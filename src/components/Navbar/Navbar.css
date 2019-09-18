@@ -1,0 +1,76 @@
+.navbar {
+    background: linear-gradient(to right, #4ca1af, #2c3e50);
+    font-family: 'Quicksand', sans-serif;
+    position: fixed;
+    z-index: 10;
+    width: 100%;
+    top: 0px;
+    text-align: center;
+}
+
+.navbar-brand {
+    font-size: 35px;
+    font-family: 'Bebas Neue';
+}
+
+.navbar-nav .nav-item .nav-link,
+.nav-account {
+    color: #fff;
+    font-size: 14px;
+}
+
+.navbar-nav .show > a.nav-link.dropdown-item {
+    color: #000;
+    font-size: 16px;
+    display: block;
+    padding: 0.25rem 1.5rem;
+    clear: both;
+    font-weight: 400;
+    color: #212529;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+}
+
+.nav-account button {
+    background-color: Transparent;
+    background-repeat: no-repeat;
+    border: none;
+    overflow: hidden;
+    outline: none;
+    cursor: pointer;
+    color: #fff;
+    width: 100%;
+}
+
+.nav-account button:hover {
+    color: #ddd;
+}
+
+#padding {
+    height: 78px;
+}
+
+@media only screen and (max-width: 991px) {
+    div.dropdown-menu.show {
+        left: 45%;
+    }
+
+    .navbar-nav div.dropdown-menu.show {
+        position: absolute;
+        top: 100%;
+        z-index: 1000;
+        float: left;
+        min-width: 10rem;
+        padding: 0.5rem 0;
+        margin: 0.125rem 0 0;
+        color: #212529;
+        text-align: left;
+        list-style: none;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        border-radius: 0.25rem;
+    }
+}

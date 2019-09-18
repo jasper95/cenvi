@@ -4,12 +4,17 @@ import loadable from '@loadable/component';
 import PageLayout from 'components/Layout/Page';
 import NotFound from 'pages/NotFound';
 
-const Login = loadable(() => import('pages/Login'));
-const Home = loadable(() => import('pages/Home'));
-const ForgotPassword = loadable(() => import('pages/ForgotPassword'));
-const ResetPassword = loadable(() => import('pages/ResetPassword'));
-const ManageRisk = loadable(() => import('pages/ManageRisk'));
-const User = loadable(() => import('pages/User'));
+const Login = loadable(() => import('pages/LoginPage'));
+const Signup = loadable(() => import('pages/RegisterPage'));
+const Home = loadable(() => import('pages/HomePage'));
+// const Team = loadable(() => import('pages/TeamPage'));
+// const Blog = loadable(() => import('pages/BlogsPage'));
+// const BlogDetails = loadable(() => import('pages/BlogPage'));
+// const Album = loadable(() => import('pages/AlbumPage'));
+// const FileUpload = loadable(() => import('pages/FileUploadPage'));
+// const ShapefileUpload = loadable(() => import('pages/ShapefileUploadPage'));
+// const SubProject = loadable(() => import('pages/SubProjectPage'));
+// const Map = loadable(() => import('pages/MapPage'));
 
 
 export default [
@@ -22,17 +27,17 @@ export default [
       requireAuth: 'optional',
     },
   },
-  {
-    key: 'resetpw',
-    component: ResetPassword,
-    path: '/activate',
-    exact: true,
-    pageProps: {
-      hasFooter: false,
-      hasNavigation: false,
-      requireAuth: 'optional',
-    },
-  },
+  // {
+  //   key: 'resetpw',
+  //   component: ResetPassword,
+  //   path: '/activate',
+  //   exact: true,
+  //   pageProps: {
+  //     hasFooter: false,
+  //     hasNavigation: false,
+  //     requireAuth: 'optional',
+  //   },
+  // },
   {
     key: 'login',
     component: Login,
@@ -43,74 +48,41 @@ export default [
       hasFooter: false,
       requireAuth: false,
       pageTitle: 'Login',
-      pageDescription: 'Login to RAMONS',
+      pageDescription: 'Login to CENVI',
     },
   },
+  // {
+  //   key: 'forgotpw',
+  //   component: ForgotPassword,
+  //   path: '/forgot-password',
+  //   exact: true,
+  //   pageProps: {
+  //     hasFooter: false,
+  //     hasNavigation: false,
+  //     requireAuth: false,
+  //   },
+  // },
   {
-    key: 'forgotpw',
-    component: ForgotPassword,
-    path: '/forgot-password',
-    exact: true,
-    pageProps: {
-      hasFooter: false,
-      hasNavigation: false,
-      requireAuth: false,
-    },
-  },
-  {
-    key: 'resetpw',
-    component: ResetPassword,
-    path: '/reset-password',
-    exact: true,
-    pageProps: {
-      hasFooter: false,
-      hasNavigation: false,
-      requireAuth: 'optional',
-    },
-  },
-  {
-    key: 'manage-risk',
-    component: ManageRisk,
-    path: '/srmp',
+    key: 'signup',
+    component: Signup,
+    path: '/register',
     exact: true,
     pageProps: {
       requireAuth: true,
-      pageTitle: 'Manage Risk',
+      pageTitle: 'Signup',
     },
   },
-  {
-    key: 'manage-risk1',
-    component: ManageRisk,
-    path: '/ormp',
-    exact: true,
-    pageProps: {
-      pageId: 'manage-risk',
-      requireAuth: true,
-      pageTitle: 'Manage Risk',
-    },
-  },
-  {
-    key: 'manage-risk2',
-    component: ManageRisk,
-    path: '/prmp',
-    exact: true,
-    pageProps: {
-      pageId: 'manage-risk',
-      requireAuth: true,
-      pageTitle: 'Manage Risk',
-    },
-  },
-  {
-    key: 'manage-user',
-    component: User,
-    path: '/users',
-    exact: true,
-    pageProps: {
-      requireAuth: true,
-      pageTitle: 'Manage Users',
-      requiredRoles: ['ADMIN'],
-    },
-  },
+  // {
+  //   key: 'team',
+  //   component: Team,
+  //   path: '/team',
+  //   exact: true,
+  //   pageProps: {
+  //     pageId: 'team',
+  //     requireAuth: true,
+  //     pageTitle: 'Team',
+  //   },
+  // },
   {
     key: 'not-found',
     path: '*',

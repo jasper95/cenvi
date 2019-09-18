@@ -1,0 +1,17 @@
+#shapefilesUl {
+    position: absolute;
+    display: block;
+    z-index: -1;
+    height: 220px;
+    width: 200px;
+    overflow: auto;
+}
+
+.search-layers {
+    position: relative;
+    color: #000;
+    background: #ecf0f1;
+    border-left: 1px solid #bdc3c7;
+    border-right: 1px solid #bdc3c7;
+    border-bottom: 1px solid #bdc3c7;
+}
