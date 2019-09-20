@@ -90,7 +90,7 @@ $success: #43EAA9;
 // ========================
 // SYSTEM COLORS
 // ========================
-$text-color: #8F918E;
+$text-color: #333333;
 $text-subhead-color: #5A5A5A;
 $text-header-color: #222223;
 $text-color-white: $white;
@@ -126,8 +126,8 @@ $box-shadow-lite: 0 0 1em 0 rgba(#000,.05);
 // ========================
 // NAVIGATION
 // ========================
-$nav-height: 3.5rem;
-$nav-avatar-size: $nav-height - 1;
+$nav-height: 78px;
+$nav-avatar-size: $nav-height - 30;
 $nav-bg: $black;
 
 // ========================

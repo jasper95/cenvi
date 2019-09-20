@@ -21,7 +21,7 @@ function Menu(props) {
     });
   }
   const linkOptions =  isSmooth ? {
-    scroll :(el) => { scrollWithOffset(el, 56) }
+    scroll :(el) => { scrollWithOffset(el, 78) }
   } : {}
 
   useEffect(() => {
@@ -40,7 +40,9 @@ function Menu(props) {
       ref={node}
       className={cn('nav_menu_list_item',
         { active: isActive },
-        { hasSubmenu: submenu })}
+        { hasSubmenu: submenu },
+        { 'hasSubmenu-open': isOpen },
+      )}
     >
       {menu.submenu ? (
         <span

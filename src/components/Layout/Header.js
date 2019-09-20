@@ -4,6 +4,7 @@ import React, {
 import Link from 'react-router-dom/Link';
 import ImageLoader from 'react-image';
 import MenuButton from 'react-md/lib/Menus/MenuButton';
+import SelectMenuButton from 'components/SelectMenuButton';
 import FontIcon from 'react-md/lib/FontIcons/FontIcon';
 import { useDispatch } from 'react-redux';
 import AuthContext from 'apollo/AuthContext';
@@ -44,15 +45,6 @@ function Header(props) {
     if (authIsLoading) {
       return (<UserSkeleton />);
     }
-    if (!isAuthenticated) {
-      return (
-        <Link to="/login">
-          <div className="iBttn iBttn-primary nav_profile_login">
-            Login
-          </div>
-        </Link>
-      );
-    }
     return (
       <>
         <MenuButton
@@ -60,22 +52,16 @@ function Header(props) {
           className="nav_profile_avatar"
           menuItems={[
             {
-              primaryText: 'Edit profile',
-              leftIcon: <FontIcon>account_circle</FontIcon>,
+              primaryText: 'Login',
+              leftIcon: <i className='wtfr wtf-sign-in'/>,
               onClick: editProfile,
             },
-            user.role === 'ADMIN'
-            && {
-              primaryText: 'Manage Users',
-              leftIcon: <FontIcon>supervisor_account</FontIcon>,
-              onClick: () => history.push('/users'),
-            },
             {
-              primaryText: 'Logout',
+              primaryText: 'Register',
               onClick: handleClickLogout,
-              leftIcon: <FontIcon>exit_to_app</FontIcon>,
+              leftIcon: <i className='wtfr wtf-sign-out'/>,
             },
-          ].filter(Boolean)}
+          ]}
           anchor={{
             x: MenuButton.HorizontalAnchors.INNER_LEFT,
             y: MenuButton.VerticalAnchors.BOTTOM,
@@ -83,7 +69,7 @@ function Header(props) {
         >
           <>
             <span className="name">
-              {user.first_name}
+              USER
             </span>
             <div className="avatar">
               <ImageLoader src="/static/img/default-avatar.png" />

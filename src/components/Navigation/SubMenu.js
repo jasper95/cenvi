@@ -31,7 +31,7 @@ function SubMenuItem({ currentPath, id, path, label}) {
     });
   }
   const linkOptions =  isSmooth ? {
-    scroll :(el) => { scrollWithOffset(el, 56) }
+    scroll :(el) => { scrollWithOffset(el, 78) }
   } : {}
 
   return  (
