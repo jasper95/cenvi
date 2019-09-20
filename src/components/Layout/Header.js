@@ -28,14 +28,9 @@ function Header(props) {
     <nav className="nav">
       <div className="nav_container">
         <Link to="/" className="nav_logo">
-          <img
-            src="/static/img/logo-minimal.png"
-            alt=""
-          />
+          CENVI
         </Link>
-        {user && (
-          <Navigation user={user} currentPath={match.path} />
-        )}
+        <Navigation user={user} currentPath={match.path} />
         <div className="nav_actions">
           <div className="nav_profile">
             {renderProfileNav()}

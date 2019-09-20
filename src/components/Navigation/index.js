@@ -10,10 +10,7 @@ function Navigation(props) {
       <ul className="nav_menu_list">
         {navMenus.map(menu => (
           <Menu
-            menu={{
-              ...menu,
-              ...menu.id === 6 && { submenu: menu.submenu.filter(e => filterRole(e.path, user)) },
-            }}
+            menu={menu}
             currentPath={currentPath}
           />
         ))}

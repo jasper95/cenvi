@@ -6958,6 +6958,13 @@ react-router-dom@^4.3.1:
     react-router "^4.3.1"
     warning "^4.0.1"
 
+react-router-hash-link@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/react-router-hash-link/-/react-router-hash-link-1.2.2.tgz#7a0ad5e925d49596d19554de8bc6c554ce4f8099"
+  integrity sha512-LBthLVHdqPeKDVt3+cFRhy15Z7veikOvdKRZRfyBR2vjqIE7rxn+tKLjb6DOmLm6JpoQVemVDnxQ35RVnEHdQA==
+  dependencies:
+    prop-types "^15.6.0"
+
 react-router@^4.3.1:
   version "4.3.1"
   resolved "https://registry.yarnpkg.com/react-router/-/react-router-4.3.1.tgz#aada4aef14c809cb2e686b05cee4742234506c4e"
@@ -7644,6 +7651,11 @@ slice-ansi@^2.1.0:
     ansi-styles "^3.2.0"
     astral-regex "^1.0.0"
     is-fullwidth-code-point "^2.0.0"
+
+smooth-scroll@^16.1.0:
+  version "16.1.0"
+  resolved "https://registry.yarnpkg.com/smooth-scroll/-/smooth-scroll-16.1.0.tgz#c811c63db67215d30847745ba0732feb3291947f"
+  integrity sha512-V5b8ekIekZ3xJ6f0sPsLgEbN5YT8gX0Q6yNjZXTKgqjH9dBGadZ0P50fhP0rLRBGifc44qfI3rnWNM+lebhJag==
 
 snapdragon-node@^2.0.1:
   version "2.1.1"

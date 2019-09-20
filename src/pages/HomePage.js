@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import { animateScroll } from '../scripts/animate-scroll';
 
 import Navbar from 'components/Navbar/Navbar';
 import Header from 'components/Header/Header';
@@ -16,24 +15,18 @@ class HomePage extends Component {
   render() {
     return (
       <div id="page-container">
-        <Navbar />
-        <scroll-container>
-          <section id="section-header">
-            <Header />
-          </section>
-          <section id="section-about">
-            <About />
-          </section>
-          <section id="section-downloads">
-            <Downloads />
-          </section>
-          <section id="section-collaborators">
-            <Collaborators />
-          </section>
-          <section id="section-contact">
-            <Contact />
-          </section>
-        </scroll-container>
+        <section id="section-about">
+          <About />
+        </section>
+        <section id="section-downloads">
+          <Downloads />
+        </section>
+        <section id="section-collaborators">
+          <Collaborators />
+        </section>
+        <section id="section-contact">
+          <Contact />
+        </section>
       </div>
     );
   }

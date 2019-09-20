@@ -12,6 +12,7 @@ import DialogTitleWithBack from './DialogTitleWithBack';
 import Footer from './Footer';
 import Header from './Header';
 
+
 const AsyncDialog = loadable(props => import(`components/Dialogs/${props.path}`));
 
 const pageSelector = createSelector(
@@ -28,11 +29,13 @@ function Page(props) {
     children,
     hasNavigation, hasFooter,
     pageId, className, pageDescription,
+    history
   } = props;
 
   const appData = useSelector(pageSelector);
   const dispatch = useDispatch();
   const { toast, dialog } = appData;
+
   useEffect(() => willUnmount, []);
 
   let { pageTitle } = props;
@@ -41,6 +44,8 @@ function Page(props) {
   } else {
     pageTitle = 'RAMONS';
   }
+
+
   return (
     <>
       <Head>

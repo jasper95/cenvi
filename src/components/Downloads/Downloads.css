@@ -1,5 +1,6 @@
 #downloads-container {
     width: 100%;
+    height: 200vh;
     overflow: hidden;
     background-color: #f5f6fa;
 }

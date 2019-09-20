@@ -3,45 +3,73 @@ export default [
     id: 1,
     path: '/',
     label: 'Home',
+
   },
   {
     id: 2,
-    path: '/dashboard',
-    label: 'Dashboard',
-  },
-  {
-    id: 3,
-    path: '/discussion',
-    label: 'Discussion Board',
-  },
-  {
-    id: 4,
-    path: '/audit',
-    label: 'Audit Observations',
-  },
-  {
-    id: 5,
-    path: '/actions',
-    label: 'Manage Actions',
+    path: '/files',
+    label: 'Files',
+    submenu: [
+      {
+        id: 3,
+        path: '/#downloads-container',
+        label: 'Downloads',
+      },
+      {
+        id: 4,
+        path: '/upload/shapefile',
+        label: 'Upload Shapefile',
+      },
+      {
+        id: 5,
+        path: '/upload/file',
+        label: 'Upload File',
+      },
+    ],
   },
   {
     id: 6,
-    label: 'Risk Management',
+    path: '/sub-projects',
+    label: 'Sub Projects',
+  },
+  {
+    id: 7,
+    path: '/map',
+    label: 'Maps',
+  },
+  {
+    id: 8,
+    path: '/blogs',
+    label: 'Blogs',
+  },
+  {
+    id: 8,
+    path: '/albums',
+    label: 'Albums',
+  },
+  {
+    id: 9,
+    path: '/collaborators',
+    label: 'Collaborators',
+  },
+  {
+    id: 10,
+    label: 'About',
     submenu: [
       {
-        id: 7,
-        path: '/srmp',
-        label: 'Strategic Risk Management',
+        id: 11,
+        path: '/#about-container',
+        label: 'About Us',
       },
       {
-        id: 8,
-        path: '/ormp',
-        label: 'Operational Risk Management',
+        id: 12,
+        path: '/team',
+        label: 'Team',
       },
       {
-        id: 9,
-        path: '/prmp',
-        label: 'Project Risk Management',
+        id: 13,
+        path: '/#section-contact',
+        label: 'Contact Us',
       },
     ],
   },

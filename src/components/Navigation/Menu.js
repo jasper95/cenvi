@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import Button from 'react-md/lib/Buttons/Button';
-import Link from 'react-router-dom/Link';
+import { HashLink as Link } from 'react-router-hash-link';
 import cn from 'classnames';
 import SubMenu from './SubMenu';
 
@@ -10,6 +10,20 @@ function Menu(props) {
   const { path, submenu } = menu;
   const isActive = currentPath === path || submenu && submenu.find(i => currentPath === i.path);
   const [isOpen, setIsOpen] = useState(false);
+
+  const isSmooth = path && path.includes('#')
+  const scrollWithOffset = (el, offset) => {
+    const elementPosition = el.offsetTop - offset;
+    window.scroll({
+      top: elementPosition,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }
+  const linkOptions =  isSmooth ? {
+    scroll :(el) => { scrollWithOffset(el, 56) }
+  } : {}
+
   useEffect(() => {
     if (typeof document === 'object') {
       // add when mounted
@@ -36,7 +50,13 @@ function Menu(props) {
           {menu.label}
         </span>
       ) : (
-        <Link className="text" to={menu.path}>{menu.label}</Link>
+        <Link 
+          className="text" 
+          to={menu.path}
+          {...linkOptions}
+        >
+          {menu.label}
+        </Link>
       )}
       {menu.submenu && (
         <>
