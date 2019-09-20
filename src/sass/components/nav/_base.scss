@@ -249,11 +249,6 @@ $menu-sub-bg: $white;
 		}
 
 
-		// nav_profile_avatar
-		&_avatar {
-
-		}
-
 	}
 }
 
@@ -311,7 +306,6 @@ $menu-sub-bg: $white;
 // AVATAR SETTINGS
 // ==============================
 .nav #nav_profile_avatar {
-
 	// #nav_profile_avatar-toggle
 	&-toggle {
 		display: flex !important;
@@ -321,6 +315,24 @@ $menu-sub-bg: $white;
 		font-size: 1em;
 		background-color: transparent !important;
 	}
+
+	// #nav_profile_avatar-list
+	&-list {
+		top: calc( 100% + 1rem );
+		padding: .5rem;
+		border-radius: .25rem;
+		overflow: visible;
+		&:before {
+			content: '';
+			position: absolute;
+			bottom: 100%;
+			right: 1rem;
+			border-bottom: 10px solid $menu-sub-bg;
+			border-left: 10px solid transparent;
+			border-right: 10px solid transparent;
+		}
+	}
+
 
 	.name {
 		font-size: 1rem;
