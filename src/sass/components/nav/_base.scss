@@ -108,6 +108,7 @@ $menu-sub-bg: lighten($nav-bg,5%);
 					min-width: 40px;
 					height: 40px;
 					padding-left: 0;
+					padding-right: 0;
 					background-color: transparent !important;
 					color: $gray-200;
 
@@ -127,10 +128,11 @@ $menu-sub-bg: lighten($nav-bg,5%);
 				&_sub {
 					position: absolute;
 					top: 100%;
-					left: 0;
-					width: 100%;
+					left: 50%;
+					width: 100vw;
+					max-width: 200px;
 					background-color: $menu-sub-bg;
-					transform: translateY(-10px);
+					transform: translateY(-10px) translateX(-50%);
 					opacity: 0;
 					visibility: hidden;
 					transition: 
@@ -163,7 +165,7 @@ $menu-sub-bg: lighten($nav-bg,5%);
 					}
 
 					&.active {
-						transform: translateY(0);
+						transform: translateY(0) translateX(-50%);
 						opacity: 1;
 						visibility: visible;
 					}
@@ -198,6 +200,7 @@ $menu-sub-bg: lighten($nav-bg,5%);
 				}
 
 				&.hasSubmenu {
+					padding-right: 0;
 					.text {
 						cursor: pointer;
 					}
