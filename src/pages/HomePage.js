@@ -7,6 +7,8 @@ import Downloads from 'components/Downloads/Downloads';
 import Collaborators from 'components/Collaborators/Collaborators';
 import Contact from 'components/Contact/Contact';
 
+import HeroSectionHome from 'sections/HeroSectionHome';
+
 class HomePage extends Component {
   componentDidMount() {
     // animateScroll();
@@ -15,6 +17,7 @@ class HomePage extends Component {
   render() {
     return (
       <div id="page-container">
+        <HeroSectionHome/>
         <section id="section-about">
           <About />
         </section>
