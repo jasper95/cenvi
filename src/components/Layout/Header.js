@@ -1,8 +1,10 @@
 import React, {
   useContext,
+  useState
 } from 'react';
 import Link from 'react-router-dom/Link';
 import ImageLoader from 'react-image';
+import Button from 'react-md/lib/Buttons/Button';
 import MenuButton from 'react-md/lib/Menus/MenuButton';
 import SelectMenuButton from 'components/SelectMenuButton';
 import FontIcon from 'react-md/lib/FontIcons/FontIcon';
@@ -13,6 +15,8 @@ import cookie from 'js-cookie';
 import withRouter from 'react-router-dom/withRouter';
 import { UserSkeleton } from 'components/Skeletons';
 import Navigation from 'components/Navigation';
+import ReactResizeDetector from 'react-resize-detector';
+import cn from 'classnames'
 import 'sass/components/nav/index.scss';
 
 function Header(props) {
@@ -20,25 +24,64 @@ function Header(props) {
     match,
     history,
   } = props;
+
   const dispatch = useDispatch();
   const { data: user, loading: authIsLoading } = useContext(AuthContext);
+  const [showMobileNav, onShowMobileNav] = useState(false)
+  const [isMobileNav, setIsMobileNav] = useState(false)
   const [, onLogout] = useMutation({ url: '/logout', onSuccess: onLogoutSucess });
   const [, onUpdateUser] = useUpdateNode({ node: 'user', message: 'Profile successfully updated' });
   const isAuthenticated = Boolean(user);
+
+  const handleResize = (width, height) => {
+    setIsMobileNav(width < 1025)
+    onShowMobileNav(false)
+  }
+
   return (
-    <nav className="nav">
-      <div className="nav_container">
-        <Link to="/" className="nav_logo">
-          CENVI
-        </Link>
-        <Navigation user={user} currentPath={match.path} />
-        <div className="nav_actions">
-          <div className="nav_profile">
-            {renderProfileNav()}
+    <ReactResizeDetector 
+      handleWidth handleHeight
+      onResize={handleResize}
+    >
+      {({ width, height }) =>  (
+        <nav className={cn("nav", {"nav-isMobile": isMobileNav})}>
+          <div className="nav_container">
+            <Link to="/" className="nav_logo">
+              CENVI
+            </Link>
+            { isMobileNav ? (
+              <>
+                <Button
+                  icon
+                  className="nav_mobile_burger"
+                  children={showMobileNav ? 'close' : 'menu'}
+                  onClick={() => onShowMobileNav(!showMobileNav)}
+                />
+                <div className={cn("nav_mobile_container", {"nav_mobile_container-show": showMobileNav})}>
+                  <Navigation user={user} currentPath={match.path} />
+                  <div className="nav_actions">
+                    <div className="nav_profile">
+                      {renderProfileNav()}
+                    </div>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <>
+                <Navigation user={user} currentPath={match.path} />
+                <div className="nav_actions">
+                  <div className="nav_profile">
+                    {renderProfileNav()}
+                  </div>
+                </div>
+              </>
+            )}
+
           </div>
-        </div>
-      </div>
-    </nav>
+        </nav>
+      )}
+    </ReactResizeDetector>
+
   );
 
   function renderProfileNav() {
