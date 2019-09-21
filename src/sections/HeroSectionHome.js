@@ -1,28 +1,29 @@
 import React, { Component } from 'react';
+import 'sass/sections/heroSectionHome.scss';
 
-function HeroSectionHome(props) {
+function HeroSectionHome({ BCP = "section-hero"}) {
   return (
-    <section id="section-hero" className="section-hero">
+    <section id={BCP} className={BCP}>
       <div className="container">
         <div className="row">
-          <div className="col-md-6 col-content">
-            <div className="section-hero_logos">
+          <div className={`col-md-7 col-content ${BCP}_content`}>
+            <div className={`${BCP}_logos`}>
               <img id="img-logo" src="static/img/logo.png" alt="cenvi_logo" />
               <img id="img-upc" src="static/img/upc.png" alt="upc_logo" />
               <img id="img-up" src="static/img/up.png" alt="up_logo" />
             </div> 
-            <h1 className="col_header section-hero_region">
+            <h1 className={`col_header ${BCP}_region`}>
               CENTRAL VISAYAS
             </h1>
-            <h1 className="col_header section-hero_office">
+            <h1 className={`col_header ${BCP}_office`}>
               CENTER FOR ENVIRONMENTAL INFORMATICS
             </h1>
-            <div className="col_desc section-hero_desc">
+            <div className={`col_desc ${BCP}_desc`}>
               Providing technical solutions to environmental problems
             </div>
           </div>
-          <div className="col-md-6 col-graphic">
-            
+          <div className={`col-md-5 ${BCP}_graphic`}>
+            <img src="static/img/CENVI2.gif" alt=""/>
           </div>
         </div>
       </div>

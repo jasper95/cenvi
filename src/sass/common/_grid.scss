@@ -50,6 +50,10 @@ $margin: .5em;
 		max-width: 900px;
 	}
 
+	@media (max-width: 1367px) {
+		max-width: $container-width-1367;
+	}
+
 	@media (max-width: 1025px) {
 		max-width: $container-width-1025;
 	}

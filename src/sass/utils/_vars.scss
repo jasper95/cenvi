@@ -56,7 +56,7 @@ $lightblack-backup: #1A1A1A;
 $lightblack: #20262B;
 
 
-$black: #0c0c0c;
+$black: #373737;
 
 $gray-400: #818181;
 $gray-300: #BFBFBF;
@@ -90,7 +90,7 @@ $success: #43EAA9;
 // ========================
 // SYSTEM COLORS
 // ========================
-$text-color: #333333;
+$text-color: #373737;
 $text-subhead-color: #5A5A5A;
 $text-header-color: #222223;
 $text-color-white: $white;
@@ -168,6 +168,7 @@ $easing-slow: .5s $biezer;
 // GRID
 // ========================
 $container-width: 1366px;
+$container-width-1367: 1140px;
 $container-width-1025: 800px;
 $container-width-769: 600px;
 $grid-columns: 12;
