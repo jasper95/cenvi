@@ -44,6 +44,13 @@ $margin: .5em;
 	margin: 0 auto;
 	padding-right: 1em;
 	padding-left: 1em;
+	
+	// .container-fluid
+	&-fluid {
+		max-width: 100%;
+		padding-right: 0;
+		padding-left: 0;
+	}
 
 	// .container-sm
 	&-sm {

@@ -15,7 +15,7 @@ function getHtml({
 }) {
   return `
     <!DOCTYPE html>
-    <html lang='en' dir='ltr' class='rafi'>
+    <html lang='en' dir='ltr' class='cenvi'>
       <head>
         ${helmet.title.toString()}
         ${helmet.meta.toString()}

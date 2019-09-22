@@ -8,6 +8,7 @@ import Collaborators from 'components/Collaborators/Collaborators';
 import Contact from 'components/Contact/Contact';
 
 import HeroSectionHome from 'sections/HeroSectionHome';
+import AboutSectionHome from 'sections/AboutSectionHome';
 
 class HomePage extends Component {
   componentDidMount() {
@@ -17,10 +18,8 @@ class HomePage extends Component {
   render() {
     return (
       <div id="page-container">
-        <HeroSectionHome/>
-        <section id="section-about">
-          <About />
-        </section>
+        <HeroSectionHome />
+        <AboutSectionHome />
         <section id="section-downloads">
           <Downloads />
         </section>

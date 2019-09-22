@@ -1,0 +1,41 @@
+@import '../utils/index';
+
+.cenvi .section-about {
+
+	.row {
+		align-items: stretch;
+	}
+
+	.col {
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+		flex-direction: column;
+		padding: 2rem;
+
+		// .col_header
+		&_header {
+			font-family: sans-serif;
+			color: #FFF;
+			font-weight: 800;
+			text-align: center;
+		}
+
+		// .col_desc
+		&_desc {
+			color: #FFF;
+			font-weight: normal;
+			text-align: center;
+		}
+	}
+
+	.col-left {
+		background-color: #34495e;
+	}
+	.col-center {
+		background-color: #2c3e50;
+	}
+	.col-right {
+		background-color: #222f3e;
+	}
+}
