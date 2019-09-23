@@ -8,7 +8,7 @@ function AboutSectionHome({ BCP = "section-about"}) {
       <div className="container container-fluid">
         <div className="row">
           <div className="col-left col col-md-4">
-            <h1 className="col_header">
+            <h1 className="col_header header-1">
               WHAT WE DO
             </h1>
             <p className="col_desc">
@@ -29,7 +29,7 @@ function AboutSectionHome({ BCP = "section-about"}) {
             </p>
           </div>
           <div className="col-center col col-md-4">
-            <h1 className="col_header">
+            <h1 className="col_header header-1">
               WEB PORTAL
             </h1>
             <p className="col_desc">
@@ -42,7 +42,7 @@ function AboutSectionHome({ BCP = "section-about"}) {
             </p>
           </div>
           <div className="col-right col col-md-4">
-            <h1 className="col_header">
+            <h1 className="col_header header-1">
               WHO WE ARE
             </h1>
             <p className="col_desc">

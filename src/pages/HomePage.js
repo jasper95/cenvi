@@ -1,15 +1,8 @@
 import React, { Component } from 'react';
-
-import Navbar from 'components/Navbar/Navbar';
-import Header from 'components/Header/Header';
-import About from 'components/About/About';
-import Downloads from 'components/Downloads/Downloads';
-import Collaborators from 'components/Collaborators/Collaborators';
-import Contact from 'components/Contact/Contact';
-
 import HeroSectionHome from 'sections/HeroSectionHome';
 import AboutSectionHome from 'sections/AboutSectionHome';
 import DownloadSectionHome from 'sections/DownloadSectionHome';
+import CollaboratorsSectionHome from 'sections/CollaboratorsSectionHome';
 
 class HomePage extends Component {
   componentDidMount() {
@@ -21,13 +14,8 @@ class HomePage extends Component {
       <div id="page-container">
         <HeroSectionHome />
         <AboutSectionHome />
-        <DownloadSectionHome/>
-        <section id="section-collaborators">
-          <Collaborators />
-        </section>
-        <section id="section-contact">
-          <Contact />
-        </section>
+        <DownloadSectionHome />
+        <CollaboratorsSectionHome />
       </div>
     );
   }

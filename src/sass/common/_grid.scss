@@ -81,6 +81,26 @@ $margin: .5em;
 
 .row {
 	width: 100%;
+
+	@for $i from 1 through 12 {
+		&-size-#{$i} {
+			.col {
+				max-width: percentage(1/$i);
+			}
+		}
+	}
+
+	// @each $screen , $value in $grid-screens {
+	// 	@media only screen and (min-width: #{($value+ 1px)} ) {
+	// 		@for $i from 1 through 12 {
+	// 			.row-size-#{$screen}-#{$i} {
+	// 				.col {
+	// 					max-width: percentage(1/$i);
+	// 				}
+	// 			}
+	// 		}
+	// 	}
+	// }
 }
 
 // positions

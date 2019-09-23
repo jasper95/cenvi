@@ -26,3 +26,10 @@ a {
 .md-text--theme-primary {
 	color: $primary-color;
 }
+
+.header-1 {
+	font-family: $font-family-header;
+	font-weight: 800;
+	font-size: 2.5rem;
+	color: $text-color;
+}

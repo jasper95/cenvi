@@ -1,123 +1,68 @@
 import React from 'react';
-import Grid from 'react-md/lib/Grids/Grid';
-import Cell from 'react-md/lib/Grids/Cell';
-import FontIcon from 'react-md/lib/FontIcons/FontIcon';
-import Link from 'react-router-dom/Link';
+
+import { Icon } from 'react-icons-kit';
+import { mapMarker } from 'react-icons-kit/fa/mapMarker';
+import { phone } from 'react-icons-kit/fa/phone';
+import { file } from 'react-icons-kit/fa/file';
+import { envelope } from 'react-icons-kit/fa/envelope';
+import { facebook } from 'react-icons-kit/fa/facebook';
+
 
 import 'sass/components/footer/index.scss';
 
 
 export default function Footer() {
-  const informationMenu = [
-    {
-      name: 'About Us',
-      link: '/#',
-    },
-    {
-      name: 'Contact Us',
-      link: '/#',
-    },
-    {
-      name: 'Privacy Policy',
-      link: '/#',
-    },
-    {
-      name: 'Terms & Conditions',
-      link: '/#',
-    },
-  ];
 
-  const internMenu = [
-    {
-      name: 'Create Account',
-      link: '/signup',
-    },
-    {
-      name: 'FAQ',
-      link: '/#',
-    },
-  ];
-
-
-  const renderMenu = () => informationMenu.map(({ name, link }, index) => (
-    <li key={index} className="footer_colItem_menu_item">
-      <Link to={link}>
-        <a>
-          {name}
-        </a>
-      </Link>
-    </li>
-  ));
-
-  const renderInterns = () => internMenu.map(({ name, link }, index) => (
-    <li key={index} className="footer_colItem_menu_item">
-      <Link to={link}>
-        {name}
-      </Link>
-    </li>
-  ));
+  const contactDetails = {
+    address: 'University of the Philippines Cebu, Gorordo Ave., Lahug, Cebu City',
+    telNoCenvi: '(032) 231-0223',
+    telNoUp: '(032) 232-8185',
+    localCenvi: '(local) 109',
+    email: 'upcebunicer@gmail.com',
+    fbPage: 'https://www.facebook.com/upcenvi/',
+  }
 
   return (
     <footer className="footer">
       <div className="container">
-        <Grid>
-          <Cell
-            className="footer_colItem-brand"
-            size={3}
-          >
-            <Link to="/" className="footer_colItem-brand_logo">
-              <img
-                src="/static/img/logo.png"
-                alt=""
-              />
-            </Link>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque atque itaque doloremque in, accusamus voluptate assumenda voluptatem, obcaecati natus at!</p>
-          </Cell>
-          <Cell
-            className="footer_colItem footer_colItem-information"
-            size={3}
-          >
-            <h1 className="footer_colItem_header">Information</h1>
-            <ul className="footer_colItem_menu">
-              { renderMenu() }
+        <div className="row row-main">
+          <div className="col col-center">
+            <h1 className="footer_header header-1">
+              CONTACT US
+            </h1>
+            <ul className="footer_contact_list">
+              <li className="footer_contact_list_item">
+                <Icon icon={mapMarker} size={20} className="icon"/>
+                <p className="text">{contactDetails.address}</p>
+              </li>
+              <li className="footer_contact_list_item">
+                <Icon icon={phone} size={20} className="icon" />
+                <p className="text">{contactDetails.telNoCenvi}</p>
+                <p className="text">{contactDetails.telNoUp}</p>
+                <p className="text">{contactDetails.localCenvi}</p>
+              </li>
+              <li className="footer_contact_list_item">
+                <Icon icon={envelope} size={20} className="icon" />
+                <p className="text">{contactDetails.email}</p>
+              </li>
+              <li className="footer_contact_list_item">
+                <Icon icon={facebook} size={20} className="icon" />
+                <a
+                  href={contactDetails.fbPage}
+                  className="text"
+                >
+                  {contactDetails.fbPage}
+                </a>
+              </li>
             </ul>
-          </Cell>
-          <Cell
-            className="footer_colItem footer_colItem-other"
-            size={3}
-          >
-            <h1 className="footer_colItem_header">Risk Management</h1>
-            <ul className="footer_colItem_menu">
-              { renderInterns() }
-            </ul>
-          </Cell>
-          <Cell
-            className="footer_colItem footer_colItem-contact"
-            size={3}
-          >
-            <h1 className="footer_colItem_header">Contact</h1>
-            <div>
-              <FontIcon>place</FontIcon>
-              <div className="value">
-                <p>Gorordo Avenue, Lahug, Cebu City</p>
-                <p>Cebu, Philippines</p>
-                <p>6000</p>
-              </div>
-            </div>
-            <div>
-              <FontIcon>local_phone</FontIcon>
-              <div className="value">
-                <p>+63 977-826-9012</p>
-              </div>
-            </div>
-            <div>
-              <FontIcon>email</FontIcon>
-              <div className="value">
-                <p>ramonssupport@gmail.com</p>
-              </div>
-            </div>
-          </Cell>
-        </Grid>
+          </div>
+        </div>
+        <div className="row row-copyright row-right">
+          <p className="copyright">
+            Copyright © { new Date().getFullYear() } Central Visayas 
+            Center for Environmental Informatics
+          </p>
+        </div>
       </div>
     </footer>
   );

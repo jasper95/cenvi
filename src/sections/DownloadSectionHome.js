@@ -31,7 +31,7 @@ function HeroSectionHome({ BCP = "section-downloads"}) {
     <section id={BCP} className={BCP}>
       <div className="container">
         <div className="row row-center row-header">
-          <h1 className={`${BCP}_header`}>
+          <h1 className={`${BCP}_header header-1`}>
             DOWNLOADS
           </h1>
         </div>
