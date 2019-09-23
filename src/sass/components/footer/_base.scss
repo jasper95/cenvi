@@ -1,6 +1,6 @@
 .cenvi .footer {
 	padding: 3rem 0 0;
-	background-color: $black;
+	background-color: #262228;
 
 	// .footer_header 
 	&_header {
@@ -35,6 +35,7 @@
 			display: flex;
 			align-items: flex-start;
 			justify-content: flex-start;
+
 			.icon {
 				margin-right: 1rem;
 				color: $primary-color;
