@@ -9,6 +9,7 @@ import Contact from 'components/Contact/Contact';
 
 import HeroSectionHome from 'sections/HeroSectionHome';
 import AboutSectionHome from 'sections/AboutSectionHome';
+import DownloadSectionHome from 'sections/DownloadSectionHome';
 
 class HomePage extends Component {
   componentDidMount() {
@@ -20,9 +21,7 @@ class HomePage extends Component {
       <div id="page-container">
         <HeroSectionHome />
         <AboutSectionHome />
-        <section id="section-downloads">
-          <Downloads />
-        </section>
+        <DownloadSectionHome/>
         <section id="section-collaborators">
           <Collaborators />
         </section>
