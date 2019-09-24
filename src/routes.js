@@ -6,7 +6,8 @@ import NotFound from 'pages/NotFound';
 
 const Login = loadable(() => import('pages/LoginPage'));
 const Signup = loadable(() => import('pages/RegisterPage'));
-const Home = loadable(() => import('pages/HomePage'));
+const Home = loadable(() => import('pages/Home/index'));
+const SubProjects = loadable(() => import('pages/SubProjectsPage'));
 // const Team = loadable(() => import('pages/TeamPage'));
 // const Blog = loadable(() => import('pages/BlogsPage'));
 // const BlogDetails = loadable(() => import('pages/BlogPage'));
@@ -26,6 +27,12 @@ export default [
     pageProps: {
       requireAuth: 'optional',
     },
+  },
+  {
+    key: 'home',
+    component: SubProjects,
+    path: '/sub-projects',
+    exact: true
   },
   // {
   //   key: 'resetpw',

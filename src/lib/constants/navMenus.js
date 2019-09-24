@@ -12,7 +12,7 @@ export default [
     submenu: [
       {
         id: 3,
-        path: '/#downloads-container',
+        path: '/#section-downloads',
         label: 'Downloads',
       },
       {
@@ -58,7 +58,7 @@ export default [
     submenu: [
       {
         id: 11,
-        path: '/#about-container',
+        path: '/#section-about',
         label: 'About Us',
       },
       {
