@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from 'react-md/lib/Buttons/Button';
-import 'sass/sections/heroSectionHome.scss';
+import './style.scss';
 
 function HeroSectionHome({ BCP = "section-hero"}) {
   return (

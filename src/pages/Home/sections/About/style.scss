@@ -1,6 +1,7 @@
-@import '../utils/index';
+@import 'sass/utils/_index.scss';
+$rootClass: '.cenvi .page-home';
 
-.cenvi .section-about {
+#{$rootClass} .section-about {
 
 	.row {
 		align-items: stretch;

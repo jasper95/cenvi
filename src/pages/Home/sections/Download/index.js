@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Col } from 'reactstrap';
-import 'sass/sections/downloadSectionHome.scss';
+import './style.scss';
 
 const apiURL = process.env.REACT_APP_API_HOST_PORT;
 
-function HeroSectionHome({ BCP = "section-downloads"}) {
+function DownloadSectionHome({ BCP = "section-downloads"}) {
   const [downloads, handleDownload] = useState(null)
   const [categories, handleCategories] = useState(null)
 
@@ -129,4 +129,4 @@ function collapseShow(id, categoriesSize) {
     }
 }
 
-export default HeroSectionHome;
+export default DownloadSectionHome;

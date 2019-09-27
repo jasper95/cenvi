@@ -1,0 +1,101 @@
+@import 'sass/utils/_index.scss';
+$rootClass: '.cenvi .page-subprojects';
+
+#{$rootClass} .section-hero {
+	.row-header {
+		padding: 4rem 0;
+		background-color: $gray-100;
+
+		.container {
+			max-width: 1025px;
+		}
+	}
+
+	.project {
+		width: 100%;
+		padding: 2rem;
+		margin-top: 1rem;
+
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+
+		&:not(:last-child) {
+			margin-bottom: 2rem;
+		}
+
+
+		// .project_img
+		&_img {
+			// .project_img_respContainer
+			&_respContainer {
+				position: relative;
+				width: 100%;
+				padding-top: 100%;
+			}
+
+			img {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				object-fit: contain;
+				object-position: 50% 50%;
+			}
+		}
+
+		// .project_info
+		&_info {
+			display: flex;
+			align-items: flex-start;
+			justify-content: center;
+			flex-direction: column;
+			padding: 0 1rem;
+
+			// .project_info_header
+			&_header {
+				width: 80%;
+				font-family: $font-family-header;
+				font-weight: bold;
+				font-size: 2.5rem;
+				line-height: 1.25;
+				color: $text-color;
+				margin-bottom: 1em;
+			}
+
+			// .project_info_content
+			&_content {
+				width: 100%;
+				border-radius: .5rem;
+				padding: 2rem;
+				background-color: $c_gray-100;
+			}
+		}
+
+
+
+		// .project_label
+		&_label {
+			font-size: 1.25rem;
+			font-weight: bold;
+			text-transform: uppercase;
+			line-height: 1;
+			color: $primary-color;
+		}
+
+		// .project_list
+		&_list {
+			margin-top: 0;
+			margin-bottom: 0;
+			padding-left: 2rem;
+
+			// .project_list_item
+			&_item {
+				font-family: $font-family;
+				font-size: 1.15rem;
+				line-height: 2;
+			}
+		}
+	}
+}

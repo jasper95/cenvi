@@ -40,9 +40,9 @@ function Page(props) {
 
   let { pageTitle } = props;
   if (pageTitle) {
-    pageTitle = `RAMONS - ${pageTitle}`;
+    pageTitle = `CENVI - ${pageTitle}`;
   } else {
-    pageTitle = 'RAMONS';
+    pageTitle = 'CENVI';
   }
 
 
@@ -81,6 +81,9 @@ function Page(props) {
         <link rel="stylesheet" type="text/css" href="/static/css/Draft.css" />
         <link rel="stylesheet" type="text/css" href="/static/css/rafiIcons.css" />
         <link rel="stylesheet" type="text/css" href="/static/css/wataphak.css" />
+        <link rel="stylesheet" type="text/css" href="/static/fonts/bebas/index.css" />
+        <link rel="stylesheet" type="text/css" href="/static/fonts/quicksand/index.css" />
+        <link rel="stylesheet" type="text/css" href="/static/fonts/segoq/index.css" />
       </Head>
       {hasNavigation && (
         <Header />
@@ -99,7 +102,7 @@ function Page(props) {
           dialogTitleRenderer={appData.hasTemporaryClosed ? DialogTitleWithBack : undefined}
         />
       )}
-      <main className={`page page-${pageId} ${className}`}>
+      <main className={`page page-${pageId} ${className || '' }`}>
         {children}
       </main>
       {hasFooter && (

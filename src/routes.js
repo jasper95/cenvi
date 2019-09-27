@@ -7,7 +7,7 @@ import NotFound from 'pages/NotFound';
 const Login = loadable(() => import('pages/LoginPage'));
 const Signup = loadable(() => import('pages/RegisterPage'));
 const Home = loadable(() => import('pages/Home/index'));
-const SubProjects = loadable(() => import('pages/SubProjectsPage'));
+const SubProjects = loadable(() => import('pages/SubProjects'));
 // const Team = loadable(() => import('pages/TeamPage'));
 // const Blog = loadable(() => import('pages/BlogsPage'));
 // const BlogDetails = loadable(() => import('pages/BlogPage'));
@@ -29,7 +29,7 @@ export default [
     },
   },
   {
-    key: 'home',
+    key: 'subprojects',
     component: SubProjects,
     path: '/sub-projects',
     exact: true

@@ -1,6 +1,7 @@
-@import '../utils/index';
+@import 'sass/utils/_index.scss';
+$rootClass: '.cenvi .page-home';
 
-.cenvi .section-collaborators {
+#{$rootClass} .section-collaborators {
 	padding: 4rem 0;
 	background-color: #fff;
 

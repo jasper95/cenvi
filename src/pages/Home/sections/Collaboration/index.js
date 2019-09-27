@@ -5,8 +5,7 @@ import { mapMarker } from 'react-icons-kit/fa/mapMarker';
 import { phone } from 'react-icons-kit/fa/phone';
 import { file } from 'react-icons-kit/fa/file';
 import { envelope } from 'react-icons-kit/fa/envelope';
-
-import 'sass/sections/collaboratorsSectionHome.scss';
+import './style.scss';
 
 function CollaboratorsSectionHome({ BCP = "section-collaborators"}) {
   const collaboratos = [

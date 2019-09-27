@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row, Col } from 'reactstrap';
-import 'sass/sections/aboutSectionHome.scss';
+import './style.scss';
 
 function AboutSectionHome({ BCP = "section-about"}) {
   return (

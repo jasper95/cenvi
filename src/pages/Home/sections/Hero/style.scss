@@ -1,6 +1,7 @@
-@import '../utils/index';
+@import 'sass/utils/_index.scss';
+$rootClass: '.cenvi .page-home';
 
-.cenvi .section-hero {
+#{$rootClass} .section-hero {
 	padding: 2rem 0;
 	background-color: #fff;
 

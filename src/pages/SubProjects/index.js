@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
-import SubProjects from 'components/SubProjects/SubProjects';
-
+import './style.scss';
 
 function SubProjectsPage() {
   useEffect(() => {
@@ -56,8 +55,18 @@ function SubProjectsPage() {
     },
   ]
 
+  const renderProjectimg = (imgObj) => {
+    return (
+      <div className="project_img col col-md-4">
+        <div className="project_img_respContainer">
+          <img { ...imgObj }/>
+        </div>
+      </div>
+    )
+  }
+
   return (
-    <section className="section">
+    <section className="section-hero">
       <div className="row row-header row-center">
         <div className="container">
           <h1 className="header-1">
@@ -78,24 +87,23 @@ function SubProjectsPage() {
       </div>
       <div className="row row-content">
         <div className="container">
-          {projects.map((item) => (
+          {projects.map((item, key) => (
             <div className="row project">
-              <h1 className="project_header">{item.header}</h1>
-              <div className="project_content row">
-                <div className="project_content_img col col-md-2">
-                  <img { ...item.img }/>
-                </div>
-                <div className="project_content_info col col-md-10">
-                  <h1 className="project_content_label">Project Objectives:</h1>
-                  <ul className="project_content_list">
+              {(key % 2 === 0) && renderProjectimg(item.img)}
+              <div className="project_info col col-md-8">
+                <h1 className="project_info_header">{item.header}</h1>
+                <div className="project_info_content">
+                  <h1 className="project_label">Project Objectives:</h1>
+                  <ul className="project_list">
                     {item.objectives.map( obj => (
-                      <li className="project_content_list_item">
+                      <li className="project_list_item">
                         {obj}
                       </li>
                     ))}
                   </ul>
                 </div>
               </div>
+              {(key % 2 !== 0) && renderProjectimg(item.img)}
             </div>
           ))}
 

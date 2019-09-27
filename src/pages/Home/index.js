@@ -1,24 +1,24 @@
-import React, { Component } from 'react';
-import HeroSectionHome from './sections/HeroSectionHome';
-import AboutSectionHome from './sections/AboutSectionHome';
-import DownloadSectionHome from './sections/DownloadSectionHome';
-import CollaboratorsSectionHome from './sections/CollaboratorsSectionHome';
+import React, { useEffect } from 'react';
+import {
+  HeroSectionHome ,
+  AboutSectionHome ,
+  DownloadSectionHome ,
+  CollaboratorsSectionHome ,
+} from './sections';
 
-class HomePage extends Component {
-  componentDidMount() {
-    // animateScroll();
-  }
+function HomePage() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
 
-  render() {
-    return (
-      <div id="page-container">
-        <HeroSectionHome />
-        <AboutSectionHome />
-        <DownloadSectionHome />
-        <CollaboratorsSectionHome />
-      </div>
-    );
-  }
+  return (
+    <div id="page-container">
+      <HeroSectionHome />
+      <AboutSectionHome />
+      <DownloadSectionHome />
+      <CollaboratorsSectionHome />
+    </div>
+  );
 }
 
 export default HomePage;

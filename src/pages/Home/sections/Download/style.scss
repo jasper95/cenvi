@@ -1,0 +1,11 @@
+@import 'sass/utils/_index.scss';
+$rootClass: '.cenvi .page-home';
+
+#{$rootClass} .section-downloads {
+	padding: 2rem 0;
+
+	// .section-downloads_header
+	&_header {
+		color: $text-color;
+	}
+}
