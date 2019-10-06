@@ -5,20 +5,19 @@ import PropTypes from 'prop-types';
 import { Helmet as Head } from 'react-helmet';
 import flowRight from 'lodash/flowRight';
 import Snackbar from 'components/Snackbar';
-import { withAuth } from 'apollo/auth';
-import { createSelector } from 'reselect';
+import withAuth from 'shared/hocs/withAuth';
+import { createSelector } from 'redux-starter-kit';
 import { useSelector, useDispatch } from 'react-redux';
 import DialogTitleWithBack from './DialogTitleWithBack';
 import Footer from './Footer';
 import Header from './Header';
 
-
 const AsyncDialog = loadable(props => import(`components/Dialogs/${props.path}`));
 
 const pageSelector = createSelector(
-  state => state.toast,
-  state => state.dialog,
-  state => state.temporaryClosedDialogs,
+  state => state.app.toast,
+  state => state.app.dialog,
+  state => state.app.temporaryClosedDialogs,
   (toast, dialog, temporaryClosedDialogs) => (
     { toast, dialog, hasTemporaryClosed: temporaryClosedDialogs.length > 0 }
   ),
@@ -29,7 +28,6 @@ function Page(props) {
     children,
     hasNavigation, hasFooter,
     pageId, className, pageDescription,
-    history
   } = props;
 
   const appData = useSelector(pageSelector);
@@ -102,7 +100,7 @@ function Page(props) {
           dialogTitleRenderer={appData.hasTemporaryClosed ? DialogTitleWithBack : undefined}
         />
       )}
-      <main className={`page page-${pageId} ${className || '' }`}>
+      <main className={`page page-${pageId} ${className || ''}`}>
         {children}
       </main>
       {hasFooter && (

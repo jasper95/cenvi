@@ -1,10 +1,10 @@
 import React from 'react';
 import AuthLayout from 'components/Layout/Auth';
 import Link from 'react-router-dom/Link';
-import useMutation from 'apollo/mutation';
+// import useMutation from 'apollo/mutation';
 import Button from 'react-md/lib/Buttons/Button';
 import FontIcon from 'react-md/lib/FontIcons/FontIcon';
-import useVerifyToken from 'lib/hooks/useVerifyToken';
+import useVerifyToken from 'shared/hooks/useVerifyToken';
 import 'sass/pages/login.scss';
 
 function Verify() {

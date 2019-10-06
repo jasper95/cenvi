@@ -1,14 +1,14 @@
 import React, { useState, useCallback } from 'react';
 import Button from 'react-md/lib/Buttons/Button';
-import useForm from 'lib/hooks/useForm';
-import { getValidationResult, fieldIsRequired } from 'lib/tools';
+import useForm from 'shared/hooks/useForm';
+import { getValidationResult, fieldIsRequired } from 'shared/utils/tools';
 import { EditorState, convertToRaw } from 'draft-js';
 import Editor from 'draft-js-plugins-editor';
 import createMentionPlugin from 'draft-js-mention-plugin';
 import * as yup from 'yup';
 import cn from 'classnames';
-import useQuery, { useManualQuery } from 'apollo/query';
-import useMutation from 'apollo/mutation';
+// import useQuery, { useManualQuery } from 'apollo/query';
+// import useMutation from 'apollo/mutation';
 import gql from 'graphql-tag';
 import debounce from 'lodash/debounce';
 import PropTypes from 'prop-types';

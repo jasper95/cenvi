@@ -1,11 +1,6 @@
 import React, { useState } from 'react';
-import useQuery from 'apollo/query';
-import Pagination from 'rc-pagination';
 import flowRight from 'lodash/flowRight';
-import withDialog from 'lib/hocs/dialog';
-import gql from 'graphql-tag';
-import cn from 'classnames';
-import { format as formatTime } from 'timeago.js';
+import withDialog from 'shared/hocs/dialog';
 import 'sass/components/notification/index.scss';
 
 

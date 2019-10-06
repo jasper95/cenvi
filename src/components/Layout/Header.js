@@ -1,6 +1,5 @@
 import React, {
-  useContext,
-  useState
+  useState,
 } from 'react';
 import Link from 'react-router-dom/Link';
 import ImageLoader from 'react-image';
@@ -8,15 +7,14 @@ import Button from 'react-md/lib/Buttons/Button';
 import MenuButton from 'react-md/lib/Menus/MenuButton';
 import SelectMenuButton from 'components/SelectMenuButton';
 import FontIcon from 'react-md/lib/FontIcons/FontIcon';
-import { useDispatch } from 'react-redux';
-import AuthContext from 'apollo/AuthContext';
-import useMutation, { useUpdateNode } from 'apollo/mutation';
+import { useDispatch, useSelector } from 'react-redux';
+import useMutation, { useUpdateNode } from 'shared/hooks/useMutation';
 import cookie from 'js-cookie';
 import withRouter from 'react-router-dom/withRouter';
 import { UserSkeleton } from 'components/Skeletons';
 import Navigation from 'components/Navigation';
 import ReactResizeDetector from 'react-resize-detector';
-import cn from 'classnames'
+import cn from 'classnames';
 import 'sass/components/nav/index.scss';
 
 function Header(props) {
@@ -26,25 +24,27 @@ function Header(props) {
   } = props;
 
   const dispatch = useDispatch();
-  const { data: user, loading: authIsLoading } = useContext(AuthContext);
-  const [showMobileNav, onShowMobileNav] = useState(false)
-  const [isMobileNav, setIsMobileNav] = useState(false)
+  const user = null;
+  // const { data: user, loading: authIsLoading } = useContext(AuthContext);
+  const [showMobileNav, onShowMobileNav] = useState(false);
+  const [isMobileNav, setIsMobileNav] = useState(false);
   const [, onLogout] = useMutation({ url: '/logout', onSuccess: onLogoutSucess });
   const [, onUpdateUser] = useUpdateNode({ node: 'user', message: 'Profile successfully updated' });
   const isAuthenticated = Boolean(user);
 
   const handleResize = (width, height) => {
-    setIsMobileNav(width < 1025)
-    onShowMobileNav(false)
-  }
+    setIsMobileNav(width < 1025);
+    onShowMobileNav(false);
+  };
 
   return (
-    <ReactResizeDetector 
-      handleWidth handleHeight
+    <ReactResizeDetector
+      handleWidth
+      handleHeight
       onResize={handleResize}
     >
-      {({ width, height }) =>  (
-        <nav className={cn("nav", {"nav-isMobile": isMobileNav})}>
+      {({ width, height }) => (
+        <nav className={cn('nav', { 'nav-isMobile': isMobileNav })}>
           <div className="nav_container">
             <Link to="/" className="nav_logo">
               CENVI
@@ -57,7 +57,7 @@ function Header(props) {
                   children={showMobileNav ? 'close' : 'menu'}
                   onClick={() => onShowMobileNav(!showMobileNav)}
                 />
-                <div className={cn("nav_mobile_container", {"nav_mobile_container-show": showMobileNav})}>
+                <div className={cn('nav_mobile_container', { 'nav_mobile_container-show': showMobileNav })}>
                   <Navigation user={user} currentPath={match.path} />
                   <div className="nav_actions">
                     <div className="nav_profile">
@@ -85,7 +85,7 @@ function Header(props) {
   );
 
   function renderProfileNav() {
-    if (authIsLoading) {
+    if (false) {
       return (<UserSkeleton />);
     }
     return (
@@ -96,13 +96,13 @@ function Header(props) {
           menuItems={[
             {
               primaryText: 'Login',
-              leftIcon: <i className='wtfr wtf-sign-in'/>,
+              leftIcon: <i className="wtfr wtf-sign-in" />,
               onClick: editProfile,
             },
             {
               primaryText: 'Register',
               onClick: handleClickLogout,
-              leftIcon: <i className='wtfr wtf-sign-out'/>,
+              leftIcon: <i className="wtfr wtf-sign-out" />,
             },
           ]}
           anchor={{

@@ -4,10 +4,14 @@ import loadable from '@loadable/component';
 import PageLayout from 'components/Layout/Page';
 import NotFound from 'pages/NotFound';
 
-const Login = loadable(() => import('pages/LoginPage'));
-const Signup = loadable(() => import('pages/RegisterPage'));
+const Login = loadable(() => import('pages/Login'));
+// const Signup = loadable(() => import('pages/RegisterPage'));
 const Home = loadable(() => import('pages/Home/index'));
 const SubProjects = loadable(() => import('pages/SubProjects'));
+const AdminBlogList = loadable(() => import('pages/Admin/Blog/BlogList'));
+const AdminBlogForm = loadable(() => import('pages/Admin/Blog/BlogForm'));
+const AlbumList = loadable(() => import('pages/Admin/Album/AlbumList'));
+const User = loadable(() => import('pages/Admin/User'));
 // const Team = loadable(() => import('pages/TeamPage'));
 // const Blog = loadable(() => import('pages/BlogsPage'));
 // const BlogDetails = loadable(() => import('pages/BlogPage'));
@@ -32,7 +36,51 @@ export default [
     key: 'subprojects',
     component: SubProjects,
     path: '/sub-projects',
-    exact: true
+    exact: true,
+  },
+  {
+    key: 'admin-blog-list',
+    component: AdminBlogList,
+    path: '/admin/blog',
+    exact: true,
+    pageProps: {
+      hasFooter: false,
+      requireAuth: true,
+      hasNavigation: false,
+    },
+  },
+  {
+    key: 'admin-edit-blog',
+    component: AdminBlogForm,
+    path: '/admin/blog/:id',
+    exact: true,
+    pageProps: {
+      hasFooter: false,
+      requireAuth: true,
+      hasNavigation: false,
+    },
+  },
+  {
+    key: 'admin-list-album',
+    component: AlbumList,
+    path: '/admin/album',
+    exact: true,
+    pageProps: {
+      hasFooter: false,
+      requireAuth: true,
+      hasNavigation: false,
+    },
+  },
+  {
+    key: 'admin-user',
+    component: User,
+    path: '/admin/user',
+    exact: true,
+    pageProps: {
+      hasFooter: false,
+      requireAuth: true,
+      hasNavigation: false,
+    },
   },
   // {
   //   key: 'resetpw',
@@ -69,16 +117,16 @@ export default [
   //     requireAuth: false,
   //   },
   // },
-  {
-    key: 'signup',
-    component: Signup,
-    path: '/register',
-    exact: true,
-    pageProps: {
-      requireAuth: true,
-      pageTitle: 'Signup',
-    },
-  },
+  // {
+  //   key: 'signup',
+  //   component: Signup,
+  //   path: '/register',
+  //   exact: true,
+  //   pageProps: {
+  //     requireAuth: true,
+  //     pageTitle: 'Signup',
+  //   },
+  // },
   // {
   //   key: 'team',
   //   component: Team,

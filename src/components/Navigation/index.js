@@ -1,6 +1,6 @@
 import React from 'react';
-import navMenus from 'lib/constants/navMenus';
-import { filterRole } from 'lib/tools';
+import navMenus from 'shared/constants/navMenus';
+import { filterRole } from 'shared/utils/tools';
 import Menu from './Menu';
 
 function Navigation(props) {

@@ -5,11 +5,11 @@ import TextField from 'react-md/lib/TextFields/TextField';
 import Link from 'react-router-dom/Link';
 import cn from 'classnames';
 import AuthLayout from 'components/Layout/Auth';
-import useForm from 'lib/hooks/useForm';
-import { getValidationResult, fieldIsRequired, fieldIsInvalid } from 'lib/tools';
+import useForm from 'shared/hooks/useForm';
+import { getValidationResult, fieldIsRequired, fieldIsInvalid } from 'shared/utils/tools';
 import * as yup from 'yup';
 import FontIcon from 'react-md/lib/FontIcons/FontIcon';
-import useMutation from 'apollo/mutation';
+// import useMutation from 'apollo/mutation';
 import 'sass/pages/login.scss';
 
 
