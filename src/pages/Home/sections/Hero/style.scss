@@ -4,44 +4,74 @@ $rootClass: '.cenvi .page-home';
 #{$rootClass} .section-hero {
 	padding: 2rem 0;
 	background-color: #fff;
-
-	.row {
-		display: flex;
-		align-items: stretch;
-		justify-content: center;
-	}
-
-	.col_header {
-		font-family: $font-family-condensed;
-		line-height: 1;
-		font-weight: bold;
-		color: $text-color;
-	}
+	height: auto;
+	min-height: 80vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+	position: relative;
 
 
 	// .section-hero_hero
 	&_region {
-		font-size: 56px;
-		margin-bottom: 0;
+		font-size: 1.25rem;
+		letter-spacing: .5em;
+		text-transform: uppercase;
+		margin-bottom: 1rem;
+		color: $secondary-color;
+		font-weight: bold;
+
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+
 	}
 	// .section-hero_office
 	&_office {
-		font-size: 72px;
-		margin-bottom: .5em;
+		position: relative;
+		font-size: 5rem;
+		font-weight: 600;
+		margin-bottom: 0;
+		line-height: 1;
+		color: $text-header-color;
+
+		.text {
+			position: relative;
+			z-index: 5;
+		}
+
+		// $diff: .25em;
+
+		// &:before {
+		// 	content: '';
+		// 	position: absolute;
+		// 	z-index: 1;
+		// 	opacity: .15;
+		// 	top: -$diff ;
+		// 	left: -10%;
+		// 	width: 50%;
+		// 	height: calc(100% + #{($diff*2)});
+		// 	border: .15em solid $secondary-color;
+		// }
 	}
 
 	// .section-hero_desc
 	&_desc {
-		font-weight: 600;
+		max-width: 500px;
+		font-weight: normal;
 		padding-top: 1em;
-		font-size: 1.15rem;
+		line-height: 1.5;
+		font-size: 1.5rem;
 		margin-bottom: 2rem;
-		border-top: 1px solid rgba(#000,.25);
+		color: $text-color;
 	}
 
 
 	// .section-hero_content
 	&_content {
+		position: relative;
+		z-index: 10;
 		display: flex;
 		align-items: flex-start;
 		justify-content: center;
@@ -54,6 +84,7 @@ $rootClass: '.cenvi .page-home';
 		align-items: center;
 		justify-content: flex-start;
 		flex-wrap: wrap;
+		margin-bottom: 4rem;
 		img {
 			width: 70px;
 			opacity: .8;
@@ -68,25 +99,17 @@ $rootClass: '.cenvi .page-home';
 
 	// .section-hero_bttn
 	&_bttn {
-		width: 100%;
-		max-width: 200px;
-		font-size: 1.25em;
-		transition: 
-			border-color 1s ease-out,
-			background-color 1s ease-out,
-			max-width 1s ease-out;
-		background-color: darken($primary-color,10%);
-		border-color: darken($primary-color,10%);
-		color: #FFF;
-		&:hover {
-			background-color: $primary-color;
-			border-color: $primary-color;
-			max-width: 300px;
-		}
+		font-size: 1.25rem;
 	}
 
 	// .section-hero_graphic
 	&_graphic {
+		pointer-events: none;
+		position: absolute;
+		z-index: 1;
+		top: -5rem;
+		right: 10vw;
+		width: 50vw;
 		display: flex;
 		align-items: center;
 		justify-content: center;

@@ -5,11 +5,11 @@ import './style.scss';
 function AboutSectionHome({ BCP = "section-about"}) {
   return (
     <section id={BCP} className={BCP}>
-      <div className="container container-fluid">
+      <div className="container">
         <div className="row">
           <div className="col-left col col-md-4">
             <h1 className="col_header header-1">
-              WHAT WE DO
+              What we do
             </h1>
             <p className="col_desc">
               CENVI uses analytical and ICT-based methods to
@@ -30,7 +30,7 @@ function AboutSectionHome({ BCP = "section-about"}) {
           </div>
           <div className="col-center col col-md-4">
             <h1 className="col_header header-1">
-              WEB PORTAL
+              Web Portal
             </h1>
             <p className="col_desc">
               As a web-based platform, CENVI web portal provides
@@ -43,7 +43,7 @@ function AboutSectionHome({ BCP = "section-about"}) {
           </div>
           <div className="col-right col col-md-4">
             <h1 className="col_header header-1">
-              WHO WE ARE
+              who we are
             </h1>
             <p className="col_desc">
               We are a team comprised of members who can handle a
