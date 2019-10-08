@@ -11,7 +11,7 @@ import useMutation, { useCreateNode, useUpdateNode } from 'shared/hooks/useMutat
 function usePage(props) {
   const { node } = props;
   const sortProps = { initialSorted: 'email', sortable: ['email', 'full_name'] };
-  const [rowResponse, onQuery] = useQuery({ url: `/${node}` }, []);
+  const [rowResponse, onQuery] = useQuery({ url: `/${node}` }, { initialData: [], initialLoading: true });
   useEffect(() => {
     onQuery({});
   }, []);

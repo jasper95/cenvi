@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import axios from 'shared/utils/axios';
 
-function useQuery(config, initialData) {
+function useQuery(config, options = {}) {
+  const { initialData = null, initialLoading = false } = options;
   const [data, setData] = useState(initialData);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(initialLoading);
   const [error, setError] = useState(null);
   async function onQuery(additionalConfig = {}) {
     setIsLoading(true);

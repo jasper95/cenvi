@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router';
 import loadable from '@loadable/component';
 import PageLayout from 'components/Layout/Page';
 import NotFound from 'pages/NotFound';
+import BlogDetails from 'pages/Blog/BlogDetails';
 
 const Login = loadable(() => import('pages/Login'));
 // const Signup = loadable(() => import('pages/RegisterPage'));
@@ -12,6 +13,8 @@ const AdminBlogList = loadable(() => import('pages/Admin/Blog/BlogList'));
 const AdminBlogForm = loadable(() => import('pages/Admin/Blog/BlogForm'));
 const AlbumList = loadable(() => import('pages/Admin/Album/AlbumList'));
 const User = loadable(() => import('pages/Admin/User'));
+const PublicBlogs = loadable(() => import('pages/Blog/List'));
+const PublicBlogDetails = loadable(() => import('pages/Blog/BlogDetails'));
 // const Team = loadable(() => import('pages/TeamPage'));
 // const Blog = loadable(() => import('pages/BlogsPage'));
 // const BlogDetails = loadable(() => import('pages/BlogPage'));
@@ -41,7 +44,7 @@ export default [
   {
     key: 'admin-blog-list',
     component: AdminBlogList,
-    path: '/admin/blog',
+    path: '/admin/blogs',
     exact: true,
     pageProps: {
       hasFooter: false,
@@ -52,7 +55,7 @@ export default [
   {
     key: 'admin-edit-blog',
     component: AdminBlogForm,
-    path: '/admin/blog/:id',
+    path: '/admin/blogs/:id',
     exact: true,
     pageProps: {
       hasFooter: false,
@@ -63,7 +66,7 @@ export default [
   {
     key: 'admin-list-album',
     component: AlbumList,
-    path: '/admin/album',
+    path: '/admin/albums',
     exact: true,
     pageProps: {
       hasFooter: false,
@@ -74,12 +77,34 @@ export default [
   {
     key: 'admin-user',
     component: User,
-    path: '/admin/user',
+    path: '/admin/users',
     exact: true,
     pageProps: {
       hasFooter: false,
       requireAuth: true,
       hasNavigation: false,
+    },
+  },
+  {
+    key: 'blogs',
+    component: PublicBlogs,
+    path: '/blogs',
+    exact: true,
+    pageProps: {
+      hasFooter: true,
+      requireAuth: 'optional',
+      hasNavigation: true,
+    },
+  },
+  {
+    key: 'blogs',
+    component: BlogDetails,
+    path: '/blogs/:slug',
+    exact: true,
+    pageProps: {
+      hasFooter: true,
+      requireAuth: 'optional',
+      hasNavigation: true,
     },
   },
   // {

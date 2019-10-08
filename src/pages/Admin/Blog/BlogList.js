@@ -14,7 +14,7 @@ function AdminBlogList() {
       pageName="Blogs"
       pageTableState={pageTableState}
       pageTableHandlers={pageTableHandlers}
-      onClickNew={() => history.push('/admin/blog/new')}
+      onClickNew={() => history.push('/admin/blogs/new')}
     />
   );
 
@@ -43,7 +43,7 @@ function AdminBlogList() {
           {
             icon: 'edit',
             label: 'Edit',
-            onClick: data => history.push(`/admin/blog/${data.slug}`),
+            onClick: data => history.push(`/admin/blogs/${data.slug}`),
           },
           {
             icon: 'view',
