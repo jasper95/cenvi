@@ -10,10 +10,10 @@ WebFontLoader.load({
   },
   custom: {
     families: [
-      // 'Proxima Nova Condensed: n3, i3, n4, i4, n6, i6',
-      // 'Proxima Nova: n4, i4, n6, i6, n7, i7, n8, n9',
+      'Proxima Nova Condensed: n3, i3, n4, i4, n6, i6',
+      'Proxima Nova: n4, i4, n6, i6, n7, i7, n8, n9',
     ],
-    urls: ['/static/css/material-icons.min.css'],
+    urls: ['/static/css/material-icons.min.css', '/static/css/proxima.min.css'],
   },
 });
 

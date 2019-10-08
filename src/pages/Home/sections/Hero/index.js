@@ -13,20 +13,20 @@ function HeroSectionHome({ BCP = "section-hero"}) {
               <img id="img-upc" src="static/img/upc.png" alt="upc_logo" />
               <img id="img-up" src="static/img/up.png" alt="up_logo" />
             </div> 
-            <h1 className={`col_header ${BCP}_region`}>
-              CENTRAL VISAYAS
+            <h1 className={`${BCP}_region`}>
+              Central Visayas
             </h1>
-            <h1 className={`col_header ${BCP}_office`}>
-              CENTER FOR ENVIRONMENTAL INFORMATICS
+            <h1 className={`${BCP}_office`}>
+              <span className="text">Center for Environmental Informatics</span> 
             </h1>
             <p className={`col_desc ${BCP}_desc`}>
               Providing technical solutions to environmental problems
             </p>
-            <Button className={`iBttn ${BCP}_bttn`}>
+            <Button className={`iBttn iBttn-primary ${BCP}_bttn`}>
               Explore
             </Button>
           </div>
-          <div className={`col-md-5 ${BCP}_graphic`}>
+          <div className={`${BCP}_graphic`}>
             <img src="static/img/CENVI2.gif" alt=""/>
           </div>
         </div>

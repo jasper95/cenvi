@@ -1,9 +1,8 @@
 
-$menu-text-color: rgba($white,.7);
-$menu-text-color-hovered: rgba($white,.9);
-$menu-text-color-active: $white;
-
-$menu-sub-bg: $white;
+$menu-text-color: rgba($text-color,.85);
+$menu-text-color-hovered: $text-color;
+$menu-text-color-active: $primary-color;
+$menu-sub-bg: $tertiary-color;
 
 .nav {
 	position: fixed;
@@ -11,9 +10,8 @@ $menu-sub-bg: $white;
 	left: 0;
 	width: 100%;
 	z-index: 9999;
+	background-color: $white;
 	height: $nav-height;
-	background-image: linear-gradient(to right, #4ca1af, #2c3e50);
-	box-shadow: 0 0 .25em .5em rgba(#000,.05);
 	font-size: 1rem;
 
 	// .nav_container
@@ -21,15 +19,12 @@ $menu-sub-bg: $white;
 		padding: 0 1em;
 		width: 100%;
 		height: 100%;
-
 		display: flex;
 		align-items: center;
 		justify-content: flex-start;
 		flex-wrap: nowrap;
-
 		margin: 0 auto;
 	}
-
 
 	// .nav_logo
 	&_logo {
@@ -42,9 +37,10 @@ $menu-sub-bg: $white;
 		display: flex;
 		align-items: center;
 		justify-content: flex-start;
-		font-family: $font-family-condensed;
+		font-family: $font-family;
 		font-size: 3em;
-		color: $white !important;
+		font-weight: 900;
+		color: $primary-color;
 	}
 
 	// .nav_actions
@@ -54,181 +50,6 @@ $menu-sub-bg: $white;
 		align-items: stretch;
 		justify-content: flex-end;
 		height: 100%;
-	}
-
-
-	// .nav_menu
-	&_menu {
-		height: 100%;
-		display: flex;
-		align-items: center;
-		justify-content: flex-start;
-
-		// .nav_menu_list ,
-		// .nav_menu_list_item ,
-		// .nav_menu_list_item a {
-		// 	height: 100%;
-		// }
-
-		// nav_menu_list
-		&_list {
-			display: flex;
-			align-items: center;
-			justify-content: flex-start;
-			flex-wrap: nowrap;
-			margin: 0;
-			padding-left: 0;
-			list-style-type: none;
-
-			// nav_menu_list_item
-			&_item {
-				position: relative;
-				color: $menu-text-color;
-				padding: 0 1em;
-				background-color: transparent;
-				display: flex;
-				align-items: center;
-				justify-content: flex-start;
-
-				.text {
-					position: relative;
-					display: flex;
-					align-items: center;
-					justify-content: center;
-					color: inherit;
-					font-family: $font-family;
-					font-weight: normal;
-					flex-shrink: 0;
-					height: 100%;
-					font-weight: 600;
-					text-transform: uppercase;
-
-					&:hover {
-						cursor: pointer;
-					}
-					&:visited {
-						color: inherit;
-					}
-				}
-
-				.iBttn-toggleSubmenu {
-					min-width: 40px;
-					height: 40px;
-					padding-left: 0;
-					padding-right: 0;
-					background-color: transparent !important;
-					color: $gray-200;
-
-					.md-icon {
-						transform: rotate(0deg);
-						transition: transform 300ms ease-out;
-					}
-
-					&.active {
-						.md-icon {
-							transform: rotate(180deg);
-						}
-					}
-				}
-			}
-		}
-
-		&_list:hover {
-			> .text {
-				color: $menu-text-color-hovered;
-			}
-		}
-
-		&_list.active {
-			> .text {
-				font-weight: bold;
-				color: $menu-text-color-active;
-			}
-		}
-
-		&_list_item.hasSubmenu {
-			padding-right: 0;
-			.text {
-				cursor: pointer;
-			}
-
-			// .hasSubmenu-open
-			&.hasSubmenu-open {
-				> .text {
-					color: $white;
-				}
-			}
-		}
-
-		// .nav_menu_list_item_sub
-		&_list_item_sub {
-			position: absolute;
-			top: calc( 100% + 10px );
-			left: 10%;
-			width: 100vw;
-			max-width: 200px;
-			background-color: $menu-sub-bg;
-			transform: translateY(-10px);
-			border-radius: .5em;
-			padding: .5em;
-			opacity: 0;
-			visibility: hidden;
-			box-shadow: 0 .25rem 1em 0 rgba(#000,.1);
-			transition: 
-				transform 150ms ease-out 150ms,
-				opacity 150ms ease-out 150ms,
-				visibility 150ms ease-out 150ms;
-
-			.nav_menu_list {
-				align-items: flex-start;
-				flex-direction: column;
-				// nav_menu_list_item
-				&_item {
-					width: 100%;
-					padding : .25rem 1.25rem;
-					color: $text-color;
-
-					a {
-						font-weight: 600;
-					}
-
-					&:hover {
-						color: $primary-color;
-					}
-
-					&.active {
-						color: $primary-color;
-						background-color: rgba(#FFF,.05);
-					}
-
-					.text {
-						width: 100%;
-						text-align: center;
-						white-space: normal;
-					}
-				}
-			}
-
-			&:before {
-				content: '';
-				position: absolute;
-				left: 1em;
-				bottom: 100%;
-				display: inline-block;
-				border-bottom: 10px solid $menu-sub-bg;
-				border-left: 10px solid transparent;
-				border-right: 10px solid transparent;
-			}
-
-			&.active {
-				transform: translateY(0);
-				opacity: 1;
-				visibility: visible;
-			}
-		}
-
-
-
 	}
 
 
@@ -250,14 +71,202 @@ $menu-sub-bg: $white;
 		&_settings {
 
 		}
-
-
 	}
 }
 
-// ==============================
-// AVATAR LIST SETTINGS
-// ==============================
+/* ==========================================================================
+   MENU
+   ========================================================================== */
+.nav_menu {
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+
+	// nav_menu_list
+	&_list {
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+		flex-wrap: nowrap;
+		margin: 0;
+		padding-left: 0;
+		list-style-type: none;
+
+		// nav_menu_list_item
+		&_item {
+			position: relative;
+			color: $menu-text-color;
+			padding: 0 1em;
+			background-color: transparent;
+			display: flex;
+			align-items: center;
+			justify-content: flex-start;
+
+			.text {
+				position: relative;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				color: inherit;
+				font-family: $font-family;
+				font-weight: normal;
+				flex-shrink: 0;
+				height: 100%;
+				font-weight: 600;
+				text-transform: uppercase;
+
+				&:before {
+					content: '';
+					position: absolute;
+					top: calc(100% + .25em);
+					left: 50%;
+					width: 2rem;
+					height: .2rem;
+					margin-left: -1rem;
+					background-color: $primary-color;
+					border-radius: 1em;
+					transform: scaleX(0);
+					transition: transform 150ms ease-out;
+				}
+
+				&:hover {
+					cursor: pointer;
+				}
+				&:visited {
+					color: inherit;
+				}
+			}
+
+			.iBttn-toggleSubmenu {
+				min-width: 40px;
+				height: 40px;
+				padding-left: 0;
+				padding-right: 0;
+				background-color: transparent !important;
+				color: $gray-200;
+
+				.md-icon {
+					transform: rotate(0deg);
+					transition: transform 300ms ease-out;
+				}
+
+				&.active {
+					.md-icon {
+						transform: rotate(180deg);
+					}
+				}
+			}
+		}
+
+		// nav_menu_list_item:hover
+		&_item:hover {
+			> .text {
+				color: $menu-text-color-hovered;
+				&:before {
+					transform: scaleX(1);
+				}
+			}
+		}
+	}
+
+	&_list:hover {
+		> .text {
+			color: $menu-text-color-hovered;
+		}
+	}
+
+	&_list.active {
+		> .text {
+			font-weight: bold;
+			color: $menu-text-color-active;
+		}
+	}
+
+	&_list_item.hasSubmenu {
+		padding-right: 0;
+		.text {
+			cursor: pointer;
+		}
+	}
+}
+
+/* ==========================================================================
+   SUBMENU
+   ========================================================================== */
+.nav_menu_list_item_sub {
+	position: absolute;
+	top: calc( 100% + 10px );
+	left: 10%;
+	width: 100vw;
+	max-width: 200px;
+	background-color: $menu-sub-bg;
+	transform: translateY(-10px);
+	border-radius: .5em;
+	padding: .5em;
+	opacity: 0;
+	visibility: hidden;
+	box-shadow: 0 .25rem 1em 0 rgba(#000,.1);
+	transition: 
+		transform 150ms ease-out 150ms,
+		opacity 150ms ease-out 150ms,
+		visibility 150ms ease-out 150ms;
+
+	.nav_menu_list {
+		align-items: flex-start;
+		flex-direction: column;
+	}
+
+	.nav_menu_list_item {
+		width: 100%;
+		padding : .25rem 1.25rem;
+		color: $text-color-white;
+		font-weight: normal;
+
+		&:hover {
+			color: $text-color-white;
+			background-color: rgba(#000,.1);
+		}
+
+		&.active {
+			color: $primary-color;
+			background-color: rgba(#FFF,.05);
+		}
+
+		.text {
+			width: 100%;
+			color: inherit !important;
+			text-align: center;
+			white-space: normal;
+			font-weight: inherit;
+			text-transform: none;
+			&:before {
+				display: none;
+			}
+		}
+	}
+
+	&:before {
+		content: '';
+		position: absolute;
+		left: 1em;
+		bottom: 100%;
+		display: inline-block;
+		border-bottom: 10px solid $menu-sub-bg;
+		border-left: 10px solid transparent;
+		border-right: 10px solid transparent;
+	}
+
+	&.active {
+		transform: translateY(0);
+		opacity: 1;
+		visibility: visible;
+	}
+}
+
+/* ==========================================================================
+   AVATAR LIST SETTINGS
+   ========================================================================== */
 .nav_profile .md-list {
 	top: 100%;
 	right: 0;
@@ -267,8 +276,9 @@ $menu-sub-bg: $white;
 	// .md-list-item
 	&-item {
 		width: 100%;
-		&:not(:last-child) {
-			border-bottom: 1px solid $gray-100;
+		.md-text ,
+		.md-fake-btn {
+			color: $text-color-white;
 		}
 	}
 
@@ -282,7 +292,6 @@ $menu-sub-bg: $white;
 		}
 		.md-text {
 			font-family: $font-family;
-			font-weight: 600;
 			font-size: 1em;
 		}
 		.md-icon {
@@ -325,6 +334,7 @@ $menu-sub-bg: $white;
 		padding: .5rem;
 		border-radius: .25rem;
 		overflow: visible;
+		background-color: $menu-sub-bg;
 		&:before {
 			content: '';
 			position: absolute;
@@ -339,7 +349,6 @@ $menu-sub-bg: $white;
 
 	.name {
 		font-size: 1rem;
-		color: $white;
 		font-weight: 600;
 		margin: 0 1em;
 	}
