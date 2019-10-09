@@ -2,11 +2,11 @@ import React from 'react';
 import Button from 'react-md/lib/Buttons/Button';
 import TextField from 'react-md/lib/TextFields/TextField';
 import Link from 'react-router-dom/Link';
-import useForm from 'lib/hooks/useForm';
-import useMutation from 'apollo/mutation';
+import useForm from 'shared/hooks/useForm';
+// import useMutation from 'apollo/mutation';
 import {
   getValidationResult, fieldIsRequired, fieldIsInvalid,
-} from 'lib/tools';
+} from 'shared/utils/tools';
 import * as yup from 'yup';
 import cn from 'classnames';
 import AuthLayout from 'components/Layout/Auth';

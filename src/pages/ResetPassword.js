@@ -6,11 +6,11 @@ import FontIcon from 'react-md/lib/FontIcons/FontIcon';
 import AuthLayout from 'components/Layout/Auth';
 import Button from 'react-md/lib/Buttons/Button';
 import cn from 'classnames';
-import useForm from 'lib/hooks/useForm';
+import useForm from 'shared/hooks/useForm';
 import * as yup from 'yup';
-import useVerifyToken from 'lib/hooks/useVerifyToken';
+import useVerifyToken from 'shared/hooks/useVerifyToken';
 import useMutation from 'apollo/mutation';
-import { getValidationResult, fieldIsRequired } from 'lib/tools';
+import { getValidationResult, fieldIsRequired } from 'shared/utils/tools';
 import 'sass/pages/login.scss';
 
 

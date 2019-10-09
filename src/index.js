@@ -1,10 +1,7 @@
 import React from 'react';
 import { hydrate, render } from 'react-dom';
-import initApollo from 'apollo/initApollo';
-import { parseCookies } from 'lib/tools';
 import { loadableReady } from '@loadable/component';
 import WebFontLoader from 'webfontloader';
-import configureStore from 'lib/configureStore';
 import Root from './App';
 
 WebFontLoader.load({
@@ -31,14 +28,9 @@ if (isProduction && 'serviceWorker' in navigator) {
 }
 
 
-const { __APOLLO_STATE__: apolloState = {} } = window;
-
-const apolloClient = initApollo(apolloState, { getToken: () => parseCookies().token });
-
-const store = configureStore({ getToken: () => parseCookies().token || '' });
 const renderFn = isProduction ? hydrate : render;
 const preLoadFn = isProduction ? loadableReady : cb => cb();
 
 preLoadFn(() => renderFn(
-  <Root store={store} apolloClient={apolloClient} />, document.getElementById('root'),
+  <Root />, document.getElementById('root'),
 ));

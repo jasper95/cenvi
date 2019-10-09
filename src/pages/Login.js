@@ -3,13 +3,12 @@ import Button from 'react-md/lib/Buttons/Button';
 import cn from 'classnames';
 import TextField from 'react-md/lib/TextFields/TextField';
 import Link from 'react-router-dom/Link';
-import useForm from 'lib/hooks/useForm';
+import useForm from 'shared/hooks/useForm';
 import cookie from 'js-cookie';
-import { getValidationResult, fieldIsRequired, fieldIsInvalid } from 'lib/tools';
+import { getValidationResult, fieldIsRequired, fieldIsInvalid } from 'shared/utils/tools';
 import * as yup from 'yup';
-import useMutation from 'apollo/mutation';
+import useMutation from 'shared/hooks/useMutation';
 import AuthLayout from 'components/Layout/Auth';
-import { useDispatch } from 'react-redux';
 import 'sass/pages/login.scss';
 
 const initialFields = {
@@ -23,7 +22,6 @@ function LoginPage() {
     initialFields, validator, onValid,
   });
   const [loginState, onLogin] = useMutation({ url: '/login', onSuccess });
-  const dispatch = useDispatch();
   const {
     onElementChange,
     onValidate,
@@ -103,7 +101,6 @@ function LoginPage() {
 
   function onSuccess({ token }) {
     cookie.set('token', token, { expires: 360000 });
-    dispatch({ type: 'SET_STATE', payload: { token } });
   }
 }
 export default LoginPage;
