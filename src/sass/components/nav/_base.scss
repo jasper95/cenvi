@@ -13,10 +13,10 @@ $menu-sub-bg: $tertiary-color;
 	background-color: $white;
 	height: $nav-height;
 	font-size: 1rem;
+	padding: 0 1em;
 
 	// .nav_container
 	&_container {
-		padding: 0 1em;
 		width: 100%;
 		height: 100%;
 		display: flex;

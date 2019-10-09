@@ -45,7 +45,7 @@ function Header(props) {
     >
       {({ width, height }) => (
         <nav className={cn('nav', { 'nav-isMobile': isMobileNav })}>
-          <div className="nav_container">
+          <div className="nav_container container">
             <Link to="/" className="nav_logo">
               CENVI
             </Link>

@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import {
   HeroSectionHome ,
+  PartnersSectionHome ,
   AboutSectionHome ,
   DownloadSectionHome ,
-  CollaboratorsSectionHome ,
+  CollaboratorsSectionHome
 } from './sections';
 
 function HomePage() {
@@ -14,6 +15,7 @@ function HomePage() {
   return (
     <div id="page-container">
       <HeroSectionHome />
+      <PartnersSectionHome />
       <AboutSectionHome />
       <DownloadSectionHome />
       <CollaboratorsSectionHome />

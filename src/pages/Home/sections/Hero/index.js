@@ -8,11 +8,6 @@ function HeroSectionHome({ BCP = "section-hero"}) {
       <div className="container">
         <div className="row">
           <div className={`col-md-6 col-content ${BCP}_content`}>
-            <div className={`${BCP}_logos`}>
-              <img id="img-logo" src="static/img/logo.png" alt="cenvi_logo" />
-              <img id="img-upc" src="static/img/upc.png" alt="upc_logo" />
-              <img id="img-up" src="static/img/up.png" alt="up_logo" />
-            </div> 
             <h1 className={`${BCP}_region`}>
               Central Visayas
             </h1>
