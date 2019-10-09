@@ -81,9 +81,8 @@ function Page(props) {
         <link rel="stylesheet" type="text/css" href="/static/css/Draft.css" />
         <link rel="stylesheet" type="text/css" href="/static/css/rafiIcons.css" />
         <link rel="stylesheet" type="text/css" href="/static/css/wataphak.css" />
-        <link rel="stylesheet" type="text/css" href="/static/fonts/bebas/index.css" />
-        <link rel="stylesheet" type="text/css" href="/static/fonts/quicksand/index.css" />
-        <link rel="stylesheet" type="text/css" href="/static/fonts/segoq/index.css" />
+        <link rel="stylesheet" type="text/css" href="/static/css/proxima.min.css" />
+        <link rel="stylesheet" type="text/css" href="/static/css/cenvi-icon.min.css" />
       </Head>
       {hasNavigation && (
         <Header />
