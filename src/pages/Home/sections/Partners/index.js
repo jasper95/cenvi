@@ -23,16 +23,18 @@ function PartnersSectionHome({ BCP = "section-partners"}) {
   return (
     <section id={BCP} className={BCP}>
       <div className="container ">
-        <div className="row">
-          <div className="col col-label col-middle col-md-2">
+        <div className="row row-header row-center">
+          <div className="col">
             <h1 className="col_header">
-              Partners
+              Founded By
             </h1>
             <p className="col_desc">
               Cenvi was founded by these schools to achieve the cause
             </p>
           </div>
-          <div className="col col-logos col-md-10">
+        </div>
+        <div className="row row-content">
+          <div className="col col-logos col-md-12">
             <div className="logo">
               {partnerLogos.map( partner => (
                <div

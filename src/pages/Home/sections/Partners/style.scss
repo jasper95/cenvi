@@ -8,27 +8,24 @@ $rootClass: '.cenvi .page-home';
 		align-items: stretch;
 	}
 
+	.row-header {
+		.col_header {
+			font-weight: 600;
+			color: $primary-color;
+			text-align: center;
+			margin-bottom: 0;
+		}
+
+		.col_desc {
+			color: $text-color;
+			text-align: center;
+		}
+	}
+
 	.col {
 		display: flex;
 		align-items: center;
 		justify-content: center;
-
-		// 
-		&_header {
-			font-family: $font-family;
-			font-weight: 600;
-			color: $text-color;
-			text-align: center;
-		}
-
-		// .col-label
-		&-label {
-			align-items: flex-start;
-			flex-direction: column;
-			.col_header {
-				margin-bottom: 0;
-			}
-		}
 
 		// .col-logos
 		&-logos .logo {
