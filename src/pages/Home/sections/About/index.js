@@ -1,19 +1,15 @@
 import React from 'react';
-import { Row, Col } from 'reactstrap';
+import { SectionHeader } from 'components/Section';
 import './style.scss';
 
 function AboutSectionHome({ BCP = "section-about"}) {
   return (
     <section id={BCP} className={`${BCP} section`}>
       <div className="container">
-        <div className="row row-header row-center">
-          <div className="col col-md-10">
-            <h5 className="section_headerLabel">about us</h5>
-            <h1 className="section_header">
-              Get to know Cenvi
-            </h1>
-          </div>
-        </div>
+        <SectionHeader
+          headerLabel='about us'
+          header='Get to know Cenvi'
+        />
         <div className="row row-content">
           <div className="col col-md-4">
             <div className="col_graphic">

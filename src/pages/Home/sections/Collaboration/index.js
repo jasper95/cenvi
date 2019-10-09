@@ -5,6 +5,7 @@ import { mapMarker } from 'react-icons-kit/fa/mapMarker';
 import { phone } from 'react-icons-kit/fa/phone';
 import { file } from 'react-icons-kit/fa/file';
 import { envelope } from 'react-icons-kit/fa/envelope';
+import { SectionHeader } from 'components/Section';
 import './style.scss';
 
 function CollaboratorsSectionHome({ BCP = "section-collaborators"}) {
@@ -59,11 +60,10 @@ function CollaboratorsSectionHome({ BCP = "section-collaborators"}) {
   return (
     <section id={BCP} className={`${BCP} section`}>
       <div className="container">
-        <div className="row row-header row-center">
-          <h1 className="header-1">
-            COLLABORATORS
-          </h1>
-        </div>
+        <SectionHeader
+          headerLabel='collaborators'
+          header='Colleges have collaborated with our Cause'
+        />
         <div className="row row-body row-size-5">
           {collaboratos.map(info => (
             <div className="col">

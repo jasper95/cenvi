@@ -1,4 +1,13 @@
 .section {
+	padding: 4rem 0;
+	// .section_headerRow
+	&_headerRow {
+		margin-bottom: 2rem;
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+		flex-direction: column;
+	}
 
 	// .section_header
 	&_header {
