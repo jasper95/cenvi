@@ -29,7 +29,7 @@ function DownloadSectionHome({ BCP = 'section-downloads' }) {
   }, []);
 
   return (
-    <section id={BCP} className={`${BCP} section`}>
+    <section id="downloads" className={`${BCP} section`}>
       <div className="container">
 
         <SectionHeader

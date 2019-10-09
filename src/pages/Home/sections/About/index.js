@@ -4,7 +4,7 @@ import './style.scss';
 
 function AboutSectionHome({ BCP = "section-about"}) {
   return (
-    <section id={BCP} className={`${BCP} section`}>
+    <section id="about" className={`${BCP} section`}>
       <div className="container">
         <SectionHeader
           headerLabel='about us'

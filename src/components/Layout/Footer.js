@@ -23,7 +23,7 @@ export default function Footer() {
   }
 
   return (
-    <footer className="footer">
+    <footer className="footer" id="contact-us">
       <div className="container">
         <div className="row row-main">
           <div className="col col-center">
