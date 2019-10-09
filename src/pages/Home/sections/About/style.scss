@@ -15,12 +15,31 @@ $rootClass: '.cenvi .page-home';
 		flex-direction: column;
 		padding: 2rem;
 
+		.col_graphic {
+			padding: 1em;
+			border-radius: .5em;
+			background-color: rgba($primary-color,.15);
+			margin-bottom: 2rem;
+			i {
+				font-size: 3rem;
+				line-height: 1;
+				width: 1em;
+				height: 1em;
+				color: $primary-color;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+		}
+
 		// .col_header
 		&_header {
 			font-family: $font-family;
 			font-weight: 600;
 			color: $text-color;
+			text-transform: capitalize;
 			text-align: center;
+			font-size: 1.5rem;
 		}
 
 		// .col_desc
@@ -28,6 +47,7 @@ $rootClass: '.cenvi .page-home';
 			color: $text-color;
 			font-weight: normal;
 			text-align: center;
+			text-align: left;
 		}
 	}
 }

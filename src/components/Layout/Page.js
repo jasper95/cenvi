@@ -80,7 +80,7 @@ function Page(props) {
         <link rel="stylesheet" type="text/css" href="/static/css/rafiIcons.css" />
         <link rel="stylesheet" type="text/css" href="/static/css/wataphak.css" />
         <link rel="stylesheet" type="text/css" href="/static/css/proxima.min.css" />
-        <link rel="stylesheet" type="text/css" href="/static/css/cenvi-icon.min.css" />
+        <link rel="stylesheet" type="text/css" href="/static/css/cenvi-icon.css" />
       </Head>
       {hasNavigation && (
         <Header />

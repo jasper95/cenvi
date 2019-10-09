@@ -1,0 +1,17 @@
+.section {
+
+	// .section_header
+	&_header {
+		font-size: 3.5rem;
+		font-weight: bold;
+		color: $text-color;
+	}
+
+	// .section_headerLabel
+	&_headerLabel {
+		text-transform: uppercase;
+		font-weight: bold;
+		color: $primary-color;
+		letter-spacing: .25em;
+	}
+}

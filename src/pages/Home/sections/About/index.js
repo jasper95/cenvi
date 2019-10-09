@@ -4,10 +4,21 @@ import './style.scss';
 
 function AboutSectionHome({ BCP = "section-about"}) {
   return (
-    <section id={BCP} className={BCP}>
+    <section id={BCP} className={`${BCP} section`}>
       <div className="container">
-        <div className="row">
-          <div className="col-left col col-md-4">
+        <div className="row row-header row-center">
+          <div className="col col-md-10">
+            <h5 className="section_headerLabel">about us</h5>
+            <h1 className="section_header">
+              Get to know Cenvi
+            </h1>
+          </div>
+        </div>
+        <div className="row row-content">
+          <div className="col col-md-4">
+            <div className="col_graphic">
+              <i className="cenvi-icon-analytics-1"/>
+            </div>
             <h1 className="col_header header-1">
               What we do
             </h1>
@@ -29,6 +40,9 @@ function AboutSectionHome({ BCP = "section-about"}) {
             </p>
           </div>
           <div className="col-center col col-md-4">
+            <div className="col_graphic">
+              <i className="cenvi-icon-browser"/>
+            </div>
             <h1 className="col_header header-1">
               Web Portal
             </h1>
@@ -42,6 +56,9 @@ function AboutSectionHome({ BCP = "section-about"}) {
             </p>
           </div>
           <div className="col-right col col-md-4">
+            <div className="col_graphic">
+              <i className="cenvi-icon-diamond"/>
+            </div>
             <h1 className="col_header header-1">
               who we are
             </h1>

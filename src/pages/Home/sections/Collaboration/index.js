@@ -57,7 +57,7 @@ function CollaboratorsSectionHome({ BCP = "section-collaborators"}) {
   ]
 
   return (
-    <section id={BCP} className={BCP}>
+    <section id={BCP} className={`${BCP} section`}>
       <div className="container">
         <div className="row row-header row-center">
           <h1 className="header-1">

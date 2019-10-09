@@ -40,20 +40,6 @@ $rootClass: '.cenvi .page-home';
 			position: relative;
 			z-index: 5;
 		}
-
-		// $diff: .25em;
-
-		// &:before {
-		// 	content: '';
-		// 	position: absolute;
-		// 	z-index: 1;
-		// 	opacity: .15;
-		// 	top: -$diff ;
-		// 	left: -10%;
-		// 	width: 50%;
-		// 	height: calc(100% + #{($diff*2)});
-		// 	border: .15em solid $secondary-color;
-		// }
 	}
 
 	// .section-hero_desc
@@ -67,7 +53,6 @@ $rootClass: '.cenvi .page-home';
 		color: $text-color;
 	}
 
-
 	// .section-hero_content
 	&_content {
 		position: relative;
@@ -80,19 +65,37 @@ $rootClass: '.cenvi .page-home';
 
 	// .section-hero_logos
 	&_logos {
-		display: flex;
-		align-items: center;
-		justify-content: flex-start;
-		flex-wrap: wrap;
-		margin-bottom: 4rem;
-		img {
-			width: 70px;
-			opacity: .8;
-			&:hover {
-				opacity: 1;
-			}
-			&:not(:last-child) {
-				margin-right: 1rem;
+		width: 100%;
+		.logo {
+			display: flex;
+			align-items: center;
+			justify-content: flex-start;
+			width: 100%;
+
+			// .logo_item
+			&_item {
+				width: 100%;
+				max-width: 5rem;
+				opacity: .35;
+				filter: grayscale(100%);
+				margin-bottom: 1rem;
+				transition: 
+					opacity 300ms ease-out ,
+					filter 300ms ease-out ;
+
+				img {
+					width: 100%;
+					height: auto;
+				}
+
+				&:not(:last-child) {
+					margin-right: 1rem;
+				}
+
+				&:hover {
+					opacity: 1;
+					filter: grayscale(0);
+				}
 			}
 		}
 	}

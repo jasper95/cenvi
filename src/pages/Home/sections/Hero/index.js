@@ -3,11 +3,41 @@ import Button from 'react-md/lib/Buttons/Button';
 import './style.scss';
 
 function HeroSectionHome({ BCP = "section-hero"}) {
+  const partnerLogos = [
+    {
+      id: 'logo',
+      src: "static/img/logo.png",
+      alt: "cenvi logo",
+    },
+    {
+      id: 'logo-upc',
+      src: "static/img/upc.png",
+      alt: "upc logo",
+    },
+    {
+      id: 'logo-up',
+      src: "static/img/up.png",
+      alt: "up logo",
+    }
+  ]
+
   return (
-    <section id={BCP} className={BCP}>
+    <section id={BCP} className={`${BCP} section`}>
       <div className="container">
         <div className="row">
           <div className={`col-md-6 col-content ${BCP}_content`}>
+            <div className={`${BCP}_logos`}>
+              <div className="logo">
+                {partnerLogos.map( partner => (
+                 <div
+                    key={partner.id}
+                    className={`logo_item logo-${partner.id}`}
+                  >
+                    <img { ...partner } />
+                 </div>
+                ))}
+              </div>
+            </div>
             <h1 className={`${BCP}_region`}>
               Central Visayas
             </h1>
