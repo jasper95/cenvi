@@ -62,7 +62,7 @@ function CollaboratorsSectionHome({ BCP = "section-collaborators"}) {
       <div className="container">
         <SectionHeader
           headerLabel='collaborators'
-          header='Colleges have collaborated with our Cause'
+          header='Together as One'
         />
         <div className="row row-body row-size-5">
           {collaboratos.map(info => (

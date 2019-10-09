@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Col } from 'reactstrap';
+import { SectionHeader } from 'components/Section';
 import './style.scss';
 
 const apiURL = process.env.REACT_APP_API_HOST_PORT;
@@ -30,11 +31,11 @@ function DownloadSectionHome({ BCP = 'section-downloads' }) {
   return (
     <section id={BCP} className={`${BCP} section`}>
       <div className="container">
-        <div className="row row-center row-header">
-          <h1 className={`${BCP}_header header-1`}>
-            DOWNLOADS
-          </h1>
-        </div>
+
+        <SectionHeader
+          header='Downloads'
+        />
+
         <div className="row row-content">
           <div className="col col-md-4 col-categories">
             {categories && categories.map(category => (
