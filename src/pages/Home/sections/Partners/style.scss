@@ -9,6 +9,10 @@ $rootClass: '.cenvi .page-home';
 	}
 
 	.row-header {
+		.col {
+			flex-direction: column;
+		}
+
 		.col_header {
 			font-weight: 600;
 			color: $primary-color;
@@ -31,7 +35,7 @@ $rootClass: '.cenvi .page-home';
 		&-logos .logo {
 			display: flex;
 			align-items: center;
-			justify-content: flex-start;
+			justify-content: center;
 			width: 100%;
 
 			// .logo_item
