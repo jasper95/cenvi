@@ -12,31 +12,29 @@ function ToolbarRenderer(props) {
         <h1 className="title">{pageName}</h1>
       </div>
       <div className={`${baseClass}_toolbar`}>
-        <Toolbar>
+        <Button
+          flat
+          children="New"
+          iconChildren="add"
+          className="iBttn iBttn-green"
+          onClick={onClickNew}
+        />
+        {rows.length > 0 && (
           <Button
             flat
-            children="New"
-            iconChildren="add"
-            className="iBttn iBttn-green"
-            onClick={onClickNew}
+            iconChildren="archive"
+            children="Export"
+            className="iBttn iBttn-primary"
           />
-          {rows.length > 0 && (
-            <Button
-              flat
-              iconChildren="archive"
-              children="Export"
-              className="iBttn iBttn-primary"
-            />
-          )}
-          {selected.length > 0 && (
-            <Button
-              flat
-              children="Delete"
-              iconChildren="delete"
-              className="iBttn iBttn-error"
-            />
-          )}
-        </Toolbar>
+        )}
+        {selected.length > 0 && (
+          <Button
+            flat
+            children="Delete"
+            iconChildren="delete"
+            className="iBttn iBttn-error"
+          />
+        )}
       </div>
     </div>
   );

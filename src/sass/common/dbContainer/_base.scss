@@ -2,21 +2,24 @@
 .dbContainer {
 	width: 100%;
 	min-height: 100vh;
-	padding: 0 1em;
+	padding: 1rem;
 	background-color: $dbcontainer-bg;
 
 }
 
 .dbContainer > .md-paper {
 	width: 100%;
-	padding: 1rem;
-	margin-top: 1rem;
 	margin-bottom: 1rem;
+
+	&:not(:first-child) {
+		margin-top: 1rem;
+	}
 }
 
 
 .dbContainer > .row-ToolbarHeader {
 	width: 100%;
+
 
 
 	// .row-ToolbarHeader-floating 

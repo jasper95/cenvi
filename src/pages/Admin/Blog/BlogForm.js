@@ -8,6 +8,7 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import cn from 'classnames';
 import SelectAutocomplete from 'components/SelectAutocomplete';
 import { Editor } from 'react-draft-wysiwyg';
+import { Paper } from 'react-md';
 import Button from 'react-md/lib/Buttons/Button';
 import useMutation from 'shared/hooks/useMutation';
 import useQuery from 'shared/hooks/useQuery';
@@ -43,78 +44,86 @@ function EditBlog(props) {
     );
   }
   return (
-    <div className="editBlog">
-      <TextField
-        id="name"
-        label="Title"
-        type="name"
-        variant="outlined"
-        onChange={value => onChange('name', value)}
-        errorText={errors.name}
-        error={!!errors.name}
-        value={fields.name || ''}
-      />
-      <Editor
-        toolbar={{
-          image: {
-            uploadCallback: () => {},
-            alt: { present: true, mandatory: true },
-          },
-        }}
-        editorState={editorState}
-        wrapperClassName="demo-wrapper"
-        editorClassName="demo-editor"
-        onEditorStateChange={(newState) => {
-          setEditorState(newState);
-          onChange('content', convertToRaw(newState.getCurrentContent()));
-        }}
-      />
-      <TextField
-        id="excerpt"
-        label="Excerpt"
-        type="excerpt"
-        onChange={value => onChange('excerpt', value)}
-        errorText={errors.excerpt}
-        error={!!errors.excerpt}
-        value={fields.excerpt || ''}
-        rows={4}
-      />
-      <SelectAutocomplete
-        id="status"
-        options={[
-          { value: 'published', label: 'Published' },
-          { value: 'unpublished', label: 'Unpublished' },
-        ]}
-        label="Status"
-        required
-        value={fields.status}
-        onChange={onElementChange}
-      />
-      {fields.status === 'published' && (
-        <DatePicker
-          id="published_date"
-          label="Published Date"
-          placeholderText="Published Date"
-          onChange={onElementChange}
-          value={fields.published_date}
+    <>
+      <Paper className="col col-md-12 col-formHeader">
+        <TextField
+          id="name"
+          label="Title"
+          type="name"
+          variant="outlined"
+          onChange={value => onChange('name', value)}
+          errorText={errors.name}
+          error={!!errors.name}
+          value={fields.name || ''}
         />
-      )}
-      <CreatableInput
-        value={fields.tags || []}
-        onChange={value => onChange('tags', value)}
-      />
-      <Button
-        className={cn('iBttn iBttn-primary', { processing: mutationState.loading })}
-        onClick={() => {
-          onMutate({
-            data: fields,
-            method: fields.id ? 'PUT' : 'POST',
-          });
-        }}
-        children="Save"
-        flat
-      />
-    </div>
+      </Paper>
+      <div className="row">
+        <Paper className="col col-md-8 col-form">
+          <Editor
+            toolbar={{
+              image: {
+                uploadCallback: () => {},
+                alt: { present: true, mandatory: true },
+              },
+            }}
+            editorState={editorState}
+            wrapperClassName="demo-wrapper"
+            editorClassName="demo-editor"
+            onEditorStateChange={(newState) => {
+              setEditorState(newState);
+              onChange('content', convertToRaw(newState.getCurrentContent()));
+            }}
+          />
+          <TextField
+            id="excerpt"
+            label="Excerpt"
+            type="excerpt"
+            onChange={value => onChange('excerpt', value)}
+            errorText={errors.excerpt}
+            error={!!errors.excerpt}
+            value={fields.excerpt || ''}
+            rows={4}
+          />
+        </Paper>
+        <Paper className="col col-md-4 col-actions">
+          <SelectAutocomplete
+            id="status"
+            options={[
+              { value: 'published', label: 'Published' },
+              { value: 'unpublished', label: 'Unpublished' },
+            ]}
+            label="Status"
+            required
+            value={fields.status}
+            onChange={onElementChange}
+          />
+          {fields.status === 'published' && (
+            <DatePicker
+              id="published_date"
+              label="Published Date"
+              placeholderText="Published Date"
+              onChange={onElementChange}
+              value={fields.published_date}
+            />
+          )}
+          <CreatableInput
+            value={fields.tags || []}
+            onChange={value => onChange('tags', value)}
+          />
+          <Button
+            className={cn('iBttn iBttn-primary', { processing: mutationState.loading })}
+            onClick={() => {
+              onMutate({
+                data: fields,
+                method: fields.id ? 'PUT' : 'POST',
+              });
+            }}
+            children="Save"
+            flat
+          />
+        </Paper>
+      </div>
+    </>
   );
 }
 
