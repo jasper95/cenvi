@@ -1,4 +1,5 @@
 import React from 'react';
+import { Paper } from 'react-md';
 import DataTable from 'components/DataTable';
 import SearchRenderer from './SearchRenderer';
 import ToolbarRenderer from './ToolbarRenderer';
@@ -12,8 +13,8 @@ function PageTable(props) {
   const { data: rows, loading: isLoading } = rowResponse;
   const { onRowToggle, onSort, onSearch } = pageTableHandlers;
   return (
-    <div className="dbContainer">
-      <div className="row-ToolbarHeader row-ToolbarHeader-floating">
+    <>
+      <Paper className="row-ToolbarHeader row-ToolbarHeader-floating">
         <Toolbar
           pageName={pageName}
           baseClass="ToolbarHeader"
@@ -21,8 +22,9 @@ function PageTable(props) {
           selected={selected}
           onClickNew={onClickNew}
         />
-      </div>
-      <div className="row-Table row-Table-floating">
+      </Paper>
+
+      <Paper className="row-Table row-Table-floating">
         <div className="row-Table_header">
           <SearchBar onSearch={onSearch} pageName={pageName} />
         </div>
@@ -36,8 +38,8 @@ function PageTable(props) {
           onSort={onSort}
           processing={isLoading}
         />
-      </div>
-    </div>
+      </Paper>
+    </>
   );
 }
 

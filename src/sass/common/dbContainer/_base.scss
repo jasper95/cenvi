@@ -1,10 +1,3 @@
-%floatingSettings {
-	background-color: #fff;
-	box-shadow: 0 0 1em 0 rgba(#000,.05);
-	border-radius: 0;
-	margin-top: 1rem;
-	margin-bottom: 1rem;
-}
 
 .dbContainer {
 	width: 100%;
@@ -14,8 +7,15 @@
 
 }
 
+.dbContainer > .md-paper {
+	width: 100%;
+	padding: 1rem;
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+}
 
-.dbContainer .row-ToolbarHeader {
+
+.dbContainer > .row-ToolbarHeader {
 	width: 100%;
 
 
@@ -25,7 +25,7 @@
 		top: 1rem;
 		left: 0;
 		z-index: 50;
-		@extend %floatingSettings;
+		padding: 0;
 		.ToolbarHeader {
 			display: flex;
 			align-items: center;
@@ -62,12 +62,5 @@
 	}
 }
 
-.dbContainer .row-Table {
-	width: 100%;
-	// .row-Table-floating
-	&-floating  {
-		@extend %floatingSettings;
-		padding: 1em;
-	}
-}
+
 

@@ -3,6 +3,7 @@ import FineUploaderTraditional from 'fine-uploader-wrappers';
 import Gallery from 'react-fine-uploader/gallery';
 import 'react-fine-uploader/gallery/gallery.css';
 import cookie from 'js-cookie';
+import { Paper } from 'react-md';
 
 
 function AlbumList() {
@@ -36,7 +37,9 @@ function AlbumList() {
     },
   }));
   return (
-    <Gallery uploader={uploader.current} />
+    <Paper>
+      <Gallery uploader={uploader.current} />
+    </Paper>
   );
 }
 

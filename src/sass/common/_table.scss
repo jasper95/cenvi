@@ -8,7 +8,7 @@ $table-header-text: $primary-color-200;
 	position: relative;
 	table-layout: fixed;
 	width: 100%;
-	overflow: auto;
+	overflow: visible;
 
 
 	.md-data-table {

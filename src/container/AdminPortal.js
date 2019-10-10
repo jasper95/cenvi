@@ -43,7 +43,9 @@ function AdminPortal(props) {
         menu={menu}
       />
       <div className='adminPortal_container'>
-        {props.children}
+        <div className="dbContainer">
+          {props.children}
+        </div>
       </div>
     </div>
   )
