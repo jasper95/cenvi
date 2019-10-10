@@ -23,6 +23,7 @@ const menu = [
 ]
 
 function AdminPortal(props) {
+  const { history, location } = props
   const [isSidebarOpen, toggleSidebar] = useState(false)
   return(
     <div className={cn('adminPortal', {
@@ -34,6 +35,8 @@ function AdminPortal(props) {
         handleToggleSidebar={toggleSidebar}
       />
       <Sidebar
+        history={history}
+        location={location}
         className={cn('adminPortal_sidebar', {
           'adminPortal_sidebar-open': isSidebarOpen
         })}
@@ -74,20 +77,24 @@ function TopNav(props) {
 }
 
 function Sidebar(props) {
-  const { className, menu } = props
+  const { className, menu, history, location } = props
   return (
     <div className={`${className} sidebar`}>
       <div className='sidebar_logo'>
         <img src='/static/img/admin-logo.png'/>
       </div>
       <List className='sidebar_list'>
-        {menu.map((item, index) => (
-          <ListItem
-            className={cn('sidebar_list_item',{ 'active' : index === 0 })}
-            leftIcon={<FontIcon>{item.icon}</FontIcon>}
-            primaryText={item.label}
-          />
-        ))}
+        {menu.map((item, index) => {
+          const isActive = location.pathname === item.route
+          return(
+            <ListItem
+              onClick={() => {history.push(item.route)}}
+              className={cn('sidebar_list_item',{ 'active' : isActive })}
+              leftIcon={<FontIcon>{item.icon}</FontIcon>}
+              primaryText={item.label}
+            />
+          )
+        })}
       </List>
     </div>
   )

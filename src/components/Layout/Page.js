@@ -34,6 +34,7 @@ function Page(props) {
     pageId, className, pageDescription,
   } = props;
 
+
   const appData = useSelector(pageSelector);
   const dispatch = useDispatch();
   const { toast, dialog } = appData;
@@ -110,7 +111,7 @@ function Page(props) {
         'page-hasSidebar' : hasSidebar
       })}>
         {isAdmin
-          ? (<AdminPortal> {children} </AdminPortal>)
+          ? (<AdminPortal {...props}> {children} </AdminPortal>)
           : (<> {children} </>)
         }
       </main>
