@@ -8,6 +8,7 @@ import Snackbar from 'components/Snackbar';
 import withAuth from 'shared/hocs/withAuth';
 import { createSelector } from 'redux-starter-kit';
 import { useSelector, useDispatch } from 'react-redux';
+import AdminPortal from 'container/AdminPortal';
 import DialogTitleWithBack from './DialogTitleWithBack';
 import Footer from './Footer';
 import Header from './Header';
@@ -26,6 +27,7 @@ const pageSelector = createSelector(
 
 function Page(props) {
   const {
+    isAdmin,
     children,
     hasSidebar,
     hasNavigation, hasFooter,
@@ -102,11 +104,15 @@ function Page(props) {
         />
       )}
       <main className={cn(`page page-${pageId} ${className || ''}`, {
+        'page-isAdmin': isAdmin,
         'page-hasNavigation' : hasNavigation,
         'page-hasFooter' : hasFooter,
         'page-hasSidebar' : hasSidebar
       })}>
-        {children}
+        {isAdmin
+          ? (<AdminPortal> {children} </AdminPortal>)
+          : (<> {children} </>)
+        }
       </main>
       {hasFooter && (
         <Footer />
@@ -117,6 +123,7 @@ function Page(props) {
     dispatch({ type: 'HIDE_NOTIFICATION' });
   }
 }
+
 
 const EnhancedPage = flowRight(
   withAuth,

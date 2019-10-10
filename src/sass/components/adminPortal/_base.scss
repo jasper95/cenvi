@@ -1,0 +1,38 @@
+$sidebar-width: 20rem;
+$nav-height: 4rem;
+$container-bg: #F6F6F6;
+
+.adminPortal {
+	width: 100%;
+
+	&_topnav {
+		position: fixed;
+		top: 0;
+		left: $sidebar-width;
+		z-index: 99;
+		height: $nav-height;
+		width: calc(100% - #{$sidebar-width});
+		box-shadow: 0 1em 1em 0 rgba(#000,.05);
+	}
+
+	// .adminPortal_sidebar
+	&_sidebar {
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: 999;
+		height: 100vh;
+		width: $sidebar-width;
+		box-shadow: 0 1em 1em 0 rgba(#000,.05);
+	}
+
+	// .adminPortal_container
+	&_container {
+		position: relative;
+		z-index: 1;
+		top: $nav-height;
+		left: $sidebar-width;
+		width: calc(100% - #{$sidebar-width});
+		background-color: $container-bg;
+	}
+}

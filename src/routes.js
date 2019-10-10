@@ -47,6 +47,7 @@ export default [
     path: '/admin/blogs',
     exact: true,
     pageProps: {
+      isAdmin: true,
       hasFooter: false,
       requireAuth: true,
       hasNavigation: false,
@@ -58,6 +59,7 @@ export default [
     path: '/admin/blogs/:id',
     exact: true,
     pageProps: {
+      isAdmin: true,
       hasFooter: false,
       requireAuth: true,
       hasNavigation: false,
@@ -69,6 +71,7 @@ export default [
     path: '/admin/albums',
     exact: true,
     pageProps: {
+      isAdmin: true,
       hasFooter: false,
       requireAuth: true,
       hasNavigation: false,
@@ -80,6 +83,7 @@ export default [
     path: '/admin/users',
     exact: true,
     pageProps: {
+      isAdmin: true,
       hasFooter: false,
       requireAuth: true,
       hasNavigation: false,
@@ -184,6 +188,7 @@ export function renderRoutes(routes, extraProps = {}, switchProps = {}) {
           render={(props) => {
             const { pageProps = { }, key } = route;
             const {
+              isAdmin,
               title, hasNavigation,
               hasFooter, requireAuth,
               pageId, pageDescription, requiredRoles,
@@ -194,6 +199,7 @@ export function renderRoutes(routes, extraProps = {}, switchProps = {}) {
                 pageId={pageId || key}
                 title={title}
                 hasNavigation={hasNavigation}
+                isAdmin={isAdmin}
                 hasFooter={hasFooter}
                 requireAuth={requireAuth}
                 pageDescription={pageDescription}

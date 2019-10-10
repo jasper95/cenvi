@@ -1,0 +1,12 @@
+.sidebar {
+
+	// .sidebar_logo
+	&_logo {
+		width: 100%;
+		max-width: 8rem;
+		img {
+			width: 100%;
+			height: auto;
+		}
+	}
+}
