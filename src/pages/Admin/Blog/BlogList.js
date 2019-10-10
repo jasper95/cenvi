@@ -1,8 +1,8 @@
 import React from 'react';
-import { formatDate } from 'components/DataTable/CellFormatter';
+import { formatDate } from 'shared/components/DataTable/CellFormatter';
 import BlogStatus from 'pages/Admin/Blog/components/BlogStatus';
-import PageTable from 'components/PageTable';
-import usePageTable from 'components/PageTable/usePageTable';
+import PageTable from 'shared/components/PageTable';
+import usePageTable from 'shared/components/PageTable/usePageTable';
 import history from 'shared/utils/history';
 
 function AdminBlogList() {

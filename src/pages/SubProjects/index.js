@@ -1,18 +1,18 @@
 import React, { useEffect } from 'react';
 import './style.scss';
-import { SectionHeader } from 'components/Section';
+import SectionHeader from 'shared/components/Section';
 
 function SubProjectsPage() {
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [])
+  }, []);
 
   const projects = [
     {
       header: 'Mango monitoring using microcontroller-based sensor systems',
       img: {
-        src:'static/img/sub-projects/mango.png',
-        alt: 'mango'
+        src: 'static/img/sub-projects/mango.png',
+        alt: 'mango',
       },
       objectives: [
         `Develop affordable microcontroller-based sensor systems 
@@ -23,14 +23,14 @@ function SubProjectsPage() {
         `Develop a spectral signature database of
         mango plant diseases and infestation.`,
         `Spatial distribution map and analyses of
-        mango pests and diseases in Cebu.`
-      ]
+        mango pests and diseases in Cebu.`,
+      ],
     },
     {
       header: 'Cebu biodiversity spatial information study',
       img: {
-        src:'static/img/sub-projects/tree.png',
-        alt: 'tree'
+        src: 'static/img/sub-projects/tree.png',
+        alt: 'tree',
       },
       objectives: [
         `Inventory the native trees including the
@@ -40,31 +40,29 @@ function SubProjectsPage() {
         centennial mango trees in Cebu Island.`,
         `Propose measures for the protection and
         conservation of native trees and
-        centennial mango trees.`
-      ]
+        centennial mango trees.`,
+      ],
     },
     {
       header: 'Cebu water source mapping and assessment',
       img: {
-        src:'static/img/sub-projects/droplet.png',
-        alt: 'droplet'
+        src: 'static/img/sub-projects/droplet.png',
+        alt: 'droplet',
       },
       objectives: [
-        `Generate maps of potential water sources in Cebu.`,
-        `Characterize discharge/recharge profile of major river basins.`
-      ]
+        'Generate maps of potential water sources in Cebu.',
+        'Characterize discharge/recharge profile of major river basins.',
+      ],
     },
-  ]
+  ];
 
-  const renderProjectimg = (imgObj) => {
-    return (
-      <div className="project_img col col-md-4">
-        <div className="project_img_respContainer">
-          <img { ...imgObj }/>
-        </div>
+  const renderProjectimg = imgObj => (
+    <div className="project_img col col-md-4">
+      <div className="project_img_respContainer">
+        <img {...imgObj} />
       </div>
-    )
-  }
+    </div>
+  );
 
   return (
     <section className="section-hero">
@@ -72,8 +70,8 @@ function SubProjectsPage() {
       <SectionHeader
         withContainer
         rowSize={12}
-        headerLabel='SUB-PROJECTS'
-        header='Projects that We Proud'
+        headerLabel="SUB-PROJECTS"
+        header="Projects that We Proud"
         desc={`
           The field of environmental informatics uses analytical
           and ICT-based methods to monitor, assess, and protect
@@ -97,7 +95,7 @@ function SubProjectsPage() {
                 <div className="project_info_content">
                   <h1 className="project_label">Project Objectives:</h1>
                   <ul className="project_list">
-                    {item.objectives.map( obj => (
+                    {item.objectives.map(obj => (
                       <li className="project_list_item">
                         {obj}
                       </li>
@@ -112,7 +110,7 @@ function SubProjectsPage() {
         </div>
       </div>
     </section>
-  )
+  );
 }
 
 export default SubProjectsPage;

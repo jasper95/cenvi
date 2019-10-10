@@ -1,5 +1,5 @@
 import React from 'react';
-import DialogLayout from 'components/Layout/Dialog';
+import DialogLayout from 'shared/components/Layout/Dialog';
 import pick from 'lodash/pick';
 import omit from 'lodash/omit';
 import useForm from 'shared/hooks/useForm';

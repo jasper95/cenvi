@@ -4,7 +4,7 @@ import Button from 'react-md/lib/Buttons/Button';
 import TextField from 'react-md/lib/TextFields/TextField';
 import Link from 'react-router-dom/Link';
 import cn from 'classnames';
-import AuthLayout from 'components/Layout/Auth';
+import AuthLayout from 'shared/components/Layout/Auth';
 import useForm from 'shared/hooks/useForm';
 import { getValidationResult, fieldIsRequired, fieldIsInvalid } from 'shared/utils/tools';
 import * as yup from 'yup';

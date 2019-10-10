@@ -9,7 +9,7 @@ import {
 } from 'shared/utils/tools';
 import * as yup from 'yup';
 import cn from 'classnames';
-import AuthLayout from 'components/Layout/Auth';
+import AuthLayout from 'shared/components/Layout/Auth';
 import 'sass/pages/signup.scss';
 
 const initialFields = {

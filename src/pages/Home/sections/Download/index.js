@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Col } from 'reactstrap';
-import { SectionHeader } from 'components/Section';
+import SectionHeader from 'shared/components/Section';
 import './style.scss';
 
 const apiURL = process.env.REACT_APP_API_HOST_PORT;
@@ -33,7 +33,7 @@ function DownloadSectionHome({ BCP = 'section-downloads' }) {
       <div className="container">
 
         <SectionHeader
-          header='Downloads'
+          header="Downloads"
         />
 
         <div className="row row-content">
@@ -70,17 +70,17 @@ function Download(props) {
   return (
     <div>
       <Col xs="12" sm="12">
-          <div
-              id="collapse"
-              key={props.id}
-              className={`dowload-file collapse${props.id}`}
-              style={{ display: 'none' }}
-            >
-              <a href={props.hrefVal} className="download-link">
-                  {props.titleFile}
-                </a>
-            </div>
-        </Col>
+        <div
+          id="collapse"
+          key={props.id}
+          className={`dowload-file collapse${props.id}`}
+          style={{ display: 'none' }}
+        >
+          <a href={props.hrefVal} className="download-link">
+            {props.titleFile}
+          </a>
+        </div>
+      </Col>
     </div>
   );
 }

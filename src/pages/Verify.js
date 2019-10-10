@@ -1,5 +1,5 @@
 import React from 'react';
-import AuthLayout from 'components/Layout/Auth';
+import AuthLayout from 'shared/components/Layout/Auth';
 import Link from 'react-router-dom/Link';
 // import useMutation from 'apollo/mutation';
 import Button from 'react-md/lib/Buttons/Button';

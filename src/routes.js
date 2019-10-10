@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router';
 import loadable from '@loadable/component';
-import PageLayout from 'components/Layout/Page';
+import PageLayout from 'shared/components/Layout/Page';
 import NotFound from 'pages/NotFound';
 import BlogDetails from 'pages/Blog/BlogDetails';
 

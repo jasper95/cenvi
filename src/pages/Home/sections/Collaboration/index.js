@@ -5,13 +5,13 @@ import { mapMarker } from 'react-icons-kit/fa/mapMarker';
 import { phone } from 'react-icons-kit/fa/phone';
 import { file } from 'react-icons-kit/fa/file';
 import { envelope } from 'react-icons-kit/fa/envelope';
-import { SectionHeader } from 'components/Section';
+import SectionHeader from 'shared/components/Section';
 import './style.scss';
 
-function CollaboratorsSectionHome({ BCP = "section-collaborators"}) {
+function CollaboratorsSectionHome({ BCP = 'section-collaborators' }) {
   const collaboratos = [
     {
-      id:1,
+      id: 1,
       logo: 'usc.jpg',
       name: 'University of San Carlos',
       address: 'Corner M.J. Cuenco Ave. & R. Palma St., Cebu',
@@ -20,7 +20,7 @@ function CollaboratorsSectionHome({ BCP = "section-collaborators"}) {
       email: 'information@usc.edu.ph',
     },
     {
-      id:2,
+      id: 2,
       logo: 'cit-u.png',
       name: 'Cebu Institute of Technology - University',
       address: 'N. Bacalso Avenue, Cebu',
@@ -29,7 +29,7 @@ function CollaboratorsSectionHome({ BCP = "section-collaborators"}) {
       email: 'info@cit.edu',
     },
     {
-      id:3,
+      id: 3,
       logo: 'ctu.png',
       name: 'Cebu Technological University - Argao Campus',
       address: 'Ed Kintanar St., Lamacan, Argao, Cebu',
@@ -38,7 +38,7 @@ function CollaboratorsSectionHome({ BCP = "section-collaborators"}) {
       email: 'argao@ctu.edu.ph',
     },
     {
-      id:4,
+      id: 4,
       logo: 'upv.png',
       name: 'University of the Philippines Visayas',
       address: 'New Administration Building, Miagao, Iloilo',
@@ -47,29 +47,29 @@ function CollaboratorsSectionHome({ BCP = "section-collaborators"}) {
       email: 'ipo@upv.edu.ph',
     },
     {
-      id:5,
+      id: 5,
       logo: 'nmrdc.png',
       name: 'National Mango Research & Development Center',
       address: 'San Miguel, Jordan, Guimaras',
       phone: '(033) 237-1391',
       fax: '(033) 237-1391',
       email: 'bpi.guimaras@gmail.com',
-    }
-  ]
+    },
+  ];
 
   return (
     <section id="collaborators" className={`${BCP} section`}>
       <div className="container">
         <SectionHeader
-          headerLabel='collaborators'
-          header='Together as One'
+          headerLabel="collaborators"
+          header="Together as One"
         />
         <div className="row row-body row-size-5">
           {collaboratos.map(info => (
             <div className="col">
               <div className="col_logo">
                 <img
-                  src={'/static/img/collaborators/' + info.logo}
+                  src={`/static/img/collaborators/${info.logo}`}
                   alt={info.logo}
                 />
               </div>
@@ -125,7 +125,7 @@ function CollaboratorsSectionHome({ BCP = "section-collaborators"}) {
         </div>
       </div>
     </section>
-  )
+  );
 }
 
 export default CollaboratorsSectionHome;

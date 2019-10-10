@@ -1,19 +1,19 @@
 import React from 'react';
-import { SectionHeader } from 'components/Section';
+import SectionHeader from 'shared/components/Section';
 import './style.scss';
 
-function AboutSectionHome({ BCP = "section-about"}) {
+function AboutSectionHome({ BCP = 'section-about' }) {
   return (
     <section id="about" className={`${BCP} section`}>
       <div className="container">
         <SectionHeader
-          headerLabel='about us'
-          header='Get to know Cenvi'
+          headerLabel="about us"
+          header="Get to know Cenvi"
         />
         <div className="row row-content">
           <div className="col col-md-4">
             <div className="col_graphic">
-              <i className="cenvi-icon-analytics-1"/>
+              <i className="cenvi-icon-analytics-1" />
             </div>
             <h1 className="col_header header-1">
               What we do
@@ -37,7 +37,7 @@ function AboutSectionHome({ BCP = "section-about"}) {
           </div>
           <div className="col-center col col-md-4">
             <div className="col_graphic">
-              <i className="cenvi-icon-browser"/>
+              <i className="cenvi-icon-browser" />
             </div>
             <h1 className="col_header header-1">
               Web Portal
@@ -53,7 +53,7 @@ function AboutSectionHome({ BCP = "section-about"}) {
           </div>
           <div className="col-right col col-md-4">
             <div className="col_graphic">
-              <i className="cenvi-icon-diamond"/>
+              <i className="cenvi-icon-diamond" />
             </div>
             <h1 className="col_header header-1">
               who we are
@@ -76,7 +76,7 @@ function AboutSectionHome({ BCP = "section-about"}) {
         </div>
       </div>
     </section>
-  )
+  );
 }
 
 export default AboutSectionHome;

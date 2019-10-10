@@ -1,46 +1,30 @@
-import React, { useRef, useEffect } from 'react';
-import FineUploaderTraditional from 'fine-uploader-wrappers';
-import Gallery from 'react-fine-uploader/gallery';
+import React, { useState } from 'react';
 import 'react-fine-uploader/gallery/gallery.css';
-import cookie from 'js-cookie';
+import Gallery from 'shared/components/FileUpload/Gallery';
+import pick from 'lodash/pick';
 import { Paper } from 'react-md';
 
-
 function AlbumList() {
-  const uploader = useRef(new FineUploaderTraditional({
-    options: {
-      request: {
-        customHeaders: {
-          Authorization: `Bearer ${cookie.get('token')}`,
-        },
-        endpoint: '/api/file/upload',
-        uuidName: 'uuid',
-        totalFileSizeName: 'totalfilesize',
-        filenameParam: 'filename',
-        inputName: 'file',
-      },
-      retry: {
-        // preventRetryResponseProperty: 'prevent_retry',
-        // enableAuto: true,
-        maxAutoAttempts: Infinity,
-      },
-      chunking: {
-        enabled: true,
-        mandatory: true,
-        paramNames: {
-          chunkSize: 'chunksize',
-          partByteOffset: 'partbyteoffset',
-          partIndex: 'partindex',
-          totalParts: 'totalparts',
-        },
-      },
-    },
-  }));
+  const [uploaded, setUploaded] = useState([]);
   return (
     <Paper>
-      <Gallery uploader={uploader.current} />
+      <div>
+        Uploaded:
+        <div>
+          {uploaded.map(e => (
+            <div key={e.id}>
+              <img alt="" src={`${process.env.STATIC_URL}/${e.file_path}`} />
+            </div>
+          ))}
+        </div>
+      </div>
+      <Gallery onUploadSuccess={onUploadSuccess} />
     </Paper>
   );
+
+  function onUploadSuccess(data) {
+    setUploaded(prevUploaded => prevUploaded.concat([pick(data, 'id', 'file_path')]));
+  }
 }
 
 export default AlbumList;

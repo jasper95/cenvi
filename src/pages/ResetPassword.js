@@ -3,7 +3,7 @@ import TextField from 'react-md/lib/TextFields/TextField';
 import withRouter from 'react-router-dom/withRouter';
 import Link from 'react-router-dom/Link';
 import FontIcon from 'react-md/lib/FontIcons/FontIcon';
-import AuthLayout from 'components/Layout/Auth';
+import AuthLayout from 'shared/components/Layout/Auth';
 import Button from 'react-md/lib/Buttons/Button';
 import cn from 'classnames';
 import useForm from 'shared/hooks/useForm';

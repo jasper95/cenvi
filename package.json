@@ -32,6 +32,7 @@
     "draftjs-to-html": "^0.8.4",
     "exceljs": "^1.14.0",
     "file-saver": "^2.0.2",
+    "file-selector": "^0.1.12",
     "fine-uploader": "^5.16.2",
     "fine-uploader-wrappers": "^1.0.1",
     "history": "^4.9.0",

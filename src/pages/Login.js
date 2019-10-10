@@ -8,7 +8,7 @@ import cookie from 'js-cookie';
 import { getValidationResult, fieldIsRequired, fieldIsInvalid } from 'shared/utils/tools';
 import * as yup from 'yup';
 import useMutation from 'shared/hooks/useMutation';
-import AuthLayout from 'components/Layout/Auth';
+import AuthLayout from 'shared/components/Layout/Auth';
 import 'sass/pages/login.scss';
 
 const initialFields = {

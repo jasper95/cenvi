@@ -1,6 +1,6 @@
 import React from 'react';
-import PageTable from 'components/PageTable';
-import usePageTable from 'components/PageTable/usePageTable';
+import PageTable from 'shared/components/PageTable';
+import usePageTable from 'shared/components/PageTable/usePageTable';
 import { useDispatch } from 'react-redux';
 
 function User() {
