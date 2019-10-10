@@ -2,13 +2,10 @@
 $rootClass: '.cenvi .page-subprojects';
 
 #{$rootClass} .section-hero {
+
 	.row-header {
 		padding: 4rem 0;
 		background-color: $gray-100;
-
-		.container {
-			max-width: 1025px;
-		}
 	}
 
 	.project {

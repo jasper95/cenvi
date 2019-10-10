@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import './style.scss';
+import { SectionHeader } from 'components/Section';
 
 function SubProjectsPage() {
   useEffect(() => {
@@ -67,24 +68,25 @@ function SubProjectsPage() {
 
   return (
     <section className="section-hero">
-      <div className="row row-header row-center">
-        <div className="container">
-          <h1 className="header-1">
-            SUB-PROJECTS
-          </h1>
-          <p id="description">
-            The field of environmental informatics uses analytical
-            and ICT-based methods to monitor, assess, and protect
-            natural resources. UP Cebu's Center for Environmental
-            Informatic intends to contribute in strengthening the
-            leadership of Central Visayas in the ICT industry,
-            particularly in the emerging fields of data science,
-            remote sensing, and artificial intelligence by
-            contributing to environmental conservation, research,
-            and development. Under CENVI are these sub-projects:
-          </p>
-        </div>
-      </div>
+
+      <SectionHeader
+        withContainer
+        rowSize={12}
+        headerLabel='SUB-PROJECTS'
+        header='Projects that We Proud'
+        desc={`
+          The field of environmental informatics uses analytical
+          and ICT-based methods to monitor, assess, and protect
+          natural resources. UP Cebu's Center for Environmental
+          Informatic intends to contribute in strengthening the
+          leadership of Central Visayas in the ICT industry,
+          particularly in the emerging fields of data science,
+          remote sensing, and artificial intelligence by
+          contributing to environmental conservation, research,
+          and development. Under CENVI are these sub-projects:
+        `}
+      />
+
       <div className="row row-content">
         <div className="container">
           {projects.map((item, key) => (
