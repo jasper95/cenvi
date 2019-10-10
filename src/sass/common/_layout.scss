@@ -11,7 +11,14 @@ body {
 }
 
 main.page {
-	padding-top: $nav-height;
+	// .page-hasNavigation
+	&-hasNavigation {
+		padding-top: $nav-height;
+	}
+	// // .page-hasFooter
+	// &-hasFooter {
+		
+	// }
 }
 
 .md-no-scroll {

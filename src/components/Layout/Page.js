@@ -11,6 +11,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import DialogTitleWithBack from './DialogTitleWithBack';
 import Footer from './Footer';
 import Header from './Header';
+import cn from 'classnames';
 
 const AsyncDialog = loadable(props => import(`components/Dialogs/${props.path}`));
 
@@ -26,6 +27,7 @@ const pageSelector = createSelector(
 function Page(props) {
   const {
     children,
+    hasSidebar,
     hasNavigation, hasFooter,
     pageId, className, pageDescription,
   } = props;
@@ -99,7 +101,11 @@ function Page(props) {
           dialogTitleRenderer={appData.hasTemporaryClosed ? DialogTitleWithBack : undefined}
         />
       )}
-      <main className={`page page-${pageId} ${className || ''}`}>
+      <main className={cn(`page page-${pageId} ${className || ''}`, {
+        'page-hasNavigation' : hasNavigation,
+        'page-hasFooter' : hasFooter,
+        'page-hasSidebar' : hasSidebar
+      })}>
         {children}
       </main>
       {hasFooter && (
