@@ -3,10 +3,72 @@
 	// .sidebar_logo
 	&_logo {
 		width: 100%;
-		max-width: 8rem;
+		padding: 2rem;
 		img {
 			width: 100%;
 			height: auto;
 		}
+	}
+
+	// .sidebar_list
+	&_list {
+		padding: 0;
+		background-color: transparent;
+
+		// .sidebar_list_item
+		&_item {
+			position: relative;
+
+			&:before {
+				content: '';
+				position: absolute;
+				top: 0;
+				right: 0;
+				height: 100%;
+				width: .25rem;
+				opacity: 0;
+				background-color: $primary-color;
+				transition: opacity 300ms ease-out;
+			}
+
+			.md-tile-addon--icon i ,
+			.md-tile-addon--icon i:before {
+				color: rgba($text-color,.25);
+			}
+
+			.md-tile-content {
+				padding-left: 1.5rem;
+			}
+
+			.md-text {
+				color: rgba($text-color,.75);
+				font-size: 1rem;
+				font-weight: bold;
+				font-family: $font-family;
+			}
+
+			[role="button"] {
+				background-color: transparent !important;
+			}
+		}
+
+		// .sidebar_list_item:hover
+		// .sidebar_list_item.active
+		&_item.active ,
+		&_item:hover {
+			&:before {
+				opacity: 1;
+			}
+
+			.md-tile-addon--icon i ,
+			.md-tile-addon--icon i:before {
+				color: $primary-color;
+			}
+
+			.md-text {
+				color: $text-color;
+			}
+		}
+
 	}
 }

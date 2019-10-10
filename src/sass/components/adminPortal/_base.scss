@@ -23,7 +23,7 @@ $container-bg: #F6F6F6;
 		z-index: 999;
 		height: 100vh;
 		width: $sidebar-width;
-		box-shadow: 0 1em 1em 0 rgba(#000,.05);
+		box-shadow: 1em 0 1em 0 rgba(#000,.05);
 	}
 
 	// .adminPortal_container
@@ -34,5 +34,6 @@ $container-bg: #F6F6F6;
 		left: $sidebar-width;
 		width: calc(100% - #{$sidebar-width});
 		background-color: $container-bg;
+		overflow-y: auto;
 	}
 }

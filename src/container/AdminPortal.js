@@ -57,7 +57,7 @@ function TopNav(props) {
     <div className={`${className} topnav`}>
       <Button
         icon
-        children='menu'
+        children={isSidebarOpen ? 'menu' : 'keyboard_arrow_right' }
         onClick={() => { handleToggleSidebar(!isSidebarOpen) }}
         className='topnav_toggle'
       />
@@ -78,12 +78,12 @@ function Sidebar(props) {
   return (
     <div className={`${className} sidebar`}>
       <div className='sidebar_logo'>
-        <img src='/static/img/logo.png'/>
+        <img src='/static/img/admin-logo.png'/>
       </div>
       <List className='sidebar_list'>
-        {menu.map((item) => (
+        {menu.map((item, index) => (
           <ListItem
-            className='sidebar_list_item'
+            className={cn('sidebar_list_item',{ 'active' : index === 0 })}
             leftIcon={<FontIcon>{item.icon}</FontIcon>}
             primaryText={item.label}
           />

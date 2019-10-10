@@ -52,7 +52,7 @@ $btn-colors: (
 
 .iBttn {
 	display: inline-block;
-	padding: .5em 3em;
+	padding: .5em 2em;
 	border-radius: .5em;
 	height: auto;
 	font-weight: 600;
@@ -68,7 +68,8 @@ $btn-colors: (
 	line-height: 1em;
 
 	> i , 
-	> span {
+	> span ,
+	> div > span {
 		color: inherit;
 		font-weight: inherit;
 		font-size: inherit;
