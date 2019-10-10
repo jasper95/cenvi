@@ -57,7 +57,7 @@ function TopNav(props) {
     <div className={`${className} topnav`}>
       <Button
         icon
-        children={isSidebarOpen ? 'menu' : 'keyboard_arrow_right' }
+        children={isSidebarOpen ? 'keyboard_arrow_right' : 'menu' }
         onClick={() => { handleToggleSidebar(!isSidebarOpen) }}
         className='topnav_toggle'
       />

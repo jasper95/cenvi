@@ -1,18 +1,25 @@
 $sidebar-width: 20rem;
-$nav-height: 4rem;
+$sm-sidebar-width: 3.5rem;
+$nav-height: 3.5rem;
 $container-bg: #F6F6F6;
 
 .adminPortal {
 	width: 100%;
 
+	// .adminPortal_topnav
 	&_topnav {
 		position: fixed;
 		top: 0;
 		left: $sidebar-width;
 		z-index: 99;
 		height: $nav-height;
-		width: calc(100% - #{$sidebar-width});
+		width: 100%;
+		max-width: calc(100% - #{$sidebar-width});
 		box-shadow: 0 1em 1em 0 rgba(#000,.05);
+		background-color: $white;
+		transition:
+			left 300ms ease-out,
+			max-width 300ms ease-out;
 	}
 
 	// .adminPortal_sidebar
@@ -22,8 +29,10 @@ $container-bg: #F6F6F6;
 		left: 0;
 		z-index: 999;
 		height: 100vh;
-		width: $sidebar-width;
+		width: 100%;
+		max-width: $sidebar-width;
 		box-shadow: 1em 0 1em 0 rgba(#000,.05);
+		transition: max-width 300ms ease-out;
 	}
 
 	// .adminPortal_container
@@ -32,8 +41,28 @@ $container-bg: #F6F6F6;
 		z-index: 1;
 		top: $nav-height;
 		left: $sidebar-width;
-		width: calc(100% - #{$sidebar-width});
+		width: 100%;
+		height: calc(100vh - #{$nav-height});
 		background-color: $container-bg;
 		overflow-y: auto;
+		max-width: calc(100% - #{$sidebar-width});
+		transition:
+			left 300ms ease-out,
+			max-width 300ms ease-out;
 	}
 }
+
+.adminPortal-sidebarOpen {
+
+	.adminPortal_topnav ,
+	.adminPortal_container {
+		left: $sm-sidebar-width;
+		max-width: calc(100% - #{$sm-sidebar-width});
+	}
+
+	.adminPortal_sidebar {
+		max-width: $sm-sidebar-width;
+	}
+}
+
+

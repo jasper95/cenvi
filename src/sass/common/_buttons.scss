@@ -125,12 +125,13 @@ $btn-colors: (
 
 
 .iBttn-second-prio {
-	border-color: $gray-300;
-	color: $black;
+	border-color: transparent;
+	color: $text-color;
+	background-color: $c_gray-100;
 	&:hover {
-		color: $primary-color;
-		border-color: $gray-400;
-		background-color: transparent;
+		color: $text-color;
+		border-color: transparent;
+		background-color: darken($c_gray-100, 5%);
 	}
 }
 
