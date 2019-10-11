@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import useQuery from 'shared/hooks/useQuery';
 import BlogItem from './components/BlogItem';
+import SectionHeader from 'shared/components/Section';
 
 function BlogList() {
   const [rowResponse, onQuery] = useQuery({ url: '/published_blog' }, { initialData: [], initialLoading: true });
@@ -8,19 +9,38 @@ function BlogList() {
   useEffect(() => {
     onQuery();
   }, []);
+
   return (
-    <div>
-      <div>Blogs</div>
-      {loading ? (
-        <div> blogs loading...</div>
-      ) : (
-        <div>
-          {blogs.map(e => (
-            <BlogItem key={e.id} blog={e} />
-          ))}
+    <section className="blogSection section">
+      <SectionHeader
+        withContainer
+        rowSize={10}
+        position="left"
+        headerLabel="BLOGS"
+        header="The Latest News from Cenvi"
+        desc={`
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+          Id culpa, mollitia suscipit nihil animi error. Veritatis
+          aliquid at dolores fugit incidunt nihil quia quaerat!
+          Eveniet dolorum enim corporis provident sit.
+        `}
+      />
+      <div className="row row-content">
+        <div className="container">
+          {loading ? (
+            <div> blogs loading...</div>
+          ) : (
+            <div className="row">
+              {blogs.map(e => (
+                <div className='col col-lg-4 col-md-6'>
+                  <BlogItem key={e.id} blog={e} />
+                </div>
+              ))}
+            </div>
+          )}
         </div>
-      )}
-    </div>
+      </div>
+    </section>
   );
 }
 

@@ -159,6 +159,14 @@ $menu-sub-bg: $tertiary-color;
 			}
 		}
 
+		// nav_menu_list_item.active
+		&_item.active {
+			> .text {
+				font-weight: bold;
+				color: $menu-text-color-active;
+			}
+		}
+
 		// nav_menu_list_item:hover
 		&_item:hover {
 			> .text {
@@ -176,12 +184,7 @@ $menu-sub-bg: $tertiary-color;
 		}
 	}
 
-	&_list.active {
-		> .text {
-			font-weight: bold;
-			color: $menu-text-color-active;
-		}
-	}
+
 
 	&_list_item.hasSubmenu {
 		padding-right: 0;
@@ -373,6 +376,11 @@ $menu-sub-bg: $tertiary-color;
 	}
 }
 
-// .nav + main {
-// 	padding-top: $nav-height;
-// }
+/* ==========================================================================
+   1366px
+   ========================================================================== */
+@media (max-width: 1367px) {
+	.cenvi .container.nav_container {
+		max-width: 100% ;
+	}
+}
