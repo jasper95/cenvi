@@ -1,14 +1,14 @@
 import React from 'react';
-import PreviewImages from './PreviewImages'
+import PreviewImages from './PreviewImages';
 import 'sass/components/cards/albumCard/index.scss';
 
 function AlbumCard(props) {
   const {
     id, name, description,
-    category, image , created_date,
-    images
-  } = props
-  const BCP='albumCard'
+    category, image, created_date,
+    images,
+  } = props;
+  const BCP = 'albumCard';
   return (
     <div className={`${BCP} row row-center`} key={id}>
       <div className={`${BCP}_media col col-md-5 `}>
@@ -34,7 +34,7 @@ function AlbumCard(props) {
         <PreviewImages
           className={`${BCP}_images`}
           images={images}
-          linkToMore=''
+          linkToMore=""
         />
       </div>
     </div>

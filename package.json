@@ -64,7 +64,7 @@
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-router-hash-link": "^1.2.2",
-    "react-select": "2.4.2",
+    "react-select": "^3.0.8",
     "react-virtualized": "^9.21.1",
     "reactstrap": "^8.0.1",
     "recharts": "^1.6.2",

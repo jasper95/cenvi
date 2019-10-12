@@ -1,6 +1,5 @@
 import 'react-datepicker/dist/react-datepicker.css';
 import React, { useEffect } from 'react';
-import loadable from '@loadable/component';
 import PropTypes from 'prop-types';
 import { Helmet as Head } from 'react-helmet';
 import flowRight from 'lodash/flowRight';
@@ -112,22 +111,11 @@ function Page(props) {
         'page-hasSidebar': hasSidebar,
       })}
       >
-        {isAdmin
-          ? (
-            <AdminPortal {...props}>
-              {' '}
-              {children}
-              {' '}
-            </AdminPortal>
-          )
-          : (
-            <>
-              {' '}
-              {children}
-              {' '}
-            </>
-          )
-        }
+        {isAdmin ? (
+          <AdminPortal {...props}>
+            {children}
+          </AdminPortal>
+        ) : children}
       </main>
       {hasFooter && (
         <Footer />

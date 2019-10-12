@@ -14,9 +14,10 @@ const AdminBlogForm = loadable(() => import('pages/Admin/Blog/BlogForm'));
 const AlbumList = loadable(() => import('pages/Admin/Album/containers/AlbumList'));
 const User = loadable(() => import('pages/Admin/User'));
 const PublicBlogs = loadable(() => import('pages/Blog/List'));
-const PublicBlogDetails = loadable(() => import('pages/Blog/BlogDetails'));
+// const PublicBlogDetails = loadable(() => import('pages/Blog/BlogDetails'));
 const Team = loadable(() => import('pages/Team'));
 const Albums = loadable(() => import('pages/Albums'));
+const EditAlbum = loadable(() => import('pages/Admin/Album/containers/EditAlbum'));
 // const Blog = loadable(() => import('pages/BlogsPage'));
 // const BlogDetails = loadable(() => import('pages/BlogPage'));
 // const FileUpload = loadable(() => import('pages/FileUploadPage'));
@@ -69,6 +70,18 @@ export default [
     key: 'admin-list-album',
     component: AlbumList,
     path: '/admin/albums',
+    exact: true,
+    pageProps: {
+      isAdmin: true,
+      hasFooter: false,
+      requireAuth: true,
+      hasNavigation: false,
+    },
+  },
+  {
+    key: 'edit-admin-list-album',
+    component: EditAlbum,
+    path: '/admin/albums/:id',
     exact: true,
     pageProps: {
       isAdmin: true,

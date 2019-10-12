@@ -19,6 +19,16 @@ function CreateAlbum(props) {
         error={Boolean(errors.name)}
         errorText={errors.name}
       />
+      <TextField
+        id="excerpt"
+        label="Excerpt"
+        type="excerpt"
+        onChange={onElementChange}
+        errorText={errors.excerpt}
+        error={Boolean(errors.excerpt)}
+        value={fields.excerpt || ''}
+        rows={4}
+      />
     </>
   );
 }

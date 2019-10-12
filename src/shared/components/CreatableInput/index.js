@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import CreatableSelect from 'react-select/lib/Creatable';
+import CreatableSelect from 'react-select/creatable';
 import PropTypes from 'prop-types';
 
 const components = {
@@ -23,7 +23,7 @@ function CreatableInput(props) {
         if (!value.map(e => e.value).includes(inputValue)) {
           const newValue = [...value, createOption(inputValue)];
           setValue(newValue);
-          onChange(newValue.map(e => e.value));
+          onChange(newValue.map(e => e.value), id);
           setInputValue('');
         }
         event.preventDefault();
@@ -34,6 +34,13 @@ function CreatableInput(props) {
   useEffect(() => {
     if (isNotEqualValue()) {
       setValue(propsValue.map(e => ({ label: e, value: e })));
+    }
+    function isNotEqualValue() {
+      const result = (value && !propsValue) || (!value && propsValue);
+      if (value && propsValue) {
+        return propsValue.join(',') !== value.map(e => e.value).join(',');
+      }
+      return result;
     }
   }, [propsValue]);
   const handleChange = (newValue) => {
@@ -57,14 +64,6 @@ function CreatableInput(props) {
       value={value}
     />
   );
-
-  function isNotEqualValue() {
-    const result = (value && !propsValue) || (!value && propsValue);
-    if (value && propsValue) {
-      return propsValue.join(',') !== value.map(e => e.value).join(',');
-    }
-    return result;
-  }
 }
 
 CreatableInput.propTypes = {

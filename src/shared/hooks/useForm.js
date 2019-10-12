@@ -20,13 +20,13 @@ export default function useForm(params) {
     if (customHandler) {
       const changes = customHandler(value, fields);
       if (changes) {
-        setFields({ ...fields, ...changes });
+        setFields(oldFields => ({ ...oldFields, ...changes }));
         setErrors(omit(errors, key));
       }
       return;
     }
     setErrors(omit(errors, key));
-    setFields({ ...fields, [key]: value });
+    setFields(oldFields => ({ ...oldFields, [key]: value }));
   }
   function onValidate() {
     const { isValid, errors: validationErrors } = validator(fields);

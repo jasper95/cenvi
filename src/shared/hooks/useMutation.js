@@ -1,19 +1,14 @@
 import { useState } from 'react';
 import capitalize from 'lodash/capitalize';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {
   showSuccess,
 } from 'shared/redux/app/reducer';
 import axios from 'shared/utils/axios';
 
-const basicAuth = Buffer.from(
-  `${process.env.REACT_APP_API_USERNAME}:${process.env.REACT_APP_API_PASSWORD}`,
-).toString('base64');
-
 export default function useMutation(params) {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-  const token = useSelector(state => state.token);
   const [data, setData] = useState();
   const [error, setError] = useState();
 
@@ -51,6 +46,7 @@ export default function useMutation(params) {
       setData(response);
       onSuccess(response);
       if (message) {
+        console.log('message: ', message);
         dispatch(showSuccess({ message, hideDialog }));
       }
     }

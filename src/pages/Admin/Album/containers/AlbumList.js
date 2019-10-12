@@ -24,6 +24,11 @@ function AlbumList() {
         component: CreateAlbum,
         props: {
           title: 'Create Album',
+          onValid,
+          initialFields: {
+            status: 'Active',
+            published_date: new Date().toISOString(),
+          },
         },
       }))}
     />
@@ -54,7 +59,7 @@ function AlbumList() {
           {
             icon: 'edit',
             label: 'Edit',
-            onClick: data => history.push(`/admin/blogs/${data.slug}`),
+            onClick: data => history.push(`/admin/albums/${data.slug}`),
           },
           {
             icon: 'view',
@@ -71,8 +76,12 @@ function AlbumList() {
     ];
   }
 
-  function onSuccess() {
+  function onValid(data) {
+    pageTableHandlers.onCreate({ data });
+  }
 
+  function onSuccess(data) {
+    history.push(`/admin/albums/${data.id}`);
   }
 }
 

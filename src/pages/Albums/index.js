@@ -6,9 +6,9 @@ import AlbumCard from './components/AlbumCard';
 function AlbumsPage(props) {
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [])
+  }, []);
   return (
-    <section class="albumsSection section">
+    <section className="albumsSection section">
       <SectionHeader
         withContainer
         headerLabel="ALBUMS"
@@ -19,11 +19,11 @@ function AlbumsPage(props) {
           { albums.length !== 0
             ? (
               <>
-                {albums.map(member => (<AlbumCard {...member}/>))}
+                {albums.map(member => (<AlbumCard {...member} />))}
               </>
             ) : (
               <div className="noRecords">
-                <h1 className='noRecords_label'>
+                <h1 className="noRecords_label">
                   No Records Found
                 </h1>
               </div>

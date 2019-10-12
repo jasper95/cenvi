@@ -2,11 +2,23 @@ import { createSlice } from 'redux-starter-kit';
 
 const initialState = {
   dialog: null,
-  notification: null,
+  toast: null,
   dialogProcessing: false,
   formProcessing: false,
   temporaryClosedDialogs: [],
 };
+
+function hideDialogReducer(state) {
+  let dialog = null;
+  let { temporaryClosedDialogs } = state;
+  if (temporaryClosedDialogs.length) {
+    [dialog] = [...temporaryClosedDialogs].reverse();
+    temporaryClosedDialogs = temporaryClosedDialogs.slice(0, temporaryClosedDialogs.length - 1);
+  }
+  state.dialog = dialog;
+  state.dialogProcessing = false;
+  state.temporaryClosedDialogs = temporaryClosedDialogs;
+}
 
 const auth = createSlice({
   slice: 'auth',
@@ -21,17 +33,7 @@ const auth = createSlice({
       state.dialog = payload;
       state.temporaryClosedDialogs = temporaryClosedDialogs;
     },
-    hideDialog(state) {
-      let dialog = null;
-      let { temporaryClosedDialogs } = state;
-      if (temporaryClosedDialogs.length) {
-        [dialog] = [...temporaryClosedDialogs].reverse();
-        temporaryClosedDialogs = temporaryClosedDialogs.slice(0, temporaryClosedDialogs.length - 1);
-      }
-      state.dialog = dialog;
-      state.dialogProcessing = false;
-      state.temporaryClosedDialogs = temporaryClosedDialogs;
-    },
+    hideDialog: hideDialogReducer,
     dialogProcessing(state, action) {
       const { dialog } = state;
       if (dialog && action.payload) {
@@ -42,10 +44,10 @@ const auth = createSlice({
       state.formProcessing = action.payload;
     },
     hideNotification(state) {
-      state.notification = null;
+      state.toast = null;
     },
     showError(state, { payload }) {
-      state.notification = {
+      state.toast = {
         ...payload,
         type: 'error',
       };
@@ -55,7 +57,7 @@ const auth = createSlice({
     showSuccess(state, { payload }) {
       const { message, hideDialog = true } = payload;
       if (hideDialog) {
-        this.hideDialog(state);
+        hideDialogReducer(state)
       }
       state.toast = {
         type: 'success',

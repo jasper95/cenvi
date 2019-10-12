@@ -2,7 +2,7 @@ import React from 'react';
 import DialogLayout from 'shared/components/Layout/Dialog';
 import pick from 'lodash/pick';
 import omit from 'lodash/omit';
-import { hideDialog } from 'shared/redux/app/reducer';
+import { hideDialog, dialogProcessing } from 'shared/redux/app/reducer';
 import useForm from 'shared/hooks/useForm';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -12,14 +12,14 @@ const formProps = ['initialFields', 'validator', 'customChangeHandler', 'onValid
 export default () => (WrappedComponent) => {
   function Dialog(props) {
     const dispatch = useDispatch();
-    const dialogProcessing = useSelector(state => state.dialogProcessing);
+    const isProcessing = useSelector(state => state.app.dialogProcessing);
     const [formState, formHandlers] = useForm({ ...pick(props, formProps), onValid });
     return (
       <DialogLayout
         {...pick(props, dialogProps)}
         onContinue={onContinue}
         onCancel={onCancel}
-        isProcessing={dialogProcessing}
+        isProcessing={isProcessing}
       >
         <WrappedComponent
           formState={formState}
@@ -31,6 +31,7 @@ export default () => (WrappedComponent) => {
       </DialogLayout>
     );
     function onValid(...args) {
+      dispatch(dialogProcessing(true));
       props.onValid(...args);
     }
     function onContinue() {
