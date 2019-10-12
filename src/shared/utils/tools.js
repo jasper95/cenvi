@@ -185,3 +185,10 @@ export const arrayMove = (array, from, to) => {
   arrayMoveMutate(array, from, to);
   return array;
 };
+
+export const toFormData = (fields) => {
+  const formData = new FormData();
+  Object.entries(fields)
+    .forEach(([key, val]) => formData.append(key, val));
+  return formData;
+};

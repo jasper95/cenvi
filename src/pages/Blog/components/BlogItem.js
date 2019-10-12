@@ -8,11 +8,9 @@ import 'sass/components/cards/blogCard/index.scss';
 
 function BlogItem(props) {
   const { blog } = props;
+  console.log('blog: ', blog);
   const dates = formatISOToDate(pick(blog, 'published_date'), ['published_date'], 'MM-DD-YYYY');
   const BCP = 'blogCard';
-
-  console.log('dates == ', dates);
-
   return (
     <div className={BCP}>
 
@@ -34,15 +32,14 @@ function BlogItem(props) {
         </div>
         <img
           className={`${BCP}_media_img`}
-          src="https://source.unsplash.com/random"
+          src={`${process.env.STATIC_URL}/${blog.image_url}`}
           alt=""
         />
       </div>
 
       <div className={`${BCP}_content`}>
         <Link className={`${BCP}_header`} to={`/blogs/${blog.slug}`}>
-          {/* {blog.name} */}
-          Example Blog with Very Long Name
+          {blog.name}
         </Link>
         <div className={`${BCP}_tags tag`}>
           { blog.tags.length > 0 && blog.tags.map(tag => (
@@ -50,15 +47,12 @@ function BlogItem(props) {
               to="/login"
               className="tag_item"
             >
-              {/* {tag} */}
-              Technology
+              {tag}
             </Link>
           ))}
         </div>
         <p className={`${BCP}_excerpt`}>
-          {/* {blog.excerpt} */}
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-          Magnam, pariatur sunt mollitia hic consequuntur. Unde.
+          {blog.excerpt}
         </p>
       </div>
 
@@ -67,7 +61,6 @@ function BlogItem(props) {
           className={`${BCP}_author`}
           name={blog.author}
         />
-
       </div>
     </div>
   );
@@ -77,7 +70,7 @@ function Author(props) {
   const {
     className,
     name,
-    avatar = 'https://i.pravatar.cc/300',
+    avatar = '/static/img/default-avatar.png',
     userId = 1,
     position = 'developer',
   } = props;

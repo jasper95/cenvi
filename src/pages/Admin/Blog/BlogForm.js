@@ -8,20 +8,18 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import cn from 'classnames';
 import SelectAutocomplete from 'shared/components/SelectAutocomplete';
 import { Editor } from 'react-draft-wysiwyg';
-import { Paper } from 'react-md';
+import Paper from 'react-md/lib/Papers/Paper';
+import SingleFileUpload from 'shared/components/FileUpload/SingleFileUpload';
 import Button from 'react-md/lib/Buttons/Button';
 import useMutation from 'shared/hooks/useMutation';
 import useQuery from 'shared/hooks/useQuery';
+import toFormData from 'object-to-formdata';
 
 function EditBlog(props) {
   const [blogResponse, onQueryBlog] = useQuery();
   const { loading: blogIsLoading } = blogResponse;
-  const blog = {
-    image_url: 'http://babaisannoy.com',
-    status: 'published',
-  };
   const [formState, formHandlers] = useForm({
-    initialFields: blog,
+    initialFields: {},
   });
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const { onSetFields, onElementChange } = formHandlers;
@@ -115,12 +113,19 @@ function EditBlog(props) {
             className={cn('iBttn iBttn-primary', { processing: mutationState.loading })}
             onClick={() => {
               onMutate({
-                data: fields,
-                method: fields.id ? 'PUT' : 'POST',
+                data: toFormData(fields),
+                method: 'POST',
               });
             }}
             children="Save"
             flat
+          />
+        </Paper>
+        <Paper className="col col-md-12 col-actions">
+          <SingleFileUpload
+            id="file"
+            value={fields.image_url ? `${process.env.STATIC_URL}/${fields.image_url}` : fields.file}
+            onChange={onElementChange}
           />
         </Paper>
       </div>

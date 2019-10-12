@@ -32,34 +32,26 @@ function BlogList() {
             <div> blogs loading...</div>
           ) : (
             <div className="row">
-              <BlogItems blogs={[]} />
+              {blogs.length > 0 ? (
+                <>
+                  {blogs.map(e => (
+                    <div className="col col-lg-4 col-md-6">
+                      <BlogItem key={e.id} blog={e} />
+                    </div>
+                  ))}
+                </>
+              ) : (
+                <div className="noRecords">
+                  <h1 className="noRecords_label">
+                    No Records Found
+                  </h1>
+                </div>
+              )}
             </div>
           )}
         </div>
       </div>
     </section>
-  );
-}
-
-function BlogItems({ blogs }) {
-  console.log('@@BlogItems ', blogs);
-  if (blogs.length > 0) {
-    return (
-      <>
-        {blogs.map(e => (
-          <div className="col col-lg-4 col-md-6">
-            <BlogItem key={e.id} blog={e} />
-          </div>
-        ))}
-      </>
-    );
-  }
-  return (
-    <div className="noRecords">
-      <h1 className="noRecords_label">
-        No Records Found
-      </h1>
-    </div>
   );
 }
 
