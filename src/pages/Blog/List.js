@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import useQuery from 'shared/hooks/useQuery';
-import BlogItem from './components/BlogItem';
 import SectionHeader from 'shared/components/Section';
+import BlogItem from './components/BlogItem';
 
 function BlogList() {
   const [rowResponse, onQuery] = useQuery({ url: '/published_blog' }, { initialData: [], initialLoading: true });
@@ -32,7 +32,7 @@ function BlogList() {
           ) : (
             <div className="row">
               {blogs.map(e => (
-                <div className='col col-lg-4 col-md-6'>
+                <div className="col col-lg-4 col-md-6">
                   <BlogItem key={e.id} blog={e} />
                 </div>
               ))}

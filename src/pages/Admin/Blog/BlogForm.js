@@ -107,8 +107,9 @@ function EditBlog(props) {
             />
           )}
           <CreatableInput
+            id="tags"
             value={fields.tags || []}
-            onChange={value => onChange('tags', value)}
+            onChange={onElementChange}
           />
           <Button
             className={cn('iBttn iBttn-primary', { processing: mutationState.loading })}

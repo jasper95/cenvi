@@ -14,8 +14,6 @@ import DialogTitleWithBack from './DialogTitleWithBack';
 import Footer from './Footer';
 import Header from './Header';
 
-// const AsyncDialog = loadable(props => import(`components/Dialogs/${props.path}`));
-
 const pageSelector = createSelector(
   state => state.app.toast,
   state => state.app.dialog,
@@ -38,6 +36,10 @@ function Page(props) {
   const appData = useSelector(pageSelector);
   const dispatch = useDispatch();
   const { toast, dialog } = appData;
+  let DialogComponent;
+  if (dialog && dialog.component) {
+    ({ component: DialogComponent } = dialog);
+  }
 
   useEffect(() => willUnmount, []);
 
@@ -97,13 +99,12 @@ function Page(props) {
           {...toast}
         />
       )}
-      {/* {dialog && dialog.path && (
-        <AsyncDialog
-          path={dialog.path}
+      {DialogComponent && (
+        <DialogComponent
           {...dialog.props}
           dialogTitleRenderer={appData.hasTemporaryClosed ? DialogTitleWithBack : undefined}
         />
-      )} */}
+      )}
       <main className={cn(`page page-${pageId} ${className || ''}`, {
         'page-isAdmin': isAdmin,
         'page-hasNavigation': hasNavigation,

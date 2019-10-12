@@ -12,7 +12,7 @@ const createOption = label => ({
 });
 
 function CreatableInput(props) {
-  const { onChange, value: propsValue } = props;
+  const { onChange, value: propsValue, id } = props;
   const [value, setValue] = useState(propsValue);
   const [inputValue, setInputValue] = useState('');
   const handleKeyDown = (event) => {
@@ -38,7 +38,7 @@ function CreatableInput(props) {
   }, [propsValue]);
   const handleChange = (newValue) => {
     setValue(newValue);
-    onChange(newValue.map(e => e.value));
+    onChange(newValue.map(e => e.value), id);
   };
   const handleInputChange = (newValue) => {
     setInputValue(newValue);
