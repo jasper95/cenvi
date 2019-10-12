@@ -13,7 +13,9 @@ import SingleFileUpload from 'shared/components/FileUpload/SingleFileUpload';
 import Button from 'react-md/lib/Buttons/Button';
 import useMutation from 'shared/hooks/useMutation';
 import useQuery from 'shared/hooks/useQuery';
-import toFormData from 'object-to-formdata';
+import { toFormData } from 'shared/utils/tools';
+import omit from 'lodash/omit';
+import axios from 'shared/utils/axios';
 
 function EditBlog(props) {
   const [blogResponse, onQueryBlog] = useQuery();
@@ -60,8 +62,11 @@ function EditBlog(props) {
           <Editor
             toolbar={{
               image: {
-                uploadCallback: () => {},
-                alt: { present: true, mandatory: true },
+                urlEnabled: true,
+                uploadEnabled: true,
+                uploadCallback: uploadFile,
+                alt: { present: true, mandatory: false },
+                previewImage: true,
               },
             }}
             editorState={editorState}
@@ -111,12 +116,7 @@ function EditBlog(props) {
           />
           <Button
             className={cn('iBttn iBttn-primary', { processing: mutationState.loading })}
-            onClick={() => {
-              onMutate({
-                data: toFormData(fields),
-                method: 'POST',
-              });
-            }}
+            onClick={onSave}
             children="Save"
             flat
           />
@@ -131,6 +131,27 @@ function EditBlog(props) {
       </div>
     </>
   );
+
+  async function uploadFile(file, params = {}) {
+    const formData = toFormData({ ...params, file });
+    const response = await axios({
+      data: formData,
+      url: '/file/upload/simple',
+      method: 'POST',
+    });
+    const { file_path: filePath } = response;
+    return { data: { link: `${process.env.STATIC_URL}/${filePath}` } };
+  }
+
+  async function onSave() {
+    if (fields.file) {
+      await uploadFile(fields.file, { entity: 'blog', entity_id: fields.id });
+    }
+    onMutate({
+      data: omit(fields, 'file', 'image_url'),
+      method: fields.id ? 'PUT' : 'POST',
+    });
+  }
 }
 
 export default EditBlog;
