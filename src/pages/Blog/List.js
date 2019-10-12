@@ -8,6 +8,7 @@ function BlogList() {
   const { data: blogs, loading } = rowResponse;
   useEffect(() => {
     onQuery();
+    window.scrollTo(0, 0);
   }, []);
 
   return (
@@ -31,16 +32,34 @@ function BlogList() {
             <div> blogs loading...</div>
           ) : (
             <div className="row">
-              {blogs.map(e => (
-                <div className="col col-lg-4 col-md-6">
-                  <BlogItem key={e.id} blog={e} />
-                </div>
-              ))}
+              <BlogItems blogs={[]} />
             </div>
           )}
         </div>
       </div>
     </section>
+  );
+}
+
+function BlogItems({ blogs }) {
+  console.log('@@BlogItems ', blogs);
+  if (blogs.length > 0) {
+    return (
+      <>
+        {blogs.map(e => (
+          <div className="col col-lg-4 col-md-6">
+            <BlogItem key={e.id} blog={e} />
+          </div>
+        ))}
+      </>
+    );
+  }
+  return (
+    <div className="noRecords">
+      <h1 className="noRecords_label">
+        No Records Found
+      </h1>
+    </div>
   );
 }
 

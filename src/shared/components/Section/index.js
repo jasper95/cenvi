@@ -15,7 +15,7 @@ function SectionHeader(props) {
       {withContainer
         ? (
           <div className="container">
-            <div className={`row-${position}`}>
+            <div className={`row row-${position}`}>
               <div className={`col col-md-${rowSize} col-${position}`}>
                 { headerLabel && (
                   <h5 className="section_headerLabel">
