@@ -66,10 +66,9 @@ function SubProjectsPage() {
 
   return (
     <section className="section-hero">
-
       <SectionHeader
         withContainer
-        rowSize={12}
+        rowSize={10}
         headerLabel="SUB-PROJECTS"
         header="Projects that We Proud"
         desc={`

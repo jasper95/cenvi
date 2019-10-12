@@ -5,11 +5,11 @@ import MemberCard from './components/MemberCard';
 
 function TeamPage(props) {
   return (
-    <section>
+    <section class="teamSection section">
       <SectionHeader
         withContainer
         headerLabel="TEAM"
-        header="Get to know the CENVI Team"
+        header="Meet the Team"
       />
       <div className="container">
         <div className="row">

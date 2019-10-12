@@ -16,9 +16,9 @@ const User = loadable(() => import('pages/Admin/User'));
 const PublicBlogs = loadable(() => import('pages/Blog/List'));
 const PublicBlogDetails = loadable(() => import('pages/Blog/BlogDetails'));
 const Team = loadable(() => import('pages/Team'));
+const Albums = loadable(() => import('pages/Albums'));
 // const Blog = loadable(() => import('pages/BlogsPage'));
 // const BlogDetails = loadable(() => import('pages/BlogPage'));
-// const Album = loadable(() => import('pages/AlbumPage'));
 // const FileUpload = loadable(() => import('pages/FileUploadPage'));
 // const ShapefileUpload = loadable(() => import('pages/ShapefileUploadPage'));
 // const SubProject = loadable(() => import('pages/SubProjectPage'));
@@ -160,6 +160,12 @@ export default [
     key: 'team',
     component: Team,
     path: '/team',
+    exact: true
+  },
+  {
+    key: 'albums',
+    component: Albums,
+    path: '/albums',
     exact: true
   },
   {
