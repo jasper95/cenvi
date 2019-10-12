@@ -4,7 +4,7 @@ import pick from 'lodash/pick';
 import history from 'shared/utils/history';
 import Link from 'react-router-dom/Link';
 import Button from 'react-md/lib/Buttons/Button';
-import 'sass/components/blogCard/index.scss';
+import 'sass/components/cards/blogCard/index.scss';
 
 function BlogItem(props) {
   const { blog } = props;

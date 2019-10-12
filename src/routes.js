@@ -15,7 +15,7 @@ const AlbumList = loadable(() => import('pages/Admin/Album/AlbumList'));
 const User = loadable(() => import('pages/Admin/User'));
 const PublicBlogs = loadable(() => import('pages/Blog/List'));
 const PublicBlogDetails = loadable(() => import('pages/Blog/BlogDetails'));
-// const Team = loadable(() => import('pages/TeamPage'));
+const Team = loadable(() => import('pages/Team'));
 // const Blog = loadable(() => import('pages/BlogsPage'));
 // const BlogDetails = loadable(() => import('pages/BlogPage'));
 // const Album = loadable(() => import('pages/AlbumPage'));
@@ -156,17 +156,12 @@ export default [
   //     pageTitle: 'Signup',
   //   },
   // },
-  // {
-  //   key: 'team',
-  //   component: Team,
-  //   path: '/team',
-  //   exact: true,
-  //   pageProps: {
-  //     pageId: 'team',
-  //     requireAuth: true,
-  //     pageTitle: 'Team',
-  //   },
-  // },
+  {
+    key: 'team',
+    component: Team,
+    path: '/team',
+    exact: true
+  },
   {
     key: 'not-found',
     path: '*',
