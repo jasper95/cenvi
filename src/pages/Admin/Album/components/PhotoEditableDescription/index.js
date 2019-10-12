@@ -1,19 +1,32 @@
-import React from 'react';
+import React, { useMemo, Fragment } from 'react';
+import chunk from 'lodash/chunk';
+import flatten from 'lodash/flatten';
+import { arrayMove } from 'shared/utils/tools';
+import { sortableContainer, sortableElement } from 'react-sortable-hoc';
 import PhotoItem from './PhotoItem';
+
+const SortablePhotoItem = sortableElement(PhotoItem);
+const SortableContainer = sortableContainer(({ children }) => <div>{children}</div>);
+
 
 function PhotosEditableDescription(props) {
   const { photos, onChange, id } = props;
+  const chunkedPhotos = useMemo(() => chunk(photos, 4), [photos]);
   return (
-    <div>
-      {photos.map(photo => (
-        <PhotoItem
-          key={photo.id}
-          photo={photo}
-          onChangeDescription={value => handleChangeDescription(value, photo.id)}
-          onRemove={handleRemove}
-        />
+    <SortableContainer onSortEnd={onSortEnd}>
+      {chunkedPhotos.map((row, i) => (
+        <Fragment key={i}>
+          {row.map(photo => (
+            <SortablePhotoItem
+              key={photo.id}
+              photo={photo}
+              onChangeDescription={value => handleChangeDescription(value, photo.id)}
+              onRemove={handleRemove}
+            />
+          ))}
+        </Fragment>
       ))}
-    </div>
+    </SortableContainer>
   );
 
   function handleChangeDescription(description, photoId) {
@@ -27,10 +40,21 @@ function PhotosEditableDescription(props) {
       return photo;
     });
     onChange(newPhotos, id);
-    console.log('id: ', id);
   }
   function handleRemove(photoId) {
-    onChange(photos.filter(photo => photo.id !== photoId), id);
+    console.log('remove');
+    // onChange(photos.filter(photo => photo.id !== photoId), id);
+  }
+
+  function onSortEnd({ oldIndex, newIndex, collection }) {
+    const newCollections = [...chunkedPhotos];
+    newCollections[collection] = arrayMove(
+      chunkedPhotos[collection],
+      oldIndex,
+      newIndex,
+    );
+    console.log('flatten(newCollections)', flatten(newCollections));
+    onChange(flatten(newCollections), id);
   }
 }
 
