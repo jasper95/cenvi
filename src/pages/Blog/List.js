@@ -8,6 +8,7 @@ function BlogList() {
   const { data: blogs, loading } = rowResponse;
   useEffect(() => {
     onQuery();
+    window.scrollTo(0, 0);
   }, []);
 
   return (

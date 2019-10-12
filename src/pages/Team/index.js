@@ -4,6 +4,10 @@ import teamMembers from 'shared/constants/team';
 import MemberCard from './components/MemberCard';
 
 function TeamPage(props) {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
+
   return (
     <section class="teamSection section">
       <SectionHeader

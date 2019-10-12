@@ -4,6 +4,9 @@ import albums from 'shared/constants/albums';
 import AlbumCard from './components/AlbumCard';
 
 function AlbumsPage(props) {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
   return (
     <section class="albumsSection section">
       <SectionHeader
