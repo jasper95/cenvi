@@ -45,20 +45,23 @@ function EditBlog(props) {
   }
   return (
     <>
-      <Paper className="col col-md-12 col-formHeader">
-        <TextField
-          id="name"
-          label="Title"
-          type="name"
-          variant="outlined"
-          onChange={value => onChange('name', value)}
-          errorText={errors.name}
-          error={!!errors.name}
-          value={fields.name || ''}
-        />
-      </Paper>
+      <div className="row row-formHeader">
+        <Paper className="col col-md-12-guttered col-formHeader">
+          <TextField
+            id="name"
+            label="Title"
+            type="name"
+            className="iField"
+            variant="outlined"
+            onChange={value => onChange('name', value)}
+            errorText={errors.name}
+            error={!!errors.name}
+            value={fields.name || ''}
+          />
+        </Paper>
+      </div>
       <div className="row">
-        <Paper className="col col-md-8 col-form">
+        <Paper className="col col-md-8-guttered col-form">
           <Editor
             toolbar={{
               image: {
@@ -81,6 +84,7 @@ function EditBlog(props) {
             id="excerpt"
             label="Excerpt"
             type="excerpt"
+            className="iField"
             onChange={value => onChange('excerpt', value)}
             errorText={errors.excerpt}
             error={!!errors.excerpt}
@@ -88,7 +92,7 @@ function EditBlog(props) {
             rows={4}
           />
         </Paper>
-        <Paper className="col col-md-4 col-actions">
+        <Paper className="col col-md-4-guttered col-actions">
           <SelectAutocomplete
             id="status"
             options={[
@@ -101,13 +105,18 @@ function EditBlog(props) {
             onChange={onElementChange}
           />
           {fields.status === 'published' && (
-            <DatePicker
-              id="published_date"
-              label="Published Date"
-              placeholderText="Published Date"
-              onChange={onElementChange}
-              value={fields.published_date}
-            />
+            <div className="iField">
+              <div className="iField_date_label">
+                Published Date
+              </div>
+              <DatePicker
+                id="published_date"
+                className="iField_date_picker"
+                placeholderText="Published Date"
+                onChange={onElementChange}
+                value={fields.published_date}
+              />
+            </div>
           )}
           <CreatableInput
             id="tags"
@@ -121,7 +130,9 @@ function EditBlog(props) {
             flat
           />
         </Paper>
-        <Paper className="col col-md-12 col-actions">
+      </div>
+      <div className="row row-formMedia">
+        <Paper className="col col-md-12-guttered col-actions">
           <SingleFileUpload
             id="file"
             value={fields.image_url ? `${process.env.STATIC_URL}/${fields.image_url}` : fields.file}

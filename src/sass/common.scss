@@ -8,6 +8,10 @@
 	color: $primary-color;
 }
 
+i.md-icon[class*="wtf-"] {
+	font-size: 18px;
+}
+
 .cenvi {
 	#nprogress .bar {
 		z-index: 999999;

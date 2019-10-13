@@ -62,7 +62,7 @@ function AlbumList() {
             onClick: data => history.push(`/admin/albums/${data.slug}`),
           },
           {
-            icon: 'view',
+            iconClassName: 'wtfr wtf-eye',
             label: 'View',
             onClick: () => {},
           },

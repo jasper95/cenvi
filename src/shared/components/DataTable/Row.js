@@ -13,7 +13,7 @@ function Row(props) {
   let children;
   if (type === 'actions') {
     children = actions.map(({
-      label,
+      label, iconClassName,
       className, icon, onClick, type: actionType, component: Action,
       conditionalRendering = () => true,
     }) => {
@@ -31,6 +31,7 @@ function Row(props) {
           children={icon}
           tooltipLabel={label}
           key={icon}
+          iconClassName={iconClassName}
           className={className}
           onClick={(e) => {
             e.stopPropagation();

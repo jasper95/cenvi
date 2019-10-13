@@ -46,7 +46,7 @@ function AdminBlogList() {
             onClick: data => history.push(`/admin/blogs/${data.slug}`),
           },
           {
-            icon: 'view',
+            iconClassName: 'wtfr wtf-eye',
             label: 'View',
             onClick: () => {},
           },

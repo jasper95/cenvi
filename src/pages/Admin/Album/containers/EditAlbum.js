@@ -33,19 +33,22 @@ function EditAlbum(props) {
   }, []);
   return (
     <>
-      <Paper className="col col-md-12 col-formHeader">
-        <TextField
-          id="name"
-          label="Title"
-          type="name"
-          onChange={onElementChange}
-          errorText={errors.name}
-          error={!!errors.name}
-          value={fields.name || ''}
-        />
-      </Paper>
+      <div className="row row-formHeader">
+        <Paper className="col col-md-12-guttered">
+          <TextField
+            id="name"
+            label="Title"
+            type="name"
+            className="iField"
+            onChange={onElementChange}
+            errorText={errors.name}
+            error={!!errors.name}
+            value={fields.name || ''}
+          />
+        </Paper>
+      </div>
       <div className="row">
-        <Paper className="col col-md-8 col-form">
+        <Paper className="col col-md-8-guttered col-form">
           <div>
             Uploaded:
             <PhotosEditableDescription photos={photos} id="photos" onChange={onElementChange} />
@@ -55,6 +58,7 @@ function EditAlbum(props) {
             id="excerpt"
             label="Excerpt"
             type="excerpt"
+            className="iField"
             onChange={onElementChange}
             errorText={errors.excerpt}
             error={!!errors.excerpt}
@@ -62,44 +66,44 @@ function EditAlbum(props) {
             rows={4}
           />
         </Paper>
-      </div>
-      <Paper className="col col-md-4 col-actions">
-        <SelectAutocomplete
-          id="status"
-          options={[
-            { value: 'published', label: 'Published' },
-            { value: 'unpublished', label: 'Unpublished' },
-          ]}
-          label="Status"
-          required
-          value={fields.status}
-          onChange={onElementChange}
-        />
-        {fields.status === 'published' && (
-          <DatePicker
-            id="published_date"
-            label="Published Date"
-            placeholderText="Published Date"
+        <Paper className="col col-md-4-guttered col-actions">
+          <SelectAutocomplete
+            id="status"
+            options={[
+              { value: 'published', label: 'Published' },
+              { value: 'unpublished', label: 'Unpublished' },
+            ]}
+            label="Status"
+            required
+            value={fields.status}
             onChange={onElementChange}
-            value={fields.published_date}
           />
-        )}
-        <CreatableInput
-          id="tags"
-          value={fields.tags || []}
-          onChange={onElementChange}
-        />
-        <Button
-          className={cn('iBttn iBttn-primary', { processing: mutationState.loading })}
-          onClick={() => {
-            onMutate({
-              data: fields,
-            });
-          }}
-          children="Save"
-          flat
-        />
-      </Paper>
+          {fields.status === 'published' && (
+            <DatePicker
+              id="published_date"
+              label="Published Date"
+              placeholderText="Published Date"
+              onChange={onElementChange}
+              value={fields.published_date}
+            />
+          )}
+          <CreatableInput
+            id="tags"
+            value={fields.tags || []}
+            onChange={onElementChange}
+          />
+          <Button
+            className={cn('iBttn iBttn-primary', { processing: mutationState.loading })}
+            onClick={() => {
+              onMutate({
+                data: fields,
+              });
+            }}
+            children="Save"
+            flat
+          />
+        </Paper>
+      </div>
     </>
   );
 
