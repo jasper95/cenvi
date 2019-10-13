@@ -9,7 +9,7 @@ import cn from 'classnames';
 import useForm from 'shared/hooks/useForm';
 import * as yup from 'yup';
 import useVerifyToken from 'shared/hooks/useVerifyToken';
-import useMutation from 'apollo/mutation';
+import useMutation from 'shared/hooks/useMutation';
 import { getValidationResult, fieldIsRequired } from 'shared/utils/tools';
 import 'sass/pages/login.scss';
 

@@ -3,23 +3,24 @@ import { Switch, Route } from 'react-router';
 import loadable from '@loadable/component';
 import PageLayout from 'shared/components/Layout/Page';
 import NotFound from 'pages/NotFound';
-import BlogDetails from 'pages/Blog/BlogDetails';
 
 const Login = loadable(() => import('pages/Login'));
-// const Signup = loadable(() => import('pages/RegisterPage'));
+const Signup = loadable(() => import('pages/Signup'));
+const ForgotPassword = loadable(() => import('pages/ForgotPassword'));
+const ResetPassword = loadable(() => import('pages/ResetPassword'));
+
 const Home = loadable(() => import('pages/Home/index'));
 const SubProjects = loadable(() => import('pages/SubProjects'));
-const AdminBlogList = loadable(() => import('pages/Admin/Blog/BlogList'));
-const AdminBlogForm = loadable(() => import('pages/Admin/Blog/BlogForm'));
-const AlbumList = loadable(() => import('pages/Admin/Album/containers/AlbumList'));
-const User = loadable(() => import('pages/Admin/User'));
-const PublicBlogs = loadable(() => import('pages/Blog/List'));
-// const PublicBlogDetails = loadable(() => import('pages/Blog/BlogDetails'));
 const Team = loadable(() => import('pages/Team'));
 const Albums = loadable(() => import('pages/Albums'));
+const PublicBlogs = loadable(() => import('pages/Blog/List'));
+const PublicBlogDetails = loadable(() => import('pages/Blog/BlogDetails'));
+
+const AdminBlogList = loadable(() => import('pages/Admin/Blog/container/BlogList'));
+const AdminBlogForm = loadable(() => import('pages/Admin/Blog/container/BlogForm'));
+const AlbumList = loadable(() => import('pages/Admin/Album/containers/AlbumList'));
+const User = loadable(() => import('pages/Admin/User/containers/UserPage'));
 const EditAlbum = loadable(() => import('pages/Admin/Album/containers/EditAlbum'));
-// const Blog = loadable(() => import('pages/BlogsPage'));
-// const BlogDetails = loadable(() => import('pages/BlogPage'));
 // const FileUpload = loadable(() => import('pages/FileUploadPage'));
 // const ShapefileUpload = loadable(() => import('pages/ShapefileUploadPage'));
 // const SubProject = loadable(() => import('pages/SubProjectPage'));
@@ -27,6 +28,54 @@ const EditAlbum = loadable(() => import('pages/Admin/Album/containers/EditAlbum'
 
 
 export default [
+  {
+    key: 'resetpw',
+    component: ResetPassword,
+    path: '/activate',
+    exact: true,
+    pageProps: {
+      hasFooter: false,
+      hasNavigation: false,
+      requireAuth: 'optional',
+    },
+  },
+  {
+    key: 'login',
+    component: Login,
+    path: '/login',
+    exact: true,
+    pageProps: {
+      hasNavigation: false,
+      hasFooter: false,
+      requireAuth: false,
+      pageTitle: 'Login',
+      pageDescription: 'Login to CENVI',
+    },
+  },
+  {
+    key: 'forgotpw',
+    component: ForgotPassword,
+    path: '/forgot-password',
+    exact: true,
+    pageProps: {
+      hasFooter: false,
+      hasNavigation: false,
+      requireAuth: false,
+    },
+  },
+  {
+    key: 'signup',
+    component: Signup,
+    path: '/register',
+    exact: true,
+    pageProps: {
+      hasNavigation: false,
+      hasFooter: false,
+      requireAuth: false,
+      pageTitle: 'Signup',
+    },
+  },
+
   {
     key: 'home',
     component: Home,
@@ -42,6 +91,41 @@ export default [
     path: '/sub-projects',
     exact: true,
   },
+  {
+    key: 'team',
+    component: Team,
+    path: '/team',
+    exact: true,
+  },
+  {
+    key: 'albums',
+    component: Albums,
+    path: '/albums',
+    exact: true,
+  },
+  {
+    key: 'blogs',
+    component: PublicBlogs,
+    path: '/blogs',
+    exact: true,
+    pageProps: {
+      hasFooter: true,
+      requireAuth: 'optional',
+      hasNavigation: true,
+    },
+  },
+  {
+    key: 'blogs',
+    component: PublicBlogDetails,
+    path: '/blogs/:slug',
+    exact: true,
+    pageProps: {
+      hasFooter: true,
+      requireAuth: 'optional',
+      hasNavigation: true,
+    },
+  },
+
   {
     key: 'admin-blog-list',
     component: AdminBlogList,
@@ -101,85 +185,6 @@ export default [
       requireAuth: true,
       hasNavigation: false,
     },
-  },
-  {
-    key: 'blogs',
-    component: PublicBlogs,
-    path: '/blogs',
-    exact: true,
-    pageProps: {
-      hasFooter: true,
-      requireAuth: 'optional',
-      hasNavigation: true,
-    },
-  },
-  {
-    key: 'blogs',
-    component: BlogDetails,
-    path: '/blogs/:slug',
-    exact: true,
-    pageProps: {
-      hasFooter: true,
-      requireAuth: 'optional',
-      hasNavigation: true,
-    },
-  },
-  // {
-  //   key: 'resetpw',
-  //   component: ResetPassword,
-  //   path: '/activate',
-  //   exact: true,
-  //   pageProps: {
-  //     hasFooter: false,
-  //     hasNavigation: false,
-  //     requireAuth: 'optional',
-  //   },
-  // },
-  {
-    key: 'login',
-    component: Login,
-    path: '/login',
-    exact: true,
-    pageProps: {
-      hasNavigation: false,
-      hasFooter: false,
-      requireAuth: false,
-      pageTitle: 'Login',
-      pageDescription: 'Login to CENVI',
-    },
-  },
-  // {
-  //   key: 'forgotpw',
-  //   component: ForgotPassword,
-  //   path: '/forgot-password',
-  //   exact: true,
-  //   pageProps: {
-  //     hasFooter: false,
-  //     hasNavigation: false,
-  //     requireAuth: false,
-  //   },
-  // },
-  // {
-  //   key: 'signup',
-  //   component: Signup,
-  //   path: '/register',
-  //   exact: true,
-  //   pageProps: {
-  //     requireAuth: true,
-  //     pageTitle: 'Signup',
-  //   },
-  // },
-  {
-    key: 'team',
-    component: Team,
-    path: '/team',
-    exact: true,
-  },
-  {
-    key: 'albums',
-    component: Albums,
-    path: '/albums',
-    exact: true,
   },
   {
     key: 'not-found',

@@ -11,7 +11,7 @@ function PageTable(props) {
   } = props;
   const { selected, sort, rowResponse } = pageTableState;
   const { data: rows, loading: isLoading } = rowResponse;
-  const { onRowToggle, onSort, onSearch } = pageTableHandlers;
+  const { onRowToggle, onSort, onSearch, onConfirmDelete } = pageTableHandlers;
   return (
     <>
       <Paper className="row-ToolbarHeader row-ToolbarHeader-floating">
@@ -21,6 +21,7 @@ function PageTable(props) {
           rows={rows}
           selected={selected}
           onClickNew={onClickNew}
+          onConfirmDelete={onConfirmDelete}
         />
       </Paper>
 

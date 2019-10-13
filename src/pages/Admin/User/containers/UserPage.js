@@ -2,6 +2,10 @@ import React from 'react';
 import PageTable from 'shared/components/PageTable';
 import usePageTable from 'shared/components/PageTable/usePageTable';
 import { useDispatch } from 'react-redux';
+import loadable from '@loadable/component';
+import { showDialog } from 'shared/redux/app/reducer';
+
+const UserDialog = loadable(() => import('pages/Admin/User/components/UserDialog'));
 
 function User() {
   const [pageTableState, pageTableHandlers] = usePageTable({ node: 'user' });
@@ -13,30 +17,26 @@ function User() {
       pageName="Users"
       pageTableState={pageTableState}
       pageTableHandlers={pageTableHandlers}
-      onClickNew={() => showDialog('Create')}
-      onClickEdit={data => showDialog('Update', data)}
+      onClickNew={() => handleUserDialog('Create')}
+      onClickEdit={data => handleUserDialog('Update', data)}
     />
   );
 
-  function showDialog(type, initialFields = {}) {
+  function handleUserDialog(type, initialFields = {}) {
     const { onCreate, onUpdate } = pageTableHandlers;
     const onSave = type === 'Create' ? onCreate : onUpdate;
-    dispatch({
-      type: 'SHOW_DIALOG',
-      payload: {
-        path: 'User',
-        props: {
-          title: `${type} User`,
-          initialFields,
-          onValid: (data) => {
-            onSave({
-              data,
-            });
-          },
-          dialogClassName: 'i_dialog_container--l',
+    dispatch(showDialog({
+      component: UserDialog,
+      props: {
+        title: `${type} User`,
+        initialFields,
+        onValid: (data) => {
+          onSave({
+            data,
+          });
         },
       },
-    });
+    }));
   }
 
   function getColumns() {
@@ -56,7 +56,7 @@ function User() {
           {
             icon: 'edit',
             label: 'Edit',
-            onClick: row => showDialog('Edit', row),
+            onClick: row => handleUserDialog('Update', row),
           },
           {
             icon: 'delete',

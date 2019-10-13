@@ -1,19 +1,19 @@
 import { useEffect, useState } from 'react';
 // import { useManualQuery } from 'apollo/query';
 import { useDispatch } from 'react-redux';
-import gql from 'graphql-tag';
+// import gql from 'graphql-tag';
 import dayjs from 'dayjs';
 import cookie from 'js-cookie';
 
-const query = gql`
-  query {
-    token {
-      used
-      expiry
-      type
-    }
-  }
-`;
+// const query = gql`
+//   query {
+//     token {
+//       used
+//       expiry
+//       type
+//     }
+//   }
+// `;
 
 export default function verifyToken({ name, type, onSuccess = () => {} }) {
   const [, onQuery] = useManualQuery(query, { });

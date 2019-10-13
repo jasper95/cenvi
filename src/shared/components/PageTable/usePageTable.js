@@ -7,6 +7,10 @@ import useQuery from 'shared/hooks/useQuery';
 import debounce from 'lodash/debounce';
 import { useDispatch } from 'react-redux';
 import useMutation, { useCreateNode, useUpdateNode } from 'shared/hooks/useMutation';
+import loadable from '@loadable/component';
+import { showDialog } from 'shared/redux/app/reducer';
+
+const Confirm = loadable(() => import('shared/components/Dialogs/Confirm'));
 
 function usePage(props) {
   const { node } = props;
@@ -56,17 +60,14 @@ function usePage(props) {
   return [states, handlers];
 
   function confirmDelete(ids) {
-    dispatch({
-      type: 'SHOW_DIALOG',
-      payload: {
-        path: 'Confirm',
-        props: {
-          title: 'Confirm Delete',
-          message: 'Do you want to delete selected record(s)?',
-          onValid: () => onDelete({ data: { ids }, message: 'Record(s) successfully deleted' }),
-        },
+    dispatch(showDialog({
+      component: Confirm,
+      props: {
+        title: 'Confirm Delete',
+        message: 'Do you want to delete selected record(s)?',
+        onValid: () => onDelete({ data: { ids }, message: 'Record(s) successfully deleted' }),
       },
-    });
+    }));
   }
 
   function onSearch(value) {
