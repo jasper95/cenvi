@@ -63,6 +63,9 @@ function EditBlog(props) {
       <div className="row">
         <Paper className="col col-md-8-guttered col-form">
           <Editor
+            wrapperClassName="iField-wysiwyg"
+            toolbarClassName="iField-wysiwyg_toolbar"
+            editorClassName="iField-wysiwyg_editor"
             toolbar={{
               image: {
                 urlEnabled: true,
@@ -73,8 +76,6 @@ function EditBlog(props) {
               },
             }}
             editorState={editorState}
-            wrapperClassName="demo-wrapper"
-            editorClassName="demo-editor"
             onEditorStateChange={(newState) => {
               setEditorState(newState);
               onChange('content', convertToRaw(newState.getCurrentContent()));
@@ -122,6 +123,8 @@ function EditBlog(props) {
             id="tags"
             value={fields.tags || []}
             onChange={onElementChange}
+            className="iField iField-ci"
+            classNamePrefix="iField-ci"
           />
           <Button
             className={cn('iBttn iBttn-primary', { processing: mutationState.loading })}
@@ -133,11 +136,14 @@ function EditBlog(props) {
       </div>
       <div className="row row-formMedia">
         <Paper className="col col-md-12-guttered col-actions">
-          <SingleFileUpload
-            id="file"
-            value={fields.image_url ? `${process.env.STATIC_URL}/${fields.image_url}` : fields.file}
-            onChange={onElementChange}
-          />
+          <div className="iField">
+            <p className="iField_date_label">Blog Photo</p>
+            <SingleFileUpload
+              id="file"
+              value={fields.image_url ? `${process.env.STATIC_URL}/${fields.image_url}` : fields.file}
+              onChange={onElementChange}
+            />
+          </div>
         </Paper>
       </div>
     </>

@@ -49,10 +49,12 @@ function EditAlbum(props) {
       </div>
       <div className="row">
         <Paper className="col col-md-8-guttered col-form">
-          <div>
-            Uploaded:
-            <PhotosEditableDescription photos={photos} id="photos" onChange={onElementChange} />
-          </div>
+          <label>Uploaded:</label>
+          <PhotosEditableDescription
+            id="photos"
+            photos={photos}
+            onChange={onElementChange}
+          />
           <Gallery onUploadSuccess={onUploadSuccess} />
           <TextField
             id="excerpt"
@@ -91,6 +93,8 @@ function EditAlbum(props) {
             id="tags"
             value={fields.tags || []}
             onChange={onElementChange}
+            className="iField iField-ci"
+            classNamePrefix="iField-ci"
           />
           <Button
             className={cn('iBttn iBttn-primary', { processing: mutationState.loading })}

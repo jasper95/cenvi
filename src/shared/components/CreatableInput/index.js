@@ -12,7 +12,9 @@ const createOption = label => ({
 });
 
 function CreatableInput(props) {
-  const { onChange, value: propsValue, id } = props;
+  const { onChange, value: propsValue, id,
+    className, classNamePrefix
+  } = props;
   const [value, setValue] = useState(propsValue);
   const [inputValue, setInputValue] = useState('');
   const handleKeyDown = (event) => {
@@ -60,6 +62,8 @@ function CreatableInput(props) {
       onChange={handleChange}
       onInputChange={handleInputChange}
       onKeyDown={handleKeyDown}
+      className={className}
+      classNamePrefix={classNamePrefix}
       placeholder="Type something and press enter..."
       value={value}
     />

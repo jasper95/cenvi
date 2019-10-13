@@ -3,6 +3,7 @@ import pick from 'lodash/pick';
 import useUpload from 'shared/hooks/fileUpload/useUpload';
 import Dropzone from './Dropzone';
 import FileItem from './FileItem';
+import 'sass/components/fsUpload/index.scss';
 
 function Gallery(props) {
   const { onUploadSuccess } = props;
@@ -12,7 +13,7 @@ function Gallery(props) {
   });
   const { submittedFiles, uploader } = uploadState;
   return (
-    <div>
+    <div className='galleryUpload'>
       {submittedFiles.map(e => (
         <FileItem id={e} uploader={uploader} key={e} />
       ))}

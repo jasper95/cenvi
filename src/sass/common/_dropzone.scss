@@ -1,5 +1,6 @@
 .iDropzone {
 	position: relative;
+	width: 100%;
 	min-height: 20em;
 
 	// .iDropzone_entryMsg
@@ -19,12 +20,8 @@
 		padding: 2em;
 		outline: none !important;
 		color: rgba($black, .8);
-		background-color: lighten($primary-color-100,2%);
+		background-color: #FFF;
 		transition: background-color 300ms ease-out;
-
-		&:hover {
-			background-color: $primary-color-100;
-		}
 	}
 
 	// .iDropzone_files
@@ -69,7 +66,7 @@
 	.iDropzone_entryMsg {
 
 		z-index: 10;
-		background-color: rgba($primary-color-100,.8);
+		background-color: #FFF;
 		visibility: hidden;
 		opacity: 0;
 		transition:

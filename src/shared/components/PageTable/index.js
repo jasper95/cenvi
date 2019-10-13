@@ -14,32 +14,36 @@ function PageTable(props) {
   const { onRowToggle, onSort, onSearch, onConfirmDelete } = pageTableHandlers;
   return (
     <>
-      <Paper className="row-ToolbarHeader row-ToolbarHeader-floating">
-        <Toolbar
-          pageName={pageName}
-          baseClass="ToolbarHeader"
-          rows={rows}
-          selected={selected}
-          onClickNew={onClickNew}
-          onConfirmDelete={onConfirmDelete}
-        />
-      </Paper>
+      <div className="row row-ToolbarHeader row-ToolbarHeader-floating">
+        <Paper className="col-md-12-guttered">
+          <Toolbar
+            pageName={pageName}
+            baseClass="ToolbarHeader"
+            rows={rows}
+            selected={selected}
+            onClickNew={onClickNew}
+            onConfirmDelete={onConfirmDelete}
+          />
+        </Paper>
+      </div>
 
-      <Paper className="row-Table row-Table-floating">
-        <div className="row-Table_header">
-          <SearchBar onSearch={onSearch} pageName={pageName} />
-        </div>
-        <DataTable
-          selected={selected}
-          onRowToggle={onRowToggle}
-          rows={rows}
-          columns={columns}
-          isSelectable
-          sort={sort}
-          onSort={onSort}
-          processing={isLoading}
-        />
-      </Paper>
+      <div className="row row-Table row-Table">
+        <Paper className="col-md-12-guttered">
+          <div className="row-Table_header">
+            <SearchBar onSearch={onSearch} pageName={pageName} />
+          </div>
+          <DataTable
+            selected={selected}
+            onRowToggle={onRowToggle}
+            rows={rows}
+            columns={columns}
+            isSelectable
+            sort={sort}
+            onSort={onSort}
+            processing={isLoading}
+          />
+        </Paper>
+      </div>
     </>
   );
 }
