@@ -2,50 +2,46 @@ import React, { useEffect } from 'react';
 import useQuery from 'shared/hooks/useQuery';
 import draftToHtml from 'draftjs-to-html';
 import htmlToReact from 'html-react-parser';
-import Author from './components/Author'
 import 'sass/components/blogPage/index.scss';
 
-function BlogDetails(props) {
-  const BCP = 'blogPage'
-  const [blogResponse, onQuery] = useQuery({}, { initialData: null, initialLoading: true });
-  useEffect(() => {
-    const { slug } = props.match.params;
-    onQuery({ url: `/published_blog/${slug}` });
-  }, []);
-  const { loading, data: blog } = blogResponse;
+function AlbumDetails(props) {
+  const BCP = 'albumDetailPage'
 
-  console.log('blog', blog)
+  const [albumResponse, onQueryAlbum] = useQuery({}, { initialData: null, initialLoading: true });
+
+  useEffect(() => {
+    const { id } = props.match.params;
+    onQueryAlbum({ url: `/album/${id}` })
+  }, []);
+
+
+  const { loading, data: album } = albumResponse;
+
+  console.log('albumResponse ', albumResponse)
 
   if (loading) {
     return (
       <span>Loading...</span>
     );
   }
+
   return (
     <section className={`${BCP}Section section`}>
       <div className={BCP}>
         <div className={`${BCP}_textContainer`}>
           <div className={`${BCP}_header`}>
             <h1 className={`${BCP}_title`}>
-              {blog.name}
+              {album.name}
+              test
             </h1>
-            <Author
-              className={`${BCP}_author`}
-              name={`by ${blog.author}`}
-            />
           </div>
         </div>
         <div className={`${BCP}_image`}>
           <img src="https://source.unsplash.com/random" alt=""/>
-        </div>
-        <div className={`${BCP}_textContainer`}>
-          <div className={`${BCP}_contents`}>
-            {htmlToReact(draftToHtml(blog.content))}
-          </div>
         </div>
       </div>
     </section>
   );
 }
 
-export default BlogDetails;
+export default AlbumDetails;

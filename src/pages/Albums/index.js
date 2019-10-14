@@ -3,10 +3,14 @@ import SectionHeader from 'shared/components/Section';
 import albums from 'shared/constants/albums';
 import AlbumCard from './components/AlbumCard';
 
-function AlbumsPage(props) {
+function AlbumsListPage(props) {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+
+  console.log('@@AlbumsListPage === ', props)
+
   return (
     <section className="albumsSection section">
       <SectionHeader
@@ -19,7 +23,12 @@ function AlbumsPage(props) {
           { albums.length !== 0
             ? (
               <>
-                {albums.map(member => (<AlbumCard {...member} />))}
+                {albums.map(member => (
+                  <AlbumCard 
+                    {...member}
+                    history={props.history}
+                  />
+                ))}
               </>
             ) : (
               <div className="noRecords">
@@ -36,4 +45,4 @@ function AlbumsPage(props) {
   );
 }
 
-export default AlbumsPage;
+export default AlbumsListPage;

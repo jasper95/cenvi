@@ -13,6 +13,7 @@ const Home = loadable(() => import('pages/Home/index'));
 const SubProjects = loadable(() => import('pages/SubProjects'));
 const Team = loadable(() => import('pages/Team'));
 const Albums = loadable(() => import('pages/Albums'));
+const AlbumDetails = loadable(() => import('pages/Albums/AlbumDetails'));
 const PublicBlogs = loadable(() => import('pages/Blog/List'));
 const PublicBlogDetails = loadable(() => import('pages/Blog/BlogDetails'));
 
@@ -104,6 +105,12 @@ export default [
     exact: true,
   },
   {
+    key: 'albums',
+    component: AlbumDetails,
+    path: '/albums/:id',
+    exact: true,
+  },
+  {
     key: 'blogs',
     component: PublicBlogs,
     path: '/blogs',
@@ -125,7 +132,6 @@ export default [
       hasNavigation: true,
     },
   },
-
   {
     key: 'admin-blog-list',
     component: AdminBlogList,

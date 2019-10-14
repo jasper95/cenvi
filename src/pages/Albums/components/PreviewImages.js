@@ -6,6 +6,7 @@ function PreviewImages(props) {
     images,
     className,
     linkToMore,
+    history
   } = props;
   const snippetImages = [...images].slice(0, SNIPPET_LIMIT);
   if (images.length > 0) {
@@ -21,7 +22,9 @@ function PreviewImages(props) {
             </div>
           ))}
           { images.length > SNIPPET_LIMIT && (
-            <div className="previewImg_item showmore">
+            <div className="previewImg_item showmore"
+              onClick={() => {history.push(linkToMore)}}
+            >
               <div className="countContainer">
                 <div className="count">
                   {images.length - SNIPPET_LIMIT}

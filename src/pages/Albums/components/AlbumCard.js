@@ -6,7 +6,7 @@ function AlbumCard(props) {
   const {
     id, name, description,
     category, image, created_date,
-    images,
+    images, history
   } = props;
   const BCP = 'albumCard';
   return (
@@ -34,7 +34,8 @@ function AlbumCard(props) {
         <PreviewImages
           className={`${BCP}_images`}
           images={images}
-          linkToMore=""
+          linkToMore="/albums/test"
+          history={history}
         />
       </div>
     </div>
