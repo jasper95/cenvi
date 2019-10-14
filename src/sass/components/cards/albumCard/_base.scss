@@ -43,6 +43,11 @@
 		color: $text-header-color;
 		line-height: 1.4;
 		margin-bottom: 0;
+		cursor: pointer;
+
+		&:hover {
+			color: $primary-color;
+		}
 	}
 
 	// .albumCard_createdDate

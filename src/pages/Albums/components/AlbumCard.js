@@ -22,7 +22,7 @@ function AlbumCard(props) {
         <h1 className={`${BCP}_category`}>
           {category}
         </h1>
-        <h1 className={`${BCP}_header`}>
+        <h1 className={`${BCP}_header`}  onClick={() => {history.push("/albums/test")}}>
           {name}
         </h1>
         <p className={`${BCP}_createdDate`}>

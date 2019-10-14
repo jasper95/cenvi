@@ -25,12 +25,14 @@ function EditAlbum(props) {
   const { fields, errors } = formState;
   const { onSetFields, onElementChange } = formHandlers;
   const { photos = [] } = fields;
+
   useEffect(() => {
     onQueryAlbum()
       .then((newFields) => {
         onSetFields(newFields);
       });
   }, []);
+
   return (
     <>
       <div className="row row-formHeader">
