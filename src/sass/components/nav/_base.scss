@@ -47,9 +47,16 @@ $menu-sub-bg: $tertiary-color;
 	&_actions {
 		margin-left: auto;
 		display: flex;
-		align-items: stretch;
+		align-items: center;
 		justify-content: flex-end;
 		height: 100%;
+
+		> .iBttn {
+			height: auto;
+			&:not(:last-child) {
+				margin-right: .5rem;
+			}
+		}	
 	}
 
 

@@ -17,8 +17,9 @@ const pageSelector = createSelector(
   state => state.app.toast,
   state => state.app.dialog,
   state => state.app.temporaryClosedDialogs,
-  (toast, dialog, temporaryClosedDialogs) => (
-    { toast, dialog, hasTemporaryClosed: temporaryClosedDialogs.length > 0 }
+  state => state.auth,
+  (toast, dialog, temporaryClosedDialogs, auth) => (
+    { toast, dialog, auth, hasTemporaryClosed: temporaryClosedDialogs.length > 0 }
   ),
 );
 
@@ -34,7 +35,7 @@ function Page(props) {
 
   const appData = useSelector(pageSelector);
   const dispatch = useDispatch();
-  const { toast, dialog } = appData;
+  const { toast, dialog, auth } = appData;
   let DialogComponent;
   if (dialog && dialog.component) {
     ({ component: DialogComponent } = dialog);
@@ -48,7 +49,6 @@ function Page(props) {
   } else {
     pageTitle = 'CENVI';
   }
-
 
   return (
     <>
@@ -89,7 +89,7 @@ function Page(props) {
         <link rel="stylesheet" type="text/css" href="/static/css/cenvi-icon.css" />
       </Head>
       {hasNavigation && (
-        <Header />
+        <Header auth={auth} />
       )}
       {toast && (
         <Snackbar

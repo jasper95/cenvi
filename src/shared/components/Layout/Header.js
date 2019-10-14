@@ -19,7 +19,10 @@ function Header(props) {
   const {
     match,
     history,
+    auth,
   } = props;
+
+  console.log('@@HEADER props', props)
 
   const dispatch = useDispatch();
   const user = null;
@@ -58,9 +61,7 @@ function Header(props) {
                 <div className={cn('nav_mobile_container', { 'nav_mobile_container-show': showMobileNav })}>
                   <Navigation user={user} currentPath={match.path} />
                   <div className="nav_actions">
-                    <div className="nav_profile">
-                      {renderProfileNav()}
-                    </div>
+                    {renderProfileNav()}
                   </div>
                 </div>
               </>
@@ -68,9 +69,7 @@ function Header(props) {
               <>
                 <Navigation user={user} currentPath={match.path} />
                 <div className="nav_actions">
-                  <div className="nav_profile">
-                    {renderProfileNav()}
-                  </div>
+                  {renderProfileNav()}
                 </div>
               </>
             )}
@@ -83,42 +82,63 @@ function Header(props) {
   );
 
   function renderProfileNav() {
-    if (false) {
-      return (<UserSkeleton />);
+    if(auth.user) {
+      if (false) {
+        return (<UserSkeleton />);
+      }
+      return (
+        <div className="nav_profile">
+          <MenuButton
+            id="nav_profile_avatar"
+            className="nav_profile_avatar"
+            menuItems={[
+              {
+                primaryText: 'Edit Profile',
+                leftIcon: <i className="wtfr wtf-user-edit" />,
+                onClick: editProfile,
+              },
+              {
+                primaryText: 'Register',
+                onClick: handleClickLogout,
+                leftIcon: <i className="wtfr wtf-sign-out" />,
+              },
+            ]}
+            anchor={{
+              x: MenuButton.HorizontalAnchors.INNER_LEFT,
+              y: MenuButton.VerticalAnchors.BOTTOM,
+            }}
+          >
+            <>
+              <span className="name">
+                USER
+              </span>
+              <div className="avatar">
+                <ImageLoader src="/static/img/default-avatar.png" />
+              </div>
+            </>
+          </MenuButton>
+        </div>
+      );
+    } else {
+      return(
+        <>
+          <Button
+            flat
+            onClick={() => {history.push('/login')}}
+            children="Login"
+            iconEl={<i className="wtfr wtf-sign-out" />}
+            className="iBttn iBttn-primary"
+          />
+          <Button
+            flat
+            onClick={() => {}}
+            children="Register"
+            iconEl={<i className="wtfr wtf-user-plus" />}
+            className="iBttn iBttn-primary"
+          />
+        </>
+      )
     }
-    return (
-      <>
-        <MenuButton
-          id="nav_profile_avatar"
-          className="nav_profile_avatar"
-          menuItems={[
-            {
-              primaryText: 'Login',
-              leftIcon: <i className="wtfr wtf-sign-in" />,
-              onClick: editProfile,
-            },
-            {
-              primaryText: 'Register',
-              onClick: handleClickLogout,
-              leftIcon: <i className="wtfr wtf-sign-out" />,
-            },
-          ]}
-          anchor={{
-            x: MenuButton.HorizontalAnchors.INNER_LEFT,
-            y: MenuButton.VerticalAnchors.BOTTOM,
-          }}
-        >
-          <>
-            <span className="name">
-              USER
-            </span>
-            <div className="avatar">
-              <ImageLoader src="/static/img/default-avatar.png" />
-            </div>
-          </>
-        </MenuButton>
-      </>
-    );
   }
 
   function handleClickLogout() {
