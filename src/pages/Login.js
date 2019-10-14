@@ -5,10 +5,13 @@ import TextField from 'react-md/lib/TextFields/TextField';
 import Link from 'react-router-dom/Link';
 import useForm from 'shared/hooks/useForm';
 import cookie from 'js-cookie';
+import history from 'shared/utils/history';
+import { useDispatch } from 'react-redux';
 import { getValidationResult, fieldIsRequired, fieldIsInvalid } from 'shared/utils/tools';
 import * as yup from 'yup';
 import useMutation from 'shared/hooks/useMutation';
 import AuthLayout from 'shared/components/Layout/Auth';
+import { authorize } from 'shared/redux/auth/reducer';
 import 'sass/pages/login.scss';
 
 const initialFields = {
@@ -18,6 +21,7 @@ const initialFields = {
 };
 
 function LoginPage() {
+  const dispatch = useDispatch();
   const [formState, formHandlers] = useForm({
     initialFields, validator, onValid,
   });
@@ -99,8 +103,10 @@ function LoginPage() {
     });
   }
 
-  function onSuccess({ token }) {
-    cookie.set('token', token, { expires: 360000 });
+  function onSuccess(response) {
+    cookie.set('token', response.token, { expires: 360000 });
+    dispatch(authorize(response));
+    history.push('/');
   }
 }
 export default LoginPage;

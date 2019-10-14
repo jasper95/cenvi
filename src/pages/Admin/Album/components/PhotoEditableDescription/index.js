@@ -13,15 +13,17 @@ function PhotosEditableDescription(props) {
   const { photos, onChange, id } = props;
   const chunkedPhotos = useMemo(() => chunk(photos, 4), [photos]);
   return (
-    <SortableContainer onSortEnd={onSortEnd}>
+    <SortableContainer onSortEnd={onSortEnd} useDragHandle>
       {chunkedPhotos.map((row, i) => (
         <Fragment key={i}>
-          {row.map(photo => (
+          {row.map((photo, index) => (
             <SortablePhotoItem
               key={photo.id}
               photo={photo}
+              index={index}
               onChangeDescription={value => handleChangeDescription(value, photo.id)}
               onRemove={handleRemove}
+              collection={i}
             />
           ))}
         </Fragment>

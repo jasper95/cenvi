@@ -46,7 +46,6 @@ export default function useMutation(params) {
       setData(response);
       onSuccess(response);
       if (message) {
-        console.log('message: ', message);
         dispatch(showSuccess({ message, hideDialog }));
       }
     }

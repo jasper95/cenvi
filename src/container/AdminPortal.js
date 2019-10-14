@@ -23,7 +23,7 @@ const menu = [
 ];
 
 function AdminPortal(props) {
-  const { history, location } = props;
+  const { history, location, onLogout } = props;
   const [isSidebarOpen, toggleSidebar] = useState(false);
   return (
     <div className={cn('adminPortal', {
@@ -34,6 +34,7 @@ function AdminPortal(props) {
         className="adminPortal_topnav"
         isSidebarOpen={isSidebarOpen}
         handleToggleSidebar={toggleSidebar}
+        onLogout={onLogout}
       />
       <Sidebar
         history={history}
@@ -58,6 +59,7 @@ function TopNav(props) {
     className,
     handleToggleSidebar,
     isSidebarOpen,
+    onLogout,
   } = props;
   return (
     <div className={`${className} topnav`}>
@@ -70,7 +72,7 @@ function TopNav(props) {
       <Button
         flat
         secondary
-        onClick={() => {}}
+        onClick={onLogout}
         children="Logout"
         iconEl={<i className="wtfr wtf-sign-out" />}
         className="topnav_logout iBttn iBttn-second-prio"

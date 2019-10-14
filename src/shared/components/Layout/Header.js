@@ -6,30 +6,31 @@ import ImageLoader from 'react-image';
 import Button from 'react-md/lib/Buttons/Button';
 import MenuButton from 'react-md/lib/Menus/MenuButton';
 import { useDispatch } from 'react-redux';
-import useMutation, { useUpdateNode } from 'shared/hooks/useMutation';
-import cookie from 'js-cookie';
+import { useUpdateNode } from 'shared/hooks/useMutation';
 import withRouter from 'react-router-dom/withRouter';
-import { UserSkeleton } from 'shared/components/Skeletons';
+// import { UserSkeleton } from 'shared/components/Skeletons';
 import Navigation from 'shared/components/Navigation';
 import ReactResizeDetector from 'react-resize-detector';
+import { showDialog } from 'shared/redux/app/reducer';
 import cn from 'classnames';
 import 'sass/components/nav/index.scss';
+import loadable from '@loadable/component';
+
+const UserDialog = loadable(() => import('pages/Admin/User/components/UserDialog'));
 
 function Header(props) {
   const {
     match,
     history,
     auth,
+    onLogout,
   } = props;
-
-  console.log('@@HEADER props', props)
 
   const dispatch = useDispatch();
   const user = null;
   // const { data: user, loading: authIsLoading } = useContext(AuthContext);
   const [showMobileNav, onShowMobileNav] = useState(false);
   const [isMobileNav, setIsMobileNav] = useState(false);
-  const [, onLogout] = useMutation({ url: '/logout', onSuccess: onLogoutSucess });
   const [, onUpdateUser] = useUpdateNode({ node: 'user', message: 'Profile successfully updated' });
   const isAuthenticated = Boolean(user);
 
@@ -82,10 +83,10 @@ function Header(props) {
   );
 
   function renderProfileNav() {
-    if(auth.user) {
-      if (false) {
-        return (<UserSkeleton />);
-      }
+    if (auth.user) {
+      // if (false) {
+      //   return (<UserSkeleton />);
+      // }
       return (
         <div className="nav_profile">
           <MenuButton
@@ -93,13 +94,13 @@ function Header(props) {
             className="nav_profile_avatar"
             menuItems={[
               {
-                primaryText: 'Edit Profile',
+                primaryText: 'Go to Admin',
                 leftIcon: <i className="wtfr wtf-user-edit" />,
-                onClick: editProfile,
+                onClick: () => history.push('/admin/blogs'),
               },
               {
-                primaryText: 'Register',
-                onClick: handleClickLogout,
+                primaryText: 'Logout',
+                onClick: onLogout,
                 leftIcon: <i className="wtfr wtf-sign-out" />,
               },
             ]}
@@ -119,59 +120,37 @@ function Header(props) {
           </MenuButton>
         </div>
       );
-    } else {
-      return(
-        <>
-          <Button
-            flat
-            onClick={() => {history.push('/login')}}
-            children="Login"
-            iconEl={<i className="wtfr wtf-sign-out" />}
-            className="iBttn iBttn-primary"
-          />
-          <Button
-            flat
-            onClick={() => {}}
-            children="Register"
-            iconEl={<i className="wtfr wtf-user-plus" />}
-            className="iBttn iBttn-primary"
-          />
-        </>
-      )
     }
+    return (
+      <>
+        <Button
+          flat
+          onClick={() => { history.push('/login'); }}
+          children="Login"
+          iconEl={<i className="wtfr wtf-sign-out" />}
+          className="iBttn iBttn-primary"
+        />
+        <Button
+          flat
+          onClick={() => {}}
+          children="Register"
+          iconEl={<i className="wtfr wtf-user-plus" />}
+          className="iBttn iBttn-primary"
+        />
+      </>
+    );
   }
 
-  function handleClickLogout() {
-    dispatch({
-      type: 'SHOW_DIALOG',
-      payload: {
-        path: 'Confirm',
-        props: {
-          title: 'Confirm Logout',
-          message: 'Do you really want to logout?',
-          onValid: onLogout,
-        },
-      },
-    });
-  }
 
   function editProfile() {
-    dispatch({
-      type: 'SHOW_DIALOG',
-      payload: {
-        path: 'User',
-        props: {
-          title: 'Edit Profile',
-          initialFields: user,
-          onValid: data => onUpdateUser({ data }),
-        },
+    dispatch(showDialog({
+      component: UserDialog,
+      props: {
+        title: 'Edit Profile',
+        initialFields: user,
+        onValid: data => onUpdateUser({ data }),
       },
-    });
-  }
-
-  function onLogoutSucess() {
-    cookie.remove('token');
-    dispatch({ type: 'SET_STATE', payload: { token: '', dialog: null, dialogProcessing: false } });
+    }));
   }
 }
 

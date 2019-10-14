@@ -14,6 +14,14 @@ import Button from 'react-md/lib/Buttons/Button';
 import cn from 'classnames';
 import { useUpdateNode } from 'shared/hooks/useMutation';
 
+const customChangeHandler = {
+  photos(newPhotos, oldFields) {
+    return {
+      ...oldFields,
+      photos: newPhotos.length === 1 ? oldFields.photos.concat(newPhotos) : newPhotos,
+    };
+  },
+};
 
 function EditAlbum(props) {
   const { id } = props.match.params;
@@ -21,8 +29,10 @@ function EditAlbum(props) {
   const [mutationState, onMutate] = useUpdateNode({ node: 'album' });
   const [formState, formHandlers] = useForm({
     initialFields: {},
+    customChangeHandler,
   });
   const { fields, errors } = formState;
+  console.log('fields: ', fields);
   const { onSetFields, onElementChange } = formHandlers;
   const { photos = [] } = fields;
 
@@ -115,7 +125,7 @@ function EditAlbum(props) {
 
   function onUploadSuccess(data) {
     data = pick(data, 'id', 'file_path');
-    onElementChange([...photos, data], 'photos');
+    onElementChange([data], 'photos');
   }
 }
 

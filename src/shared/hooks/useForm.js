@@ -18,16 +18,20 @@ export default function useForm(params) {
     const customHandler = customChangeHandler[key];
 
     if (customHandler) {
-      const changes = customHandler(value, fields);
-      if (changes) {
-        setFields(oldFields => ({ ...oldFields, ...changes }));
-        setErrors(omit(errors, key));
-      }
+      setFields((oldFields) => {
+        const changes = customHandler(value, oldFields);
+        if (changes) {
+          return { ...oldFields, ...changes };
+        }
+        return oldFields;
+      });
+      setErrors(omit(errors, key));
       return;
     }
     setErrors(omit(errors, key));
     setFields(oldFields => ({ ...oldFields, [key]: value }));
   }
+
   function onValidate() {
     const { isValid, errors: validationErrors } = validator(fields);
     if (isValid) {

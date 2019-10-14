@@ -7,7 +7,11 @@ import Snackbar from 'shared/components/Snackbar';
 import withAuth from 'shared/hocs/withAuth';
 import { createSelector } from 'redux-starter-kit';
 import { useSelector, useDispatch } from 'react-redux';
+import useMutation from 'shared/hooks/useMutation';
+import { showDialog, hideDialog } from 'shared/redux/app/reducer';
+import { unauthorize } from 'shared/redux/auth/reducer';
 import AdminPortal from 'container/AdminPortal';
+import loadable from '@loadable/component';
 import cn from 'classnames';
 import DialogTitleWithBack from './DialogTitleWithBack';
 import Footer from './Footer';
@@ -19,9 +23,12 @@ const pageSelector = createSelector(
   state => state.app.temporaryClosedDialogs,
   state => state.auth,
   (toast, dialog, temporaryClosedDialogs, auth) => (
-    { toast, dialog, auth, hasTemporaryClosed: temporaryClosedDialogs.length > 0 }
+    {
+      toast, dialog, auth, hasTemporaryClosed: temporaryClosedDialogs.length > 0,
+    }
   ),
 );
+const Confirm = loadable(() => import('shared/components/Dialogs/Confirm'));
 
 function Page(props) {
   const {
@@ -33,6 +40,7 @@ function Page(props) {
   } = props;
 
 
+  const [, onLogout] = useMutation({ url: '/logout', onSuccess: onLogoutSucess });
   const appData = useSelector(pageSelector);
   const dispatch = useDispatch();
   const { toast, dialog, auth } = appData;
@@ -89,7 +97,7 @@ function Page(props) {
         <link rel="stylesheet" type="text/css" href="/static/css/cenvi-icon.css" />
       </Head>
       {hasNavigation && (
-        <Header auth={auth} />
+        <Header auth={auth} onLogout={handleClickLogout} />
       )}
       {toast && (
         <Snackbar
@@ -112,7 +120,7 @@ function Page(props) {
       })}
       >
         {isAdmin ? (
-          <AdminPortal {...props}>
+          <AdminPortal {...props} onLogout={handleClickLogout}>
             {children}
           </AdminPortal>
         ) : children}
@@ -124,6 +132,20 @@ function Page(props) {
   );
   function willUnmount() {
     dispatch({ type: 'HIDE_NOTIFICATION' });
+  }
+  function handleClickLogout() {
+    dispatch(showDialog({
+      component: Confirm,
+      props: {
+        title: 'Confirm Logout',
+        message: 'Do you really want to logout?',
+        onValid: onLogout,
+      },
+    }));
+  }
+  function onLogoutSucess() {
+    dispatch(hideDialog());
+    dispatch(unauthorize());
   }
 }
 

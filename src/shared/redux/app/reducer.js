@@ -57,7 +57,7 @@ const auth = createSlice({
     showSuccess(state, { payload }) {
       const { message, hideDialog = true } = payload;
       if (hideDialog) {
-        hideDialogReducer(state)
+        hideDialogReducer(state);
       }
       state.toast = {
         type: 'success',
