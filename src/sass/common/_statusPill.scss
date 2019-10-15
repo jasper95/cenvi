@@ -1,0 +1,15 @@
+.statusPill {
+	font-size: .8rem;
+	padding: .5rem 1.5rem;
+	border-radius: .25rem;
+	background-color: $gray-100;
+	text-transform: uppercase;
+	letter-spacing: .15em;
+	font-weight: 600;
+
+	// .statusPill-published
+	&-published {
+		background-color: $success;
+		color: #FFF;
+	}
+}
