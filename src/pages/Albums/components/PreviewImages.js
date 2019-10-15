@@ -1,15 +1,16 @@
 import React from 'react';
+import { getPhotoUrl } from 'shared/utils/tools';
 
 const SNIPPET_LIMIT = 3;
 function PreviewImages(props) {
   const {
-    images,
+    photos,
     className,
     linkToMore,
-    history
+    history,
   } = props;
-  const snippetImages = [...images].slice(0, SNIPPET_LIMIT);
-  if (images.length > 0) {
+  const snippetImages = [...photos].slice(0, SNIPPET_LIMIT);
+  if (photos.length > 0) {
     return (
       <div className={`${className} previewImg`}>
         <h5 className="previewImg_label">
@@ -17,17 +18,18 @@ function PreviewImages(props) {
         </h5>
         <div className="previewImg_container">
           {snippetImages.map((img, i) => (
-            <div className="previewImg_item">
-              <img src={img} alt={`preview image ${i}`} />
+            <div key={img.id} className="previewImg_item">
+              <img src={getPhotoUrl(img)} alt="" />
             </div>
           ))}
-          { images.length > SNIPPET_LIMIT && (
-            <div className="previewImg_item showmore"
-              onClick={() => {history.push(linkToMore)}}
+          { photos.length > SNIPPET_LIMIT && (
+            <div
+              className="previewImg_item showmore"
+              onClick={() => { history.push(linkToMore); }}
             >
               <div className="countContainer">
                 <div className="count">
-                  {images.length - SNIPPET_LIMIT}
+                  {photos.length - SNIPPET_LIMIT}
                 </div>
                 <p className="text">
                   more photos

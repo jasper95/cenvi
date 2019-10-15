@@ -1,15 +1,18 @@
 import React, { useEffect } from 'react';
 import SectionHeader from 'shared/components/Section';
-import albums from 'shared/constants/albums';
+import useQuery from 'shared/hooks/useLazyQuery';
+// import albums from 'shared/constants/albums';
 import AlbumCard from './components/AlbumCard';
 
 function AlbumsListPage(props) {
+  const [queryState, onQuery] = useQuery({ url: '/published_album' }, { initialLoading: true, initialData: [] });
+  console.log('queryState: ', queryState);
   useEffect(() => {
     window.scrollTo(0, 0);
+    onQuery();
   }, []);
-
-
-  console.log('@@AlbumsListPage === ', props)
+  const { data: albums } = queryState;
+  // const
 
   return (
     <section className="albumsSection section">
@@ -23,9 +26,10 @@ function AlbumsListPage(props) {
           { albums.length !== 0
             ? (
               <>
-                {albums.map(member => (
-                  <AlbumCard 
-                    {...member}
+                {albums.map(album => (
+                  <AlbumCard
+                    key={album.id}
+                    album={album}
                     history={props.history}
                   />
                 ))}
