@@ -64,27 +64,6 @@
 	// .blogCard_tags
 	&_tags {
 		width: 100%;
-
-		.tag_item {
-			color: $text-color;
-			font-weight: bold;
-			text-transform: uppercase;
-			font-size: .75rem;
-			letter-spacing: .15em;
-			padding: .5em 1.5em;
-			border-radius: 1em;
-			background-color: $c_gray-100;
-			margin-bottom: .5rem;
-
-			&:not(:last-child) {
-				margin-right: .5em;
-			}
-
-			&:hover {
-				background-color: $primary-color;
-				color: $white;
-			}
-		}
 	}
 
 	// .blogCard_excerpt

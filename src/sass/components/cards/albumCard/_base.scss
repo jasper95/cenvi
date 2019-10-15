@@ -42,12 +42,17 @@
 		font-size: 2.5rem;
 		color: $text-header-color;
 		line-height: 1.4;
-		margin-bottom: 0;
+		margin-bottom: 1rem;
 		cursor: pointer;
 
 		&:hover {
 			color: $primary-color;
 		}
+	}
+
+	// .albumCard_tags
+	&_tags {
+		margin-bottom: 2rem;
 	}
 
 	// .albumCard_createdDate

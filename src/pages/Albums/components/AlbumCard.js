@@ -1,11 +1,12 @@
 import React from 'react';
 import PreviewImages from './PreviewImages';
+import Link from 'react-router-dom/Link';
 import 'sass/components/cards/albumCard/index.scss';
 
 function AlbumCard(props) {
   const {
     id, name, description,
-    category, image, created_date,
+    tags, image, created_date,
     images, history
   } = props;
   const BCP = 'albumCard';
@@ -19,12 +20,24 @@ function AlbumCard(props) {
         />
       </div>
       <div className={`${BCP}_content col col-md-7 `}>
-        <h1 className={`${BCP}_category`}>
-          {category}
-        </h1>
+
         <h1 className={`${BCP}_header`}  onClick={() => {history.push("/albums/test")}}>
           {name}
         </h1>
+
+        { tags.length > 0 && (
+          <div className={`${BCP}_tags tag`}>
+            {tags.map(tag => (
+              <Link
+                to="/login"
+                className="tag_item"
+              >
+                {tag}
+              </Link>
+            ))}
+          </div>
+        )}
+
         <p className={`${BCP}_createdDate`}>
           {created_date}
         </p>
