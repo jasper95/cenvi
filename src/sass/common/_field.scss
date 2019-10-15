@@ -470,7 +470,7 @@ $fieldBorder: 1px solid $gray-200;
 	&_label {
 		margin-bottom: .5em;
 		font-size: .8em;
-		font-family: inherit;
+		font-family: $font-family;
 		transform: none !important;
 		color: $gray-300;
 		width: 100%;

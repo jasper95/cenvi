@@ -29,11 +29,18 @@ function Gallery(props) {
         label="(Drag and Drop your files here or click here to open file selection dialog)"
       />
 
-      <div className="fs_uploadItems">
-        {submittedFiles.map(e => (
-          <FileItem id={e} uploader={uploader} key={e} />
-        ))}
-      </div>
+      {submittedFiles.length > 0 && (
+        <>
+          <p className="iField_label">
+            On Queue
+          </p>
+          <div className="fs_uploadItems">
+            {submittedFiles.map(e => (
+              <FileItem id={e} uploader={uploader} key={e} />
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 

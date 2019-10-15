@@ -136,6 +136,11 @@
 	}
 }
 
+.fs_uploadItem  .react-fine-uploader-thumbnail {
+	width: 50px;
+	height: 50px;
+}
+
 .fs_uploadItem_progress .progress {
 	display: flex;
 	align-items: center;
@@ -336,7 +341,7 @@
 	align-items: center;
 	justify-content: center;
 	padding: 2em 1em;
-	margin-top: 1em;
+	margin-bottom: 1em;
 	position: relative;
 	cursor: pointer;
 	color: rgba(#000,.25);
@@ -380,6 +385,18 @@
 			display: block;
 			color: inherit;
 		}
+	}
+
+	// .fs_dropzone_labelText
+	&_labelText {
+		font-size: 1rem;
+		font-family: $font-family;
+	}
+
+	// .fs_dropzone_icon
+	&_icon {
+		width: 200px;
+		height: auto;
 	}
 
 	&:not(.fs_dropzone--active):hover {

@@ -38,7 +38,7 @@ function PhotoItem(props) {
 
         <div className={`${BCP}_content`}>
           <TextField
-            className="iField"
+            className={`${BCP}_description iField `}
             label="Description"
             value={description}
             rows={3}
