@@ -57,8 +57,7 @@ function PhotosEditableDescription(props) {
     onChange(newPhotos, id);
   }
   function handleRemove(photoId) {
-    console.log('remove');
-    // onChange(photos.filter(photo => photo.id !== photoId), id);
+    onChange(photos.filter(photo => photo.id !== photoId), id);
   }
 
   function onSortEnd({ oldIndex, newIndex, collection }) {
