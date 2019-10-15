@@ -8,7 +8,7 @@ function CustomDatePicker(props) {
     value, label, onChange, id, error, ...restProps
   } = props;
   return (
-    <div className="iField_date">
+    <div className="iField">
       {label && (
         <span className="iField_date_label">{label}</span>
       )}

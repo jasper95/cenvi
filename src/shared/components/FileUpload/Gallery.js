@@ -14,24 +14,25 @@ function Gallery(props) {
   const { submittedFiles, uploader } = uploadState;
   return (
     <div className='galleryUpload'>
-      {submittedFiles.map(e => (
-        <FileItem id={e} uploader={uploader} key={e} />
-      ))}
-      <div>
-        <Dropzone
-          className="fs_dropzone"
-          dropActiveClassName="fs_dropzone--active"
-          dropAcceptClassname="fs_dropzone--accept"
-          dropRejectClassname="fs_dropzone--reject"
-          {...pick(uploadHandlers, [
-            'onDrop',
-            'multiple',
-            'children',
-            'inputRef',
-            'noClick',
-          ])}
-          label="(Drag and Drop your files here or click here to open file selection dialog)"
-        />
+      <Dropzone
+        className="fs_dropzone"
+        dropActiveClassName="fs_dropzone--active"
+        dropAcceptClassname="fs_dropzone--accept"
+        dropRejectClassname="fs_dropzone--reject"
+        {...pick(uploadHandlers, [
+          'onDrop',
+          'multiple',
+          'children',
+          'inputRef',
+          'noClick',
+        ])}
+        label="(Drag and Drop your files here or click here to open file selection dialog)"
+      />
+
+      <div className="fs_uploadItems">
+        {submittedFiles.map(e => (
+          <FileItem id={e} uploader={uploader} key={e} />
+        ))}
       </div>
     </div>
   );

@@ -21,7 +21,11 @@ $fieldBorder: 1px solid $gray-200;
 	width: 100%;
 	margin-top: 0;
 	margin-bottom: 0em;
-	@extend %fieldLabelSettings;
+
+	// .iField_label
+	&_label {
+		@extend %fieldLabelSettings;
+	}
 	// border: $fieldBorder;
 
 	.md-floating-label {
@@ -29,7 +33,7 @@ $fieldBorder: 1px solid $gray-200;
 		top: 0;
 		left: 0;
 		transform: none !important;
-
+		@extend %fieldLabelSettings;
 
 		&:not([class*="--inactive"]) {
 			color: $primary-color;

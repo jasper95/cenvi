@@ -137,7 +137,7 @@ function EditBlog(props) {
       <div className="row row-formMedia">
         <Paper className="col col-md-12-guttered col-actions">
           <div className="iField">
-            <p className="iField_date_label">Blog Photo</p>
+            <p className="iField_label">Blog Photo</p>
             <SingleFileUpload
               id="file"
               value={fields.image_url ? `${process.env.STATIC_URL}/${fields.image_url}` : fields.file}

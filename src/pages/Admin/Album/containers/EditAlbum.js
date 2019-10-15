@@ -9,6 +9,7 @@ import DatePicker from 'shared/components/DatePicker';
 import SelectAutocomplete from 'shared/components/SelectAutocomplete';
 import CreatableInput from 'shared/components/CreatableInput';
 import PhotosEditableDescription from 'pages/Admin/Album/components/PhotoEditableDescription';
+import SingleFileUpload from 'shared/components/FileUpload/SingleFileUpload';
 import useForm from 'shared/hooks/useForm';
 import Button from 'react-md/lib/Buttons/Button';
 import cn from 'classnames';
@@ -60,13 +61,31 @@ function EditAlbum(props) {
         </Paper>
       </div>
       <div className="row">
-        <Paper className="col col-md-8-guttered col-form">
-          <label>Uploaded:</label>
-          <PhotosEditableDescription
-            id="photos"
-            photos={photos}
-            onChange={onElementChange}
-          />
+        <Paper className="col col-md-12-guttered col-actions">
+          <div className="iField">
+            <p className="iField_label">Album Thumnail</p>
+            <SingleFileUpload
+              id="file"
+              onChange={() => { console.log(' thumbnail ') }}
+            />
+          </div>
+        </Paper>
+      </div>
+      <div className="row">
+        <Paper className="col col-md-10-guttered col-form">
+          <p className="iField_label">Album Photos</p>
+          <div className="row">
+            <div className="col col-md-4">
+              <Gallery onUploadSuccess={onUploadSuccess} />
+            </div>
+            <div className="col col-md-8">
+              <PhotosEditableDescription
+                id="photos"
+                photos={photos}
+                onChange={onElementChange}
+              />
+            </div>
+          </div>
           <TextField
             id="excerpt"
             label="Excerpt"
@@ -79,11 +98,8 @@ function EditAlbum(props) {
             rows={4}
           />
         </Paper>
-        <div className="col col-md-4 col-actions">
-          <Paper className="col col-md-12-guttered">
-            <Gallery onUploadSuccess={onUploadSuccess} />
-          </Paper>
-          <Paper className="col col-md-12-guttered">
+        <div className="col col-md-2-guttered col-actions">
+          <Paper className="col col-md-12">
             <SelectAutocomplete
               id="status"
               options={[
@@ -123,7 +139,6 @@ function EditAlbum(props) {
             />
           </Paper>
         </div>
-
       </div>
     </>
   );
