@@ -45,6 +45,37 @@ function EditBlog(props) {
   }
   return (
     <>
+      <div className="row row-ToolbarHeader row-ToolbarHeader-floating">
+        <Paper className="col col-md-12-guttered">
+          <div className="ToolbarHeader row">
+            <div className="ToolbarHeader_title">
+              <h1 className="title">
+                { fields.name === ''
+                  ? 'New Blog'
+                  : `Blog: ${fields.name}`
+                }
+              </h1>
+            </div>
+            <div className="ToolbarHeader_toolbar">
+              <Button
+                className={cn('iBttn iBttn-primary', { processing: mutationState.loading })}
+                onClick={() => {
+                  onMutate({
+                    data: fields,
+                  });
+                }}
+                children="Save"
+                flat
+              />
+              <Button
+                flat
+                className='iBttn iBttn-second-prio'
+                children="Cancel"
+              />
+            </div>
+          </div>
+        </Paper>
+      </div>
       <div className="row row-formHeader">
         <Paper className="col col-md-12-guttered col-formHeader">
           <TextField
@@ -58,6 +89,18 @@ function EditBlog(props) {
             error={!!errors.name}
             value={fields.name || ''}
           />
+        </Paper>
+      </div>
+      <div className="row row-formMedia">
+        <Paper className="col col-md-12-guttered col-actions">
+          <div className="iField">
+            <p className="iField_label">Blog Photo</p>
+            <SingleFileUpload
+              id="file"
+              value={fields.image_url ? `${process.env.STATIC_URL}/${fields.image_url}` : fields.file}
+              onChange={onElementChange}
+            />
+          </div>
         </Paper>
       </div>
       <div className="row">
@@ -134,18 +177,7 @@ function EditBlog(props) {
           />
         </Paper>
       </div>
-      <div className="row row-formMedia">
-        <Paper className="col col-md-12-guttered col-actions">
-          <div className="iField">
-            <p className="iField_label">Blog Photo</p>
-            <SingleFileUpload
-              id="file"
-              value={fields.image_url ? `${process.env.STATIC_URL}/${fields.image_url}` : fields.file}
-              onChange={onElementChange}
-            />
-          </div>
-        </Paper>
-      </div>
+
     </>
   );
 

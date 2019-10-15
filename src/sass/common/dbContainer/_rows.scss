@@ -12,6 +12,11 @@
    ========================================================================== */
 .dbContainer > .row-ToolbarHeader {
 	width: 100%;
+
+	> .md-paper {
+		padding: 0;
+	}
+
 	// .row-ToolbarHeader-floating 
 	&-floating {
 		position: sticky;
@@ -29,7 +34,7 @@
 
 			// .ToolbarHeader_title
 			&_title {
-				font-size: 2rem;
+				font-size: 1.5rem;
 				font-weight: 700;
 				color: $primary-color-700;
 				.title {
