@@ -3,17 +3,28 @@ import chunk from 'lodash/chunk';
 import flatten from 'lodash/flatten';
 import { arrayMove } from 'shared/utils/tools';
 import { sortableContainer, sortableElement } from 'react-sortable-hoc';
+
 import PhotoItem from './PhotoItem';
+import 'sass/components/cards/albumPhotoCard/index.scss';
+
 
 const SortablePhotoItem = sortableElement(PhotoItem);
-const SortableContainer = sortableContainer(({ children }) => <div>{children}</div>);
+const SortableContainer = sortableContainer(({ children }) => (
+  <div className="albumPhotoCardGridContainer">
+    {children}
+  </div>
+));
 
 
 function PhotosEditableDescription(props) {
   const { photos, onChange, id } = props;
   const chunkedPhotos = useMemo(() => chunk(photos, 4), [photos]);
   return (
-    <SortableContainer onSortEnd={onSortEnd} useDragHandle>
+    <SortableContainer
+      axis="xy"
+      onSortEnd={onSortEnd}
+      helperClass="onTheFly onTheFly-albumCard"
+    >
       {chunkedPhotos.map((row, i) => (
         <Fragment key={i}>
           {row.map((photo, index) => (

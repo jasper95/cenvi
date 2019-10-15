@@ -67,7 +67,6 @@ function EditAlbum(props) {
             photos={photos}
             onChange={onElementChange}
           />
-          <Gallery onUploadSuccess={onUploadSuccess} />
           <TextField
             id="excerpt"
             label="Excerpt"
@@ -80,45 +79,51 @@ function EditAlbum(props) {
             rows={4}
           />
         </Paper>
-        <Paper className="col col-md-4-guttered col-actions">
-          <SelectAutocomplete
-            id="status"
-            options={[
-              { value: 'published', label: 'Published' },
-              { value: 'unpublished', label: 'Unpublished' },
-            ]}
-            label="Status"
-            required
-            value={fields.status}
-            onChange={onElementChange}
-          />
-          {fields.status === 'published' && (
-            <DatePicker
-              id="published_date"
-              label="Published Date"
-              placeholderText="Published Date"
+        <div className="col col-md-4 col-actions">
+          <Paper className="col col-md-12-guttered">
+            <Gallery onUploadSuccess={onUploadSuccess} />
+          </Paper>
+          <Paper className="col col-md-12-guttered">
+            <SelectAutocomplete
+              id="status"
+              options={[
+                { value: 'published', label: 'Published' },
+                { value: 'unpublished', label: 'Unpublished' },
+              ]}
+              label="Status"
+              required
+              value={fields.status}
               onChange={onElementChange}
-              value={fields.published_date}
             />
-          )}
-          <CreatableInput
-            id="tags"
-            value={fields.tags || []}
-            onChange={onElementChange}
-            className="iField iField-ci"
-            classNamePrefix="iField-ci"
-          />
-          <Button
-            className={cn('iBttn iBttn-primary', { processing: mutationState.loading })}
-            onClick={() => {
-              onMutate({
-                data: fields,
-              });
-            }}
-            children="Save"
-            flat
-          />
-        </Paper>
+            {fields.status === 'published' && (
+              <DatePicker
+                id="published_date"
+                label="Published Date"
+                placeholderText="Published Date"
+                onChange={onElementChange}
+                value={fields.published_date}
+              />
+            )}
+            <CreatableInput
+              id="tags"
+              value={fields.tags || []}
+              onChange={onElementChange}
+              className="iField iField-ci"
+              classNamePrefix="iField-ci"
+            />
+            <Button
+              className={cn('iBttn iBttn-primary', { processing: mutationState.loading })}
+              onClick={() => {
+                onMutate({
+                  data: fields,
+                });
+              }}
+              children="Save"
+              flat
+            />
+          </Paper>
+        </div>
+
       </div>
     </>
   );

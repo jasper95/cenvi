@@ -1,0 +1,111 @@
+
+/* ==========================================================================
+   GRID CONTAINER
+   ========================================================================== */
+$items : 4;
+.albumPhotoCardGridContainer {
+	width: 100%;
+	display: grid;
+	grid-template-columns: repeat(#{$items}, 1fr);
+
+	@media (max-width: 1441px) {
+		grid-template-columns: repeat(#{( $items - 1 )}, 1fr);
+	}
+
+	@media (max-width: 1367px) {
+		grid-template-columns: repeat(#{( $items - 2 )}, 1fr);
+	}
+
+	@media (max-width: 1025px) {
+		grid-template-columns: repeat(#{( $items - 3 )}, 1fr);
+	}
+}
+
+/* ==========================================================================
+   GRID SORTABLE COLUMN HOLDER
+   ========================================================================== */
+.albumPhotoCardGridColumn {
+	
+}
+
+
+/* ==========================================================================
+   BASIC STUFF
+   ========================================================================== */
+$gutter : 1rem;
+
+.albumPhotoCard {
+	width: calc(100% - #{ $gutter });
+	background-color: #fff;
+	margin: $gutter /2;
+	position: relative;
+	padding: 1rem;
+	padding-bottom: 3rem;
+	box-shadow: 0 0 1em 0 rgba(#000,.05);
+
+	cursor: move;
+	cursor: grab;
+	cursor: -moz-grab;
+	cursor: -webkit-grab;
+
+	overflow: hidden;
+
+	transition: box-shadow .3s ease-out;
+
+
+	// .albumPhotoCard_handle
+	&_handle {
+		position: absolute;
+		top: .25rem;
+		left: .25rem;
+		z-index: 10;
+	}
+
+	// .albumPhotoCard_media
+	&_media {
+		width: 100%;
+		padding-top: 75%;
+		// height: 100px;
+		background-color: $lightgray;
+		position: relative;
+	}
+
+	// .albumPhotoCard_img
+	&_img {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
+		object-position: 50% 50%;
+	}
+
+	// .albumPhotoCard_actions
+	&_actions {
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		z-index: 10;
+		width: 100%;
+		height: auto;
+		padding: 1rem;
+		transform: translateY(50%);
+		opacity: 0;
+		transition:
+			opacity .3s ease-out,
+			transform .3s ease-out;
+
+		.iBttn {
+			width: 100%;
+		}
+	}
+}
+
+.albumPhotoCard:hover {
+	box-shadow: 0 0 1em 0 rgba(#000,.15);
+	.albumPhotoCard_actions {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
