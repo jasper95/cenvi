@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import 'react-fine-uploader/gallery/gallery.css';
 import Gallery from 'shared/components/FileUpload/Gallery';
 import pick from 'lodash/pick';
-import useQuery from 'shared/hooks/useQuery';
+import useQuery from 'shared/hooks/useLazyQuery';
 import Paper from 'react-md/lib/Papers/Paper';
 import TextField from 'react-md/lib/TextFields/TextField';
 import DatePicker from 'shared/components/DatePicker';
@@ -32,7 +32,6 @@ function EditAlbum(props) {
     customChangeHandler,
   });
   const { fields, errors } = formState;
-  console.log('fields: ', fields);
   const { onSetFields, onElementChange } = formHandlers;
   const { photos = [] } = fields;
 
@@ -61,7 +60,7 @@ function EditAlbum(props) {
       </div>
       <div className="row">
         <Paper className="col col-md-8-guttered col-form">
-          <label>Uploaded:</label>
+          {/* <label>Uploaded:</label> */}
           <PhotosEditableDescription
             id="photos"
             photos={photos}

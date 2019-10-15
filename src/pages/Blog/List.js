@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import useQuery from 'shared/hooks/useQuery';
+import useQuery from 'shared/hooks/useLazyQuery';
 import SectionHeader from 'shared/components/Section';
 import BlogItem from './components/BlogItem';
-import Author from './components/Author'
+import Author from './components/Author';
 
 function BlogList() {
   const [rowResponse, onQuery] = useQuery({ url: '/published_blog' }, { initialData: [], initialLoading: true });

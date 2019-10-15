@@ -12,7 +12,7 @@ import Paper from 'react-md/lib/Papers/Paper';
 import SingleFileUpload from 'shared/components/FileUpload/SingleFileUpload';
 import Button from 'react-md/lib/Buttons/Button';
 import useMutation from 'shared/hooks/useMutation';
-import useQuery from 'shared/hooks/useQuery';
+import useQuery from 'shared/hooks/useLazyQuery';
 import { toFormData } from 'shared/utils/tools';
 import omit from 'lodash/omit';
 import axios from 'shared/utils/axios';
