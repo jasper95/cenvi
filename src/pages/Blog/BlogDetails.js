@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import useQuery from 'shared/hooks/useLazyQuery';
 import draftToHtml from 'draftjs-to-html';
 import htmlToReact from 'html-react-parser';
+import { getPhotoUrl } from 'shared/utils/tools';
 import Author from './components/Author';
 import 'sass/components/blogPage/index.scss';
 
@@ -13,8 +14,6 @@ function BlogDetails(props) {
     onQuery({ url: `/published_blog/${slug}` });
   }, []);
   const { loading, data: blog } = blogResponse;
-
-  console.log('blog', blog);
 
   if (loading) {
     return (
@@ -36,7 +35,7 @@ function BlogDetails(props) {
           </div>
         </div>
         <div className={`${BCP}_image`}>
-          <img src="https://source.unsplash.com/random" alt="" />
+          <img src={getPhotoUrl(blog)} alt="" />
         </div>
         <div className={`${BCP}_textContainer`}>
           <div className={`${BCP}_contents`}>
