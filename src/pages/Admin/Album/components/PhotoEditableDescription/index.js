@@ -20,26 +20,28 @@ function PhotosEditableDescription(props) {
   const { photos, onChange, id } = props;
   const chunkedPhotos = useMemo(() => chunk(photos, 4), [photos]);
   return (
-    <SortableContainer
-      axis="xy"
-      onSortEnd={onSortEnd}
-      helperClass="onTheFly onTheFly-albumCard"
-    >
-      {chunkedPhotos.map((row, i) => (
-        <Fragment key={i}>
-          {row.map((photo, index) => (
-            <SortablePhotoItem
-              key={photo.id}
-              photo={photo}
-              index={index}
-              onChangeDescription={value => handleChangeDescription(value, photo.id)}
-              onRemove={handleRemove}
-              collection={i}
-            />
-          ))}
-        </Fragment>
-      ))}
-    </SortableContainer>
+    <div className="albumPhotoCardFormGridContainer">
+      <SortableContainer
+        axis="xy"
+        onSortEnd={onSortEnd}
+        helperClass="onTheFly onTheFly-albumCard"
+      >
+        {chunkedPhotos.map((row, i) => (
+          <Fragment key={i}>
+            {row.map((photo, index) => (
+              <SortablePhotoItem
+                key={photo.id}
+                photo={photo}
+                index={index}
+                onChangeDescription={value => handleChangeDescription(value, photo.id)}
+                onRemove={handleRemove}
+                collection={i}
+              />
+            ))}
+          </Fragment>
+        ))}
+      </SortableContainer>
+    </div>
   );
 
   function handleChangeDescription(description, photoId) {
