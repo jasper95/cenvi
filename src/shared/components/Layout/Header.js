@@ -132,7 +132,7 @@ function Header(props) {
         />
         <Button
           flat
-          onClick={() => {}}
+          onClick={() => history.push('/register')}
           children="Register"
           iconEl={<i className="wtfr wtf-user-plus" />}
           className="iBttn iBttn-primary"

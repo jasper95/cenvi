@@ -193,4 +193,4 @@ export const toFormData = (fields) => {
   return formData;
 };
 
-export const getPhotoUrl = photo => `${process.env.STATIC_URL}/${photo.file_path}`;
+export const getPhotoUrl = photo => `${process.env.STATIC_URL}/${photo.image_url || photo.file_path}`;
