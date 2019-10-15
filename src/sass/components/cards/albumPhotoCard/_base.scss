@@ -43,6 +43,7 @@ $items : 4;
 $gutter : 1rem;
 
 .cenvi .albumPhotoCard {
+	position: relative;
 	width: calc(100% - #{ $gutter });
 	background-color: #fff;
 	margin: $gutter /2;
@@ -59,6 +60,39 @@ $gutter : 1rem;
 
 	transition: box-shadow .3s ease-out;
 
+	// .albumPhotoCard_setFavorite
+	&_setFavorite {
+		position: absolute;
+		top: .5rem;
+		left: .5rem;
+		z-index: 10; 
+		font-size: 1rem;
+		width: 2em;
+		height: 2em;
+		padding: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: $gray-100;
+		border: 1px solid $text-color;
+		border-radius: .25rem;
+
+		i {
+			font-size: 1em;
+			color: $text-color;
+		}
+
+		// .albumPhotoCard_setFavorite-favorite
+		&-favorite {
+			background-color: $orange;
+			box-shadow: 0 0 1em 0 rgba(#000,.25);
+			border: none;
+
+			i {
+				color: #FFF;
+			}
+		}
+	}
 
 	// .albumPhotoCard_handle
 	&_handle {
