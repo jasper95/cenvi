@@ -192,3 +192,5 @@ export const toFormData = (fields) => {
     .forEach(([key, val]) => formData.append(key, val));
   return formData;
 };
+
+export const getPhotoUrl = photo => `${process.env.STATIC_URL}/${photo.file_path}`;

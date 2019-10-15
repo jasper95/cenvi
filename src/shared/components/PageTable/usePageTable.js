@@ -3,7 +3,7 @@ import {
 } from 'react';
 import useTableSelect from 'shared/hooks/useTableSelect';
 import useTableSort from 'shared/hooks/useTableSort';
-import useQuery from 'shared/hooks/useQuery';
+import useQuery from 'shared/hooks/useLazyQuery';
 import debounce from 'lodash/debounce';
 import { useDispatch } from 'react-redux';
 import useMutation, { useCreateNode, useUpdateNode } from 'shared/hooks/useMutation';
