@@ -10,6 +10,7 @@ WebFontLoader.load({
   },
   custom: {
     families: [
+      'Material Icons',
       'Proxima Nova Condensed: n3, i3, n4, i4, n6, i6',
       'Proxima Nova: n4, i4, n6, i6, n7, i7, n8, n9',
     ],
