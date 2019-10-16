@@ -1,18 +1,15 @@
 import React, { useEffect } from 'react';
 import SectionHeader from 'shared/components/Section';
 import useQuery from 'shared/hooks/useLazyQuery';
-// import albums from 'shared/constants/albums';
 import AlbumCard from './components/AlbumCard';
 
 function AlbumsListPage(props) {
   const [queryState, onQuery] = useQuery({ url: '/published_album' }, { initialLoading: true, initialData: [] });
-  console.log('queryState: ', queryState);
   useEffect(() => {
     window.scrollTo(0, 0);
     onQuery();
   }, []);
-  const { data: albums } = queryState;
-  // const
+  const { data: albums, loading } = queryState;
 
   return (
     <section className="albumsSection section">
@@ -22,9 +19,11 @@ function AlbumsListPage(props) {
         header="Showcasing our projects in Pictures"
       />
       <div className="container">
-        <div className="row">
-          { albums.length !== 0
-            ? (
+        {loading ? (
+          <span>Loading...</span>
+        ) : (
+          <div className="row">
+            {albums.length !== 0 ? (
               <>
                 {albums.map(album => (
                   <AlbumCard
@@ -37,13 +36,12 @@ function AlbumsListPage(props) {
             ) : (
               <div className="noRecords">
                 <h1 className="noRecords_label">
-                  No Records Found
+                    No Records Found
                 </h1>
               </div>
-            )
-          }
-
-        </div>
+            )}
+          </div>
+        )}
       </div>
     </section>
   );

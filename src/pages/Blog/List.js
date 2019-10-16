@@ -30,7 +30,7 @@ function BlogList() {
       <div className="row row-content">
         <div className="container">
           {loading ? (
-            <div> blogs loading...</div>
+            <div>Loading...</div>
           ) : (
             <div className="row">
               {blogs.length > 0 ? (
