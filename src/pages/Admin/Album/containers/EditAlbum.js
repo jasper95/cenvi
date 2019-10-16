@@ -15,6 +15,8 @@ import Button from 'react-md/lib/Buttons/Button';
 import cn from 'classnames';
 import { useUpdateNode } from 'shared/hooks/useMutation';
 
+import 'sass/pages/edit-admin-list-album';
+
 const customChangeHandler = {
   photos(newPhotos, oldFields) {
     return {
@@ -45,99 +47,110 @@ function EditAlbum(props) {
 
   return (
     <>
+
+      <div className="row row-ToolbarHeader row-ToolbarHeader-floating">
+        <Paper className="col col-md-12-guttered">
+          <div className="ToolbarHeader row">
+            <div className="ToolbarHeader_title">
+              <h1 className="title">
+                { fields.name === ''
+                  ? 'New Album'
+                  : `Album: ${fields.name}`
+                }
+              </h1>
+            </div>
+            <div className="ToolbarHeader_toolbar">
+              <Button
+                className={cn('iBttn iBttn-primary', { processing: mutationState.loading })}
+                onClick={() => {
+                  onMutate({
+                    data: fields,
+                  });
+                }}
+                children="Save"
+                flat
+              />
+              <Button
+                flat
+                className='iBttn iBttn-second-prio'
+                children="Cancel"
+              />
+            </div>
+          </div>
+        </Paper>
+      </div>
+
       <div className="row row-formHeader">
         <Paper className="col col-md-12-guttered">
-          <TextField
-            id="name"
-            label="Title"
-            type="name"
-            className="iField"
-            onChange={onElementChange}
-            errorText={errors.name}
-            error={!!errors.name}
-            value={fields.name || ''}
-          />
-        </Paper>
-      </div>
-      <div className="row">
-        <Paper className="col col-md-12-guttered col-actions">
-          <div className="iField">
-            <p className="iField_label">Album Thumnail</p>
-            <SingleFileUpload
-              id="file"
-              onChange={() => { console.log(' thumbnail ') }}
-            />
-          </div>
-        </Paper>
-      </div>
-      <div className="row">
-        <Paper className="col col-md-10-guttered col-form">
-          <p className="iField_label">Album Photos</p>
           <div className="row">
-            <div className="col col-md-4">
-              <Gallery onUploadSuccess={onUploadSuccess} />
-            </div>
-            <div className="col col-md-8">
-              <PhotosEditableDescription
-                id="photos"
-                photos={photos}
+            <div className="col col-infoFields col-md-8">
+              <TextField
+                id="name"
+                label="Title"
+                type="name"
+                className="iField"
                 onChange={onElementChange}
+                errorText={errors.name}
+                error={!!errors.name}
+                value={fields.name || ''}
+              />
+              <TextField
+                id="excerpt"
+                label="Excerpt"
+                type="excerpt"
+                className="iField"
+                onChange={onElementChange}
+                errorText={errors.excerpt}
+                error={!!errors.excerpt}
+                value={fields.excerpt || ''}
+                rows={4}
+              />
+            </div>
+            <div className="col col-infoDetails col-md-4">
+              <SelectAutocomplete
+                id="status"
+                options={[
+                  { value: 'published', label: 'Published' },
+                  { value: 'unpublished', label: 'Unpublished' },
+                ]}
+                label="Status"
+                required
+                value={fields.status}
+                onChange={onElementChange}
+              />
+              {fields.status === 'published' && (
+                <DatePicker
+                  id="published_date"
+                  label="Published Date"
+                  placeholderText="Published Date"
+                  onChange={onElementChange}
+                  value={fields.published_date}
+                />
+              )}
+              <CreatableInput
+                id="tags"
+                value={fields.tags || []}
+                onChange={onElementChange}
+                className="iField iField-ci"
+                classNamePrefix="iField-ci"
               />
             </div>
           </div>
-          <TextField
-            id="excerpt"
-            label="Excerpt"
-            type="excerpt"
-            className="iField"
+        </Paper>
+      </div>
+      <div className="row row-stretch">
+        <Paper className="col col-md-8-guttered col-uploadedPhotos">
+          <p className="iField_label">Uploaded Photos</p>
+          <PhotosEditableDescription
+            id="photos"
+            photos={photos}
             onChange={onElementChange}
-            errorText={errors.excerpt}
-            error={!!errors.excerpt}
-            value={fields.excerpt || ''}
-            rows={4}
           />
         </Paper>
-        <div className="col col-md-2-guttered col-actions">
-          <Paper className="col col-md-12">
-            <SelectAutocomplete
-              id="status"
-              options={[
-                { value: 'published', label: 'Published' },
-                { value: 'unpublished', label: 'Unpublished' },
-              ]}
-              label="Status"
-              required
-              value={fields.status}
-              onChange={onElementChange}
-            />
-            {fields.status === 'published' && (
-              <DatePicker
-                id="published_date"
-                label="Published Date"
-                placeholderText="Published Date"
-                onChange={onElementChange}
-                value={fields.published_date}
-              />
-            )}
-            <CreatableInput
-              id="tags"
-              value={fields.tags || []}
-              onChange={onElementChange}
-              className="iField iField-ci"
-              classNamePrefix="iField-ci"
-            />
-            <Button
-              className={cn('iBttn iBttn-primary', { processing: mutationState.loading })}
-              onClick={() => {
-                onMutate({
-                  data: fields,
-                });
-              }}
-              children="Save"
-              flat
-            />
-          </Paper>
-        </div>
+        <Paper className="col col-md-4-guttered col-uploadedDetails">
+          <p className="iField_label">Upload Photos</p>
+          <Gallery onUploadSuccess={onUploadSuccess} />
+        </Paper>
       </div>
     </>
   );
