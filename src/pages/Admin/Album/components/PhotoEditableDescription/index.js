@@ -34,6 +34,7 @@ function PhotosEditableDescription(props) {
                 photo={photo}
                 index={index}
                 onChangeDescription={value => handleChangeDescription(value, photo.id)}
+                onSetCover={() => handleSetFavorite(photo.id)}
                 onRemove={handleRemove}
                 collection={i}
               />
@@ -56,6 +57,24 @@ function PhotosEditableDescription(props) {
     });
     onChange(newPhotos, id);
   }
+
+  function handleSetFavorite(photoId) {
+    console.log('photoId: ', photoId);
+    const newPhotos = photos.map((photo) => {
+      if (photo.id === photoId) {
+        return {
+          ...photo,
+          is_cover: true,
+        };
+      }
+      return {
+        ...photo,
+        is_cover: false,
+      };
+    });
+    onChange(newPhotos, id);
+  }
+
   function handleRemove(photoId) {
     onChange(photos.filter(photo => photo.id !== photoId), id);
   }
@@ -67,7 +86,6 @@ function PhotosEditableDescription(props) {
       oldIndex,
       newIndex,
     );
-    console.log('flatten(newCollections)', flatten(newCollections));
     onChange(flatten(newCollections), id);
   }
 }

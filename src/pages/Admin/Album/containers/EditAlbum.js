@@ -9,13 +9,12 @@ import DatePicker from 'shared/components/DatePicker';
 import SelectAutocomplete from 'shared/components/SelectAutocomplete';
 import CreatableInput from 'shared/components/CreatableInput';
 import PhotosEditableDescription from 'pages/Admin/Album/components/PhotoEditableDescription';
-import SingleFileUpload from 'shared/components/FileUpload/SingleFileUpload';
 import useForm from 'shared/hooks/useForm';
 import Button from 'react-md/lib/Buttons/Button';
 import cn from 'classnames';
 import { useUpdateNode } from 'shared/hooks/useMutation';
 
-import 'sass/pages/edit-admin-list-album';
+import 'sass/pages/edit-admin-list-album.scss';
 
 const customChangeHandler = {
   photos(newPhotos, oldFields) {
@@ -28,7 +27,7 @@ const customChangeHandler = {
 
 function EditAlbum(props) {
   const { id } = props.match.params;
-  const [, onQueryAlbum] = useQuery({ url: `/album/${id}` });
+  const [queryState, onQueryAlbum] = useQuery({ url: `/album/${id}` });
   const [mutationState, onMutate] = useUpdateNode({ node: 'album' });
   const [formState, formHandlers] = useForm({
     initialFields: {},
@@ -44,6 +43,12 @@ function EditAlbum(props) {
         onSetFields(newFields);
       });
   }, []);
+  const { loading } = queryState;
+  if (loading) {
+    return (
+      <span>Loading...</span>
+    );
+  }
 
   return (
     <>
@@ -72,7 +77,7 @@ function EditAlbum(props) {
               />
               <Button
                 flat
-                className='iBttn iBttn-second-prio'
+                className="iBttn iBttn-second-prio"
                 children="Cancel"
               />
             </div>

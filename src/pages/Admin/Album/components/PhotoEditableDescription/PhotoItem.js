@@ -1,33 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import TextField from 'react-md/lib/TextFields/TextField';
 import Button from 'react-md/lib/Buttons/Button';
 import cn from 'classnames';
-import { sortableHandle } from 'react-sortable-hoc';
-
-const DragHandle = sortableHandle(({ 
-  className, icon,
-  iconClassName 
-}) => (
-  <Button
-    icon
-    children={icon}
-    className={className}
-    iconClassName={iconClassName}
-  />
-));
 
 function PhotoItem(props) {
   const {
-    photo, onChangeDescription, onRemove,
+    photo, onChangeDescription, onRemove, onSetCover,
   } = props;
 
-  const [isFavorite, setFavorite] = useState(false)
-
-  const BCP = 'albumPhotoCard'
-  const { description, file_path: url, id } = photo;
-  const imgSrc = url 
+  const BCP = 'albumPhotoCard';
+  const {
+    description, file_path: url, id, is_cover: isCover,
+  } = photo;
+  const imgSrc = url
     ? `${process.env.STATIC_URL}/${url}`
-    : '/static/img/image-placeholder-gray.png'
+    : '/static/img/image-placeholder-gray.png';
 
   return (
     <div className={`${BCP}GridColumn`}>
@@ -36,21 +23,22 @@ function PhotoItem(props) {
         <Button
           icon
           className={cn(`${BCP}_setFavorite`, {
-            [`${BCP}_setFavorite-favorite`] : isFavorite,
+            [`${BCP}_setFavorite-favorite`]: photo.is_cover,
           })}
           iconClassName={cn({
-            'wtfr wtf-star' : !isFavorite,
-            'wtfs wtf-star' : isFavorite,
+            'wtfr wtf-star': !photo.is_cover,
+            'wtfs wtf-star': photo.is_cover,
           })}
           tooltipLabel="set as favorite"
           tooltipPosition="right"
-          onClick={() => setFavorite(!isFavorite)}
+          onClick={onSetCover}
         />
 
         <div className={`${BCP}_media`}>
           <img
             className={`${BCP}_img`}
             src={imgSrc}
+            alt=""
           />
         </div>
 

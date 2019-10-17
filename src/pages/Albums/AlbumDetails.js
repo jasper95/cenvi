@@ -21,7 +21,8 @@ function AlbumDetails(props) {
     );
   }
   const { photos } = album;
-  const [hero] = photos;
+  let hero = photos.find(e => e.is_cover);
+  if (!hero) { ([hero] = photos); }
 
   return (
     <section className={`${BCP}Section section`}>
@@ -57,7 +58,6 @@ function AlbumDetails(props) {
                 <img src={getPhotoUrl(photo)} alt="" />
               </div>
             ))}
-            {/* <GalleryMasonry photos={album.photos}/> */}
           </div>
         </div>
       </div>

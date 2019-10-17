@@ -13,7 +13,8 @@ function AlbumCard(props) {
   const {
     id, photos, tags, name, slug, excerpt,
   } = album;
-  const [hero] = photos;
+  let hero = photos.find(e => e.is_cover);
+  if (!hero) { ([hero] = photos); }
   const BCP = 'albumCard';
   const dates = formatISOToDate(pick(album, 'published_date'), ['published_date'], 'MM-DD-YYYY');
   return (
