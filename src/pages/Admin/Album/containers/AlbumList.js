@@ -64,12 +64,12 @@ function AlbumList() {
           {
             iconClassName: 'wtfr wtf-eye',
             label: 'View',
-            onClick: () => {},
+            onClick: data => window.open(`/albums/${data.slug}`, '_blank'),
           },
           {
             icon: 'delete',
             label: 'Delete',
-            onClick: () => {},
+            onClick: row => pageTableHandlers.onConfirmDelete([row.id]),
           },
         ],
       },

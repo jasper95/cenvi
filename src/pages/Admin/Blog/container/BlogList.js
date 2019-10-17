@@ -48,12 +48,12 @@ function AdminBlogList() {
           {
             iconClassName: 'wtfr wtf-eye',
             label: 'View',
-            onClick: () => {},
+            onClick: data => window.open(`/blogs/${data.slug}`, '_blank'),
           },
           {
             icon: 'delete',
             label: 'Delete',
-            onClick: () => {},
+            onClick: row => pageTableHandlers.onConfirmDelete([row.id]),
           },
         ],
       },

@@ -11,6 +11,7 @@ import CreatableInput from 'shared/components/CreatableInput';
 import PhotosEditableDescription from 'pages/Admin/Album/components/PhotoEditableDescription';
 import useForm from 'shared/hooks/useForm';
 import Button from 'react-md/lib/Buttons/Button';
+import history from 'shared/utils/history';
 import cn from 'classnames';
 import { useUpdateNode } from 'shared/hooks/useMutation';
 
@@ -79,6 +80,7 @@ function EditAlbum(props) {
                 flat
                 className="iBttn iBttn-second-prio"
                 children="Cancel"
+                onClick={() => history.push('/admin/albums')}
               />
             </div>
           </div>

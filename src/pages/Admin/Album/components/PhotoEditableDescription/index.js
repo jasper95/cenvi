@@ -33,7 +33,12 @@ function PhotosEditableDescription(props) {
                 key={photo.id}
                 photo={photo}
                 index={index}
-                onChangeDescription={value => handleChangeDescription(value, photo.id)}
+                onChangeDescription={(value) => {
+                  if (value && value.length >= 140) {
+                    return;
+                  }
+                  handleChangeDescription(value, photo.id);
+                }}
                 onSetCover={() => handleSetFavorite(photo.id)}
                 onRemove={handleRemove}
                 collection={i}

@@ -13,6 +13,7 @@ import SingleFileUpload from 'shared/components/FileUpload/SingleFileUpload';
 import Button from 'react-md/lib/Buttons/Button';
 import useMutation from 'shared/hooks/useMutation';
 import useQuery from 'shared/hooks/useLazyQuery';
+import history from 'shared/utils/history';
 import { toFormData } from 'shared/utils/tools';
 import omit from 'lodash/omit';
 import axios from 'shared/utils/axios';
@@ -69,8 +70,9 @@ function EditBlog(props) {
               />
               <Button
                 flat
-                className='iBttn iBttn-second-prio'
+                className="iBttn iBttn-second-prio"
                 children="Cancel"
+                onClick={() => history.push('/admin/blogs')}
               />
             </div>
           </div>

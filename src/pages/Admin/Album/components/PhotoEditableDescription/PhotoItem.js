@@ -48,6 +48,7 @@ function PhotoItem(props) {
             label="Description"
             value={description}
             rows={3}
+            maxLength={140}
             onChange={onChangeDescription}
           />
         </div>
