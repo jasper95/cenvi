@@ -53,9 +53,6 @@ function Header(props) {
             </Link>
             { isMobileNav ? (
               <>
-                <div className="nav_actions">
-                  {renderProfileNav()}
-                </div>
                 <Button
                   icon
                   className="nav_mobile_burger"
@@ -63,7 +60,9 @@ function Header(props) {
                   onClick={() => onShowMobileNav(!showMobileNav)}
                 />
                 <div className={cn('nav_mobile_container', { 'nav_mobile_container-show': showMobileNav })}>
-
+                  <div className="nav_actions">
+                    {renderProfileNav({ isMobile : true })}
+                  </div>
                   <Navigation user={user} currentPath={match.path} />
                 </div>
               </>
@@ -83,7 +82,11 @@ function Header(props) {
 
   );
 
-  function renderProfileNav() {
+  function renderProfileNav(props = {}) {
+    const {
+      isMobile = false
+    } = props
+
     if (auth.user) {
       // if (false) {
       //   return (<UserSkeleton />);
@@ -111,12 +114,19 @@ function Header(props) {
             }}
           >
             <>
-              <span className="name">
-                USER
-              </span>
+              {!isMobile && (
+                <span className="name">
+                  USER
+                </span>
+              )}
               <div className="avatar">
                 <ImageLoader src="/static/img/default-avatar.png" />
               </div>
+              {isMobile && (
+                <span className="name">
+                  USER
+                </span>
+              )}
             </>
           </MenuButton>
         </div>

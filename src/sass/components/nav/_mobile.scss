@@ -3,6 +3,7 @@
 		color: $text-color-white;
 		background-color: $primary-color;
 		border-radius: .25rem;
+		margin-left: auto;
 	}
 
 	.nav_mobile_container {
@@ -28,12 +29,15 @@
 
 
 
+
+
 		.nav_actions {
 			margin-left: auto;
 			padding: 1rem;
 			border-bottom: 1px solid rgba(#FFF,.25);
 			width: 100%;
 			height: auto;
+			justify-content: center;
 		}
 
 		.nav_menu {
@@ -152,8 +156,6 @@
 				}
 			}
 		}
-
-
 	}
 
 	.nav_mobile_container-show {
