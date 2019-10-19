@@ -27,14 +27,16 @@
 
 			// .authContainer_contentHeader_logo
 			&_logo {
-				width: 8em;
-				height: auto;
-				display: flex;
+				width: 8rem;
+				height: 8rem;
+				display: block;	
 				margin-bottom: 5rem;
 				cursor: pointer;
 				img {
 					width: 100%;
-					height: auto;
+					height: 100%;
+					object-fit: contain;
+					object-position: center center;
 				}
 			}
 
