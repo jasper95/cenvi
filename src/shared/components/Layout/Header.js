@@ -53,6 +53,9 @@ function Header(props) {
             </Link>
             { isMobileNav ? (
               <>
+                <div className="nav_actions">
+                  {renderProfileNav()}
+                </div>
                 <Button
                   icon
                   className="nav_mobile_burger"
@@ -60,10 +63,8 @@ function Header(props) {
                   onClick={() => onShowMobileNav(!showMobileNav)}
                 />
                 <div className={cn('nav_mobile_container', { 'nav_mobile_container-show': showMobileNav })}>
+
                   <Navigation user={user} currentPath={match.path} />
-                  <div className="nav_actions">
-                    {renderProfileNav()}
-                  </div>
                 </div>
               </>
             ) : (

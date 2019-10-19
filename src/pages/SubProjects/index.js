@@ -70,7 +70,7 @@ function SubProjectsPage() {
         withContainer
         rowSize={10}
         headerLabel="SUB-PROJECTS"
-        header="Projects that We Proud"
+        header="Projects that We're Proud"
         desc={`
           The field of environmental informatics uses analytical
           and ICT-based methods to monitor, assess, and protect
