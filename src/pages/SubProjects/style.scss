@@ -70,8 +70,6 @@ $rootClass: '.cenvi .page-subprojects';
 			}
 		}
 
-
-
 		// .project_label
 		&_label {
 			font-size: 1.25rem;
@@ -93,6 +91,25 @@ $rootClass: '.cenvi .page-subprojects';
 				font-size: 1.15rem;
 				line-height: 2;
 			}
+		}
+	}
+}
+
+@media (max-width: 1281px) {
+	#{$rootClass} .section-hero {
+
+		.project:nth-child(even) {
+			flex-direction: column-reverse;
+		}
+		.project_img {
+			padding: 1rem 3rem;
+		}
+		.project_info_header {
+			width: 100%;
+			font-size: 2rem;
+		}
+		.project_list_item {
+			font-size: 1rem;
 		}
 	}
 }

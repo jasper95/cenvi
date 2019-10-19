@@ -18,7 +18,7 @@ function TeamPage(props) {
       <div className="container">
         <div className="row">
           {teamMembers.map(member => (
-            <div className="col col-md-3">
+            <div className="col col-lg-3 col-md-4 col-sm-6">
               <MemberCard {...member}/>
             </div>
           ))}
