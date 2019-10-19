@@ -17,7 +17,7 @@
 		background-color: #FFF;
 		overflow-x: hidden;
 		overflow-y: auto;
-		transform: translateY(-20px);
+		transform: translateX(30%);
 		box-shadow: 0 .5em 1rem 0 rgba(#000,.05);
 		opacity: 0;
 		visibility: hidden;
@@ -157,7 +157,7 @@
 	}
 
 	.nav_mobile_container-show {
-		transform: translateY(0);
+		transform: translateX(0);
 		opacity: 1;
 		visibility: visible;
 		pointer-events: auto;
