@@ -54,6 +54,7 @@ function AlbumList() {
         },
       },
       {
+        title: 'Actions',
         type: 'actions',
         actions: [
           {

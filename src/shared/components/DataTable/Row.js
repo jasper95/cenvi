@@ -8,7 +8,7 @@ function Row(props) {
   const {
     type, row, accessor, bodyProps, actions,
     component: Cell, fn, index, componentProps,
-    title,
+    columnClassName, title,
   } = props;
   let children;
   if (type === 'actions') {
@@ -16,7 +16,7 @@ function Row(props) {
       label, iconClassName,
       className, icon, onClick, type: actionType, component: Action,
       conditionalRendering = () => true,
-    }) => {
+    }) => {  
       if (!conditionalRendering(row)) {
         return null;
       }
@@ -51,7 +51,7 @@ function Row(props) {
   }
 
   return (
-    <TableColumn {...bodyProps}>
+    <TableColumn className={columnClassName} {...bodyProps}>
       <div
         className="tableCell"
         data-header-title={title}

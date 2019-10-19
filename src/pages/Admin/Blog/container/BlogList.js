@@ -38,6 +38,7 @@ function AdminBlogList() {
         },
       },
       {
+        title: 'Actions',
         type: 'actions',
         actions: [
           {

@@ -9,14 +9,16 @@
 
 	display: flex;
 	align-items: center;
-	justify-content: flex-start; 
+	justify-content: flex-start;
+
 
 	#client-snackbar {
+		width: 100%;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		color: $black;
-		font-weight: 600;
+		font-weight: normal;
 		line-height: 1;
 
 		.md-icon {
@@ -27,7 +29,23 @@
 
 
 .md-snackbar.error {
-	#client-snackbar .md-icon {
-		color: $error
+	background-color: lighten($error, 10%);
+	#client-snackbar {
+		color: $text-color-white;
+		.md-icon {
+			color: rgba($text-color-white,.5);
+		}
+	}
+}
+
+.md-snackbar-container {
+	z-index: 999999;
+}
+
+
+@media (max-width: 737px) {
+	.md-snackbar {
+		left: 1rem;
+		max-width: calc(100vw - 4rem);
 	}
 }

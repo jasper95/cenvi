@@ -51,6 +51,7 @@ function User() {
         accessor: 'full_name',
       },
       {
+        title: 'Actions',
         type: 'actions',
         actions: [
           {

@@ -5,6 +5,10 @@ html {
 main {
 	min-height: calc(100vh - #{$nav-height});
 }
+#root {
+	width: 100%;
+	overflow: hidden;
+}
 
 body {
 	margin: 0;

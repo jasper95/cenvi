@@ -65,3 +65,39 @@
 		}
 	}
 }
+
+@media (max-width: 737px) {
+	.dbContainer > .row-ToolbarHeader-floating {
+		.ToolbarHeader {
+			padding: 0;
+			flex-direction: column;
+			// .ToolbarHeader_title
+			&_title {
+				width: 100%;
+				padding: .5rem;
+				border-bottom: 1px solid $gray-100;
+				.title {
+					width: 100%;
+					max-width: 100%;
+				}
+			}
+
+			// .ToolbarHeader_toolbar
+			&_toolbar {
+				width: 100%;
+				margin-left: 0;
+				padding: .5rem;
+
+				> .iBttn {
+					width: 100%;
+					.md-icon-separator {
+						justify-content: center;
+					}
+					.md-icon-text {
+						flex-grow: 0;
+					}
+				}
+			}
+		}
+	}
+}

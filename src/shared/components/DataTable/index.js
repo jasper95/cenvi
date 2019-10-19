@@ -13,21 +13,25 @@ function DataTable(props) {
     rows, columns, onRowClick, className, isSelectable, selected, onRowToggle,
     onSort, sort,
   } = props;
+
+  const BCP = 'iTable'
+
   return (
     <Table
       plain={!isSelectable}
-      className={cn(`iTable ${className}`, {
-        'iTable-empty': rows.length === 0,
+      className={cn(`${BCP} ${className}`, {
+        [`${BCP}-empty`]: rows.length === 0,
       })}
       onRowToggle={onRowToggle}
     >
-      <TableHead>
-        <TableRow>
+      <TableHead className={`${BCP}_header`}>
+        <TableRow className={`${BCP}_row`}>
           {columns.map(({ title, accessor, headProps = {} }, idx) => (
             <TableColumn
               key={idx}
               onClick={() => onSort(accessor)}
               sorted={sort[accessor]}
+              className={`${BCP}_cell`}
               {...headProps}
             >
               {title}
@@ -36,7 +40,7 @@ function DataTable(props) {
           ))}
         </TableRow>
       </TableHead>
-      <TableBody>
+      <TableBody className={`${BCP}_body`}>
         {rows.length === 0 && (
           <div>No Records Found</div>
         )}
@@ -48,9 +52,16 @@ function DataTable(props) {
               onRowClick(row);
             }}
             selected={selected.includes(row.id)}
+            className={`${BCP}_row`}
           >
             {columns.map((column, idx) => (
-              <Row index={rowIndex} key={idx} {...column} row={row} />
+              <Row
+                key={idx}
+                row={row}
+                index={rowIndex}
+                columnClassName={`${BCP}_cell`}
+                {...column}
+              />
             ))
             }
           </TableRow>

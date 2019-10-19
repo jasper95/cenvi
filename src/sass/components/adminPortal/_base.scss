@@ -1,10 +1,12 @@
 $sidebar-width: 20rem;
-$sm-sidebar-width: 3.5rem;
+$sm-sidebar-width: 6rem;
 $nav-height: 3.5rem;
 $container-bg: #F6F6F6;
+$sidebar-bg: #113238;
 
 .adminPortal {
 	width: 100%;
+	padding-top: $nav-height;
 
 	// .adminPortal_topnav
 	&_topnav {
@@ -39,12 +41,12 @@ $container-bg: #F6F6F6;
 	&_container {
 		position: relative;
 		z-index: 1;
-		top: $nav-height;
+		top: 0;
 		left: $sidebar-width;
 		width: 100%;
 		height: calc(100vh - #{$nav-height});
-		background-color: $container-bg;
 		overflow-y: auto;
+		background-color: $container-bg;
 		max-width: calc(100% - #{$sidebar-width});
 		transition:
 			left 300ms ease-out,
@@ -52,7 +54,7 @@ $container-bg: #F6F6F6;
 	}
 }
 
-.adminPortal-sidebarOpen {
+.adminPortal-sidebarCollapsed {
 
 	.adminPortal_topnav ,
 	.adminPortal_container {
@@ -65,4 +67,17 @@ $container-bg: #F6F6F6;
 	}
 }
 
+
+@media (max-width: 737px) {
+	.adminPortal {
+		width: 100vw;
+		overflow: hidden;
+		// .adminPortal_container
+		&_container {
+			min-width: calc(100vw - #{$sm-sidebar-width});
+			height: auto;
+			overflow: visible;
+		}
+	}
+}
 

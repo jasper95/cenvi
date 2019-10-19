@@ -1,21 +1,34 @@
+
 .sidebar {
+	background-color: $sidebar-bg;
+	overflow: hidden;
 
 	// .sidebar_logo
 	&_logo {
+		position: relative;
 		width: 100%;
 		height: $nav-height;
-		padding: .25rem;
 		img {
-			width: 100%;
-			height: 100%;
+			position: absolute;
+			top: 10%;
+			left: 10%;
+			width: 80%;
+			height: 80%;
+			opacity: 1;
 			object-fit: contain;
-			object-position: left center;
+			object-position: center;
+			transition: opacity 300ms ease-out;
+		}
+
+		.logoSm {
+			opacity: 0;
 		}
 	}
 
 	// .sidebar_list
 	&_list {
 		padding: 0;
+		padding-top: 1rem;
 		background-color: transparent !important;
 
 		// .sidebar_list_item
@@ -28,23 +41,44 @@
 				top: 0;
 				right: 0;
 				height: 100%;
-				width: .25rem;
+				width: 100%;
 				opacity: 0;
-				background-color: $primary-color;
+				pointer-events: none;
+				background-image: linear-gradient(
+					to right,
+					rgba($primary-color,0),
+					rgba($primary-color,.3),
+					rgba($primary-color,.5),
+				);
 				transition: opacity 300ms ease-out;
 			}
 
-			.md-tile-addon--icon i ,
-			.md-tile-addon--icon i:before {
-				color: rgba($text-color,.25);
+			[role="button"] {
+				display: flex;
+				align-items: center;
+				justify-content: flex-start;
+				cursor: pointer;
+				padding: 0;
 			}
+
+			.md-tile-addon--icon {
+				padding: 1em;
+				height: auto;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				i , i:before {
+					color: rgba($text-color-white,.25);
+				}
+			}
+
 
 			.md-tile-content {
 				padding-left: 1.5rem;
 			}
 
 			.md-text {
-				color: rgba($text-color,.75);
+				color: rgba($text-color-white,.75);
 				font-size: 1rem;
 				font-weight: bold;
 				font-family: $font-family;
@@ -69,9 +103,55 @@
 			}
 
 			.md-text {
-				color: $text-color;
+				color: $text-color-white;
 			}
 		}
 
+	}
+}
+
+.adminPortal_sidebar-collapsed {
+	.sidebar_logo {
+		.logoSm {
+			opacity: 1;
+		}
+		.logo {
+			opacity: 0;
+		}
+	}
+
+	.sidebar_list_item {
+		[role="button"] {
+			display: flex;
+			flex-direction: column;
+			height: auto;
+			.md-tile-addon--icon {
+				padding: .5rem;
+			}
+
+			.md-icon {
+				font-size: 1.5rem;
+				margin-bottom: .5rem;
+			}
+
+			.md-tile-content {
+				padding-left: 0;
+				width: 100%;
+			}
+
+			.md-text {
+				text-align: center;
+				font-size: .75rem;
+				font-weight: normal;
+				text-transform: uppercase;
+				letter-spacing: .15em;
+			}
+		}
+	}
+
+	.sidebar_list_item.active {
+		.md-icon {
+			color: #FFF !important;
+		}
 	}
 }

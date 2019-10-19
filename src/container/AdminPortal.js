@@ -3,6 +3,8 @@ import Button from 'react-md/lib/Buttons/Button';
 import { List, ListItem, FontIcon } from 'react-md';
 import cn from 'classnames';
 import 'sass/components/adminPortal/index.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleSidebar } from 'shared/redux/app/reducer';
 
 const menu = [
   {
@@ -23,24 +25,32 @@ const menu = [
 ];
 
 function AdminPortal(props) {
+  const dispatch = useDispatch();
+  const globalIsSidebarCollapsed = useSelector(state => state.app.isSidebarCollapsed)
   const { history, location, onLogout } = props;
-  const [isSidebarOpen, toggleSidebar] = useState(false);
+
+  const handleToggleSidebar = () => {
+    // console.log('globalIsSidebarOpen' , globalIsSidebarOpen)
+    console.log('toggleSidebar')
+    dispatch(toggleSidebar(!globalIsSidebarCollapsed))
+  }
+
   return (
     <div className={cn('adminPortal', {
-      'adminPortal-sidebarOpen': isSidebarOpen,
+      'adminPortal-sidebarCollapsed': globalIsSidebarCollapsed,
     })}
     >
       <TopNav
         className="adminPortal_topnav"
-        isSidebarOpen={isSidebarOpen}
-        handleToggleSidebar={toggleSidebar}
+        isSidebarOpen={globalIsSidebarCollapsed}
+        handleToggleSidebar={handleToggleSidebar}
         onLogout={onLogout}
       />
       <Sidebar
         history={history}
         location={location}
         className={cn('adminPortal_sidebar', {
-          'adminPortal_sidebar-open': isSidebarOpen,
+          'adminPortal_sidebar-collapsed': globalIsSidebarCollapsed,
         })}
         menu={menu}
       />
@@ -65,7 +75,7 @@ function TopNav(props) {
     <div className={`${className} topnav`}>
       <Button
         icon
-        children={isSidebarOpen ? 'keyboard_arrow_right' : 'menu'}
+        children={isSidebarOpen ? 'menu' : 'keyboard_arrow_left'}
         onClick={() => { handleToggleSidebar(!isSidebarOpen); }}
         className="topnav_toggle"
       />
@@ -88,7 +98,8 @@ function Sidebar(props) {
   return (
     <div className={`${className} sidebar`}>
       <div className="sidebar_logo">
-        <img src="/static/img/admin-logo.png" />
+        <img className='logo' src="/static/img/admin-logo.png" />
+        <img className='logoSm' src="/static/img/logo.png" />
       </div>
       <List className="sidebar_list">
         {menu.map((item, index) => {

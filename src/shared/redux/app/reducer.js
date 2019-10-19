@@ -6,6 +6,7 @@ const initialState = {
   dialogProcessing: false,
   formProcessing: false,
   temporaryClosedDialogs: [],
+  isSidebarCollapsed: false
 };
 
 function hideDialogReducer(state) {
@@ -68,6 +69,10 @@ const auth = createSlice({
       state.formProcessing = false;
       state.dialogProcessing = false;
     },
+    toggleSidebar(state, { payload }) {
+      const { isSidebarCollapsed } = state;
+      state.isSidebarCollapsed = payload;
+    }
   },
 });
 
@@ -80,6 +85,7 @@ export const {
   showSuccess,
   clearLoading,
   dialogProcessing,
+  toggleSidebar
 } = auth.actions;
 
 
