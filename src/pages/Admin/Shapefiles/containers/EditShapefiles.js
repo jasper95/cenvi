@@ -6,8 +6,8 @@ import useQuery from 'shared/hooks/useLazyQuery';
 import Paper from 'react-md/lib/Papers/Paper';
 import TextField from 'react-md/lib/TextFields/TextField';
 import DatePicker from 'shared/components/DatePicker';
-import SelectAutocomplete from 'shared/components/SelectAutocomplete';
 import CreatableInput from 'shared/components/CreatableInput';
+import SelectAutocomplete from 'shared/components/SelectAutocomplete';
 import PhotosEditableDescription from 'pages/Admin/Album/components/PhotoEditableDescription';
 import useForm from 'shared/hooks/useForm';
 import Button from 'react-md/lib/Buttons/Button';
@@ -26,7 +26,7 @@ const customChangeHandler = {
   },
 };
 
-function EditAlbum(props) {
+function EditShapefiles(props) {
   const { id } = props.match.params;
   const [queryState, onQueryAlbum] = useQuery({ url: `/album/${id}` });
   const [mutationState, onMutate] = useUpdateNode({ node: 'album' });
@@ -60,8 +60,8 @@ function EditAlbum(props) {
             <div className="ToolbarHeader_title">
               <h1 className="title">
                 { !fields.name
-                  ? 'New Album'
-                  : `Album: ${fields.name}`
+                  ? 'New Shapefile'
+                  : `Shapefile: ${fields.name}`
                 }
               </h1>
             </div>
@@ -90,7 +90,7 @@ function EditAlbum(props) {
       <div className="row row-formHeader">
         <Paper className="col col-md-12-guttered">
           <div className="row">
-            <div className="col col-infoFields col-md-8">
+            <div className="col col-md-8">
               <TextField
                 id="name"
                 label="Title"
@@ -101,61 +101,42 @@ function EditAlbum(props) {
                 error={!!errors.name}
                 value={fields.name || ''}
               />
-              <TextField
-                id="excerpt"
-                label="Excerpt"
-                type="excerpt"
-                className="iField"
-                onChange={onElementChange}
-                errorText={errors.excerpt}
-                error={!!errors.excerpt}
-                value={fields.excerpt || ''}
-                rows={4}
-              />
             </div>
-            <div className="col col-infoDetails col-md-4">
+            <div className="col col-md-4">
               <SelectAutocomplete
                 id="status"
                 options={[
-                  { value: 'published', label: 'Published' },
-                  { value: 'unpublished', label: 'Unpublished' },
+                  { value: 'category_1', label: 'category 1' },
+                  { value: 'category_2', label: 'category 2' },
+                  { value: 'category_3', label: 'category 3' }
                 ]}
-                label="Status"
+                label="Category"
                 required
-                value={fields.status}
+                value={fields.category}
                 onChange={onElementChange}
               />
-              {fields.status === 'published' && (
-                <DatePicker
-                  id="published_date"
-                  label="Published Date"
-                  placeholderText="Published Date"
-                  onChange={onElementChange}
-                  value={fields.published_date}
-                />
-              )}
-              <CreatableInput
-                id="tags"
-                value={fields.tags || []}
+            </div>
+          </div>
+          <div className="row">
+            <div className="col col-md-12">
+              <TextField
+                id="description"
+                label="Description"
+                type="description"
+                className="iField"
                 onChange={onElementChange}
-                className="iField iField-ci"
-                classNamePrefix="iField-ci"
+                errorText={errors.description}
+                error={!!errors.description}
+                value={fields.description || ''}
+                rows={4}
               />
             </div>
           </div>
         </Paper>
       </div>
       <div className="row row-stretch">
-        <Paper className="col col-md-8-guttered col-uploadedPhotos">
-          <p className="iField_label">Uploaded Photos</p>
-          <PhotosEditableDescription
-            id="photos"
-            photos={photos}
-            onChange={onElementChange}
-          />
-        </Paper>
-        <Paper className="col col-md-4-guttered col-uploadedDetails">
-          <p className="iField_label">Upload Photos</p>
+        <Paper className="col col-md-12-guttered col-uploadedDetails">
+          <p className="iField_label">Upload Shapefile</p>
           <Gallery onUploadSuccess={onUploadSuccess} />
         </Paper>
       </div>
@@ -168,4 +149,4 @@ function EditAlbum(props) {
   }
 }
 
-export default EditAlbum;
+export default EditShapefiles;

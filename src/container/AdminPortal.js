@@ -5,24 +5,7 @@ import cn from 'classnames';
 import 'sass/components/adminPortal/index.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleSidebar } from 'shared/redux/app/reducer';
-
-const menu = [
-  {
-    label: 'users',
-    icon: 'account_circle',
-    route: '/admin/users',
-  },
-  {
-    label: 'blogs',
-    icon: 'book',
-    route: '/admin/blogs',
-  },
-  {
-    label: 'albums',
-    icon: 'book',
-    route: '/admin/albums',
-  },
-];
+import menu from 'shared/constants/adminRoutes';
 
 function AdminPortal(props) {
   const dispatch = useDispatch();

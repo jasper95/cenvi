@@ -13,7 +13,7 @@ const createOption = label => ({
 
 function CreatableInput(props) {
   const { onChange, value: propsValue, id,
-    className, classNamePrefix
+    className, classNamePrefix, label
   } = props;
   const [value, setValue] = useState(propsValue);
   const [inputValue, setInputValue] = useState('');
@@ -53,20 +53,26 @@ function CreatableInput(props) {
     setInputValue(newValue);
   };
   return (
-    <CreatableSelect
-      components={components}
-      inputValue={inputValue}
-      isClearable
-      isMulti
-      menuIsOpen={false}
-      onChange={handleChange}
-      onInputChange={handleInputChange}
-      onKeyDown={handleKeyDown}
-      className={className}
-      classNamePrefix={classNamePrefix}
-      placeholder="Type something and press enter..."
-      value={value}
-    />
+    <div className="iField">
+      {label && (
+        <label className="iField_label">
+          { label }
+        </label>
+      )}
+      <CreatableSelect
+        components={components}
+        inputValue={inputValue}
+        isClearable
+        isMulti
+        menuIsOpen={false}
+        onChange={handleChange}
+        onInputChange={handleInputChange}
+        onKeyDown={handleKeyDown}
+        classNamePrefix={classNamePrefix}
+        placeholder="Type something and press enter..."
+        value={value}
+      />
+    </div>
   );
 }
 

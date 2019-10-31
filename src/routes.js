@@ -17,15 +17,137 @@ const AlbumDetails = loadable(() => import('pages/Albums/AlbumDetails'));
 const PublicBlogs = loadable(() => import('pages/Blog/List'));
 const PublicBlogDetails = loadable(() => import('pages/Blog/BlogDetails'));
 
+const User = loadable(() => import('pages/Admin/User/containers/UserPage'));
+
 const AdminBlogList = loadable(() => import('pages/Admin/Blog/container/BlogList'));
 const AdminBlogForm = loadable(() => import('pages/Admin/Blog/container/BlogForm'));
+
 const AlbumList = loadable(() => import('pages/Admin/Album/containers/AlbumList'));
-const User = loadable(() => import('pages/Admin/User/containers/UserPage'));
 const EditAlbum = loadable(() => import('pages/Admin/Album/containers/EditAlbum'));
+
+const AdminCategory = loadable(() => import('pages/Admin/Category/containers/Category'));
+const AdminEditCategory = loadable(() => import('pages/Admin/Category/containers/EditCategory'));
+
+const AdminShapefiles = loadable(() => import('pages/Admin/Shapefiles/containers/Shapefiles'));
+const AdminEditShapefiles = loadable(() => import('pages/Admin/Shapefiles/containers/EditShapefiles'));
+
 // const FileUpload = loadable(() => import('pages/FileUploadPage'));
 // const ShapefileUpload = loadable(() => import('pages/ShapefileUploadPage'));
 // const SubProject = loadable(() => import('pages/SubProjectPage'));
 // const Map = loadable(() => import('pages/MapPage'));
+
+
+const adminRoutes = [
+  {
+    key: 'admin-user',
+    component: User,
+    path: '/admin/users',
+    exact: true,
+    pageProps: {
+      isAdmin: true,
+      hasFooter: false,
+      requireAuth: true,
+      hasNavigation: false,
+    },
+  },
+  {
+    key: 'admin-blog-list',
+    component: AdminBlogList,
+    path: '/admin/blogs',
+    exact: true,
+    pageProps: {
+      isAdmin: true,
+      hasFooter: false,
+      requireAuth: true,
+      hasNavigation: false,
+    },
+  },
+  {
+    key: 'admin-edit-blog',
+    component: AdminBlogForm,
+    path: '/admin/blogs/:id',
+    exact: true,
+    pageProps: {
+      isAdmin: true,
+      hasFooter: false,
+      requireAuth: true,
+      hasNavigation: false,
+    },
+  },
+  {
+    key: 'admin-list-album',
+    component: AlbumList,
+    path: '/admin/albums',
+    exact: true,
+    pageProps: {
+      isAdmin: true,
+      hasFooter: false,
+      requireAuth: true,
+      hasNavigation: false,
+    },
+  },
+  {
+    key: 'edit-admin-list-album',
+    component: EditAlbum,
+    path: '/admin/albums/:id',
+    exact: true,
+    pageProps: {
+      isAdmin: true,
+      hasFooter: false,
+      requireAuth: true,
+      hasNavigation: false,
+    },
+  },
+  {
+    key: 'admin-category',
+    component: AdminCategory,
+    path: '/admin/category',
+    exact: true,
+    pageProps: {
+      isAdmin: true,
+      hasFooter: false,
+      requireAuth: true,
+      hasNavigation: false,
+    },
+  },
+  {
+    key: 'edit-admin-category',
+    component: AdminEditCategory,
+    path: '/admin/category/:id',
+    exact: true,
+    pageProps: {
+      isAdmin: true,
+      hasFooter: false,
+      requireAuth: true,
+      hasNavigation: false,
+    },
+  },
+  {
+    key: 'admin-shapefiles',
+    component: AdminShapefiles,
+    path: '/admin/shapefiles',
+    exact: true,
+    pageProps: {
+      isAdmin: true,
+      hasFooter: false,
+      requireAuth: true,
+      hasNavigation: false,
+    },
+  },
+  {
+    key: 'edit-admin-shapefiles',
+    component: AdminEditShapefiles,
+    path: '/admin/shapefiles/:id',
+    exact: true,
+    pageProps: {
+      isAdmin: true,
+      hasFooter: false,
+      requireAuth: true,
+      hasNavigation: false,
+    },
+  }
+]
+
 
 
 export default [
@@ -76,7 +198,6 @@ export default [
       pageTitle: 'Signup',
     },
   },
-
   {
     key: 'home',
     component: Home,
@@ -132,66 +253,7 @@ export default [
       hasNavigation: true,
     },
   },
-  {
-    key: 'admin-blog-list',
-    component: AdminBlogList,
-    path: '/admin/blogs',
-    exact: true,
-    pageProps: {
-      isAdmin: true,
-      hasFooter: false,
-      requireAuth: true,
-      hasNavigation: false,
-    },
-  },
-  {
-    key: 'admin-edit-blog',
-    component: AdminBlogForm,
-    path: '/admin/blogs/:id',
-    exact: true,
-    pageProps: {
-      isAdmin: true,
-      hasFooter: false,
-      requireAuth: true,
-      hasNavigation: false,
-    },
-  },
-  {
-    key: 'admin-list-album',
-    component: AlbumList,
-    path: '/admin/albums',
-    exact: true,
-    pageProps: {
-      isAdmin: true,
-      hasFooter: false,
-      requireAuth: true,
-      hasNavigation: false,
-    },
-  },
-  {
-    key: 'edit-admin-list-album',
-    component: EditAlbum,
-    path: '/admin/albums/:id',
-    exact: true,
-    pageProps: {
-      isAdmin: true,
-      hasFooter: false,
-      requireAuth: true,
-      hasNavigation: false,
-    },
-  },
-  {
-    key: 'admin-user',
-    component: User,
-    path: '/admin/users',
-    exact: true,
-    pageProps: {
-      isAdmin: true,
-      hasFooter: false,
-      requireAuth: true,
-      hasNavigation: false,
-    },
-  },
+  ...adminRoutes,
   {
     key: 'not-found',
     path: '*',

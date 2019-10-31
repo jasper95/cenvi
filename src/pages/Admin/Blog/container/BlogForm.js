@@ -51,7 +51,7 @@ function EditBlog(props) {
           <div className="ToolbarHeader row">
             <div className="ToolbarHeader_title">
               <h1 className="title">
-                { fields.name === ''
+                {!fields.name 
                   ? 'New Blog'
                   : `Blog: ${fields.name}`
                 }

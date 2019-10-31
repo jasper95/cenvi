@@ -26,7 +26,7 @@ const customChangeHandler = {
   },
 };
 
-function EditAlbum(props) {
+function EditCategory(props) {
   const { id } = props.match.params;
   const [queryState, onQueryAlbum] = useQuery({ url: `/album/${id}` });
   const [mutationState, onMutate] = useUpdateNode({ node: 'album' });
@@ -59,7 +59,7 @@ function EditAlbum(props) {
           <div className="ToolbarHeader row">
             <div className="ToolbarHeader_title">
               <h1 className="title">
-                { !fields.name
+                { fields.name === ''
                   ? 'New Album'
                   : `Album: ${fields.name}`
                 }
@@ -168,4 +168,4 @@ function EditAlbum(props) {
   }
 }
 
-export default EditAlbum;
+export default EditCategory;
