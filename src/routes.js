@@ -135,6 +135,19 @@ const adminRoutes = [
     },
   },
   {
+    key: 'new-admin-shapefiles',
+    component: AdminEditShapefiles,
+    path: '/admin/shapefiles/new',
+    exact: true,
+    pageProps: {
+      isAdmin: true,
+      hasFooter: false,
+      requireAuth: true,
+      hasNavigation: false,
+      isEdit: false,
+    },
+  },
+  {
     key: 'edit-admin-shapefiles',
     component: AdminEditShapefiles,
     path: '/admin/shapefiles/:id',
@@ -144,6 +157,7 @@ const adminRoutes = [
       hasFooter: false,
       requireAuth: true,
       hasNavigation: false,
+      isEdit: true,
     },
   }
 ]

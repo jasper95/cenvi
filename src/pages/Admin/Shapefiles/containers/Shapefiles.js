@@ -10,7 +10,7 @@ import loadable from '@loadable/component';
 
 
 function Shapefiles() {
-  const [pageTableState, pageTableHandlers] = usePageTable({ node: 'shapefiles', onSuccess });
+  const [pageTableState, pageTableHandlers] = usePageTable({ node: 'shapefile', onSuccess });
   const dispatch = useDispatch();
   return (
     <PageTable
@@ -49,12 +49,12 @@ function Shapefiles() {
           {
             icon: 'edit',
             label: 'Edit',
-            onClick: data => history.push(`/admin/albums/${data.slug}`),
+            onClick: data => history.push(`/admin/shapefiles/${data.slug}`),
           },
           {
             iconClassName: 'wtfr wtf-eye',
             label: 'View',
-            onClick: data => window.open(`/albums/${data.slug}`, '_blank'),
+            onClick: data => window.open(`/shapefiles/${data.slug}`, '_blank'),
           },
           {
             icon: 'delete',

@@ -8,7 +8,7 @@ import 'sass/components/fsUpload/index.scss';
 function Gallery(props) {
   const { onUploadSuccess } = props;
   const [uploadState, uploadHandlers] = useUpload({
-    allowedExtensions: ['png', 'jpg', 'jpeg'],
+    allowedExtensions: ['png', 'jpg', 'jpeg', 'pdf', 'shp'],
     onFileUploaded,
   });
   const { submittedFiles, uploader } = uploadState;

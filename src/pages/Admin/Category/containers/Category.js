@@ -60,12 +60,12 @@ function Category() {
           {
             icon: 'edit',
             label: 'Edit',
-            onClick: data => history.push(`/admin/albums/${data.slug}`),
+            onClick: data => history.push(`/admin/category/${data.slug}`),
           },
           {
             iconClassName: 'wtfr wtf-eye',
             label: 'View',
-            onClick: data => window.open(`/albums/${data.slug}`, '_blank'),
+            onClick: data => window.open(`/category/${data.slug}`, '_blank'),
           },
           {
             icon: 'delete',
