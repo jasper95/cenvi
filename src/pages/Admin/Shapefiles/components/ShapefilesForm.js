@@ -1,23 +1,20 @@
 import React, { useState, useEffect } from 'react'
 import Gallery from 'shared/components/FileUpload/Gallery';
-import pick from 'lodash/pick';
 import useQuery from 'shared/hooks/useLazyQuery';
 import Paper from 'react-md/lib/Papers/Paper';
 import TextField from 'react-md/lib/TextFields/TextField';
-import DatePicker from 'shared/components/DatePicker';
-import CreatableInput from 'shared/components/CreatableInput';
 import SelectAutocomplete from 'shared/components/SelectAutocomplete';
-import PhotosEditableDescription from 'pages/Admin/Album/components/PhotoEditableDescription';
 import Button from 'react-md/lib/Buttons/Button';
 import history from 'shared/utils/history';
 import cn from 'classnames';
 
 function ShapefilesForm(props) {
-  const [, onQueryCategories] = useQuery({ url: `/category` })
+  const [, onQueryCategories] = useQuery({ url: `/category` }, { isBase: true, initialData: [] })
   const [categories, setCategories] = useState([])
   const { mutationState, onMutate, formState, formHandlers } = props
   const { fields, errors } = formState
   const { onElementChange } = formHandlers
+
   useEffect(() => {
     onQueryCategories()
       .then((categories) => {
@@ -80,11 +77,11 @@ function ShapefilesForm(props) {
             </div>
             <div className="col col-md-4">
               <SelectAutocomplete
-                id="status"
+                id="category_id"
                 options={categories}
-                label="Category"
+                label='Category'
                 required
-                value={find(categories, (category) => category.category_id === fields.category_id)}
+                value={fields.category_id}
                 onChange={onElementChange}
               />
             </div>
@@ -116,9 +113,7 @@ function ShapefilesForm(props) {
   );
 
   function onUploadSuccess(data) {
-    data = pick(data, 'id', 'file_path');
-    console.log('data', data)
-    onElementChange([data], 'photos');
+    onElementChange(data.file_path, 'file_path');
   }
 }
 
