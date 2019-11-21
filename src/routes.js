@@ -35,7 +35,7 @@ const AdminEditShapefile = loadable(() => import('pages/Admin/Shapefiles/contain
 // const FileUpload = loadable(() => import('pages/FileUploadPage'));
 // const ShapefileUpload = loadable(() => import('pages/ShapefileUploadPage'));
 // const SubProject = loadable(() => import('pages/SubProjectPage'));
-// const Map = loadable(() => import('pages/MapPage'));
+const MapPage = loadable(() => import('pages/Map'));
 
 
 const adminRoutes = [
@@ -160,9 +160,8 @@ const adminRoutes = [
       hasNavigation: false,
       isEdit: true,
     },
-  }
-]
-
+  },
+];
 
 
 export default [
@@ -244,6 +243,12 @@ export default [
     key: 'albums',
     component: AlbumDetails,
     path: '/albums/:id',
+    exact: true,
+  },
+  {
+    key: 'map',
+    component: MapPage,
+    path: '/map',
     exact: true,
   },
   {

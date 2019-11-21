@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react'
-import Gallery from 'shared/components/FileUpload/Gallery';
+import React, { useState, useEffect } from 'react';
 import useQuery from 'shared/hooks/useLazyQuery';
 import Paper from 'react-md/lib/Papers/Paper';
 import TextField from 'react-md/lib/TextFields/TextField';
@@ -7,20 +6,25 @@ import SelectAutocomplete from 'shared/components/SelectAutocomplete';
 import Button from 'react-md/lib/Buttons/Button';
 import history from 'shared/utils/history';
 import cn from 'classnames';
+import SingleFileUpload from 'shared/components/FileUpload/SingleFileUpload';
+import uploadService from 'shared/utils/uploadService';
+import omit from 'lodash/omit';
 
 function ShapefilesForm(props) {
-  const [, onQueryCategories] = useQuery({ url: `/category` }, { isBase: true, initialData: [] })
-  const [categories, setCategories] = useState([])
-  const { mutationState, onMutate, formState, formHandlers } = props
-  const { fields, errors } = formState
-  const { onElementChange } = formHandlers
+  const [, onQueryCategories] = useQuery({ url: '/category' }, { isBase: true, initialData: [] });
+  const [categories, setCategories] = useState([]);
+  const {
+    mutationState, onMutate, formState, formHandlers,
+  } = props;
+  const { fields, errors } = formState;
+  const { onElementChange } = formHandlers;
 
   useEffect(() => {
     onQueryCategories()
       .then((categories) => {
         setCategories(categories.map(category => ({
           value: category.id,
-          label: category.name
+          label: category.name,
         })));
       });
   }, []);
@@ -41,11 +45,7 @@ function ShapefilesForm(props) {
             <div className="ToolbarHeader_toolbar">
               <Button
                 className={cn('iBttn iBttn-primary', { processing: mutationState.loading })}
-                onClick={() => {
-                  onMutate({
-                    data: fields,
-                  });
-                }}
+                onClick={onSave}
                 children="Save"
                 flat
               />
@@ -79,7 +79,7 @@ function ShapefilesForm(props) {
               <SelectAutocomplete
                 id="category_id"
                 options={categories}
-                label='Category'
+                label="Category"
                 required
                 value={fields.category_id}
                 onChange={onElementChange}
@@ -104,16 +104,29 @@ function ShapefilesForm(props) {
         </Paper>
       </div>
       <div className="row row-stretch">
-        <Paper className="col col-md-12-guttered col-uploadedDetails">
-          <p className="iField_label">Upload Shapefile</p>
-          <Gallery onUploadSuccess={onUploadSuccess} />
+        <Paper className="col col-md-12-guttered col-actions">
+          <div className="iField">
+            <p className="iField_label">Shapefile</p>
+            <SingleFileUpload
+              id="file"
+              value={fields.image_url ? `${process.env.STATIC_URL}/${fields.image_url}` : fields.file}
+              onChange={onElementChange}
+            />
+          </div>
         </Paper>
       </div>
     </>
   );
 
-  function onUploadSuccess(data) {
-    onElementChange(data.file_path, 'file_path');
+  async function onSave() {
+    const response = await uploadService(fields.file, { });
+    await onMutate({
+      data: {
+        ...omit(fields, 'file', 'image_url'),
+        ...response,
+      },
+      method: 'POST',
+    });
   }
 }
 

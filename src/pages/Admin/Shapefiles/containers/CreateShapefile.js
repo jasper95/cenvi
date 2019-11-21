@@ -1,12 +1,14 @@
 import React from 'react';
 import useForm from 'shared/hooks/useForm';
 import { useCreateNode } from 'shared/hooks/useMutation';
-import ShapeFilesForm from '../components/ShapefilesForm'
+import uuid from 'uuid/v4';
+import ShapeFilesForm from '../components/ShapefilesForm';
 
 function CreateShapefile(props) {
   const [mutationState, onMutate] = useCreateNode({ node: 'shapefile' });
   const [formState, formHandlers] = useForm({
-    initialFields: {},
+    initialFields: {
+    },
   });
   const { fields, errors } = formState;
   const { onSetFields, onElementChange } = formHandlers;
