@@ -34,6 +34,7 @@ $rootClass: '.cenvi .page-home';
 		margin-bottom: 0;
 		line-height: 1;
 		color: $text-header-color;
+		text-align: left;
 
 		.text {
 			position: relative;
@@ -50,6 +51,7 @@ $rootClass: '.cenvi .page-home';
 		font-size: 1.5rem;
 		margin-bottom: 2rem;
 		color: $text-color;
+		text-align: left;
 	}
 
 	// .section-hero_content
