@@ -16,33 +16,39 @@ function Sidebar(props) {
         <div className='sidebar_body'>
           <div className='row'>
             <TextField
-                id='name'
-                label='Title'
-                className='iField'
-                placeholder='Search For ..'
+              id='name'
+              label='Available Layers'
+              className='iField'
+              placeholder='Search For ..'
             />
           </div>
           <div className='row row-filterCategories'>
-            <div className='col col-md-4 col-categories'>
-              { categories && categories.map(( cat ) => (
-                <Button
-                  children={cat.label}
-                  tooltipLabel={cat.label}
-                  tooltipPosition='top'
-                  className={cn('iBttn', {
-                    'iBttn-primary': cat.active
-                  })}
-                />
-              ))}
+            <div className="col-12-guttered">
+              <label className="iField_label">
+                Filter Categories By:
+              </label>  
+              <div className="categories">
+                { categories && categories.map((cat) => (
+                  <Button
+                    children={cat.label}
+                    tooltipLabel={cat.label}
+                    tooltipPosition="top"
+                    className={cn('iBttn', {
+                      'iBttn-primary': cat.active,
+                      'iBttn-second-prio': !cat.active
+                    })}
+                  />
+                ))}
+              </div>
             </div>
-            <div className='col-md-8 col-textfield'>
-              <TextField
-                id='name'
-                label='Title'
-                className='iField'
-                rows={5}
-              />
-            </div>
+          </div>
+          <div className="row">
+            <TextField
+              id='name'
+              label='Title'
+              className='iField'
+              rows={5}
+            />
           </div>
           <div className="row">
             <TextField
