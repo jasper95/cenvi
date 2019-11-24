@@ -6,7 +6,7 @@ import 'sass/components/mapSidebar/index';
 
 function Sidebar(props) {
   const { categories } = props 
-  const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [sidebarOpen, setSidebarOpen] = useState(true)
   return (
     <div className={cn('sidebar', {
       'sidebar-open': sidebarOpen
