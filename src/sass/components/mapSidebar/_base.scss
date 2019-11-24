@@ -1,25 +1,47 @@
-.sidebar {
+$header-color: $tertiary-color;
+$header-height: 60px;
+$sidebar-width: 400px;
+$base-class: '.page-map .sidebar';
+
+#{$base-class} {
     width: 100%;
     height: 100%;
-    overflow-y: auto;
-    overflow-x: hidden;
     background-color: #fff;
 
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
     flex-direction: column;
+    overflow: visible;
+
+    max-width: 0;
+    transition: max-width 300ms ease-out;
+    position: relative;
+
+    // .sidebar_toggler
+    &_toggler {
+        position: absolute;
+        top: 0;
+        left: 100%;
+        background-color: lighten($header-color, 5%);
+        height: $header-height;
+        border-radius: 0;
+        color: $text-color-white;
+    }
 
     // .sidebar_header
     &_header {
+        position: relative;
         width: 100%;
-        padding: 1rem;
         flex-shrink: 0;
-        background-color: $tertiary-color;
+        background-color: $header-color;
         display: flex;
         align-items: center;
         justify-content: flex-start;
         flex-wrap: nowrap;
+        height: $header-height;
+        overflow: hidden;
+        white-space: nowrap;
 
         // .sidebar_header_title
         &_title {
@@ -49,19 +71,37 @@
 
     // .sidebar_body
     &_body {
+        width: 100%;
         flex-grow: 1;
         flex-shrink: 1;
         overflow-y: auto;
         overflow-x: hidden;
+    }
+}
+
+
+
+///////////////////////////////////////////////
+//           sidebar events                  //
+/////////////////////////////////////////////*/
+// .sidebar-open
+#{$base-class}-open {
+    max-width: $sidebar-width;
+    .sidebar_header ,
+    .sidebar_body {
         padding: 1rem;
     }
 }
 
 
+///////  End of sidebar events  ////////
+
+
+
 ///////////////////////////////////////////////
 //           sidebar components              //
 /////////////////////////////////////////////*/
-.sidebar .row-filterCategories {
+#{$base-class} .row-filterCategories {
     .iBttn {
         font-size: .8rem;
         border-radius: 1em;
