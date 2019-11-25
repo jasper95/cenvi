@@ -1,23 +1,20 @@
+import { toggleSingleUploading } from 'shared/redux/app/reducer';
 import axios from './axios';
+import store from '../redux/store';
 
-export default async function uploadService(file, params) {
+export default async function uploadService(file, params = {}, url = '/file/upload/simple') {
   const formData = new FormData();
   Object.entries(params)
     .forEach(([key, val]) => formData.append(key, val));
 
-  // const mime = base64string.match(/data:([a-zA-Z0-9]+\/[a-zA-Z0-9-.+]+).*,.*/);
-  // let mimeType = 'inode/x-empty';
-  // if (mime && mime.length) {
-  //   mimeType = mime[1];
-  // }
-  // const file = await fetch(base64string)
-  //   .then(res => res.arrayBuffer())
-  //   .then(buffer => new File([buffer], filename, { type: mimeType }));
+  store.dispatch(toggleSingleUploading());
   formData.append('file', file);
 
   return axios({
     data: formData,
-    url: '/file/upload/simple',
+    url,
     method: 'POST',
+  }).finally(() => {
+    store.dispatch(toggleSingleUploading());
   });
 }

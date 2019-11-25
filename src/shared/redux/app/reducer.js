@@ -6,7 +6,8 @@ const initialState = {
   dialogProcessing: false,
   formProcessing: false,
   temporaryClosedDialogs: [],
-  isSidebarCollapsed: false
+  isSidebarCollapsed: false,
+  isSingleUploading: false
 };
 
 function hideDialogReducer(state) {
@@ -72,6 +73,9 @@ const auth = createSlice({
     toggleSidebar(state, { payload }) {
       const { isSidebarCollapsed } = state;
       state.isSidebarCollapsed = payload;
+    },
+    toggleSingleUploading(state) {
+      state.isSingleUploading = !state.isSingleUploading
     }
   },
 });
@@ -85,7 +89,8 @@ export const {
   showSuccess,
   clearLoading,
   dialogProcessing,
-  toggleSidebar
+  toggleSidebar,
+  toggleSingleUploading,
 } = auth.actions;
 
 

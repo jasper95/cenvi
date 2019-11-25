@@ -8,9 +8,10 @@ import history from 'shared/utils/history';
 import cn from 'classnames';
 import SingleFileUpload from 'shared/components/FileUpload/SingleFileUpload';
 import uploadService from 'shared/utils/uploadService';
-import omit from 'lodash/omit';
+import { useSelector } from 'react-redux';
 
 function ShapefilesForm(props) {
+  const isSingleUploading = useSelector(state => state.app.isSingleUploading);
   const [, onQueryCategories] = useQuery({ url: '/category' }, { isBase: true, initialData: [] });
   const [categories, setCategories] = useState([]);
   const {
@@ -45,7 +46,7 @@ function ShapefilesForm(props) {
             <div className="ToolbarHeader_toolbar">
               <Button
                 className={cn('iBttn iBttn-primary', { processing: mutationState.loading })}
-                onClick={onSave}
+                onClick={formHandlers.onValidate}
                 children="Save"
                 flat
               />
@@ -109,8 +110,8 @@ function ShapefilesForm(props) {
             <p className="iField_label">Shapefile</p>
             <SingleFileUpload
               id="file"
-              value={fields.image_url ? `${process.env.STATIC_URL}/${fields.image_url}` : fields.file}
-              onChange={onElementChange}
+              // value={fields.image_url ? `${process.env.STATIC_URL}/${fields.image_url}` : fields.file}
+              onChange={validateShapefile}
             />
           </div>
         </Paper>
@@ -118,15 +119,8 @@ function ShapefilesForm(props) {
     </>
   );
 
-  async function onSave() {
-    const response = await uploadService(fields.file, { });
-    await onMutate({
-      data: {
-        ...omit(fields, 'file', 'image_url'),
-        ...response,
-      },
-      method: 'POST',
-    });
+  function validateShapefile(file) {
+    onElementChange(file, 'file');
   }
 }
 

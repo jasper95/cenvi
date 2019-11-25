@@ -40,6 +40,11 @@ const result = baseConfig({
         pathRewrite: { '^/api': '' },
         changeOrigin: true,
       },
+      '/cdn': {
+        target: process.env.STATIC_URL,
+        pathRewrite: { '^/cdn': '' },
+        changeOrigin: true,
+      },
     },
   },
 });
