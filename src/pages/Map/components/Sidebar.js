@@ -1,16 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { TextField, Button } from 'react-md';
 import cn from 'classnames';
 
-import 'sass/components/mapSidebar/index';
+import 'sass/components/mapSidebar/index.scss';
 
 function Sidebar(props) {
-  const { categories, layers, onActivateLayer } = props;
+  const { categories } = props;
+  const [sidebarOpen, setSidebarOpen] = useState(true);
   return (
-    <div className="sidebar">
+    <div className={cn('sidebar', {
+      'sidebar-open': sidebarOpen,
+    })}
+    >
+      <Button
+        icon
+        iconClassName={cn('', {
+          'wtfs wtf-chevron-left': sidebarOpen,
+          'wtfs wtf-chevron-right': !sidebarOpen,
+        })}
+        className="sidebar_toggler"
+        onClick={() => setSidebarOpen(!sidebarOpen)}
+      />
       <div className="sidebar_header">
         <h1 className="sidebar_header_title">
-            Map Viewer
+          Map Viewer
         </h1>
       </div>
       <div className="sidebar_body">
@@ -25,7 +38,7 @@ function Sidebar(props) {
         <div className="row row-filterCategories">
           <div className="col-12-guttered">
             <label className="iField_label">
-                Filter Categories By:
+              Filter Categories By:
             </label>
             <div className="categories">
               { categories && categories.map(cat => (
@@ -43,12 +56,12 @@ function Sidebar(props) {
           </div>
         </div>
         <div className="row">
-          {layers.map(e => (
-            <div className="row">
-              <div>{e.name}</div>
-              <button onClick={() => onActivateLayer(e.id)}>CLick</button>
-            </div>
-          ))}
+          <TextField
+            id="name"
+            label="Title"
+            className="iField"
+            rows={5}
+          />
         </div>
         <div className="row">
           <TextField
