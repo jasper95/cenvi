@@ -26,17 +26,9 @@ function CreateShapefile(props) {
   );
 
   function onValid(data) {
-    const fileId = uuid();
-    const { file, ...restData } = data;
-    const geojsonPath = `uploads/${fileId}/data.geojson.gz`;
+    const { file } = data;
     const extension = file.name.split('.').pop();
-    uploadService(file, { file_path: geojsonPath, extension }, '/file/upload/shapefile');
-    onMutate({
-      data: {
-        ...restData,
-        file_path: geojsonPath,
-      },
-    });
+    uploadService(file, { extension }, '/file/upload/shapefile');
   }
 }
 
