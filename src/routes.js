@@ -17,6 +17,8 @@ const AlbumDetails = loadable(() => import('pages/Albums/AlbumDetails'));
 const PublicBlogs = loadable(() => import('pages/Blog/List'));
 const PublicBlogDetails = loadable(() => import('pages/Blog/BlogDetails'));
 
+
+const Dashboard = loadable(() => import('pages/Admin/Dashboard/containers/Dashboard'));
 const User = loadable(() => import('pages/Admin/User/containers/UserPage'));
 
 const AdminBlogList = loadable(() => import('pages/Admin/Blog/container/BlogList'));
@@ -25,12 +27,15 @@ const AdminBlogForm = loadable(() => import('pages/Admin/Blog/container/BlogForm
 const AlbumList = loadable(() => import('pages/Admin/Album/containers/AlbumList'));
 const EditAlbum = loadable(() => import('pages/Admin/Album/containers/EditAlbum'));
 
+
 const AdminCategory = loadable(() => import('pages/Admin/Category/containers/Category'));
 const AdminEditCategory = loadable(() => import('pages/Admin/Category/containers/EditCategory'));
 
 const AdminShapefiles = loadable(() => import('pages/Admin/Shapefiles/containers/Shapefiles'));
 const AdminCreateShapefile = loadable(() => import('pages/Admin/Shapefiles/containers/CreateShapefile'));
 const AdminEditShapefile = loadable(() => import('pages/Admin/Shapefiles/containers/EditShapefile'));
+
+
 
 // const FileUpload = loadable(() => import('pages/FileUploadPage'));
 // const ShapefileUpload = loadable(() => import('pages/ShapefileUploadPage'));
@@ -39,6 +44,18 @@ const MapPage = loadable(() => import('pages/Map'));
 
 
 const adminRoutes = [
+  {
+    key: 'admin-dashboard',
+    component: Dashboard,
+    path: '/admin',
+    exact: true,
+    pageProps: {
+      isAdmin: true,
+      hasFooter: false,
+      requireAuth: true,
+      hasNavigation: false,
+    },
+  },
   {
     key: 'admin-user',
     component: User,
