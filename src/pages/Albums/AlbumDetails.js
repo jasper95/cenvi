@@ -59,7 +59,16 @@ function AlbumDetails(props) {
           <div className={`${BCP}_imageList`}>
             {album.photos.map(photo => (
               <div className={`${BCP}_imageList_item`}>
-                <ImageLoader src={getPhotoUrl(photo)} alt="" />
+                <div className={`${BCP}_imageList_item_image`}>
+                  <ImageLoader src={getPhotoUrl(photo)} alt="" />
+                </div>
+                <div className={`${BCP}_imageList_item_desc`}>
+                  <h3 className="label"> Description </h3>
+                  <p className="content">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam quo sit quasi iure ab,
+                    doloribus ratione repellendus corporis unde voluptates.
+                  </p>
+                </div>
               </div>
             ))}
           </div>
