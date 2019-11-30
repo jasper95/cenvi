@@ -10,6 +10,20 @@ export default function useForm(params) {
   } = params;
   const [fields, setFields] = useState(initialFields);
   const [errors, setErrors] = useState({});
+  return [
+    {
+      fields,
+      errors,
+    },
+    {
+      onElementChange,
+      onChange,
+      onValidate,
+      onReset,
+      onSetFields: setFields,
+    },
+  ];
+
   function onElementChange(value, e) {
     const id = e.target ? e.target.id : e;
     onChange(id, value);
@@ -45,17 +59,4 @@ export default function useForm(params) {
     setErrors({});
     setFields(initialFields);
   }
-  return [
-    {
-      fields,
-      errors,
-    },
-    {
-      onElementChange,
-      onChange,
-      onValidate,
-      onReset,
-      onSetFields: setFields,
-    },
-  ];
 }

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import useQuery from 'shared/hooks/useQuery';
-import Map from './components/Mapbox';
+import Map from './components/Map';
 import Sidebar from './components/Sidebar';
 import './style.scss';
 

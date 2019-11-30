@@ -3,7 +3,12 @@ import axiosLib from 'axios';
 import axios from 'shared/utils/axios';
 
 function useQuery(config, options) {
-  const { initialData, isBase = false } = options;
+  const {
+    initialData,
+    isBase = false,
+    onFetchSuccess = () => {},
+    skip = false,
+  } = options;
   const { url } = config;
   const [data, setData] = useState(initialData);
   const [isLoading, setIsLoading] = useState(true);
@@ -20,6 +25,7 @@ function useQuery(config, options) {
       })
         .then((response) => {
           setData(response);
+          onFetchSuccess(response);
           setIsLoading(false);
         })
         .catch((err) => {
@@ -29,13 +35,15 @@ function useQuery(config, options) {
           setIsLoading(false);
         });
     };
-    if (url) {
+    if (!skip) {
       fetchData();
+    } else {
+      setIsLoading(false);
     }
     return () => {
       source.cancel();
     };
-  }, [url, isBase, refetchCount]);
+  }, [url, isBase, refetchCount, skip]);
   const queryState = { data, loading: isLoading, error };
   return [queryState, { refetch }];
 

@@ -1,9 +1,8 @@
 import 'react-datepicker/dist/react-datepicker.css';
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Helmet as Head } from 'react-helmet';
 import flowRight from 'lodash/flowRight';
-import Snackbar from 'shared/components/Snackbar';
 import withAuth from 'shared/hocs/withAuth';
 import { createSelector } from 'redux-starter-kit';
 import { useSelector, useDispatch } from 'react-redux';
@@ -48,8 +47,6 @@ function Page(props) {
   if (dialog && dialog.component) {
     ({ component: DialogComponent } = dialog);
   }
-
-  useEffect(() => willUnmount, []);
 
   let { pageTitle } = props;
   if (pageTitle) {
@@ -99,13 +96,6 @@ function Page(props) {
       {hasNavigation && (
         <Header auth={auth} onLogout={handleClickLogout} />
       )}
-      {toast && (
-        <Snackbar
-          onClose={() => dispatch({ type: 'HIDE_NOTIFICATION' })}
-          open={!!toast}
-          {...toast}
-        />
-      )}
       {DialogComponent && (
         <DialogComponent
           {...dialog.props}
@@ -130,9 +120,7 @@ function Page(props) {
       )}
     </>
   );
-  function willUnmount() {
-    dispatch({ type: 'HIDE_NOTIFICATION' });
-  }
+
   function handleClickLogout() {
     dispatch(showDialog({
       component: Confirm,

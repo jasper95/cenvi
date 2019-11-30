@@ -4,6 +4,7 @@ import pick from 'lodash/pick';
 import history from 'shared/utils/history';
 import Link from 'react-router-dom/Link';
 import Button from 'react-md/lib/Buttons/Button';
+import ImageLoader from 'react-image';
 import Author from './Author';
 import 'sass/components/cards/blogCard/index.scss';
 
@@ -31,7 +32,7 @@ function BlogItem(props) {
             }}
           />
         </div>
-        <img
+        <ImageLoader
           className={`${BCP}_media_img`}
           src={`${process.env.STATIC_URL}/${blog.image_url}`}
           alt=""

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import useForm from 'shared/hooks/useForm';
 import TextField from 'react-md/lib/TextFields/TextField';
 import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
@@ -12,30 +12,32 @@ import Paper from 'react-md/lib/Papers/Paper';
 import SingleFileUpload from 'shared/components/FileUpload/SingleFileUpload';
 import Button from 'react-md/lib/Buttons/Button';
 import useMutation from 'shared/hooks/useMutation';
-import useQuery from 'shared/hooks/useLazyQuery';
+import useQuery from 'shared/hooks/useQuery';
 import history from 'shared/utils/history';
 import { toFormData } from 'shared/utils/tools';
-import omit from 'lodash/omit';
 import axios from 'shared/utils/axios';
+import uuid from 'uuid/v4';
+import uploadService, { isUploadingSelector } from 'shared/utils/uploadService';
+import omit from 'lodash/omit';
+import { useSelector, useDispatch } from 'react-redux';
+import { showSuccess } from 'shared/redux/app/reducer';
 
 function EditBlog(props) {
-  const [blogResponse, onQueryBlog] = useQuery();
-  const { loading: blogIsLoading } = blogResponse;
+  const { id } = props.match.params;
+  const dispatch = useDispatch();
+  const isCreate = id === 'new';
   const [formState, formHandlers] = useForm({
-    initialFields: {},
+    initialFields: {
+      status: 'published',
+      published_date: new Date(),
+    },
+    onValid: onSave,
   });
+  const { onSetFields, onElementChange, onValidate } = formHandlers;
+  const isUploading = useSelector(isUploadingSelector);
+  const [blogResponse] = useQuery({ url: `/blog/${id}` }, { skip: isCreate, onFetchSuccess });
+  const { loading: blogIsLoading } = blogResponse;
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
-  const { onSetFields, onElementChange } = formHandlers;
-  useEffect(() => {
-    const { id } = props.match.params;
-    if (id !== 'new') {
-      onQueryBlog({ url: `/blog/${id}` })
-        .then((newFields) => {
-          setEditorState(EditorState.createWithContent(convertFromRaw(newFields.content)));
-          onSetFields(newFields);
-        });
-    }
-  }, []);
   const { fields, errors } = formState;
   const { onChange } = formHandlers;
   const [mutationState, onMutate] = useMutation({ url: '/blog' });
@@ -51,7 +53,7 @@ function EditBlog(props) {
           <div className="ToolbarHeader row">
             <div className="ToolbarHeader_title">
               <h1 className="title">
-                {!fields.name 
+                {!fields.name
                   ? 'New Blog'
                   : `Blog: ${fields.name}`
                 }
@@ -59,12 +61,8 @@ function EditBlog(props) {
             </div>
             <div className="ToolbarHeader_toolbar">
               <Button
-                className={cn('iBttn iBttn-primary', { processing: mutationState.loading })}
-                onClick={() => {
-                  onMutate({
-                    data: fields,
-                  });
-                }}
+                className={cn('iBttn iBttn-primary', { processing: mutationState.loading || isUploading })}
+                onClick={onValidate}
                 children="Save"
                 flat
               />
@@ -91,18 +89,6 @@ function EditBlog(props) {
             error={!!errors.name}
             value={fields.name || ''}
           />
-        </Paper>
-      </div>
-      <div className="row row-formMedia">
-        <Paper className="col col-md-12-guttered col-actions">
-          <div className="iField">
-            <p className="iField_label">Blog Photo</p>
-            <SingleFileUpload
-              id="file"
-              value={fields.image_url ? `${process.env.STATIC_URL}/${fields.image_url}` : fields.file}
-              onChange={onElementChange}
-            />
-          </div>
         </Paper>
       </div>
       <div className="row">
@@ -166,42 +152,67 @@ function EditBlog(props) {
           )}
           <CreatableInput
             id="tags"
+            label="Tags"
             value={fields.tags || []}
             onChange={onElementChange}
             className="iField iField-ci"
             classNamePrefix="iField-ci"
           />
-          <Button
-            className={cn('iBttn iBttn-primary', { processing: mutationState.loading })}
-            onClick={onSave}
-            children="Save"
-            flat
-          />
         </Paper>
       </div>
-
+      <div className="row row-formMedia">
+        <Paper className="col col-md-12-guttered col-actions">
+          <div className="iField">
+            <p className="iField_label">Blog Photo</p>
+            <SingleFileUpload
+              id="file"
+              value={fields.image_url ? `${process.env.STATIC_URL}/${fields.image_url}` : fields.file}
+              onChange={onElementChange}
+            />
+          </div>
+        </Paper>
+      </div>
     </>
   );
 
-  async function uploadFile(file, params = {}) {
-    const formData = toFormData({ ...params, file });
-    const response = await axios({
+  function onFetchSuccess(blog) {
+    setEditorState(EditorState.createWithContent(convertFromRaw(blog.content)));
+    onSetFields(blog);
+  }
+
+  async function uploadFile(file) {
+    const fileId = uuid();
+    const filePath = ['uploads', 'blog', fileId, file.name].join('/');
+    const formData = toFormData({ file_path: filePath, file });
+    await axios({
       data: formData,
       url: '/file/upload/simple',
       method: 'POST',
     });
-    const { file_path: filePath } = response;
     return { data: { link: `${process.env.STATIC_URL}/${filePath}` } };
   }
 
-  async function onSave() {
-    if (fields.file) {
-      await uploadFile(fields.file, { entity: 'blog', entity_id: fields.id });
+  async function onSave(data) {
+    let filePath;
+    if (data.file) {
+      filePath = ['uploads', 'blog', uuid(), data.file.name].join('/');
+      data = {
+        ...data,
+        image_url: filePath,
+      };
     }
-    onMutate({
-      data: omit(fields, 'file', 'image_url'),
-      method: fields.id ? 'PUT' : 'POST',
-    });
+    await Promise.all([
+      onMutate({
+        data: omit(data, 'file'),
+        method: isCreate ? 'POST' : 'PUT',
+      }),
+      data.file && uploadService(data.file, { file_path: filePath }),
+    ].filter(Boolean));
+    const message = `Blog successfuly ${isCreate ? 'created' : 'updated'}`;
+    dispatch(showSuccess({ message }));
+    if (isCreate) {
+      history.push('/admin/blogs');
+    }
   }
 }
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { getPhotoUrl } from 'shared/utils/tools';
+import ImageLoader from 'react-image';
 
 const SNIPPET_LIMIT = 3;
 function PreviewImages(props) {
@@ -19,7 +20,7 @@ function PreviewImages(props) {
         <div className="previewImg_container">
           {snippetImages.map((img, i) => (
             <div key={img.id} className="previewImg_item">
-              <img src={getPhotoUrl(img)} alt="" />
+              <ImageLoader src={getPhotoUrl(img)} alt="" />
             </div>
           ))}
           { photos.length > SNIPPET_LIMIT && (

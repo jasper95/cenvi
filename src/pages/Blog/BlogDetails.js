@@ -3,6 +3,7 @@ import useQuery from 'shared/hooks/useLazyQuery';
 import draftToHtml from 'draftjs-to-html';
 import htmlToReact from 'html-react-parser';
 import { getPhotoUrl } from 'shared/utils/tools';
+import ImageLoader from 'react-image';
 import Author from './components/Author';
 import 'sass/components/blogPage/index.scss';
 
@@ -35,7 +36,7 @@ function BlogDetails(props) {
           </div>
         </div>
         <div className={`${BCP}_image`}>
-          <img src={getPhotoUrl(blog)} alt="" />
+          <ImageLoader src={getPhotoUrl(blog)} alt="" />
         </div>
         <div className={`${BCP}_textContainer`}>
           <div className={`${BCP}_contents`}>

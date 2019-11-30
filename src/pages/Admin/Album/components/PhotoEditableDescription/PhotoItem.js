@@ -2,6 +2,7 @@ import React from 'react';
 import TextField from 'react-md/lib/TextFields/TextField';
 import Button from 'react-md/lib/Buttons/Button';
 import cn from 'classnames';
+import ImageLoader from 'react-image';
 
 function PhotoItem(props) {
   const {
@@ -35,7 +36,7 @@ function PhotoItem(props) {
         />
 
         <div className={`${BCP}_media`}>
-          <img
+          <ImageLoader
             className={`${BCP}_img`}
             src={imgSrc}
             alt=""

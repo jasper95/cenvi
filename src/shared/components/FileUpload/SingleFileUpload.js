@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 import cn from 'classnames';
+import ImageLoader from 'react-image';
 
 function SingleFileUpload(props) {
   const { value, onChange, id } = props;
@@ -27,7 +28,7 @@ function SingleFileUpload(props) {
         <div className="iDropzone_files">
           <div className="iDropzone_file">
             <div className="iDropzone_file_preview">
-              <img
+              <ImageLoader
                 className="iDropzone_file_preview_src"
                 src={preview}
                 alt="Preview"

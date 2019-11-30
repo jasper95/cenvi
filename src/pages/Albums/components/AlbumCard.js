@@ -4,6 +4,7 @@ import { getPhotoUrl, formatISOToDate } from 'shared/utils/tools';
 import pick from 'lodash/pick';
 import PreviewImages from './PreviewImages';
 import 'sass/components/cards/albumCard/index.scss';
+import ImageLoader from 'react-image';
 
 function AlbumCard(props) {
   const {
@@ -20,14 +21,13 @@ function AlbumCard(props) {
   return (
     <div className={`${BCP} row row-center`} key={id}>
       <div className={`${BCP}_media col col-md-5 `}>
-        <img
+        <ImageLoader
           className={`${BCP}_media_img`}
           src={getPhotoUrl(hero)}
           alt={name}
         />
       </div>
       <div className={`${BCP}_content col col-md-7 `}>
-
         <h1 className={`${BCP}_header`} onClick={() => { history.push(`/albums/${slug}`); }}>
           {name}
         </h1>

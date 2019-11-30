@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import useQuery from 'shared/hooks/useLazyQuery';
 import { getPhotoUrl } from 'shared/utils/tools';
 import 'sass/components/albumDetailsPage/index.scss';
+import ImageLoader from 'react-image';
 
 function AlbumDetails(props) {
   const BCP = 'albumDetailPage';
@@ -37,7 +38,10 @@ function AlbumDetails(props) {
             </p>
           </div>
           <div className={`${BCP}_heroBanner_img`}>
-            <img src={getPhotoUrl(hero)} alt="" />
+            <ImageLoader
+              src={getPhotoUrl(hero)}
+              alt=""
+            />
           </div>
         </div>
         <div className={`${BCP}_container`}>
@@ -55,7 +59,7 @@ function AlbumDetails(props) {
           <div className={`${BCP}_imageList`}>
             {album.photos.map(photo => (
               <div className={`${BCP}_imageList_item`}>
-                <img src={getPhotoUrl(photo)} alt="" />
+                <ImageLoader src={getPhotoUrl(photo)} alt="" />
               </div>
             ))}
           </div>
