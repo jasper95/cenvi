@@ -23,8 +23,8 @@ function CustomOneLevelPieChart(props) {
                 data={data}
                 cx={(width/2)}
                 cy={(height/2)}
-                innerRadius={(height/3) - barThickness}
-                outerRadius={(height/3)}
+                innerRadius={(height/3.2) - barThickness}
+                outerRadius={(height/3.2)}
                 fill="#8884d8"
                 paddingAngle={5}
                 dataKey="value"
