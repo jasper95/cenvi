@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import useQuery from 'shared/hooks/useLazyQuery';
+import useQuery from 'shared/hooks/useQuery';
 import { getPhotoUrl } from 'shared/utils/tools';
 import 'sass/components/albumDetailsPage/index.scss';
 import ImageLoader from 'react-image';
@@ -7,12 +7,8 @@ import ImageLoader from 'react-image';
 function AlbumDetails(props) {
   const BCP = 'albumDetailPage';
 
-  const [albumResponse, onQueryAlbum] = useQuery({}, { initialData: null, initialLoading: true });
-
-  useEffect(() => {
-    const { id } = props.match.params;
-    onQueryAlbum({ url: `/published_album/${id}` });
-  }, []);
+  const { id } = props.match.params;
+  const [albumResponse] = useQuery({ url: `/published_album/${id}` }, { initialData: null, initialLoading: true });
 
 
   const { loading, data: album } = albumResponse;
@@ -65,8 +61,7 @@ function AlbumDetails(props) {
                 <div className={`${BCP}_imageList_item_desc`}>
                   <h3 className="label"> Description </h3>
                   <p className="content">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam quo sit quasi iure ab,
-                    doloribus ratione repellendus corporis unde voluptates.
+                    {photo.description}
                   </p>
                 </div>
               </div>
