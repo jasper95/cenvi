@@ -2,8 +2,10 @@ import React from 'react';
 import flowRight from 'lodash/flowRight';
 import withDialog from 'shared/hocs/withDialog';
 import TextField from 'react-md/lib/TextFields/TextField';
+import * as yup from 'yup';
+import { getValidationResult, fieldIsRequired, fieldIsInvalid } from 'shared/utils/tools';
 
-function UserDialog(props) {
+function CreateUser(props) {
   const {
     formState, formHandlers,
   } = props;
@@ -40,6 +42,20 @@ function UserDialog(props) {
     </>
   );
 }
-export default flowRight(
+
+const CreateUserDialog = flowRight(
   withDialog(),
-)(UserDialog);
+)(CreateUser);
+
+CreateUserDialog.defaultProps = {
+  validator(data) {
+    const schema = yup.object().shape({
+      first_name: yup.string().required(fieldIsRequired),
+      last_name: yup.string().required(fieldIsRequired),
+      email: yup.string().email(fieldIsInvalid).required(fieldIsRequired),
+    });
+    return getValidationResult(data, schema);
+  },
+};
+
+export default CreateUserDialog;

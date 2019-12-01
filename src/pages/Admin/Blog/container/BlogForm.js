@@ -7,6 +7,7 @@ import CreatableInput from 'shared/components/CreatableInput';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import cn from 'classnames';
 import SelectAutocomplete from 'shared/components/SelectAutocomplete';
+import TextFieldMessage from 'react-md/lib/TextFields/TextFieldMessage';
 import { Editor } from 'react-draft-wysiwyg';
 import Paper from 'react-md/lib/Papers/Paper';
 import SingleFileUpload from 'shared/components/FileUpload/SingleFileUpload';
@@ -14,7 +15,10 @@ import Button from 'react-md/lib/Buttons/Button';
 import useMutation from 'shared/hooks/useMutation';
 import useQuery from 'shared/hooks/useQuery';
 import history from 'shared/utils/history';
-import { toFormData } from 'shared/utils/tools';
+import * as yup from 'yup';
+import {
+  toFormData, fieldIsRequired, getValidationResult, validateTextEditor,
+} from 'shared/utils/tools';
 import axios from 'shared/utils/axios';
 import uuid from 'uuid/v4';
 import uploadService, { isUploadingSelector } from 'shared/utils/uploadService';
@@ -31,6 +35,7 @@ function EditBlog(props) {
       status: 'published',
       published_date: new Date(),
     },
+    validator,
     onValid: onSave,
   });
   const { onSetFields, onElementChange, onValidate } = formHandlers;
@@ -93,25 +98,31 @@ function EditBlog(props) {
       </div>
       <div className="row">
         <Paper className="col col-md-8-guttered col-form">
-          <Editor
-            wrapperClassName="iField-wysiwyg"
-            toolbarClassName="iField-wysiwyg_toolbar"
-            editorClassName="iField-wysiwyg_editor"
-            toolbar={{
-              image: {
-                urlEnabled: true,
-                uploadEnabled: true,
-                uploadCallback: uploadFile,
-                alt: { present: true, mandatory: false },
-                previewImage: true,
-              },
-            }}
-            editorState={editorState}
-            onEditorStateChange={(newState) => {
-              setEditorState(newState);
-              onChange('content', convertToRaw(newState.getCurrentContent()));
-            }}
-          />
+          <div>
+            <Editor
+              wrapperClassName="iField-wysiwyg"
+              toolbarClassName="iField-wysiwyg_toolbar"
+              editorClassName="iField-wysiwyg_editor"
+              toolbar={{
+                image: {
+                  urlEnabled: true,
+                  uploadEnabled: true,
+                  uploadCallback: uploadFile,
+                  alt: { present: true, mandatory: false },
+                  previewImage: true,
+                },
+              }}
+              editorState={editorState}
+              onEditorStateChange={(newState) => {
+                setEditorState(newState);
+                onChange('content', convertToRaw(newState.getCurrentContent()));
+              }}
+            />
+            <TextFieldMessage
+              errorText={errors.content}
+              error={errors.content}
+            />
+          </div>
           <TextField
             id="excerpt"
             label="Excerpt"
@@ -147,6 +158,7 @@ function EditBlog(props) {
                 placeholderText="Published Date"
                 onChange={onElementChange}
                 value={fields.published_date}
+                error={errors.published_date}
               />
             </div>
           )}
@@ -157,17 +169,18 @@ function EditBlog(props) {
             onChange={onElementChange}
             className="iField iField-ci"
             classNamePrefix="iField-ci"
+            error={errors.tags}
           />
-        </Paper>
-      </div>
-      <div className="row row-formMedia">
-        <Paper className="col col-md-12-guttered col-actions">
           <div className="iField">
             <p className="iField_label">Blog Photo</p>
             <SingleFileUpload
               id="file"
               value={fields.image_url ? `${process.env.STATIC_URL}/${fields.image_url}` : fields.file}
-              onChange={onElementChange}
+              onChange={(file) => {
+                onElementChange(['uploads', 'blog', uuid(), file.name].join('/'));
+                onElementChange(file, 'file');
+              }}
+              error={errors.image_url}
             />
           </div>
         </Paper>
@@ -193,20 +206,12 @@ function EditBlog(props) {
   }
 
   async function onSave(data) {
-    let filePath;
-    if (data.file) {
-      filePath = ['uploads', 'blog', uuid(), data.file.name].join('/');
-      data = {
-        ...data,
-        image_url: filePath,
-      };
-    }
     await Promise.all([
       onMutate({
         data: omit(data, 'file'),
         method: isCreate ? 'POST' : 'PUT',
       }),
-      data.file && uploadService(data.file, { file_path: filePath }),
+      data.file && uploadService(data.file, { file_path: data.image_url }),
     ].filter(Boolean));
     const message = `Blog successfuly ${isCreate ? 'created' : 'updated'}`;
     dispatch(showSuccess({ message }));
@@ -214,6 +219,22 @@ function EditBlog(props) {
       history.push('/admin/blogs');
     }
   }
+}
+
+function validator(data) {
+  const schema = yup.object().shape({
+    name: yup.string().label('Title').required(fieldIsRequired),
+    excerpt: yup.string().required(fieldIsRequired),
+    image_url: yup.string().label('Photo').required(fieldIsRequired),
+    tags: yup.array().of(yup.string()).min(1, fieldIsRequired),
+  });
+  const result = getValidationResult(data, schema);
+  return {
+    errors: {
+      ...result.errors,
+      ...validateTextEditor(data.content, 'content'),
+    },
+  };
 }
 
 export default EditBlog;

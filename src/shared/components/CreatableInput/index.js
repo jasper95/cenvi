@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import CreatableSelect from 'react-select/creatable';
+import TextFieldMessage from 'react-md/lib/TextFields/TextFieldMessage';
 import PropTypes from 'prop-types';
 
 const components = {
@@ -12,8 +13,10 @@ const createOption = label => ({
 });
 
 function CreatableInput(props) {
-  const { onChange, value: propsValue, id,
-    className, classNamePrefix, label
+  const {
+    onChange, value: propsValue, id,
+    className, classNamePrefix, label,
+    error,
   } = props;
   const [value, setValue] = useState(propsValue);
   const [inputValue, setInputValue] = useState('');
@@ -71,6 +74,11 @@ function CreatableInput(props) {
         classNamePrefix={classNamePrefix}
         placeholder="Type something and press enter..."
         value={value}
+      />
+      <TextFieldMessage
+        className="iField_date_message"
+        errorText={error}
+        error={error}
       />
     </div>
   );
