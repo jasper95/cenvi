@@ -2,8 +2,10 @@ import React from 'react';
 import flowRight from 'lodash/flowRight';
 import withDialog from 'shared/hocs/withDialog';
 import TextField from 'react-md/lib/TextFields/TextField';
+import * as yup from 'yup';
+import { getValidationResult, fieldIsRequired } from 'shared/utils/tools';
 
-function CreateCategoryDialog(props) {
+function CreateCategory(props) {
   const {
     formState, formHandlers,
   } = props;
@@ -22,6 +24,17 @@ function CreateCategoryDialog(props) {
     </>
   );
 }
-export default flowRight(
+const CreateCategoryDialog = flowRight(
   withDialog(),
-)(CreateCategoryDialog);
+)(CreateCategory);
+
+CreateCategoryDialog.defaultProps = {
+  validator(data) {
+    const schema = yup.object().shape({
+      name: yup.string().required(fieldIsRequired),
+    });
+    return getValidationResult(data, schema);
+  },
+};
+
+export default CreateCategoryDialog;

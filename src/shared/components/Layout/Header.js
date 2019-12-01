@@ -61,7 +61,7 @@ function Header(props) {
                 />
                 <div className={cn('nav_mobile_container', { 'nav_mobile_container-show': showMobileNav })}>
                   <div className="nav_actions">
-                    {renderProfileNav({ isMobile : true })}
+                    {renderProfileNav({ isMobile: true })}
                   </div>
                   <Navigation user={user} currentPath={match.path} />
                 </div>
@@ -84,8 +84,8 @@ function Header(props) {
 
   function renderProfileNav(props = {}) {
     const {
-      isMobile = false
-    } = props
+      isMobile = false,
+    } = props;
 
     if (auth.user) {
       // if (false) {
@@ -100,7 +100,7 @@ function Header(props) {
               {
                 primaryText: 'Go to Admin',
                 leftIcon: <i className="wtfr wtf-user-edit" />,
-                onClick: () => history.push('/admin/blogs'),
+                onClick: () => history.push('/admin'),
               },
               {
                 primaryText: 'Logout',

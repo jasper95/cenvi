@@ -2,9 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 import cn from 'classnames';
 import ImageLoader from 'react-image';
+import TextFieldMessage from 'react-md/lib/TextFields/TextFieldMessage';
 
 function SingleFileUpload(props) {
-  const { value, onChange, id } = props;
+  const {
+    value, onChange, id, error,
+  } = props;
   const [file, setFile] = useState(null);
   const [preview, setPreview] = useState(value);
   useEffect(() => {
@@ -37,6 +40,11 @@ function SingleFileUpload(props) {
           </div>
         </div>
       )}
+      <TextFieldMessage
+        className="iField_date_message"
+        errorText={error}
+        error={error}
+      />
     </div>
   );
 

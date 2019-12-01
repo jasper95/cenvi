@@ -47,8 +47,8 @@ export default function useForm(params) {
   }
 
   function onValidate() {
-    const { isValid, errors: validationErrors } = validator(fields);
-    if (isValid) {
+    const { errors: validationErrors } = validator(fields);
+    if (!Object.keys(validationErrors).length) {
       setErrors({});
       onValid(fields);
       return;

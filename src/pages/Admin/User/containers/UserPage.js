@@ -48,7 +48,8 @@ function User() {
       },
       {
         title: 'Full Name',
-        accessor: 'full_name',
+        type: 'function',
+        fn: row => [row.first_name, row.last_name].join(' '),
       },
       {
         title: 'Actions',
