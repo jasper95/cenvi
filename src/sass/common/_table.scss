@@ -149,3 +149,59 @@ $table-header-text: $primary-color-200;
 }
 
 
+/**
+ * table loading
+ */
+
+ .iTable-loading {
+	 display: flex;
+	 width: 100%;
+ }
+
+ .iTable_preLoader {
+	 width: 100%;
+	 display: flex;
+	 align-items: flex-start;
+	 justify-content: flex-start;
+	 flex-direction: column;
+	 border-bottom: none;
+
+	//  .iTable_preLoader_header
+	&_header {
+		width: 100%;
+		height: auto;
+		display: flex;
+		align-items: flex-start;
+		justify-content: flex-start;
+		flex-wrap: nowrap;
+		background-color: #ecf1f9;
+	}
+
+	//  .iTable_preLoader_cell
+	&_cell {
+		flex-grow: 1;
+		flex-shrink: 1;
+		padding: 1rem;
+
+		svg {
+			max-width: 270px;
+		}
+
+		&:not(:last-child) {
+			border-right: 2px solid darken(#ecf1f9, 2%);
+		}
+	}
+
+	//  .iTable_preLoader_body
+	&_body {
+		width: 100%;
+		display: flex;
+		align-items: flex-start;
+		justify-content: flex-start;
+		flex-wrap: nowrap;
+	}
+ }
+
+
+
+
