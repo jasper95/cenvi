@@ -23,7 +23,7 @@ export default function Map(props) {
           srs={4326}
         />
       ))}
-      <Legend />
+      {/* <Legend /> */}
     </LeafletMap>
   );
 }

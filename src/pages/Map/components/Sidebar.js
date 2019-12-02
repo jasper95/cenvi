@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { TextField, Button } from 'react-md';
 import cn from 'classnames';
 import SelectAutocomplete from 'shared/components/SelectAutocomplete';
+import qs from 'qs';
 
 import 'sass/components/mapSidebar/index.scss';
 import useQuery from 'shared/hooks/useQuery';
@@ -63,43 +64,38 @@ function Sidebar(props) {
             </div>
           </div>
         </div>
-        {/* <div className="row">
-          <TextField
-            id="name"
-            label="Title"
-            className="iField"
-            rows={5}
-          />
-        </div> */}
         <div className="row">
           <div>
             <span>Active Layers</span>
           </div>
           <div>
             {selectedLayers.map(layer => (
-              <>
+              <div>
                 <span>
                   {layer.name}
                 </span>
                 <br />
-              </>
+                <img
+                  alt=""
+                  src={`${process.env.GEOSERVER_URL}?${qs.stringify({
+                    service: 'WMS',
+                    request: 'GetLegendGraphic',
+                    layer: `topp:${layer.id}`,
+                    format: 'image/png',
+                  })}`}
+                />
+              </div>
             ))}
           </div>
-          {/* <TextField
-            id="loaded_layer"
-            label="Loaded Layers"
-            className="iField"
-            rows={5}
-          /> */}
         </div>
-        <div className="row">
+        {/* <div className="row">
           <TextField
             id="legend"
             label="Legend"
             className="iField"
             rows={5}
           />
-        </div>
+        </div> */}
       </div>
     </div>
   );

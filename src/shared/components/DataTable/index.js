@@ -12,10 +12,10 @@ import PreLoader from './PreLoader';
 function DataTable(props) {
   const {
     rows, columns, onRowClick, className, isSelectable, selected, onRowToggle,
-    onSort, sort, isLoading = true
+    onSort, sort, isLoading,
   } = props;
 
-  const BCP = 'iTable'
+  const BCP = 'iTable';
 
   return (
     <Table
@@ -26,9 +26,9 @@ function DataTable(props) {
       })}
       onRowToggle={onRowToggle}
     >
-      { 
+      {
         isLoading ? (
-          <PreLoader columns={columns.length} className={`${BCP}_preLoader`}/>
+          <PreLoader columns={columns.length} className={`${BCP}_preLoader`} />
         ) : (
           <>
             <TableHead className={`${BCP}_header`}>
@@ -91,6 +91,7 @@ DataTable.propTypes = {
   onRowToggle: PropTypes.func,
   onSort: PropTypes.func,
   sort: PropTypes.object,
+  isLoading: PropTypes.bool,
 };
 
 DataTable.defaultProps = {
@@ -101,6 +102,7 @@ DataTable.defaultProps = {
   isSelectable: false,
   onSort: () => {},
   sort: {},
+  isLoading: false,
 };
 
 export default DataTable;
