@@ -1,6 +1,5 @@
 import React from 'react';
 import { ResponsiveContainer } from 'recharts';
-import ReactResizeDetector from 'react-resize-detector';
 import cn from 'classnames';
 import 'sass/components/charts/index.scss';
 
@@ -15,13 +14,9 @@ function CustomResponsiveChart(props) {
     <div className={cn(`${chartClassName} customChart`,{
       [`customChart-${type}`] : type,
     })}>
-      <ReactResizeDetector handleWidth handleHeight >
-        {({ width, height }) => (
-          <ResponsiveContainer width={width} height={height}>
-            {children}
-          </ResponsiveContainer>
-        )}
-      </ReactResizeDetector>
+      <ResponsiveContainer debounce={100000000000000}>
+        {children}
+      </ResponsiveContainer>
     </div>
 	)
 }
