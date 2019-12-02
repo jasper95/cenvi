@@ -1,12 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { TextField, Button } from 'react-md';
 import cn from 'classnames';
+import SelectAutocomplete from 'shared/components/SelectAutocomplete';
 
 import 'sass/components/mapSidebar/index.scss';
+import useQuery from 'shared/hooks/useQuery';
 
 function Sidebar(props) {
-  const { categories } = props;
+  const { categories, activeLayers, onActivateLayer } = props;
+  const [queryState] = useQuery({ url: '/shapefile' }, { initialData: [] });
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const selectedLayers = useMemo(() => activeLayers.map(e => queryState.data.find(ee => ee.id === e)), [activeLayers, queryState.data]);
+  const selectOptions = useMemo(() => queryState
+    .data
+    // .filter(e => )
+    .map(e => ({ label: e.name, value: e.id })), [queryState.data]);
   return (
     <div className={cn('sidebar', {
       'sidebar-open': sidebarOpen,
@@ -28,11 +36,11 @@ function Sidebar(props) {
       </div>
       <div className="sidebar_body">
         <div className="row">
-          <TextField
-            id="name"
+          <SelectAutocomplete
             label="Available Layers"
-            className="iField"
-            placeholder="Search For .."
+            options={selectOptions}
+            isLoading={queryState.loading}
+            onChange={layer => onActivateLayer(layer)}
           />
         </div>
         <div className="row row-filterCategories">
@@ -55,21 +63,34 @@ function Sidebar(props) {
             </div>
           </div>
         </div>
-        <div className="row">
+        {/* <div className="row">
           <TextField
             id="name"
             label="Title"
             className="iField"
             rows={5}
           />
-        </div>
+        </div> */}
         <div className="row">
-          <TextField
+          <div>
+            <span>Active Layers</span>
+          </div>
+          <div>
+            {selectedLayers.map(layer => (
+              <>
+                <span>
+                  {layer.name}
+                </span>
+                <br />
+              </>
+            ))}
+          </div>
+          {/* <TextField
             id="loaded_layer"
             label="Loaded Layers"
             className="iField"
             rows={5}
-          />
+          /> */}
         </div>
         <div className="row">
           <TextField

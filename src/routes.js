@@ -32,8 +32,7 @@ const AdminCategory = loadable(() => import('pages/Admin/Category/containers/Cat
 const AdminEditCategory = loadable(() => import('pages/Admin/Category/containers/EditCategory'));
 
 const AdminShapefiles = loadable(() => import('pages/Admin/Shapefiles/containers/Shapefiles'));
-const AdminCreateShapefile = loadable(() => import('pages/Admin/Shapefiles/containers/CreateShapefile'));
-const AdminEditShapefile = loadable(() => import('pages/Admin/Shapefiles/containers/EditShapefile'));
+const AdminShapefilesForm = loadable(() => import('pages/Admin/Shapefiles/containers/ShapefilesForm'));
 
 
 
@@ -153,21 +152,8 @@ const adminRoutes = [
     },
   },
   {
-    key: 'new-admin-shapefiles',
-    component: AdminCreateShapefile,
-    path: '/admin/shapefiles/new',
-    exact: true,
-    pageProps: {
-      isAdmin: true,
-      hasFooter: false,
-      requireAuth: true,
-      hasNavigation: false,
-      isEdit: false,
-    },
-  },
-  {
     key: 'edit-admin-shapefile',
-    component: AdminEditShapefile,
+    component: AdminShapefilesForm,
     path: '/admin/shapefiles/:id',
     exact: true,
     pageProps: {

@@ -5,12 +5,11 @@ import Sidebar from './components/Sidebar';
 import './style.scss';
 
 export default function MapPage() {
-  const [queryState] = useQuery({ url: '/shapefile' }, { initialData: [] });
   const [activeLayers, setLayers] = useState([]);
   return (
     <section className="section-map section">
       <div className="col-sidebar">
-        <Sidebar layers={queryState.data} onActivateLayer={onActivateLayer} />
+        <Sidebar activeLayers={activeLayers} onActivateLayer={onActivateLayer} />
       </div>
       <div className="col-map">
         <Map activeLayers={activeLayers} />
@@ -18,7 +17,7 @@ export default function MapPage() {
     </section>
   );
 
-  async function onActivateLayer(id) {
-    setLayers(prev => prev.concat(queryState.data.find(e => e.id === id)));
+  async function onActivateLayer(data) {
+    setLayers(prev => prev.concat(data));
   }
 }

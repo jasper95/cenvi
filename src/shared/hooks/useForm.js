@@ -4,7 +4,7 @@ import omit from 'lodash/omit';
 export default function useForm(params) {
   const {
     initialFields = {},
-    validator = () => ({ isValid: true }),
+    validator = () => ({ isValid: true, errors: {} }),
     customChangeHandler = {},
     onValid = () => {},
   } = params;

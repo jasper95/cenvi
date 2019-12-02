@@ -22,10 +22,20 @@ function SelectAutocomplete(props) {
       if (props.isMulti) {
         setCurrentValue(value ? value.map(e => selectOptions.find(ee => ee.value === e)) : value);
       } else {
-        setCurrentValue(selectOptions.find(e => e.value === value));
+        setCurrentValue(selectOptions.find(e => e.value === value) || null);
       }
     }
-  }, [value]);
+    function isNotEqualValue() {
+      const result = (value && !currentValue) || (!value && currentValue);
+      if (value && currentValue) {
+        if (props.isMulti) {
+          return value.join(',') !== currentValue.map(e => e.value).join(',');
+        }
+        return value !== currentValue.value;
+      }
+      return result;
+    }
+  }, [value, currentValue]);
   return (
     <div className={`selectAutoComplete ${className}`}>
       {label && (
@@ -68,17 +78,6 @@ function SelectAutocomplete(props) {
       onChange(newVal.value, id, newVal);
       setCurrentValue(newVal ? { ...newVal } : newVal);
     }
-  }
-
-  function isNotEqualValue() {
-    const result = (value && !currentValue) || (!value && currentValue);
-    if (value && currentValue) {
-      if (props.isMulti) {
-        return value.join(',') !== currentValue.map(e => e.value).join(',');
-      }
-      return value !== currentValue.value;
-    }
-    return result;
   }
 }
 

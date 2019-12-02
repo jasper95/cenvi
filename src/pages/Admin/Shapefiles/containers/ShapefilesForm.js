@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import useQuery from 'shared/hooks/useLazyQuery';
+import useQuery from 'shared/hooks/useQuery';
 import Paper from 'react-md/lib/Papers/Paper';
 import TextField from 'react-md/lib/TextFields/TextField';
 import SelectAutocomplete from 'shared/components/SelectAutocomplete';
@@ -7,28 +7,39 @@ import Button from 'react-md/lib/Buttons/Button';
 import history from 'shared/utils/history';
 import cn from 'classnames';
 import SingleFileUpload from 'shared/components/FileUpload/SingleFileUpload';
-import uploadService from 'shared/utils/uploadService';
-import { useSelector } from 'react-redux';
+import uploadService, { isUploadingSelector } from 'shared/utils/uploadService';
+import { useSelector, useDispatch } from 'react-redux';
+import uuid from 'uuid/v4';
+import useForm from 'shared/hooks/useForm';
+import useMutation from 'shared/hooks/useMutation';
+import omit from 'lodash/omit';
+import { showSuccess } from 'shared/redux/app/reducer';
+
 
 function ShapefilesForm(props) {
-  const isSingleUploading = useSelector(state => state.app.isSingleUploading);
-  const [, onQueryCategories] = useQuery({ url: '/category' }, { isBase: true, initialData: [] });
-  const [categories, setCategories] = useState([]);
-  const {
-    mutationState, onMutate, formState, formHandlers,
-  } = props;
+  const { id } = props.match.params;
+  const dispatch = useDispatch();
+  const isCreate = id === 'new';
+  const [formState, formHandlers] = useForm({
+    initialFields: {
+      id: uuid(),
+    },
+    // validator,
+    onValid: onSave,
+  });
+  const { onSetFields, onElementChange, onValidate } = formHandlers;
+  const isUploading = useSelector(isUploadingSelector);
+  const [categoryResponse] = useQuery({ url: '/category' }, { initialData: [] });
+  const [shapefileResponse] = useQuery({ url: `/shapefile/${id}` }, { skip: isCreate, onFetchSuccess: onSetFields });
   const { fields, errors } = formState;
-  const { onElementChange } = formHandlers;
-
-  useEffect(() => {
-    onQueryCategories()
-      .then((categories) => {
-        setCategories(categories.map(category => ({
-          value: category.id,
-          label: category.name,
-        })));
-      });
-  }, []);
+  const { onChange } = formHandlers;
+  const [mutationState, onMutate] = useMutation({ url: '/shapefile' });
+  const { data: categories } = categoryResponse;
+  if (shapefileResponse.isLoading) {
+    return (
+      <span>Loading...</span>
+    );
+  }
 
   return (
     <>
@@ -45,7 +56,7 @@ function ShapefilesForm(props) {
             </div>
             <div className="ToolbarHeader_toolbar">
               <Button
-                className={cn('iBttn iBttn-primary', { processing: mutationState.loading })}
+                className={cn('iBttn iBttn-primary', { processing: mutationState.loading || isUploading })}
                 onClick={formHandlers.onValidate}
                 children="Save"
                 flat
@@ -79,7 +90,7 @@ function ShapefilesForm(props) {
             <div className="col col-md-4">
               <SelectAutocomplete
                 id="category_id"
-                options={categories}
+                options={categories.map(e => ({ label: e.name, value: e.id }))}
                 label="Category"
                 required
                 value={fields.category_id}
@@ -110,8 +121,7 @@ function ShapefilesForm(props) {
             <p className="iField_label">Shapefile</p>
             <SingleFileUpload
               id="file"
-              // value={fields.image_url ? `${process.env.STATIC_URL}/${fields.image_url}` : fields.file}
-              onChange={validateShapefile}
+              onChange={onElementChange}
             />
           </div>
         </Paper>
@@ -119,8 +129,20 @@ function ShapefilesForm(props) {
     </>
   );
 
-  function validateShapefile(file) {
-    onElementChange(file, 'file');
+  async function onSave(data) {
+    const { file } = data;
+    const extension = file.name.split('.').pop();
+    await Promise.all([
+      file && uploadService(file, { extension, id: data.id }, '/file/upload/shapefile'),
+      onMutate({
+        data: omit(data, 'file'),
+        method: isCreate ? 'POST' : 'PUT',
+      }),
+    ].filter(Boolean));
+    dispatch(showSuccess({ message: `Shapefile successfuly ${isCreate ? 'created' : 'updated'}` }));
+    if (isCreate) {
+      history.push('/admin/shapefiles');
+    }
   }
 }
 
