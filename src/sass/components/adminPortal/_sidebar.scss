@@ -1,4 +1,4 @@
-
+$accent-color: #1a899c;
 .adminPortal .sidebar {
 	background-color: $sidebar-bg;
 	overflow: hidden;
@@ -46,9 +46,9 @@
 				pointer-events: none;
 				background-image: linear-gradient(
 					to right,
-					rgba($primary-color,0),
-					rgba($primary-color,.3),
-					rgba($primary-color,.5),
+					rgba($accent-color,0),
+					rgba($accent-color,.2),
+					rgba($accent-color,.4),
 				);
 				transition: opacity 300ms ease-out;
 			}
@@ -68,20 +68,21 @@
 				align-items: center;
 				justify-content: center;
 				i , i:before {
-					color: rgba($text-color-white,.25);
+					color: rgba($text-color,.25);
 				}
 			}
 
 
 			.md-tile-content {
-				padding-left: 1.5rem;
+				padding-left: 1rem;
 			}
 
 			.md-text {
-				color: rgba($text-color-white,.75);
+				color: rgba($text-color,.75);
 				font-size: 1rem;
 				font-weight: bold;
 				font-family: $font-family;
+				text-transform: capitalize;
 			}
 
 			[role="button"] {
@@ -99,11 +100,11 @@
 
 			.md-tile-addon--icon i ,
 			.md-tile-addon--icon i:before {
-				color: $primary-color;
+				color: $accent-color !important;
 			}
 
 			.md-text {
-				color: $text-color-white;
+				color: $accent-color;
 			}
 		}
 
