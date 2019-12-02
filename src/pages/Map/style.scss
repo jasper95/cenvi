@@ -5,7 +5,7 @@ $rootClass: ".cenvi .page-map";
   padding-top: 0;
   padding-bottom: 0;
   width: 100%;
-  height: calc(100vh - #{$nav-height});
+  height: calc(100vh - #{($nav-height * 2)});
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
@@ -27,15 +27,49 @@ $rootClass: ".cenvi .page-map";
     height: 100%;
     flex-grow: 1;
     flex-shrink: 1;
+  }
+}
+#{$rootClass} .section-map .col-map {
+  .info.legend.leaflet-control {
+    background-color: #fff;
+    padding: 1rem;
+  }
+  .leaflet-container {
+    width: 100%;
+    height: 100%;
 
-    .leaflet-container {
+    .leaflet-map-pane {
       width: 100vw;
+    }
+    .leaflet-control-container {
+      position: relative;
+      z-index: 500;
+      width: 100%;
       height: 100%;
+      .leaflet-top.leaflet-left {
+        margin-top: 100px;
+      }
+    }
 
-      .leaflet-control-container {
-        .leaflet-top.leaflet-left {
-          margin-top: 100px;
-        }
+    .legendItem {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      flex-wrap: nowrap;
+      // .legendItem_color
+      &_color {
+        width: 4rem;
+        height: 1rem;
+        display: inline-block;
+        margin-right: 0.5rem;
+      }
+
+      // .legendItem_text
+      .legendItem_text {
+        font-size: .8rem;
+        font-weight: 600;
+        text-align: right;
       }
     }
   }

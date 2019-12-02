@@ -36,13 +36,18 @@ class Legend extends MapControl {
         from = grades[i];
         to = grades[i + 1];
 
-        labels.push(
-          `<i style="background:${
-            getColor(from + 1)
-          }"></i> ${
-            from
-          }${to ? `&ndash;${to}` : '+'}`,
-        );
+        const labelsDom = `
+          <div class="legendItem">
+            <span 
+              class="legendItem_color"
+              style="background-color: ${getColor(from + 1)}"
+            ></span>
+            <span class='legendItem_text'>
+              ${from} ${to ? `&ndash;${to}` : '+'} 
+            </span>
+          </div>
+        `
+        labels.push(labelsDom);
       }
 
       div.innerHTML = labels.join('<br>');
