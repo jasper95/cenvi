@@ -10,21 +10,26 @@ function CustomOneLevelPieChart(props) {
   const { 
     data,
     barThickness,
-    chartClassName
+    chartClassName,
+    customNumber
   } = props
   return (
     <div className={`${chartClassName} customChart customChart-one-level-pie`}>
       <ReactResizeDetector handleWidth handleHeight>
         {({ width, height }) => (
           <>
-            <h1> {width} {height} </h1>
+            { customNumber && (
+              <h1 className="customChart_number">
+                {customNumber}
+              </h1>
+            )}
             <PieChart width={width} height={height} >
               <Pie
                 data={data}
                 cx={(width/2)}
                 cy={(height/2)}
-                innerRadius={(height/3.2) - barThickness}
-                outerRadius={(height/3.2)}
+                innerRadius={(height/2.3) - barThickness}
+                outerRadius={(height/2.3)}
                 fill="#8884d8"
                 paddingAngle={5}
                 dataKey="value"
@@ -49,7 +54,7 @@ CustomOneLevelPieChart.defaultProps = {
     { name: 'Group D', value: 200, color: '#FF8042' },
   ],
   chartClassName: '',
-  barThickness: 15
+  barThickness: 30
 }
 
 export default CustomOneLevelPieChart;
