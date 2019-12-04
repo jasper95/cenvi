@@ -80,7 +80,7 @@ function Sidebar(props) {
                   src={`${process.env.GEOSERVER_URL}?${qs.stringify({
                     service: 'WMS',
                     request: 'GetLegendGraphic',
-                    layer: `topp:${layer.id}`,
+                    layer: `cenvi:postgis_${layer.id}`,
                     format: 'image/png',
                   })}`}
                 />
@@ -88,14 +88,6 @@ function Sidebar(props) {
             ))}
           </div>
         </div>
-        {/* <div className="row">
-          <TextField
-            id="legend"
-            label="Legend"
-            className="iField"
-            rows={5}
-          />
-        </div> */}
       </div>
     </div>
   );
