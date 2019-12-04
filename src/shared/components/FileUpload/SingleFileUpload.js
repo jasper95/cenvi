@@ -20,7 +20,7 @@ function SingleFileUpload(props) {
   const hasPreviewImage = (file && file.type.includes('image')) || preview;
   return (
     <div
-      className={cn('iDropzone', { 'iDropzone-hasFiles': hasPreviewImage })}
+      className={cn('iDropzone iDropzone-singleUpload', { 'iDropzone-hasFiles': hasPreviewImage })}
       {...getRootProps()}
     >
       <input {...getInputProps()} />
