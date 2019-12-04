@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { TextField, Button } from 'react-md';
+import { TextField, Button, ExpansionPanel } from 'react-md';
 import cn from 'classnames';
 import SelectAutocomplete from 'shared/components/SelectAutocomplete';
 import qs from 'qs';
@@ -64,33 +64,61 @@ function Sidebar(props) {
             </div>
           </div>
         </div>
-        <div className="row">
-          <div>
-            <span>Active Layers</span>
-          </div>
-          <div>
-            {selectedLayers.map(layer => (
-              <div>
-                <span>
-                  {layer.name}
-                </span>
-                <br />
-                <img
-                  alt=""
-                  src={`${process.env.GEOSERVER_URL}?${qs.stringify({
-                    service: 'WMS',
-                    request: 'GetLegendGraphic',
-                    layer: `cenvi:postgis_${layer.id}`,
-                    format: 'image/png',
-                  })}`}
-                />
-              </div>
-            ))}
-          </div>
+        <div className="row row-activeLayers">
+          <label className="iField_label">
+            Active Layers
+          </label>
+          {
+            selectedLayers.map(layer => (<ActiveItemsLayers layer={layer}/>))
+          }
         </div>
       </div>
     </div>
   );
+}
+
+function ActiveItemsLayers(props) {
+  const { layer } = props
+  const [isVisible, setVisibility] = useState(true) 
+  return(
+    <div className="activeLayer">
+      <div className="activeLayer_header">
+        <Button 
+          icon
+          children='drag_handle'
+          className='activeLayer_dragHandle'
+        />
+        <Button 
+          icon
+          children={isVisible ? 'visibility': 'visibility_off'}
+          className={cn('activeLayer_hideShow', {
+            'activeLayer_hideShow-visible':isVisible,
+            'activeLayer_hideShow-hidden':!isVisible,
+          })}
+          onClick={() => setVisibility(!isVisible)}
+        />
+        <p className="activeLayer_label">
+          {layer.name}
+        </p>
+
+      </div>
+      <ExpansionPanel
+        className="activeLayer_container"
+        contentClassName="activeLayer_container_content"
+        footer={null}
+      >
+        <img
+          alt=""
+          src={`${process.env.GEOSERVER_URL}?${qs.stringify({
+            service: 'WMS',
+            request: 'GetLegendGraphic',
+            layer: `cenvi:postgis_${layer.id}`,
+            format: 'image/png',
+          })}`}
+        />
+      </ExpansionPanel>
+    </div>
+  )
 }
 
 Sidebar.defaultProps = {

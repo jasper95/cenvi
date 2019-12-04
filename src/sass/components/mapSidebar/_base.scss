@@ -76,6 +76,10 @@ $base-class: '.page-map .sidebar';
         flex-shrink: 1;
         overflow-y: auto;
         overflow-x: hidden;
+
+        > .row {
+            margin-bottom: 1rem;
+        }
     }
 }
 
