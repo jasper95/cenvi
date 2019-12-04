@@ -17,13 +17,12 @@ export default function Map(props) {
       {activeLayers.map(e => (
         <WMSTileLayer
           url={process.env.GEOSERVER_URL}
-          layers={`topp:${e}`}
+          layers={`cenvi:postgis_${e}`}
           transparent
           format="image/png"
           srs={4326}
         />
       ))}
-      {/* <Legend /> */}
     </LeafletMap>
   );
 }
