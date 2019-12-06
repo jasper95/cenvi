@@ -4,7 +4,6 @@ import {
   TileLayer,
   WMSTileLayer,
 } from 'react-leaflet';
-import Legend from './Legend';
 
 export default function Map(props) {
   const { activeLayers } = props;
@@ -17,7 +16,8 @@ export default function Map(props) {
       {activeLayers.map(e => (
         <WMSTileLayer
           url={process.env.GEOSERVER_URL}
-          layers={`cenvi:postgis_${e}`}
+          layers={`cenvi:${e}`}
+          styles={`cenvi:${e}`}
           transparent
           format="image/png"
           srs={4326}
