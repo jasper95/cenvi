@@ -69,7 +69,7 @@ function Sidebar(props) {
             Active Layers
           </label>
           {
-            selectedLayers.map(layer => (<ActiveItemsLayers layer={layer}/>))
+            selectedLayers.map(layer => (<ActiveItemsLayers layer={layer} />))
           }
         </div>
       </div>
@@ -78,22 +78,22 @@ function Sidebar(props) {
 }
 
 function ActiveItemsLayers(props) {
-  const { layer } = props
-  const [isVisible, setVisibility] = useState(true) 
-  return(
+  const { layer } = props;
+  const [isVisible, setVisibility] = useState(true);
+  return (
     <div className="activeLayer">
       <div className="activeLayer_header">
-        <Button 
+        <Button
           icon
-          children='drag_handle'
-          className='activeLayer_dragHandle'
+          children="drag_handle"
+          className="activeLayer_dragHandle"
         />
-        <Button 
+        <Button
           icon
-          children={isVisible ? 'visibility': 'visibility_off'}
+          children={isVisible ? 'visibility' : 'visibility_off'}
           className={cn('activeLayer_hideShow', {
-            'activeLayer_hideShow-visible':isVisible,
-            'activeLayer_hideShow-hidden':!isVisible,
+            'activeLayer_hideShow-visible': isVisible,
+            'activeLayer_hideShow-hidden': !isVisible,
           })}
           onClick={() => setVisibility(!isVisible)}
         />
@@ -112,13 +112,14 @@ function ActiveItemsLayers(props) {
           src={`${process.env.GEOSERVER_URL}?${qs.stringify({
             service: 'WMS',
             request: 'GetLegendGraphic',
-            layer: `cenvi:postgis_${layer.id}`,
+            layer: `cenvi:${layer.id}`,
+            styles: `cenvi:${layer.id}`,
             format: 'image/png',
           })}`}
         />
       </ExpansionPanel>
     </div>
-  )
+  );
 }
 
 Sidebar.defaultProps = {

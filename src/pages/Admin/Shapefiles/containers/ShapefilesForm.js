@@ -14,6 +14,7 @@ import useForm from 'shared/hooks/useForm';
 import useMutation from 'shared/hooks/useMutation';
 import omit from 'lodash/omit';
 import { showSuccess } from 'shared/redux/app/reducer';
+import { toFormData } from 'shared/utils/tools';
 
 
 function ShapefilesForm(props) {
@@ -117,10 +118,17 @@ function ShapefilesForm(props) {
       </div>
       <div className="row row-stretch">
         <Paper className="col col-md-12-guttered col-actions">
-          <div className="iField">
+          <div className="iField col col-md-6">
             <p className="iField_label">Shapefile</p>
             <SingleFileUpload
               id="file"
+              onChange={onElementChange}
+            />
+          </div>
+          <div className="iField col col-md-6">
+            <p className="iField_label">Style</p>
+            <SingleFileUpload
+              id="sld"
               onChange={onElementChange}
             />
           </div>
@@ -130,19 +138,19 @@ function ShapefilesForm(props) {
   );
 
   async function onSave(data) {
-    const { file } = data;
+    const { file, sld } = data;
     const extension = file.name.split('.').pop();
-    await Promise.all([
-      file && uploadService(file, { extension, id: data.id }, '/file/upload/shapefile'),
-      onMutate({
-        data: omit(data, 'file'),
-        method: isCreate ? 'POST' : 'PUT',
-      }),
-    ].filter(Boolean));
-    dispatch(showSuccess({ message: `Shapefile successfuly ${isCreate ? 'created' : 'updated'}` }));
-    if (isCreate) {
-      history.push('/admin/shapefiles');
-    }
+    const sldExtension = sld.name.split('.').pop();
+    onMutate({
+      data: toFormData({ ...data, extension, sld_extension: sldExtension }),
+      method: isCreate ? 'POST' : 'PUT',
+      message: `Shapefile successfuly ${isCreate ? 'created' : 'updated'}`,
+      onSuccess() {
+        if (isCreate) {
+          history.push('/admin/shapefiles');
+        }
+      },
+    });
   }
 }
 
