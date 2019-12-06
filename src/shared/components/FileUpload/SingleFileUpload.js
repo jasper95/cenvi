@@ -49,6 +49,9 @@ function SingleFileUpload(props) {
                 alt="Preview"
               />
             </div>
+            <h1 className="iDropzone_file_name">
+              {file.name}
+            </h1>
           </div>
         </div>
       )}

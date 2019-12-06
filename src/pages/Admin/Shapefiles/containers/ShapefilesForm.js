@@ -123,6 +123,7 @@ function ShapefilesForm(props) {
             <SingleFileUpload
               id="file"
               onChange={onElementChange}
+              acceptedFileTypes={['zip','shp']}
             />
           </div>
           <div className="iField col col-md-6">
