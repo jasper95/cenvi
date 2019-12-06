@@ -67,18 +67,14 @@ function SingleFileUpload(props) {
     const reader = new FileReader();
     const fileType = acceptedFile.type.split('/')[1]
 
-    setFile(acceptedFile);
-    
-    console.log('acceptedFile ==== ', acceptedFile)
-
     if (acceptedFileTypes && !acceptedFileTypes.includes(fileType)) {
       dispatch(showError({ message: 'File is not supported' }))
       return;
     }
 
-    const retrieveDefaultFileType = FILE_TYPE_IMAGES.find((f) => f.type === fileType)
+    setFile(acceptedFile);
 
-    console.log('retrieveDefaultFileType === ', retrieveDefaultFileType)
+    const retrieveDefaultFileType = FILE_TYPE_IMAGES.find((f) => f.type === fileType)
 
     reader.onload = () => {
       let preview = retrieveDefaultFileType 
