@@ -63,6 +63,16 @@
 // SINGLE FILE
 // ================================
 .iDropzone-singleUpload {
+	height: 300px;
+
+	.iDropzone_files {
+		width: 100%;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;	
+	}
+
 	.iDropzone_file {
 		width: 100%;
 
@@ -77,6 +87,15 @@
 			width: 100%;
 			height: 100%;
 			object-fit: contain;
+		}
+	}
+
+
+	.iDropzone_file {
+		// .iDropzone_file--zip
+		&--zip {
+			max-width: 200px;
+			margin: 0 auto;
 		}
 	}
 }
