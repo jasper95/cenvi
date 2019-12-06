@@ -14,7 +14,7 @@ function CustomResponsiveChart(props) {
     <div className={cn(`${chartClassName} customChart`,{
       [`customChart-${type}`] : type,
     })}>
-      <ResponsiveContainer debounce={100000000000000}>
+      <ResponsiveContainer debounce={500}>
         {children}
       </ResponsiveContainer>
     </div>
