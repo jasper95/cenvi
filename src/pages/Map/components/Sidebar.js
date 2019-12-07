@@ -1,21 +1,25 @@
 import React, { useState, useMemo } from 'react';
-import { TextField, Button, ExpansionPanel } from 'react-md';
+import { Button, ExpansionPanel } from 'react-md';
 import cn from 'classnames';
 import SelectAutocomplete from 'shared/components/SelectAutocomplete';
 import qs from 'qs';
+import omit from 'lodash/omit';
 
 import 'sass/components/mapSidebar/index.scss';
 import useQuery from 'shared/hooks/useQuery';
 
 function Sidebar(props) {
-  const { categories, activeLayers, onActivateLayer } = props;
-  const [queryState] = useQuery({ url: '/shapefile' }, { initialData: [] });
+  const { activeLayers, onActivateLayer, onRemoveLayer } = props;
+  const [activeFilters, setActiveFilters] = useState({ all: true });
+  const [shapefileQueryState] = useQuery({ url: '/shapefile' }, { initialData: [] });
+  const [categoryQueryState] = useQuery({ url: '/category' }, { initialData: [] });
+  const { data: categoryData } = categoryQueryState;
+  const { data: shapefileData } = shapefileQueryState;
   const [sidebarOpen, setSidebarOpen] = useState(true);
-  const selectedLayers = useMemo(() => activeLayers.map(e => queryState.data.find(ee => ee.id === e)), [activeLayers, queryState.data]);
-  const selectOptions = useMemo(() => queryState
-    .data
-    // .filter(e => )
-    .map(e => ({ label: e.name, value: e.id })), [queryState.data]);
+  const selectedLayers = useMemo(getActiveLayers, [activeLayers, shapefileData]);
+  const layersOptions = useMemo(getLayersOptions, [shapefileData, activeLayers]);
+  const categoryOptions = useMemo(getCategoryOptions, [categoryData, activeFilters]);
+
   return (
     <div className={cn('sidebar', {
       'sidebar-open': sidebarOpen,
@@ -39,8 +43,8 @@ function Sidebar(props) {
         <div className="row">
           <SelectAutocomplete
             label="Available Layers"
-            options={selectOptions}
-            isLoading={queryState.loading}
+            options={layersOptions}
+            isLoading={shapefileQueryState.loading}
             onChange={layer => onActivateLayer(layer)}
           />
         </div>
@@ -50,10 +54,11 @@ function Sidebar(props) {
               Filter Categories By:
             </label>
             <div className="categories">
-              { categories && categories.map(cat => (
+              {categoryOptions.map(cat => (
                 <Button
                   children={cat.label}
                   tooltipLabel={cat.label}
+                  onClick={() => onSetActiveFilter(cat.value)}
                   tooltipPosition="top"
                   className={cn('iBttn', {
                     'iBttn-primary': cat.active,
@@ -68,25 +73,57 @@ function Sidebar(props) {
           <label className="iField_label">
             Active Layers
           </label>
-          {
-            selectedLayers.map(layer => (<ActiveItemsLayers layer={layer} />))
-          }
+          {selectedLayers.map(layer => (
+            <ActiveItemsLayers
+              layer={layer}
+              onRemoveLayer={() => onRemoveLayer(layer.id)}
+            />
+          ))}
         </div>
       </div>
     </div>
   );
+
+  function getActiveLayers() {
+    return activeLayers.map(e => shapefileData.find(ee => ee.id === e));
+  }
+
+  function onSetActiveFilter(filter) {
+    if (filter === 'all') {
+      setActiveFilters({ all: true });
+    } else {
+      setActiveFilters(prevFilters => ({ ...omit(prevFilters, 'all'), [filter]: true }));
+    }
+  }
+
+  function getLayersOptions() {
+    const options = shapefileData
+      .filter(e => !activeLayers.includes(e.id))
+      .map(e => ({ label: e.name, value: e.id }));
+    if (activeFilters.all) {
+      return options;
+    }
+    return options.filter(e => activeFilters[e.value]);
+  }
+
+  function getCategoryOptions() {
+    const catOptions = categoryData
+      .map(e => ({ label: e.name, value: e.id, active: activeFilters[e.id] }));
+    return [{ label: 'All', value: 'all', active: activeFilters.all }].concat(catOptions);
+  }
 }
 
 function ActiveItemsLayers(props) {
-  const { layer } = props;
+  const { layer, onRemoveLayer } = props;
   const [isVisible, setVisibility] = useState(true);
   return (
     <div className="activeLayer">
       <div className="activeLayer_header">
         <Button
           icon
-          children="drag_handle"
+          children="remove"
           className="activeLayer_dragHandle"
+          onClick={onRemoveLayer}
         />
         <Button
           icon
@@ -123,37 +160,6 @@ function ActiveItemsLayers(props) {
 }
 
 Sidebar.defaultProps = {
-  categories: [
-    {
-      id: 1,
-      label: 'All',
-      active: true,
-    },
-    {
-      id: 2,
-      label: 'Disaster Risk',
-    },
-    {
-      id: 3,
-      label: 'Social',
-    },
-    {
-      id: 4,
-      label: 'Political',
-    },
-    {
-      id: 5,
-      label: 'Economical',
-    },
-    {
-      id: 6,
-      label: 'Environmental',
-    },
-    {
-      id: 7,
-      label: 'Others',
-    },
-  ],
 };
 
 export default Sidebar;

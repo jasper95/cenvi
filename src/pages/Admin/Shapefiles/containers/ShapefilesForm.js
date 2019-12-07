@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import useQuery from 'shared/hooks/useQuery';
 import Paper from 'react-md/lib/Papers/Paper';
 import TextField from 'react-md/lib/TextFields/TextField';
@@ -7,19 +7,16 @@ import Button from 'react-md/lib/Buttons/Button';
 import history from 'shared/utils/history';
 import cn from 'classnames';
 import SingleFileUpload from 'shared/components/FileUpload/SingleFileUpload';
-import uploadService, { isUploadingSelector } from 'shared/utils/uploadService';
-import { useSelector, useDispatch } from 'react-redux';
+import { isUploadingSelector } from 'shared/utils/uploadService';
+import { useSelector } from 'react-redux';
 import uuid from 'uuid/v4';
 import useForm from 'shared/hooks/useForm';
 import useMutation from 'shared/hooks/useMutation';
-import omit from 'lodash/omit';
-import { showSuccess } from 'shared/redux/app/reducer';
 import { toFormData } from 'shared/utils/tools';
 
 
 function ShapefilesForm(props) {
   const { id } = props.match.params;
-  const dispatch = useDispatch();
   const isCreate = id === 'new';
   const [formState, formHandlers] = useForm({
     initialFields: {
@@ -28,12 +25,11 @@ function ShapefilesForm(props) {
     // validator,
     onValid: onSave,
   });
-  const { onSetFields, onElementChange, onValidate } = formHandlers;
+  const { onSetFields, onElementChange } = formHandlers;
   const isUploading = useSelector(isUploadingSelector);
   const [categoryResponse] = useQuery({ url: '/category' }, { initialData: [] });
   const [shapefileResponse] = useQuery({ url: `/shapefile/${id}` }, { skip: isCreate, onFetchSuccess: onSetFields });
   const { fields, errors } = formState;
-  const { onChange } = formHandlers;
   const [mutationState, onMutate] = useMutation({ url: '/shapefile' });
   const { data: categories } = categoryResponse;
   if (shapefileResponse.isLoading) {
@@ -123,7 +119,7 @@ function ShapefilesForm(props) {
             <SingleFileUpload
               id="file"
               onChange={onElementChange}
-              acceptedFileTypes={['zip','shp']}
+              acceptedFileTypes={['zip', 'shp', 'rar']}
             />
           </div>
           <div className="iField col col-md-6">
@@ -131,6 +127,7 @@ function ShapefilesForm(props) {
             <SingleFileUpload
               id="sld"
               onChange={onElementChange}
+              acceptedFileTypes={['zip', 'rar', 'sld']}
             />
           </div>
         </Paper>

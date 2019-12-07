@@ -10,7 +10,7 @@ import FILE_TYPE_IMAGES from 'shared/constants/fileType';
 function SingleFileUpload(props) {
   const {
     value, onChange, id, error,
-    acceptedFileTypes
+    acceptedFileTypes,
   } = props;
   const [file, setFile] = useState(null);
   const [preview, setPreview] = useState(value);
@@ -21,11 +21,11 @@ function SingleFileUpload(props) {
       setPreview(value);
     }
   }, [value]);
- 
-  const { getRootProps, getInputProps } = useDropzone({ 
-    onDrop, 
+
+  const { getRootProps, getInputProps } = useDropzone({
+    onDrop,
     multiple: false,
-  }); 
+  });
 
 
   const hasPreviewImage = (file && file.type.includes('image')) || preview;
@@ -65,21 +65,21 @@ function SingleFileUpload(props) {
 
   function onDrop([acceptedFile]) {
     const reader = new FileReader();
-    const fileType = acceptedFile.type.split('/')[1]
+    const fileType = acceptedFile.type.split('/')[1];
 
     if (acceptedFileTypes && !acceptedFileTypes.includes(fileType)) {
-      dispatch(showError({ message: 'File is not supported' }))
+      dispatch(showError({ message: 'File is not supported' }));
       return;
     }
 
     setFile(acceptedFile);
 
-    const retrieveDefaultFileType = FILE_TYPE_IMAGES.find((f) => f.type === fileType)
+    const retrieveDefaultFileType = FILE_TYPE_IMAGES.find(f => f.type === fileType);
 
     reader.onload = () => {
-      let preview = retrieveDefaultFileType 
+      const preview = retrieveDefaultFileType
         ? retrieveDefaultFileType.image
-        : reader.result
+        : reader.result;
 
       setPreview(preview);
     };
@@ -88,5 +88,9 @@ function SingleFileUpload(props) {
     reader.readAsDataURL(acceptedFile);
   }
 }
+
+SingleFileUpload.defaultProps = {
+  acceptedFileTypes: ['jpg', 'jpeg', 'png'],
+};
 
 export default SingleFileUpload;

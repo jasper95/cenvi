@@ -106,7 +106,7 @@ function LoginPage() {
   function onSuccess(response) {
     cookie.set('token', response.token, { expires: 360000 });
     dispatch(authorize(response));
-    history.push('/');
+    history.push('/admin');
   }
 }
 export default LoginPage;

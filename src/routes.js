@@ -35,7 +35,6 @@ const AdminShapefiles = loadable(() => import('pages/Admin/Shapefiles/containers
 const AdminShapefilesForm = loadable(() => import('pages/Admin/Shapefiles/containers/ShapefilesForm'));
 
 
-
 // const FileUpload = loadable(() => import('pages/FileUploadPage'));
 // const ShapefileUpload = loadable(() => import('pages/ShapefileUploadPage'));
 // const SubProject = loadable(() => import('pages/SubProjectPage'));
@@ -229,30 +228,45 @@ export default [
     component: SubProjects,
     path: '/sub-projects',
     exact: true,
+    pageProps: {
+      requireAuth: 'optional',
+    },
   },
   {
     key: 'team',
     component: Team,
     path: '/team',
     exact: true,
+    pageProps: {
+      requireAuth: 'optional',
+    },
   },
   {
     key: 'albums',
     component: Albums,
     path: '/albums',
     exact: true,
+    pageProps: {
+      requireAuth: 'optional',
+    },
   },
   {
     key: 'albums',
     component: AlbumDetails,
     path: '/albums/:id',
     exact: true,
+    pageProps: {
+      requireAuth: 'optional',
+    },
   },
   {
     key: 'map',
     component: MapPage,
     path: '/map',
     exact: true,
+    pageProps: {
+      requireAuth: 'optional',
+    },
   },
   {
     key: 'blogs',

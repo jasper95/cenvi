@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import useQuery from 'shared/hooks/useQuery';
 import Map from './components/Map';
 import Sidebar from './components/Sidebar';
 import './style.scss';
@@ -9,7 +8,7 @@ export default function MapPage() {
   return (
     <section className="section-map section">
       <div className="col-sidebar">
-        <Sidebar activeLayers={activeLayers} onActivateLayer={onActivateLayer} />
+        <Sidebar activeLayers={activeLayers} onActivateLayer={onActivateLayer} onRemoveLayer={onRemoveLayer} />
       </div>
       <div className="col-map">
         <Map activeLayers={activeLayers} />
@@ -17,7 +16,10 @@ export default function MapPage() {
     </section>
   );
 
-  async function onActivateLayer(data) {
+  function onActivateLayer(data) {
     setLayers(prev => prev.concat(data));
+  }
+  function onRemoveLayer(id) {
+    setLayers(prev => prev.filter(e => e !== id));
   }
 }
