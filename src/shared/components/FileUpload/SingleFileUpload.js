@@ -65,7 +65,7 @@ function SingleFileUpload(props) {
 
   function onDrop([acceptedFile]) {
     const reader = new FileReader();
-    const fileType = acceptedFile.type.split('/')[1];
+    const fileType = acceptedFile.name.split('.').pop();
 
     if (acceptedFileTypes && !acceptedFileTypes.includes(fileType)) {
       dispatch(showError({ message: 'File is not supported' }));

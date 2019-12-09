@@ -17,7 +17,6 @@ export default function Map(props) {
         <WMSTileLayer
           url={process.env.GEOSERVER_URL}
           layers={`cenvi:${e}`}
-          styles={`cenvi:${e}`}
           transparent
           format="image/png"
           srs={4326}

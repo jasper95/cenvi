@@ -3,7 +3,7 @@ import Button from 'react-md/lib/Buttons/Button';
 
 function ToolbarRenderer(props) {
   const {
-    pageName, baseClass, selected, rows, onClickNew, onConfirmDelete
+    pageName, baseClass, selected, rows, onClickNew, onConfirmDelete,
   } = props;
   return (
     <div className={`${baseClass} row`}>
@@ -32,7 +32,7 @@ function ToolbarRenderer(props) {
             children="Delete"
             iconChildren="delete"
             className="iBttn iBttn-error"
-            onClick={onConfirmDelete}
+            onClick={() => onConfirmDelete(selected)}
           />
         )}
       </div>

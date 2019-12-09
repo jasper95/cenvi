@@ -119,7 +119,7 @@ function ShapefilesForm(props) {
             <SingleFileUpload
               id="file"
               onChange={onElementChange}
-              acceptedFileTypes={['zip', 'shp', 'rar']}
+              acceptedFileTypes={['zip', 'shp', 'rar', 'kml', 'kmz']}
             />
           </div>
           <div className="iField col col-md-6">
@@ -137,8 +137,8 @@ function ShapefilesForm(props) {
 
   async function onSave(data) {
     const { file, sld } = data;
-    const extension = file.name.split('.').pop();
-    const sldExtension = sld.name.split('.').pop();
+    const extension = file && file.name.split('.').pop();
+    const sldExtension = sld && sld.name.split('.').pop();
     onMutate({
       data: toFormData({ ...data, extension, sld_extension: sldExtension }),
       method: isCreate ? 'POST' : 'PUT',

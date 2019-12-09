@@ -63,13 +63,13 @@ function usePage(props) {
   ]);
   return [states, handlers];
 
-  function confirmDelete() {
+  function confirmDelete(ids) {
     dispatch(showDialog({
       component: Confirm,
       props: {
         title: 'Confirm Delete',
         message: 'Do you want to delete selected record(s)?',
-        onValid: () => onDelete({ data: { ids: selected }, message: 'Record(s) successfully deleted' }),
+        onValid: () => onDelete({ data: { ids }, message: 'Record(s) successfully deleted' }),
       },
     }));
   }
