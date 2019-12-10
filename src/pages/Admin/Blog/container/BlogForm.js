@@ -181,6 +181,7 @@ function EditBlog(props) {
                 onElementChange(file, 'file');
               }}
               error={errors.image_url}
+              acceptedFileTypes={['png', 'jpg', 'jpeg']}
             />
           </div>
         </Paper>

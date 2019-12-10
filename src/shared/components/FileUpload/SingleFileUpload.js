@@ -41,7 +41,7 @@ function SingleFileUpload(props) {
       </p>
       { hasPreviewImage && (
         <div className="iDropzone_files">
-          <div className={`iDropzone_file  iDropzone_file--${file.type.split('/')[1]}`}>
+          <div className="iDropzone_file">
             <div className="iDropzone_file_preview">
               <ImageLoader
                 className="iDropzone_file_preview_src"
@@ -49,9 +49,11 @@ function SingleFileUpload(props) {
                 alt="Preview"
               />
             </div>
-            <h1 className="iDropzone_file_name">
-              {file.name}
-            </h1>
+            {file && (
+              <h1 className="iDropzone_file_name">
+                {file.name}
+              </h1>
+            )}
           </div>
         </div>
       )}
