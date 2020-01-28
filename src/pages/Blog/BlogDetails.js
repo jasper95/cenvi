@@ -6,6 +6,8 @@ import { getPhotoUrl } from 'shared/utils/tools';
 import ImageLoader from 'react-image';
 import Author from './components/Author';
 import 'sass/components/blogPage/index.scss';
+import BlogPageSkeleton from 'shared/components/Skeletons/BlogPageSkeleton';
+
 
 function BlogDetails(props) {
   const BCP = 'blogPage';
@@ -16,9 +18,9 @@ function BlogDetails(props) {
   }, []);
   const { loading, data: blog } = blogResponse;
 
-  if (loading) {
+  if (true) {
     return (
-      <span>Loading...</span>
+      <BlogPageSkeleton />
     );
   }
   return (
