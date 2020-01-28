@@ -6,8 +6,8 @@ const Content = () => (
   <BaseSkeleton
     width="212.26"
     height="209.17"
-    primaryColor='#e2e2e2'
-    secondaryColor='#c7c7c7'
+    primaryColor="#d5dff1"
+    secondaryColor="#dfe8f7"
   >
     <path d="M207.07,161.94H5.19c-2.87,0-5.19-2.32-5.19-5.19V5.19C0,2.32,2.32,0,5.19,0h201.88c2.87,0,5.19,2.32,5.19,5.19v151.55
     C212.26,159.61,209.93,161.94,207.07,161.94z"
@@ -25,14 +25,14 @@ const Content = () => (
       C141.45,207.03,139.31,209.17,136.66,209.17z"
     />
   </BaseSkeleton>
-)
+);
 
 const UserCitation = () => (
   <BaseSkeleton
     width="145.51"
     height="37.4"
-    primaryColor='#e2e2e2'
-    secondaryColor='#c7c7c7'
+    primaryColor="#d5dff1"
+    secondaryColor="#dfe8f7"
   >
     <path d="M142.2,17.21H49.39c-1.83,0-3.31-1.48-3.31-3.31V6.85c0-1.83,1.48-3.31,3.31-3.31h92.81c1.83,0,3.31,1.48,3.31,3.31v7.04
     C145.51,15.73,144.03,17.21,142.2,17.21z"
@@ -42,19 +42,17 @@ const UserCitation = () => (
     />
     <circle cx="18.7" cy="18.7" r="18.7" />
   </BaseSkeleton>
-)
+);
 
-const BlogSkeleton = ()  => {
-  return (
-    <div className="skeleton skeleton-blog">
-      <div className="content">
-        <Content />
-      </div>
-      <div className="user">
-        <UserCitation />
-      </div>
+const BlogSkeleton = () => (
+  <div className="skeleton skeleton-blog">
+    <div className="content">
+      <Content />
     </div>
-  )
-}
+    <div className="user">
+      <UserCitation />
+    </div>
+  </div>
+);
 
-export default BlogSkeleton
+export default BlogSkeleton;
