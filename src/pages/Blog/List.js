@@ -3,6 +3,11 @@ import useQuery from 'shared/hooks/useLazyQuery';
 import SectionHeader from 'shared/components/Section';
 import BlogItem from './components/BlogItem';
 import Author from './components/Author';
+import range from 'lodash/range';
+
+
+import BlogSkeleton from 'shared/components/Skeletons/BlogSkeleton'
+
 
 function BlogList() {
   const [rowResponse, onQuery] = useQuery({ url: '/published_blog' }, { initialData: [], initialLoading: true });
@@ -30,7 +35,9 @@ function BlogList() {
       <div className="row row-content">
         <div className="container">
           {loading ? (
-            <div>Loading...</div>
+            <div className="row">
+              <BlogSkeletons />
+            </div>
           ) : (
             <div className="row">
               {blogs.length > 0 ? (
@@ -54,6 +61,18 @@ function BlogList() {
       </div>
     </section>
   );
+}
+
+function  BlogSkeletons() {
+  return (
+    <>
+      { range(0, 3).map(() => (
+        <div className="col col-lg-4 col-md-6">
+          <BlogSkeleton />
+        </div>
+      ))}
+    </>
+  )
 }
 
 export default BlogList;
