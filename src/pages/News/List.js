@@ -17,13 +17,13 @@ function BlogList() {
   }, []);
 
   return (
-    <section className="blogSection section">
+    <section className="newsSection section">
       <SectionHeader
         withContainer
         rowSize={10}
         position="left"
-        headerLabel="BLOGS"
-        header="The Latest Blogs from Cenvi"
+        headerLabel="News"
+        header="The Latest News from Cenvi"
         desc={`
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
           Id culpa, mollitia suscipit nihil animi error. Veritatis
@@ -43,7 +43,7 @@ function BlogList() {
                 <>
                   {blogs.map(e => (
                     <div className="col col-lg-4 col-md-6">
-                      <ArticleItem type="blogs" key={e.id} data={e} />
+                      <ArticleItem type="news" key={e.id} data={e} />
                     </div>
                   ))}
                 </>

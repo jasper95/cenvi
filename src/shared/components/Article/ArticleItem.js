@@ -6,13 +6,12 @@ import Link from 'react-router-dom/Link';
 import Button from 'react-md/lib/Buttons/Button';
 import ImageLoader from 'react-image';
 import Author from './Author';
-import 'sass/components/cards/blogCard/index.scss';
+import 'sass/components/cards/articleCard/index.scss';
 
-function BlogItem(props) {
-  const { blog } = props;
-  console.log('blog: ', blog);
-  const dates = formatISOToDate(pick(blog, 'published_date'), ['published_date'], 'MM-DD-YYYY');
-  const BCP = 'blogCard';
+function ArticleItem(props) {
+  const { data, type } = props;
+  const dates = formatISOToDate(pick(data, 'published_date'), ['published_date'], 'MM-DD-YYYY');
+  const BCP = 'articleCard';
   return (
     <div className={BCP}>
 
@@ -28,23 +27,23 @@ function BlogItem(props) {
             className={`${BCP}_link`}
             children="insert_link"
             onClick={() => {
-              history.push(`/blogs/${blog.slug}`);
+              history.push(`/${type}/${data.slug}`);
             }}
           />
         </div>
         <ImageLoader
           className={`${BCP}_media_img`}
-          src={`${process.env.STATIC_URL}/${blog.image_url}`}
+          src={`${process.env.STATIC_URL}/${data.image_url}`}
           alt=""
         />
       </div>
 
       <div className={`${BCP}_content`}>
-        <Link className={`${BCP}_header`} to={`/blogs/${blog.slug}`}>
-          {blog.name}
+        <Link className={`${BCP}_header`} to={`/blogs/${data.slug}`}>
+          {data.name}
         </Link>
         <div className={`${BCP}_tags tag`}>
-          { blog.tags.length > 0 && blog.tags.map(tag => (
+          { data.tags.length > 0 && data.tags.map(tag => (
             <Link
               to="/login"
               className="tag_item"
@@ -54,14 +53,14 @@ function BlogItem(props) {
           ))}
         </div>
         <p className={`${BCP}_excerpt`}>
-          {blog.excerpt}
+          {data.excerpt}
         </p>
       </div>
 
       <div className={`${BCP}_footer`}>
         <Author
           className={`${BCP}_author`}
-          name={blog.author}
+          name={data.author}
         />
       </div>
     </div>
@@ -69,4 +68,4 @@ function BlogItem(props) {
 }
 
 
-export default BlogItem;
+export default ArticleItem;

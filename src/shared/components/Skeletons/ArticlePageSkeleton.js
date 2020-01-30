@@ -1,5 +1,4 @@
 import React from 'react';
-import UserSkeleton from './UserSkeleton';
 import BaseSkeleton from './BaseSkeleton';
 
 
@@ -94,7 +93,7 @@ const Contents = () => (
   </BaseSkeleton>
 );
 
-const BlogPageSkeleton = () => (
+const ArticlePageSkeleton = () => (
   <div className="skeleton skeleton-blog-page">
     <div className="content_title">
       <Title />
@@ -117,4 +116,4 @@ const BlogPageSkeleton = () => (
   </div>
 );
 
-export default BlogPageSkeleton;
+export default ArticlePageSkeleton;

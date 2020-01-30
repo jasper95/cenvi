@@ -1,9 +1,4 @@
 import React from 'react';
-import { formatISOToDate } from 'shared/utils/tools';
-import pick from 'lodash/pick';
-import history from 'shared/utils/history';
-import Link from 'react-router-dom/Link';
-import Button from 'react-md/lib/Buttons/Button';
 import 'sass/components/author/index.scss';
 
 function Author(props) {

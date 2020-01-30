@@ -1,15 +1,15 @@
-.cenvi .blogCard {
+.cenvi .articleCard {
 	padding: 1em;
 	margin-bottom: 1em;
 	border-radius: .5em;
 	width: 100%;
 
-	// .blogCard_date
+	// .articleCard_date
 	&_date {
 		color: $darkgray;
 	}
 
-	// .blogCard_media
+	// .articleCard_media
 	&_media {
 		width: 100%;
 		height: 15rem;
@@ -17,7 +17,7 @@
 		position: relative;
 		background-color: $darkgray;
 
-		// .blogCard_media_action
+		// .articleCard_media_action
 		&_action {
 			position: absolute;
 			top: 0;
@@ -33,25 +33,25 @@
 			transition: 200ms ease-out;
 		}
 
-		// .blogCard_media_img
+		// .articleCard_media_img
 		&_img {
 			position: relative;
 			z-index: 1;
 		}
 
 		&:hover {
-			.blogCard_media_action {
+			.articleCard_media_action {
 				opacity: 1;
 			}
 		}
 	}
 
-	// .blogCard_content
+	// .articleCard_content
 	&_content {
 		padding: 1rem 0;
 	}
 
-	// .blogCard_header
+	// .articleCard_header
 	&_header {
 		font-weight: bold;
 		font-size: 2rem;
@@ -61,12 +61,12 @@
 		display: block;
 	}
 
-	// .blogCard_tags
+	// .articleCard_tags
 	&_tags {
 		width: 100%;
 	}
 
-	// .blogCard_excerpt
+	// .articleCard_excerpt
 	&_excerpt {
 		width: 100%;
 		margin-top: 2rem;
@@ -75,7 +75,7 @@
 		color: $text-color;
 	}
 
-	// .blogCard_link
+	// .articleCard_link
 	&_link {
 		background-color: $white;
 		color: $text-color;
@@ -100,7 +100,7 @@
 		}
 	}
 
-	// .blogCard_author
+	// .articleCard_author
 	&_author {
 		margin-top: 2rem;
 	}

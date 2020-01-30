@@ -1,12 +1,12 @@
-.blogPage {
+.article {
 
-	// .blogPage_textContainer
+	// .article_textContainer
 	&_textContainer {
 		max-width: 800px;
 		margin: 0 auto;
 	}
 
-	// .blogPage_header
+	// .article_header
 	&_header {
 		display: flex;
 		align-items: center;
@@ -15,7 +15,7 @@
 		margin-bottom: 2rem;
 	}
 
-	// .blogPage_title
+	// .article_title
 	&_title {
 		font-size: 5rem;
 		font-weight: bold;
@@ -23,12 +23,12 @@
 		margin-bottom: .75em;
 	}
 
-	// .blogPage_author
+	// .article_author
 	&_author {
 		width: auto;
 	}
 
-	// .blogPage_image
+	// .article_image
 	&_image {
 		max-width: 1025px;
 		height: 30rem;
@@ -41,7 +41,7 @@
 		}
 	}
 
-	// .blogPage_contents
+	// .article_contents
 	&_contents {
 		font-size: 1.15em;
 		line-height: 2;

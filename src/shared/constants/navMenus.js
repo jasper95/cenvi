@@ -43,17 +43,22 @@ export default [
     label: 'Blogs',
   },
   {
-    id: 8,
+    id: 9,
+    path: '/news',
+    label: 'News',
+  },
+  {
+    id: 10,
     path: '/albums',
     label: 'Albums',
   },
   {
-    id: 9,
+    id: 11,
     path: '/#collaborators',
     label: 'Collaborators',
   },
   {
-    id: 10,
+    id: 12,
     label: 'About',
     submenu: [
       {

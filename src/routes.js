@@ -14,8 +14,12 @@ const SubProjects = loadable(() => import('pages/SubProjects'));
 const Team = loadable(() => import('pages/Team'));
 const Albums = loadable(() => import('pages/Albums'));
 const AlbumDetails = loadable(() => import('pages/Albums/AlbumDetails'));
+
 const PublicBlogs = loadable(() => import('pages/Blog/List'));
 const PublicBlogDetails = loadable(() => import('pages/Blog/BlogDetails'));
+
+const PublicNews = loadable(() => import('pages/News/List'));
+const PublicNewsDetails = loadable(() => import('pages/News/NewsDetails'));
 
 
 const Dashboard = loadable(() => import('pages/Admin/Dashboard/containers/Dashboard'));
@@ -283,6 +287,28 @@ export default [
     key: 'blogs',
     component: PublicBlogDetails,
     path: '/blogs/:slug',
+    exact: true,
+    pageProps: {
+      hasFooter: true,
+      requireAuth: 'optional',
+      hasNavigation: true,
+    },
+  },
+  {
+    key: 'news',
+    component: PublicNews,
+    path: '/news',
+    exact: true,
+    pageProps: {
+      hasFooter: true,
+      requireAuth: 'optional',
+      hasNavigation: true,
+    },
+  },
+  {
+    key: 'news',
+    component: PublicNewsDetails,
+    path: '/news/:slug',
     exact: true,
     pageProps: {
       hasFooter: true,
