@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
 import SectionHeader from 'shared/components/Section';
 import useQuery from 'shared/hooks/useLazyQuery';
+import { AlbumItemSkeleton } from 'shared/components/Skeletons';
 import AlbumCard from './components/AlbumCard';
+
 
 function AlbumsListPage(props) {
   const [queryState, onQuery] = useQuery({ url: '/published_album' }, { initialLoading: true, initialData: [] });
@@ -20,7 +22,7 @@ function AlbumsListPage(props) {
       />
       <div className="container">
         {loading ? (
-          <span>Loading...</span>
+          <AlbumItemSkeleton />
         ) : (
           <div className="row">
             {albums.length !== 0 ? (
