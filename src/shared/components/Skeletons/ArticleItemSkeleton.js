@@ -44,7 +44,7 @@ const UserCitation = () => (
   </BaseSkeleton>
 );
 
-const BlogSkeleton = () => (
+const ArticleItemSkeleton = () => (
   <div className="skeleton skeleton-blog">
     <div className="content">
       <Content />
@@ -55,4 +55,4 @@ const BlogSkeleton = () => (
   </div>
 );
 
-export default BlogSkeleton;
+export default ArticleItemSkeleton;

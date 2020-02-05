@@ -4,12 +4,12 @@ import SectionHeader from 'shared/components/Section';
 
 import range from 'lodash/range';
 
-import BlogSkeleton from 'shared/components/Skeletons/BlogSkeleton';
+import ArticleItemSkeleton from 'shared/components/Skeletons/ArticleItemSkeleton';
 import ArticleItem from 'shared/components/Article/ArticleItem';
 
 
-function BlogList() {
-  const [rowResponse, onQuery] = useQuery({ url: '/published_blog' }, { initialData: [], initialLoading: true });
+function NewsList() {
+  const [rowResponse, onQuery] = useQuery({ url: '/published_news' }, { initialData: [], initialLoading: true });
   const { data: blogs, loading } = rowResponse;
   useEffect(() => {
     onQuery();
@@ -67,11 +67,11 @@ function BlogSkeletons() {
     <>
       { range(0, 3).map(() => (
         <div className="col col-lg-4 col-md-6">
-          <BlogSkeleton />
+          <ArticleItemSkeleton />
         </div>
       ))}
     </>
   );
 }
 
-export default BlogList;
+export default NewsList;
