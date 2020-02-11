@@ -68,7 +68,7 @@ function Page(props) {
           content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
         />
         <meta property="og:image" content="/static/img/logo.png" />
-        <meta property="og:site_name" content="Internlink" />
+        <meta property="og:site_name" content="CENVI" />
         <meta property="og:locale" content="en_US" />
         <meta name="robots" content="index, follow" />
 
