@@ -5,6 +5,12 @@
   headers = { cache-control = "max-age=0" }
 
 [[redirects]]
+  from = "/n8kvx2na1bp9orklepiuu1ww4cy7au.html" 
+  to = "/n8kvx2na1bp9orklepiuu1ww4cy7au.html"
+  status = 200
+  headers = { cache-control = "max-age=0" }
+
+[[redirects]]
   from = "/static/*" 
   to = "/:splat"
   status = 200
