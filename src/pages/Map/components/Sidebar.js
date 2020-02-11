@@ -10,7 +10,9 @@ import useQuery from 'shared/hooks/useQuery';
 import { exportShapefile } from 'shared/utils/tools';
 
 function Sidebar(props) {
-  const { activeLayers, onActivateLayer, onRemoveLayer } = props;
+  const {
+    activeLayers, onActivateLayer, onRemoveLayer, onToggleHideLayer,
+  } = props;
   const [activeFilters, setActiveFilters] = useState({ all: true });
   const [shapefileQueryState] = useQuery({ url: '/shapefile' }, { initialData: [] });
   const [categoryQueryState] = useQuery({ url: '/category' }, { initialData: [] });
@@ -78,6 +80,7 @@ function Sidebar(props) {
             <ActiveItemsLayers
               layer={layer}
               onRemoveLayer={() => onRemoveLayer(layer.id)}
+              onToggleHideLayer={onToggleHideLayer}
             />
           ))}
         </div>
@@ -115,7 +118,7 @@ function Sidebar(props) {
 }
 
 function ActiveItemsLayers(props) {
-  const { layer, onRemoveLayer } = props;
+  const { layer, onRemoveLayer, onToggleHideLayer } = props;
   const [isVisible, setVisibility] = useState(true);
   return (
     <div className="activeLayer">
@@ -133,7 +136,10 @@ function ActiveItemsLayers(props) {
             'activeLayer_hideShow-visible': isVisible,
             'activeLayer_hideShow-hidden': !isVisible,
           })}
-          onClick={() => setVisibility(!isVisible)}
+          onClick={() => {
+            setVisibility(prev => !prev);
+            onToggleHideLayer(layer);
+          }}
         />
         <p className="activeLayer_label">
           {layer.name}
