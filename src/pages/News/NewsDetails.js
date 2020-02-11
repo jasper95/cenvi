@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import useQuery from 'shared/hooks/useLazyQuery';
-import ArticlePage from 'shared/components/article/articlePage';
+import ArticlePage from 'shared/components/Article/ArticlePage';
 
 function BlogDetails(props) {
   const BCP = 'blogPage';

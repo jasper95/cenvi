@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import useQuery from 'shared/hooks/useLazyQuery';
+import React from 'react';
 import draftToHtml from 'draftjs-to-html';
 import htmlToReact from 'html-react-parser';
 import { getPhotoUrl } from 'shared/utils/tools';
