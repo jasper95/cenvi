@@ -196,7 +196,7 @@ export const toFormData = (fields) => {
   return formData;
 };
 
-export const exportShapefile = data => () => window.open(`${process.env.GEOSERVER_URL}/wfs${qs.stringify({
+export const exportShapefile = data => window.location.assign(`${process.env.GEOSERVER_URL}/wfs?${qs.stringify({
   service: 'wfs', outputFormat: 'shape-zip', typeName: `cenvi:${data.id}`, request: 'GetFeature',
 })}`, '_blank');
 

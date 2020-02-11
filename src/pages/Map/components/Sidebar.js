@@ -139,7 +139,7 @@ function ActiveItemsLayers(props) {
           {layer.name}
         </p>
         {layer.is_public && (
-          <Button icon children="import_export" tooltipLabel="Export" onClick={exportShapefile(layer)} />
+          <Button icon children="import_export" tooltipLabel="Export" onClick={() => exportShapefile(layer)} />
         )}
       </div>
       <ExpansionPanel
