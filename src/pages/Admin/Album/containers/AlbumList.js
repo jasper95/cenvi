@@ -2,7 +2,7 @@ import React from 'react';
 import PageTable from 'shared/components/PageTable';
 import history from 'shared/utils/history';
 import usePageTable from 'shared/components/PageTable/usePageTable';
-import BlogStatus from 'pages/Admin/Blog/components/BlogStatus';
+import BlogStatus from 'pages/Admin/Post/components/BlogStatus';
 import { formatDate } from 'shared/components/DataTable/CellFormatter';
 import { showDialog } from 'shared/redux/app/reducer';
 import { useDispatch } from 'react-redux';

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import useForm from 'shared/hooks/useForm';
 import TextField from 'react-md/lib/TextFields/TextField';
 import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
@@ -17,7 +17,7 @@ import useQuery from 'shared/hooks/useQuery';
 import history from 'shared/utils/history';
 import * as yup from 'yup';
 import {
-  toFormData, fieldIsRequired, getValidationResult, validateTextEditor,
+  toFormData, fieldIsRequired, getValidationResult, validateTextEditor, getPostType, getPostLabel, getPostUrl,
 } from 'shared/utils/tools';
 import axios from 'shared/utils/axios';
 import uuid from 'uuid/v4';
@@ -25,14 +25,19 @@ import uploadService, { isUploadingSelector } from 'shared/utils/uploadService';
 import omit from 'lodash/omit';
 import { useSelector, useDispatch } from 'react-redux';
 import { showSuccess } from 'shared/redux/app/reducer';
+import useRouter from 'shared/hooks/useRouter';
 
-function EditBlog(props) {
-  const { id } = props.match.params;
+function PostForm() {
+  const router = useRouter();
+  const { post, id } = router.params;
+  const type = useMemo(() => getPostType(post), [post]);
+  const typeDisplay = useMemo(() => getPostLabel(post), [post]);
   const dispatch = useDispatch();
   const isCreate = id === 'new';
   const [formState, formHandlers] = useForm({
     initialFields: {
       status: 'published',
+      type,
       published_date: new Date(),
     },
     validator,
@@ -40,12 +45,12 @@ function EditBlog(props) {
   });
   const { onSetFields, onElementChange, onValidate } = formHandlers;
   const isUploading = useSelector(isUploadingSelector);
-  const [blogResponse] = useQuery({ url: `/blog/${id}` }, { skip: isCreate, onFetchSuccess });
+  const [blogResponse] = useQuery({ url: `/post/${id}` }, { skip: isCreate, onFetchSuccess });
   const { loading: blogIsLoading } = blogResponse;
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const { fields, errors } = formState;
   const { onChange } = formHandlers;
-  const [mutationState, onMutate] = useMutation({ url: '/blog' });
+  const [mutationState, onMutate] = useMutation({ url: '/post' });
   if (blogIsLoading) {
     return (
       <span>Loading...</span>
@@ -59,8 +64,8 @@ function EditBlog(props) {
             <div className="ToolbarHeader_title">
               <h1 className="title">
                 {!fields.name
-                  ? 'New Blog'
-                  : `Blog: ${fields.name}`
+                  ? `New ${typeDisplay}`
+                  : `${typeDisplay}: ${fields.name}`
                 }
               </h1>
             </div>
@@ -75,7 +80,7 @@ function EditBlog(props) {
                 flat
                 className="iBttn iBttn-second-prio"
                 children="Cancel"
-                onClick={() => history.push('/admin/blogs')}
+                onClick={() => history.push(`/admin/${post}`)}
               />
             </div>
           </div>
@@ -172,12 +177,12 @@ function EditBlog(props) {
             error={errors.tags}
           />
           <div className="iField">
-            <p className="iField_label">Blog Photo</p>
+            <p className="iField_label">{`${typeDisplay} Photo`}</p>
             <SingleFileUpload
               id="file"
               value={fields.image_url ? `${process.env.STATIC_URL}/${fields.image_url}` : fields.file}
               onChange={(file) => {
-                onElementChange(['uploads', 'blog', uuid(), file.name].join('/'));
+                onElementChange(['uploads', 'post', uuid(), file.name].join('/'), 'image_url');
                 onElementChange(file, 'file');
               }}
               error={errors.image_url}
@@ -196,7 +201,7 @@ function EditBlog(props) {
 
   async function uploadFile(file) {
     const fileId = uuid();
-    const filePath = ['uploads', 'blog', fileId, file.name].join('/');
+    const filePath = ['uploads', 'post', fileId, file.name].join('/');
     const formData = toFormData({ file_path: filePath, file });
     await axios({
       data: formData,
@@ -214,10 +219,10 @@ function EditBlog(props) {
       }),
       data.file && uploadService(data.file, { file_path: data.image_url }),
     ].filter(Boolean));
-    const message = `Blog successfuly ${isCreate ? 'created' : 'updated'}`;
+    const message = `${typeDisplay} successfuly ${isCreate ? 'created' : 'updated'}`;
     dispatch(showSuccess({ message }));
     if (isCreate) {
-      history.push('/admin/blogs');
+      history.push(`/admin/${post}`);
     }
   }
 }
@@ -238,4 +243,4 @@ function validator(data) {
   };
 }
 
-export default EditBlog;
+export default PostForm;

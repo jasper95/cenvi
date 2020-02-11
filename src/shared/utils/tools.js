@@ -5,6 +5,7 @@ import differenceBy from 'lodash/differenceBy';
 import pick from 'lodash/pick';
 import jsonexport from 'jsonexport/dist';
 import fileSaver from 'file-saver';
+import qs from 'qs';
 
 export function getValidationResult(data, schema) {
   try {
@@ -195,4 +196,20 @@ export const toFormData = (fields) => {
   return formData;
 };
 
+export const exportShapefile = data => () => window.open(`${process.env.GEOSERVER_URL}/wfs${qs.stringify({
+  service: 'wfs', outputFormat: 'shape-zip', typeName: `cenvi:${data.id}`, request: 'GetFeature',
+})}`, '_blank');
+
 export const getPhotoUrl = photo => `${process.env.STATIC_URL}/${photo.image_url || photo.file_path}`;
+
+const singularTypes = ['news'];
+export const getPostType = (type) => {
+  type = type.replace(/-/g, '_');
+  return singularTypes.includes(type) ? type : type.slice(0, -1);
+};
+
+export const getPostLabel = (type, cardinality = 'plural') => {
+  type = type.replace(/-/g, ' ');
+  const label = singularTypes.includes(type) || cardinality === 'plural' ? type : `${type}s`;
+  return capitalize(label);
+};

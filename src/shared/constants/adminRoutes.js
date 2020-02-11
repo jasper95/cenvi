@@ -15,6 +15,11 @@ export default [
     route: '/admin/blogs',
   },
   {
+    label: 'news',
+    icon: 'book',
+    route: '/admin/news',
+  },
+  {
     label: 'albums',
     icon: 'perm_media',
     route: '/admin/albums',
@@ -29,4 +34,4 @@ export default [
     icon: 'format_shapes',
     route: '/admin/shapefiles',
   },
-]
+];

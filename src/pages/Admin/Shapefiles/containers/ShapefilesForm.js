@@ -13,6 +13,8 @@ import uuid from 'uuid/v4';
 import useForm from 'shared/hooks/useForm';
 import useMutation from 'shared/hooks/useMutation';
 import { toFormData } from 'shared/utils/tools';
+import CreatableInput from 'shared/components/CreatableInput';
+import Checkbox from 'react-md/lib/SelectionControls/Checkbox';
 
 
 function ShapefilesForm(props) {
@@ -72,7 +74,7 @@ function ShapefilesForm(props) {
       <div className="row row-formHeader">
         <Paper className="col col-md-12-guttered">
           <div className="row">
-            <div className="col col-md-8">
+            <div className="col col-md-12">
               <TextField
                 id="name"
                 label="Title"
@@ -84,6 +86,19 @@ function ShapefilesForm(props) {
                 value={fields.name || ''}
               />
             </div>
+          </div>
+          <div className="row">
+            <div className="col col-md-5">
+              <CreatableInput
+                id="tags"
+                label="Tags"
+                value={fields.tags || []}
+                onChange={onElementChange}
+                className="iField iField-ci"
+                classNamePrefix="iField-ci"
+                error={errors.tags}
+              />
+            </div>
             <div className="col col-md-4">
               <SelectAutocomplete
                 id="category_id"
@@ -91,6 +106,15 @@ function ShapefilesForm(props) {
                 label="Category"
                 required
                 value={fields.category_id}
+                onChange={onElementChange}
+              />
+            </div>
+            <div className="col col-md-3">
+              <Checkbox
+                id="is_public"
+                name=""
+                label="Download in public allowed"
+                checked={fields.is_public}
                 onChange={onElementChange}
               />
             </div>

@@ -1,20 +1,25 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { formatDate } from 'shared/components/DataTable/CellFormatter';
-import BlogStatus from 'pages/Admin/Blog/components/BlogStatus';
+import BlogStatus from 'pages/Admin/Post/components/BlogStatus';
 import PageTable from 'shared/components/PageTable';
 import usePageTable from 'shared/components/PageTable/usePageTable';
 import history from 'shared/utils/history';
+import useRouter from 'shared/hooks/useRouter';
+import { getPostType, getPostLabel } from 'shared/utils/tools';
 
-function AdminBlogList() {
-  const [pageTableState, pageTableHandlers] = usePageTable({ node: 'blog' });
+
+function AdminPostList() {
+  const router = useRouter();
+  const { post } = router.params;
+  const type = useMemo(() => getPostType(post), [post]);
+  const [pageTableState, pageTableHandlers] = usePageTable({ node: 'post', queryParams: { type } });
   return (
     <PageTable
-      node="blog"
       columns={getColumns()}
-      pageName="Blogs"
+      pageName={getPostLabel(post)}
       pageTableState={pageTableState}
       pageTableHandlers={pageTableHandlers}
-      onClickNew={() => history.push('/admin/blogs/new')}
+      onClickNew={() => history.push(`/admin/${post}/new`)}
     />
   );
 
@@ -44,12 +49,12 @@ function AdminBlogList() {
           {
             icon: 'edit',
             label: 'Edit',
-            onClick: data => history.push(`/admin/blogs/${data.slug}`),
+            onClick: data => history.push(`/admin/${post}/${data.slug}`),
           },
           {
             iconClassName: 'wtfr wtf-eye',
             label: 'View',
-            onClick: data => window.open(`/blogs/${data.slug}`, '_blank'),
+            onClick: data => window.open(`/${post}/${data.slug}`, '_blank'),
           },
           {
             icon: 'delete',
@@ -63,4 +68,4 @@ function AdminBlogList() {
 }
 
 
-export default AdminBlogList;
+export default AdminPostList;

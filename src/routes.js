@@ -25,8 +25,9 @@ const PublicNewsDetails = loadable(() => import('pages/News/NewsDetails'));
 const Dashboard = loadable(() => import('pages/Admin/Dashboard/containers/Dashboard'));
 const User = loadable(() => import('pages/Admin/User/containers/UserPage'));
 
-const AdminBlogList = loadable(() => import('pages/Admin/Blog/container/BlogList'));
-const AdminBlogForm = loadable(() => import('pages/Admin/Blog/container/BlogForm'));
+const AdminPostList = loadable(() => import('pages/Admin/Post/container/PostList'));
+const AdminPostForm = loadable(() => import('pages/Admin/Post/container/PostForm'));
+
 
 const AlbumList = loadable(() => import('pages/Admin/Album/containers/AlbumList'));
 const EditAlbum = loadable(() => import('pages/Admin/Album/containers/EditAlbum'));
@@ -70,10 +71,34 @@ const adminRoutes = [
       hasNavigation: false,
     },
   },
+  // {
+  //   key: 'admin-blog-list',
+  //   component: AdminPostList,
+  //   path: '/admin/blogs',
+  //   exact: true,
+  //   pageProps: {
+  //     isAdmin: true,
+  //     hasFooter: false,
+  //     requireAuth: true,
+  //     hasNavigation: false,
+  //   },
+  // },
+  // {
+  //   key: 'admin-edit-blog',
+  //   component: AdminPostForm,
+  //   path: '/admin/blogs/:id',
+  //   exact: true,
+  //   pageProps: {
+  //     isAdmin: true,
+  //     hasFooter: false,
+  //     requireAuth: true,
+  //     hasNavigation: false,
+  //   },
+  // },
   {
-    key: 'admin-blog-list',
-    component: AdminBlogList,
-    path: '/admin/blogs',
+    key: 'admin-news-list',
+    component: AdminPostList,
+    path: '/admin/:post(blogs|news)',
     exact: true,
     pageProps: {
       isAdmin: true,
@@ -83,9 +108,9 @@ const adminRoutes = [
     },
   },
   {
-    key: 'admin-edit-blog',
-    component: AdminBlogForm,
-    path: '/admin/blogs/:id',
+    key: 'admin-edit-post',
+    component: AdminPostForm,
+    path: '/admin/:post(blogs|news)/:id',
     exact: true,
     pageProps: {
       isAdmin: true,

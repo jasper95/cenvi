@@ -9,13 +9,14 @@ import { useDispatch } from 'react-redux';
 import useMutation, { useCreateNode, useUpdateNode } from 'shared/hooks/useMutation';
 import loadable from '@loadable/component';
 import { showDialog } from 'shared/redux/app/reducer';
+import qs from 'qs';
 
 const Confirm = loadable(() => import('shared/components/Dialogs/Confirm'));
 
 function usePage(props) {
-  const { node } = props;
+  const { node, queryParams = {} } = props;
   const sortProps = { initialSorted: 'email', sortable: ['email', 'full_name'] };
-  const [rowResponse, queryHandlers] = useQuery({ url: `/${node}` }, { initialData: [], initialLoading: true });
+  const [rowResponse, queryHandlers] = useQuery({ url: `/${node}?${qs.stringify(queryParams)}` }, { initialData: [], initialLoading: true });
   const [search, setSearch] = useState('');
   const [sort, onSort] = useTableSort(sortProps);
   const { data: rows } = rowResponse;

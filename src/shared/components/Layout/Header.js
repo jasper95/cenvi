@@ -7,32 +7,31 @@ import Button from 'react-md/lib/Buttons/Button';
 import MenuButton from 'react-md/lib/Menus/MenuButton';
 import { useDispatch } from 'react-redux';
 import { useUpdateNode } from 'shared/hooks/useMutation';
-import withRouter from 'react-router-dom/withRouter';
-// import { UserSkeleton } from 'shared/components/Skeletons';
 import Navigation from 'shared/components/Navigation';
 import ReactResizeDetector from 'react-resize-detector';
 import { showDialog } from 'shared/redux/app/reducer';
 import cn from 'classnames';
 import 'sass/components/nav/index.scss';
 import loadable from '@loadable/component';
+import useRouter from 'shared/hooks/useRouter';
+import history from 'shared/utils/history';
+import { useRouteMatch } from 'react-router';
 
 const UserDialog = loadable(() => import('pages/Admin/User/components/UserDialog'));
 
 function Header(props) {
   const {
-    match,
-    history,
     auth,
     onLogout,
   } = props;
 
+  const router = useRouter();
+  const { match } = router;
   const dispatch = useDispatch();
   const user = null;
-  // const { data: user, loading: authIsLoading } = useContext(AuthContext);
   const [showMobileNav, onShowMobileNav] = useState(false);
   const [isMobileNav, setIsMobileNav] = useState(false);
   const [, onUpdateUser] = useUpdateNode({ node: 'user', message: 'Profile successfully updated' });
-  const isAuthenticated = Boolean(user);
 
   const handleResize = (width, height) => {
     setIsMobileNav(width < 1025);
@@ -165,4 +164,4 @@ function Header(props) {
   }
 }
 
-export default withRouter(Header);
+export default Header;

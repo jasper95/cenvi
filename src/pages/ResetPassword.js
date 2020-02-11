@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import TextField from 'react-md/lib/TextFields/TextField';
-import withRouter from 'react-router-dom/withRouter';
 import Link from 'react-router-dom/Link';
 import FontIcon from 'react-md/lib/FontIcons/FontIcon';
 import AuthLayout from 'shared/components/Layout/Auth';
@@ -12,6 +11,7 @@ import useVerifyToken from 'shared/hooks/useVerifyToken';
 import useMutation from 'shared/hooks/useMutation';
 import { getValidationResult, fieldIsRequired } from 'shared/utils/tools';
 import 'sass/pages/login.scss';
+import useRouter from 'shared/hooks/useRouter';
 
 
 const initialFields = {
@@ -19,8 +19,8 @@ const initialFields = {
 };
 
 function ResetPassword(props) {
-  const { match: { path } } = props;
-  const type = path.replace('/', '');
+  const router = useRouter();
+  const type = router.match.path.replace('/', '');
   const [requestSuccess, setRequestSuccess] = useState(false);
   const {
     linkName, pageTitle, requestUrl, successMessage,
@@ -142,4 +142,4 @@ function validator(data) {
   return getValidationResult(data, schema);
 }
 
-export default withRouter(ResetPassword);
+export default ResetPassword;

@@ -7,6 +7,7 @@ import omit from 'lodash/omit';
 
 import 'sass/components/mapSidebar/index.scss';
 import useQuery from 'shared/hooks/useQuery';
+import { exportShapefile } from 'shared/utils/tools';
 
 function Sidebar(props) {
   const { activeLayers, onActivateLayer, onRemoveLayer } = props;
@@ -137,7 +138,9 @@ function ActiveItemsLayers(props) {
         <p className="activeLayer_label">
           {layer.name}
         </p>
-
+        {layer.is_public && (
+          <Button icon children="import_export" tooltipLabel="Export" onClick={exportShapefile(layer)} />
+        )}
       </div>
       <ExpansionPanel
         className="activeLayer_container"
@@ -146,7 +149,7 @@ function ActiveItemsLayers(props) {
       >
         <img
           alt=""
-          src={`${process.env.GEOSERVER_URL}?${qs.stringify({
+          src={`${process.env.GEOSERVER_URL}/wms?${qs.stringify({
             service: 'WMS',
             request: 'GetLegendGraphic',
             layer: `cenvi:${layer.id}`,

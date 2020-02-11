@@ -3,9 +3,9 @@ import PageTable from 'shared/components/PageTable';
 import history from 'shared/utils/history';
 import usePageTable from 'shared/components/PageTable/usePageTable';
 import { formatDate } from 'shared/components/DataTable/CellFormatter';
-import { showDialog } from 'shared/redux/app/reducer';
+import qs from 'qs';
 import { useDispatch } from 'react-redux';
-import loadable from '@loadable/component';
+import { exportShapefile } from 'shared/utils/tools';
 
 
 function Shapefiles() {
@@ -43,6 +43,11 @@ function Shapefiles() {
             onClick: data => history.push(`/admin/shapefiles/${data.slug}`),
           },
           {
+            icon: 'import_export',
+            label: 'Export',
+            onClick: exportShapefile,
+          },
+          {
             iconClassName: 'wtfr wtf-eye',
             label: 'View',
             onClick: data => window.open(`/shapefiles/${data.slug}`, '_blank'),
@@ -55,10 +60,6 @@ function Shapefiles() {
         ],
       },
     ];
-  }
-
-  function onValid(data) {
-    pageTableHandlers.onCreate({ data });
   }
 
   function onSuccess(data) {
