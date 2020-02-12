@@ -45,7 +45,7 @@ function PostForm() {
   });
   const { onSetFields, onElementChange, onValidate } = formHandlers;
   const isUploading = useSelector(isUploadingSelector);
-  const [blogResponse] = useQuery({ url: `/post/${id}` }, { skip: isCreate, onFetchSuccess });
+  const [blogResponse] = useQuery({ url: `/post/${id}` }, { skip: isCreate, onFetchSuccess, isBase: true });
   const { loading: blogIsLoading } = blogResponse;
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const { fields, errors } = formState;
