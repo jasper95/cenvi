@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import 'react-fine-uploader/gallery/gallery.css';
 import Gallery from 'shared/components/FileUpload/Gallery';
 import pick from 'lodash/pick';
-import useQuery from 'shared/hooks/useLazyQuery';
+import useQuery from 'shared/hooks/useQuery';
 import Paper from 'react-md/lib/Papers/Paper';
 import TextField from 'react-md/lib/TextFields/TextField';
 import DatePicker from 'shared/components/DatePicker';
@@ -28,7 +28,7 @@ const customChangeHandler = {
 
 function EditCategory(props) {
   const { id } = props.match.params;
-  const [queryState, onQueryAlbum] = useQuery({ url: `/album/${id}` });
+  const [queryState] = useQuery({ url: `/album/${id}` }, { isBase: true, onFetchSuccess: onSetFields });
   const [mutationState, onMutate] = useUpdateNode({ node: 'album' });
   const [formState, formHandlers] = useForm({
     initialFields: {},
@@ -38,12 +38,6 @@ function EditCategory(props) {
   const { onSetFields, onElementChange } = formHandlers;
   const { photos = [] } = fields;
 
-  useEffect(() => {
-    onQueryAlbum()
-      .then((newFields) => {
-        onSetFields(newFields);
-      });
-  }, []);
   const { loading } = queryState;
   if (loading) {
     return (
