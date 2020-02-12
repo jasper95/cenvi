@@ -20,8 +20,10 @@ function ArticlePage(props) {
     isLoading,
   } = props;
 
-  if (!data) {
-    return null;
+  if (isLoading && !data) {
+    return (
+      <ArticlePageSkeleton />
+    );
   }
 
   const {
@@ -32,24 +34,6 @@ function ArticlePage(props) {
     name,
     content,
   } = data;
-
-  if (isLoading) {
-    return (
-      <ArticlePageSkeleton />
-    );
-  }
-
-  const renderTags = () => {
-    if (tags && tags.length > 0) {
-      return (
-        <div className={`${BCP}_tags`}>
-          { tags.map(tag => (
-            <span className="pill">{tag}</span>
-          ))}
-        </div>
-      );
-    }
-  };
 
   return (
     <>
@@ -84,6 +68,18 @@ function ArticlePage(props) {
       </div>
     </>
   );
+
+  function renderTags() {
+    if (tags && tags.length > 0) {
+      return (
+        <div className={`${BCP}_tags`}>
+          {tags.map(tag => (
+            <span className="pill">{tag}</span>
+          ))}
+        </div>
+      );
+    }
+  }
 }
 
 export default ArticlePage;
