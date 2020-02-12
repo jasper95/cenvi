@@ -34,4 +34,9 @@ export default [
     icon: 'format_shapes',
     route: '/admin/shapefiles',
   },
+  {
+    label: 'resources',
+    icon: 'format_shapes',
+    route: '/admin/resources',
+  },
 ];

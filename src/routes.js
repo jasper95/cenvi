@@ -39,6 +39,7 @@ const AdminEditCategory = loadable(() => import('pages/Admin/Category/containers
 const AdminShapefiles = loadable(() => import('pages/Admin/Shapefiles/containers/Shapefiles'));
 const AdminShapefilesForm = loadable(() => import('pages/Admin/Shapefiles/containers/ShapefilesForm'));
 
+const AdminResources = loadable(() => import('pages/Admin/Resource/containers/ResourceList'));
 
 // const FileUpload = loadable(() => import('pages/FileUploadPage'));
 // const ShapefileUpload = loadable(() => import('pages/ShapefileUploadPage'));
@@ -63,6 +64,18 @@ const adminRoutes = [
     key: 'admin-user',
     component: User,
     path: '/admin/users',
+    exact: true,
+    pageProps: {
+      isAdmin: true,
+      hasFooter: false,
+      requireAuth: true,
+      hasNavigation: false,
+    },
+  },
+  {
+    key: 'admin-resource',
+    component: AdminResources,
+    path: '/admin/resources',
     exact: true,
     pageProps: {
       isAdmin: true,
