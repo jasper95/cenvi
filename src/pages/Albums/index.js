@@ -1,15 +1,14 @@
 import React, { useEffect } from 'react';
 import SectionHeader from 'shared/components/Section';
-import useQuery from 'shared/hooks/useLazyQuery';
+import useQuery from 'shared/hooks/useQuery';
 import { AlbumItemSkeleton } from 'shared/components/Skeletons';
 import AlbumCard from './components/AlbumCard';
 
 
 function AlbumsListPage(props) {
-  const [queryState, onQuery] = useQuery({ url: '/published_album' }, { initialLoading: true, initialData: [] });
+  const [queryState] = useQuery({ url: '/published_album' }, { isBase: true, initialLoading: true, initialData: [] });
   useEffect(() => {
     window.scrollTo(0, 0);
-    onQuery();
   }, []);
   const { data: albums, loading } = queryState;
 

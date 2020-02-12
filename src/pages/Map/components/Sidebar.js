@@ -14,8 +14,8 @@ function Sidebar(props) {
     activeLayers, onActivateLayer, onRemoveLayer, onToggleHideLayer,
   } = props;
   const [activeFilters, setActiveFilters] = useState({ all: true });
-  const [shapefileQueryState] = useQuery({ url: '/shapefile' }, { initialData: [] });
-  const [categoryQueryState] = useQuery({ url: '/category' }, { initialData: [] });
+  const [shapefileQueryState] = useQuery({ url: '/shapefile' }, { initialData: [], isBase: true });
+  const [categoryQueryState] = useQuery({ url: '/category' }, { initialData: [], isBase: true });
   const { data: categoryData } = categoryQueryState;
   const { data: shapefileData } = shapefileQueryState;
   const [sidebarOpen, setSidebarOpen] = useState(true);

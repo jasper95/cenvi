@@ -3,14 +3,11 @@ import PageTable from 'shared/components/PageTable';
 import history from 'shared/utils/history';
 import usePageTable from 'shared/components/PageTable/usePageTable';
 import { formatDate } from 'shared/components/DataTable/CellFormatter';
-import qs from 'qs';
-import { useDispatch } from 'react-redux';
 import { exportShapefile } from 'shared/utils/tools';
 
 
 function Shapefiles() {
   const [pageTableState, pageTableHandlers] = usePageTable({ node: 'shapefile', onSuccess });
-  const dispatch = useDispatch();
   return (
     <PageTable
       node="shapefiles"

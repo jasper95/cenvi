@@ -28,11 +28,11 @@ export default function useMutation(params) {
       onSuccess = () => {},
       message,
       hideDialog = true,
+      isBase = false,
     } = allParams;
     let { url } = allParams;
-    if (method.toLowerCase() === 'delete' && body.id) {
-      url = `${url}/${body.id}`;
-    }
+    url = [url, ['delete'].includes(method.toLowerCase()) && body.id].filter(Boolean).join('/');
+    url = [isBase && 'base', url].filter(Boolean).join('');
     const response = await axios({
       data: body,
       method,
@@ -54,31 +54,34 @@ export default function useMutation(params) {
 }
 
 export function useCreateNode(params) {
-  const { node, message = `${capitalize(node)} successfully created` } = params;
+  const { node, message = `${capitalize(node)} successfully created`, isBase = true } = params;
   return useMutation({
-    ...params,
     message,
     method: 'POST',
     url: `/${node}`,
+    isBase,
+    ...params,
   });
 }
 
 export function useUpdateNode(params) {
-  const { node, message = `${capitalize(node)} successfully updated` } = params;
+  const { node, message = `${capitalize(node)} successfully updated`, isBase = true } = params;
   return useMutation({
-    ...params,
     message,
     method: 'PUT',
     url: `/${node}`,
+    isBase,
+    ...params,
   });
 }
 
 export function useDeleteNode(params) {
-  const { node, message = `${capitalize(node)} successfully deleted` } = params;
+  const { node, message = `${capitalize(node)} successfully deleted`, isBase = true } = params;
   return useMutation({
-    ...params,
     message,
     method: 'DELETE',
     url: `/${node}`,
+    isBase,
+    ...params,
   });
 }

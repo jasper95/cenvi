@@ -29,8 +29,8 @@ function ShapefilesForm(props) {
   });
   const { onSetFields, onElementChange } = formHandlers;
   const isUploading = useSelector(isUploadingSelector);
-  const [categoryResponse] = useQuery({ url: '/category' }, { initialData: [] });
-  const [shapefileResponse] = useQuery({ url: `/shapefile/${id}` }, { skip: isCreate, onFetchSuccess: onSetFields });
+  const [categoryResponse] = useQuery({ url: '/category' }, { initialData: [], isBase: true });
+  const [shapefileResponse] = useQuery({ url: `/shapefile/${id}` }, { skip: isCreate, onFetchSuccess: onSetFields, isBase: true });
   const { fields, errors } = formState;
   const [mutationState, onMutate] = useMutation({ url: '/shapefile' });
   const { data: categories } = categoryResponse;

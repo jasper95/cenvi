@@ -12,7 +12,7 @@ function AdminPostList() {
   const router = useRouter();
   const { post } = router.params;
   const type = useMemo(() => getPostType(post), [post]);
-  const [pageTableState, pageTableHandlers] = usePageTable({ node: 'post', queryParams: { type } });
+  const [pageTableState, pageTableHandlers] = usePageTable({ node: 'post', queryParams: { type }, isBaseCreate: false });
   return (
     <PageTable
       columns={getColumns()}

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import useQuery from 'shared/hooks/useLazyQuery';
+import useQuery from 'shared/hooks/useQuery';
 import SectionHeader from 'shared/components/Section';
 
 import range from 'lodash/range';
@@ -9,10 +9,9 @@ import ArticleItem from 'shared/components/Article/ArticleItem';
 
 
 function NewsList() {
-  const [rowResponse, onQuery] = useQuery({ url: '/published_news' }, { initialData: [], initialLoading: true });
+  const [rowResponse] = useQuery({ url: '/published_news' }, { initialData: [], isBase: true, initialLoading: true });
   const { data: blogs, loading } = rowResponse;
   useEffect(() => {
-    onQuery();
     window.scrollTo(0, 0);
   }, []);
 
