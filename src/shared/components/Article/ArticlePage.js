@@ -33,12 +33,13 @@ function ArticlePage(props) {
     author,
     name,
     content,
+    slug,
   } = data;
 
   return (
     <>
       <Head>
-        <meta property="og:url" content={`${window.location.origin}/${data.slug}`} />
+        <meta property="og:url" content={`${window.location.origin}/${slug}`} />
         <meta property="og:type" content="article" />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={excerpt} />
