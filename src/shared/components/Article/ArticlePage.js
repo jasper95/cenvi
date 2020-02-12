@@ -20,6 +20,10 @@ function ArticlePage(props) {
     isLoading,
   } = props;
 
+  if (!data) {
+    return null;
+  }
+
   const {
     tags,
     title,
