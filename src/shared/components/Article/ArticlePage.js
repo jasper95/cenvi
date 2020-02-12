@@ -20,30 +20,52 @@ function ArticlePage(props) {
     isLoading,
   } = props;
 
+  const {
+    tags,
+    title,
+    excerpt,
+    author,
+    name,
+    content,
+  } = data;
+
   if (isLoading) {
     return (
       <ArticlePageSkeleton />
     );
   }
 
+  const renderTags = () => {
+    if (tags && tags.length > 0) {
+      return (
+        <div className={`${BCP}_tags`}>
+          { tags.map(tag => (
+            <span className="pill">{tag}</span>
+          ))}
+        </div>
+      );
+    }
+  };
+
   return (
     <>
       <Head>
         <meta property="og:url" content={`${window.location.origin}/${data.slug}`} />
         <meta property="og:type" content="article" />
-        <meta property="og:title" content={data.title} />
-        <meta property="og:description" content={data.excerpt} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={excerpt} />
         <meta property="og:image" content={getPhotoUrl(data)} />
       </Head>
       <div className={`${BCP} ${BCP}-${type} `}>
         <div className={`${BCP}_textContainer`}>
           <div className={`${BCP}_header`}>
             <h1 className={`${BCP}_title`}>
-              {data.name}
+              {name}
             </h1>
+            {renderTags()}
             <Author
               className={`${BCP}_author`}
-              name={`by ${data.author}`}
+              name={`by ${author}`}
             />
           </div>
         </div>
@@ -52,7 +74,7 @@ function ArticlePage(props) {
         </div>
         <div className={`${BCP}_textContainer`}>
           <div className={`${BCP}_contents`}>
-            {htmlToReact(draftToHtml(data.content))}
+            {htmlToReact(draftToHtml(content))}
           </div>
         </div>
       </div>
