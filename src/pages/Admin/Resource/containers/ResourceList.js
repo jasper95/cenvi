@@ -4,12 +4,16 @@ import usePageTable from 'shared/components/PageTable/usePageTable';
 import loadable from '@loadable/component';
 import { showDialog } from 'shared/redux/app/reducer';
 import { useDispatch } from 'react-redux';
+import omit from 'lodash/omit';
+import uploadService from 'shared/utils/uploadService';
+import pick from 'lodash/pick';
+import history from 'shared/utils/history';
 
 const ResourceDialog = loadable(() => import('pages/Admin/Resource/components/ResourceDialog'));
 
 
 function Resource() {
-  const [pageTableState, pageTableHandlers] = usePageTable({ node: 'resource', isBaseCreate: false });
+  const [pageTableState, pageTableHandlers] = usePageTable({ node: 'resource' });
   const dispatch = useDispatch();
   return (
     <PageTable
@@ -19,25 +23,26 @@ function Resource() {
       pageTableState={pageTableState}
       pageTableHandlers={pageTableHandlers}
       onClickNew={() => handleResourceDialog('Create')}
-      onClickEdit={data => handleResourceDialog('Update', data)}
     />
   );
 
-  function handleResourceDialog(type, initialFields = {}) {
-    const { onCreate, onUpdate } = pageTableHandlers;
-    const onSave = type === 'Create' ? onCreate : onUpdate;
+  function handleResourceDialog() {
     dispatch(showDialog({
       component: ResourceDialog,
       props: {
-        title: `${type} Resource`,
-        initialFields,
-        onValid: (data) => {
-          onSave({
-            data,
-          });
-        },
+        title: 'Create',
+        onValid,
       },
     }));
+  }
+
+  async function onValid(data) {
+    const { onCreate } = pageTableHandlers;
+    await uploadService(data.file, pick(data, 'file_path'));
+    const response = await onCreate({
+      data: omit(data, 'file'),
+    });
+    history.push(`/admin/resources/${response.id}`);
   }
 
   function getColumns() {
@@ -54,7 +59,13 @@ function Resource() {
           {
             icon: 'edit',
             label: 'Edit',
-            onClick: row => handleResourceDialog('Update', row),
+            onClick: row => history.push(`/admin/resources/${row.id}`),
+
+          },
+          {
+            icon: 'search',
+            label: 'Preview',
+            onClick: openPreview,
           },
           {
             icon: 'delete',
@@ -64,6 +75,12 @@ function Resource() {
         ],
       },
     ];
+  }
+
+  function openPreview(row) {
+    const url = [process.env.STATIC_URL, row.file_path].join('/');
+    const win = window.open(`https://docs.google.com/gview?url=${url}`, '_blank');
+    win.focus();
   }
 }
 

@@ -2,7 +2,6 @@ import React from 'react';
 import useQuery from 'shared/hooks/useQuery';
 import Paper from 'react-md/lib/Papers/Paper';
 import TextField from 'react-md/lib/TextFields/TextField';
-import SelectAutocomplete from 'shared/components/SelectAutocomplete';
 import Button from 'react-md/lib/Buttons/Button';
 import history from 'shared/utils/history';
 import cn from 'classnames';
@@ -13,13 +12,10 @@ import uuid from 'uuid/v4';
 import useForm from 'shared/hooks/useForm';
 import useMutation from 'shared/hooks/useMutation';
 import { toFormData } from 'shared/utils/tools';
-import CreatableInput from 'shared/components/CreatableInput';
-import Checkbox from 'react-md/lib/SelectionControls/Checkbox';
 
 
 function ShapefilesForm(props) {
   const { id } = props.match.params;
-  const isCreate = id === 'new';
   const [formState, formHandlers] = useForm({
     initialFields: {
       id: uuid(),
@@ -29,17 +25,16 @@ function ShapefilesForm(props) {
   });
   const { onSetFields, onElementChange } = formHandlers;
   const isUploading = useSelector(isUploadingSelector);
-  const [categoryResponse] = useQuery({ url: '/category' }, { initialData: [], isBase: true });
-  const [shapefileResponse] = useQuery({ url: `/shapefile/${id}` }, { skip: isCreate, onFetchSuccess: onSetFields, isBase: true });
+  const [queryResponse] = useQuery({ url: `/resource/${id}` }, { onFetchSuccess: onSetFields, isBase: true });
   const { fields, errors } = formState;
-  const [mutationState, onMutate] = useMutation({ url: '/shapefile' });
-  const { data: categories } = categoryResponse;
-  if (shapefileResponse.loading) {
+  const [mutationState, onMutate] = useMutation({ url: '/resource' });
+  if (queryResponse.loading) {
     return (
       <span>Loading...</span>
     );
   }
 
+  const url = [process.env.STATIC_URL, fields.file_path].join('/');
   return (
     <>
       <div className="row row-ToolbarHeader row-ToolbarHeader-floating">
@@ -47,10 +42,7 @@ function ShapefilesForm(props) {
           <div className="ToolbarHeader row">
             <div className="ToolbarHeader_title">
               <h1 className="title">
-                {!fields.name
-                  ? 'New Shapefile'
-                  : `Shapefile: ${fields.name}`
-                }
+                {`Resource: ${fields.name}`}
               </h1>
             </div>
             <div className="ToolbarHeader_toolbar">
@@ -64,7 +56,7 @@ function ShapefilesForm(props) {
                 flat
                 className="iBttn iBttn-second-prio"
                 children="Cancel"
-                onClick={() => history.push('/admin/shapefiles')}
+                onClick={() => history.push('/admin/resources')}
               />
             </div>
           </div>
@@ -88,38 +80,6 @@ function ShapefilesForm(props) {
             </div>
           </div>
           <div className="row">
-            <div className="col col-md-5">
-              <CreatableInput
-                id="tags"
-                label="Tags"
-                value={fields.tags || []}
-                onChange={onElementChange}
-                className="iField iField-ci"
-                classNamePrefix="iField-ci"
-                error={errors.tags}
-              />
-            </div>
-            <div className="col col-md-4">
-              <SelectAutocomplete
-                id="category_id"
-                options={categories.map(e => ({ label: e.name, value: e.id }))}
-                label="Category"
-                required
-                value={fields.category_id}
-                onChange={onElementChange}
-              />
-            </div>
-            <div className="col col-md-3">
-              <Checkbox
-                id="is_public"
-                name=""
-                label="Download in public allowed"
-                checked={fields.is_public}
-                onChange={onElementChange}
-              />
-            </div>
-          </div>
-          <div className="row">
             <div className="col col-md-12">
               <TextField
                 id="description"
@@ -139,19 +99,18 @@ function ShapefilesForm(props) {
       <div className="row row-stretch">
         <Paper className="col col-md-12-guttered col-actions">
           <div className="iField col col-md-6">
-            <p className="iField_label">Shapefile</p>
-            <SingleFileUpload
-              id="file"
-              onChange={onElementChange}
-              acceptedFileTypes={['zip', 'shp', 'rar', 'kml', 'kmz']}
+            <p className="iField_label">Preview</p>
+            <iframe
+              src={`https://docs.google.com/gview?url=${url}&embedded=true`}
+              title="Preview"
             />
           </div>
           <div className="iField col col-md-6">
-            <p className="iField_label">Style</p>
+            <p className="iField_label">File</p>
             <SingleFileUpload
-              id="sld"
+              id="file"
               onChange={onElementChange}
-              acceptedFileTypes={['zip', 'rar', 'sld']}
+              acceptedFileTypes={['doc', 'docx', 'pdf']}
             />
           </div>
         </Paper>

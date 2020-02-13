@@ -40,6 +40,7 @@ const AdminShapefiles = loadable(() => import('pages/Admin/Shapefiles/containers
 const AdminShapefilesForm = loadable(() => import('pages/Admin/Shapefiles/containers/ShapefilesForm'));
 
 const AdminResources = loadable(() => import('pages/Admin/Resource/containers/ResourceList'));
+const AdminResourcesForm = loadable(() => import('pages/Admin/Resource/containers/ResourceForm'));
 
 // const FileUpload = loadable(() => import('pages/FileUploadPage'));
 // const ShapefileUpload = loadable(() => import('pages/ShapefileUploadPage'));
@@ -84,30 +85,18 @@ const adminRoutes = [
       hasNavigation: false,
     },
   },
-  // {
-  //   key: 'admin-blog-list',
-  //   component: AdminPostList,
-  //   path: '/admin/blogs',
-  //   exact: true,
-  //   pageProps: {
-  //     isAdmin: true,
-  //     hasFooter: false,
-  //     requireAuth: true,
-  //     hasNavigation: false,
-  //   },
-  // },
-  // {
-  //   key: 'admin-edit-blog',
-  //   component: AdminPostForm,
-  //   path: '/admin/blogs/:id',
-  //   exact: true,
-  //   pageProps: {
-  //     isAdmin: true,
-  //     hasFooter: false,
-  //     requireAuth: true,
-  //     hasNavigation: false,
-  //   },
-  // },
+  {
+    key: 'admin-resource-form',
+    component: AdminResourcesForm,
+    path: '/admin/resources/:id',
+    exact: true,
+    pageProps: {
+      isAdmin: true,
+      hasFooter: false,
+      requireAuth: true,
+      hasNavigation: false,
+    },
+  },
   {
     key: 'admin-news-list',
     component: AdminPostList,
