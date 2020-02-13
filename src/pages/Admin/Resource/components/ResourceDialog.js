@@ -2,17 +2,15 @@ import React from 'react';
 import flowRight from 'lodash/flowRight';
 import withDialog from 'shared/hocs/withDialog';
 import TextField from 'react-md/lib/TextFields/TextField';
-import * as yup from 'yup';
-import { getValidationResult, fieldIsRequired } from 'shared/utils/tools';
 import SingleFileUpload from 'shared/components/FileUpload/SingleFileUpload';
 import uuid from 'uuid';
+import { resourceValidator } from '../model/resource';
 
 function Resource(props) {
   const {
     formState, formHandlers,
   } = props;
   const { fields, errors } = formState;
-  console.log('errors: ', errors);
   const { onElementChange } = formHandlers;
   return (
     <>
@@ -50,14 +48,6 @@ const ResourceDialog = flowRight(
 )(Resource);
 
 ResourceDialog.defaultProps = {
-  validator(data) {
-    const schema = yup.object().shape({
-      name: yup.string().required(fieldIsRequired),
-      description: yup.string().required(fieldIsRequired),
-      file_path: yup.string().label('File').required(fieldIsRequired),
-    });
-    return getValidationResult(data, schema);
-  },
+  validator: resourceValidator,
 };
-
 export default ResourceDialog;

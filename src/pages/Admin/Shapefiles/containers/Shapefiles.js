@@ -2,12 +2,17 @@ import React from 'react';
 import PageTable from 'shared/components/PageTable';
 import history from 'shared/utils/history';
 import usePageTable from 'shared/components/PageTable/usePageTable';
+import loadable from '@loadable/component';
 import { formatDate } from 'shared/components/DataTable/CellFormatter';
-import { exportShapefile } from 'shared/utils/tools';
+import { exportShapefile, toFormData } from 'shared/utils/tools';
+import { useDispatch } from 'react-redux';
+import { showDialog } from 'shared/redux/app/reducer';
 
+const ShapefileDialog = loadable(() => import('pages/Admin/Shapefiles/components/ShapefileDialog'));
 
 function Shapefiles() {
   const [pageTableState, pageTableHandlers] = usePageTable({ node: 'shapefile', onSuccess });
+  const dispatch = useDispatch();
   return (
     <PageTable
       node="shapefiles"
@@ -15,9 +20,32 @@ function Shapefiles() {
       pageName="Shapefiles"
       pageTableState={pageTableState}
       pageTableHandlers={pageTableHandlers}
-      onClickNew={() => history.push('/admin/shapefiles/new')}
+      onClickNew={showShapefileDialog}
     />
   );
+
+  function showShapefileDialog() {
+    dispatch(showDialog({
+      component: ShapefileDialog,
+      props: {
+        title: 'Create Shapefile',
+        onValid,
+      },
+    }));
+  }
+
+  function onValid(data) {
+    const { onCreate } = pageTableHandlers;
+    const { file, sld } = data;
+    const extension = file && file.name.split('.').pop();
+    const sldExtension = sld && sld.name.split('.').pop();
+    onCreate({
+      data: toFormData({ ...data, extension, sld_extension: sldExtension }),
+      onSuccess(response) {
+        history.push(`/admin/shapefiles/${response.id}`);
+      },
+    });
+  }
 
   function getColumns() {
     return [

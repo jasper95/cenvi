@@ -11,28 +11,28 @@ import { isUploadingSelector } from 'shared/utils/uploadService';
 import { useSelector } from 'react-redux';
 import uuid from 'uuid/v4';
 import useForm from 'shared/hooks/useForm';
-import useMutation from 'shared/hooks/useMutation';
-import { toFormData } from 'shared/utils/tools';
+import { useUpdateNode } from 'shared/hooks/useMutation';
+import { toFormData, getValidationResult } from 'shared/utils/tools';
 import CreatableInput from 'shared/components/CreatableInput';
 import Checkbox from 'react-md/lib/SelectionControls/Checkbox';
+import { updateShapefileSchema } from '../model/shapefile';
 
 
 function ShapefilesForm(props) {
   const { id } = props.match.params;
-  const isCreate = id === 'new';
   const [formState, formHandlers] = useForm({
     initialFields: {
       id: uuid(),
     },
-    // validator,
+    validator,
     onValid: onSave,
   });
   const { onSetFields, onElementChange } = formHandlers;
   const isUploading = useSelector(isUploadingSelector);
   const [categoryResponse] = useQuery({ url: '/category' }, { initialData: [], isBase: true });
-  const [shapefileResponse] = useQuery({ url: `/shapefile/${id}` }, { skip: isCreate, onFetchSuccess: onSetFields, isBase: true });
+  const [shapefileResponse] = useQuery({ url: `/shapefile/${id}` }, { onFetchSuccess: onSetFields, isBase: true });
   const { fields, errors } = formState;
-  const [mutationState, onMutate] = useMutation({ url: '/shapefile' });
+  const [mutationState, onMutate] = useUpdateNode({ node: 'shapefile', isBase: false });
   const { data: categories } = categoryResponse;
   if (shapefileResponse.loading) {
     return (
@@ -165,15 +165,12 @@ function ShapefilesForm(props) {
     const sldExtension = sld && sld.name.split('.').pop();
     onMutate({
       data: toFormData({ ...data, extension, sld_extension: sldExtension }),
-      method: isCreate ? 'POST' : 'PUT',
-      message: `Shapefile successfuly ${isCreate ? 'created' : 'updated'}`,
-      onSuccess() {
-        if (isCreate) {
-          history.push('/admin/shapefiles');
-        }
-      },
     });
   }
+}
+
+function validator(data) {
+  return getValidationResult(data, updateShapefileSchema);
 }
 
 export default ShapefilesForm;

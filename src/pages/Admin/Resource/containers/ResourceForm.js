@@ -10,8 +10,9 @@ import { isUploadingSelector } from 'shared/utils/uploadService';
 import { useSelector } from 'react-redux';
 import uuid from 'uuid/v4';
 import useForm from 'shared/hooks/useForm';
-import useMutation from 'shared/hooks/useMutation';
+import { useUpdateNode } from 'shared/hooks/useMutation';
 import { toFormData } from 'shared/utils/tools';
+import { resourceValidator } from '../model/resource';
 
 
 function ShapefilesForm(props) {
@@ -20,14 +21,14 @@ function ShapefilesForm(props) {
     initialFields: {
       id: uuid(),
     },
-    // validator,
+    validator: resourceValidator,
     onValid: onSave,
   });
   const { onSetFields, onElementChange } = formHandlers;
   const isUploading = useSelector(isUploadingSelector);
   const [queryResponse] = useQuery({ url: `/resource/${id}` }, { onFetchSuccess: onSetFields, isBase: true });
   const { fields, errors } = formState;
-  const [mutationState, onMutate] = useMutation({ url: '/resource' });
+  const [mutationState, onMutate] = useUpdateNode({ node: 'resource' });
   if (queryResponse.loading) {
     return (
       <span>Loading...</span>
@@ -124,13 +125,6 @@ function ShapefilesForm(props) {
     const sldExtension = sld && sld.name.split('.').pop();
     onMutate({
       data: toFormData({ ...data, extension, sld_extension: sldExtension }),
-      method: isCreate ? 'POST' : 'PUT',
-      message: `Shapefile successfuly ${isCreate ? 'created' : 'updated'}`,
-      onSuccess() {
-        if (isCreate) {
-          history.push('/admin/shapefiles');
-        }
-      },
     });
   }
 }

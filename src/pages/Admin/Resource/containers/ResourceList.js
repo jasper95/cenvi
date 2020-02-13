@@ -13,7 +13,7 @@ const ResourceDialog = loadable(() => import('pages/Admin/Resource/components/Re
 
 
 function Resource() {
-  const [pageTableState, pageTableHandlers] = usePageTable({ node: 'resource' });
+  const [pageTableState, pageTableHandlers] = usePageTable({ node: 'resource', isBaseCreate: false });
   const dispatch = useDispatch();
   return (
     <PageTable
@@ -63,7 +63,7 @@ function Resource() {
 
           },
           {
-            icon: 'search',
+            iconClassName: 'wtfr wtf-eye',
             label: 'Preview',
             onClick: openPreview,
           },
