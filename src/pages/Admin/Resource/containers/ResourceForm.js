@@ -99,14 +99,16 @@ function ShapefilesForm(props) {
       </div>
       <div className="row row-stretch">
         <Paper className="col col-md-12-guttered col-actions">
-          <div className="iField col col-md-6">
+          <div className="iField col col-md-7">
             <p className="iField_label">Preview</p>
-            <iframe
-              src={`https://docs.google.com/gview?url=${url}&embedded=true`}
-              title="Preview"
-            />
+            <div className="iframeViewer">
+              <iframe
+                src={`https://docs.google.com/gview?url=${url}&embedded=true`}
+                title="Preview"
+              />
+            </div>
           </div>
-          <div className="iField col col-md-6">
+          <div className="iField col col-md-5">
             <p className="iField_label">File</p>
             <SingleFileUpload
               id="file"
