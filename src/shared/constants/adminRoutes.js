@@ -16,7 +16,7 @@ export default [
   },
   {
     label: 'news',
-    icon: 'book',
+    icon: 'subject',
     route: '/admin/news',
   },
   {
@@ -36,7 +36,7 @@ export default [
   },
   {
     label: 'resources',
-    icon: 'format_shapes',
+    icon: 'cloud_upload',
     route: '/admin/resources',
   },
 ];
