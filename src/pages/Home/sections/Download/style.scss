@@ -6,4 +6,51 @@ $rootClass: '.cenvi .page-home';
 	&_header {
 		color: $text-color;
 	}
+
+
+	.row-downloads {
+		max-width: 1024px;
+		margin: 0 auto;
+	}
+
+	.dlItem {
+		padding: 2rem 4rem;
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+		flex-direction: column;
+		text-align: center;
+		border-radius: .5rem;
+		transition: box-shadow 300ms ease-out;
+
+		// .dlItem_thumbnail
+		&_thumbnail {
+			width: 100%;
+			max-width: 5rem;
+		}
+
+		// .dlItem_info
+		&_info {
+			margin: 1rem 0;
+
+			// .dlItem_info
+			&_name {
+				font-size: 1.25rem;
+				font-weight: 600;
+				color: $text-color;
+				text-transform: capitalize;
+				margin-bottom: 0.25rem;
+				line-height: 1.5;
+			}
+		}
+
+		img {
+			width: 100%;
+		}
+
+		&:hover {
+			box-shadow: .25rem .25rem 1rem 0 rgba(#000, .1)
+		}
+	}
 }

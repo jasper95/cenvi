@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Col } from 'reactstrap';
+import range from 'lodash/range';
+import Button from 'react-md/lib/Buttons/Button';
+
 import SectionHeader from 'shared/components/Section';
 import './style.scss';
 
@@ -33,10 +36,24 @@ function DownloadSectionHome({ BCP = 'section-downloads' }) {
       <div className="container">
 
         <SectionHeader
-          header="Downloads"
+          rowSize={8}
+          headerLabel="Downloads"
+          header="Files & Resources"
+          desc="Aute esse ea anim ipsum amet id officia. Officia aliquip nisi fugiat
+          magna commodo. Excepteur tempor occaecat ut culpa exercitation consectetur excepteur dolor.
+            Duis et labore dolore duis. Labore voluptate do ipsum et velit.
+          "
         />
 
-        <div className="row row-content">
+        <div className="row row-downloads">
+          {range(0, 9).map(r => (
+            <div className="col col-md-4 col-sm-6">
+              <DowndloadableItem />
+            </div>
+          ))}
+        </div>
+
+        {/* <div className="row row-content">
           <div className="col col-md-4 col-categories">
             {categories && categories.map(category => (
               <div key={category.id}>
@@ -59,12 +76,53 @@ function DownloadSectionHome({ BCP = 'section-downloads' }) {
               />
             ))}
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );
 }
 
+function getRandom(max) {
+  return Math.floor(Math.random() * Math.floor(max));
+}
+
+function DowndloadableItem(props) {
+  const randomfiletype = ['csv', 'docx', 'jpeg', 'kml', 'shp', 'txt'];
+  const {
+    name = 'filename',
+    format = randomfiletype[getRandom(randomfiletype.length)],
+    description = 'Id veniam cillum nisi velit velit officia tempor occaecat esse ea.',
+  } = props;
+
+  const assumedFilename = `${name.replace(' ', '-')}.${format}`;
+  const assumedImgSrc = `/static/img/file_icons/${format}.png`;
+
+  return (
+    <div className="dlItem">
+      <div className="dlItem_thumbnail">
+        <img
+          src={assumedImgSrc}
+          alt={assumedFilename}
+        />
+      </div>
+      <div className="dlItem_info">
+        <h1 className="dlItem_info_name">
+          {name}
+        </h1>
+        <p className="dlItem_info_desc">
+          {description}
+        </p>
+        <Button
+          flat
+          secondary
+          children="Download"
+          iconEl={<i className="wtfr wtf-cloud-download" />}
+          className="iBttn iBttn-second-prio"
+        />
+      </div>
+    </div>
+  );
+}
 
 function Download(props) {
   return (
