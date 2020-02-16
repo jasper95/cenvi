@@ -110,13 +110,18 @@ function ShapefilesForm(props) {
               />
             </div>
             <div className="col col-md-3">
-              <Checkbox
-                id="is_public"
-                name=""
-                label="Download in public allowed"
-                checked={fields.is_public}
-                onChange={onElementChange}
-              />
+              <div className="iField iField-cb">
+                <p className="iField_label">
+                  Download in Public
+                </p>
+                <Checkbox
+                  id="is_public"
+                  name=""
+                  label="Allow Downloads"
+                  checked={fields.is_public}
+                  onChange={onElementChange}
+                />
+              </div>
             </div>
           </div>
           <div className="row">
@@ -136,31 +141,35 @@ function ShapefilesForm(props) {
           </div>
         </Paper>
       </div>
+
       <div className="row row-stretch">
-        <Paper className="col col-md-12-guttered col-actions">
-          <div className="iField col col-md-5">
-            <div className="iField col col-md-12">
-              <p className="iField_label">Shapefile</p>
-              <SingleFileUpload
-                id="file"
-                onChange={onElementChange}
-                acceptedFileTypes={['zip', 'shp', 'rar', 'kml', 'kmz']}
-              />
-            </div>
-            <div className="iField col col-md-12">
-              <p className="iField_label">Style</p>
-              <SingleFileUpload
-                id="sld"
-                onChange={onElementChange}
-                acceptedFileTypes={['zip', 'rar', 'sld']}
-              />
-            </div>
-          </div>
-          <div className="iField col col-md-7">
+        <Paper className="col col-md-8-guttered col-preview">
+          <div className="iField col">
             <p className="iField_label">Preview</p>
             <div className="col-map">
               <Map activeLayers={[id]} bbox={bbox} />
             </div>
+          </div>
+        </Paper>
+
+
+        <Paper className="col col-md-4-guttered col-options">
+          <div className="iField col">
+            <p className="iField_label">Shapefile</p>
+            <SingleFileUpload
+              id="file"
+              onChange={onElementChange}
+              acceptedFileTypes={['zip', 'shp', 'rar', 'kml', 'kmz']}
+            />
+          </div>
+
+          <div className="iField col">
+            <p className="iField_label">Style</p>
+            <SingleFileUpload
+              id="sld"
+              onChange={onElementChange}
+              acceptedFileTypes={['zip', 'rar', 'sld']}
+            />
           </div>
         </Paper>
       </div>

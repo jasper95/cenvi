@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import difference from 'lodash/difference';
 import Map from './components/Map';
 import Sidebar from './components/Sidebar';
@@ -7,6 +7,11 @@ import './style.scss';
 export default function MapPage() {
   const [activeLayers, setLayers] = useState([]);
   const [hiddenLayers, setHiddenLayers] = useState([]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <section className="section-map section">
       <div className="col-sidebar">

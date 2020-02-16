@@ -12,7 +12,7 @@ function Dashboard() {
     <>
       <div className="row row-header dashboardHeader">
         <h1 className="dashboardHeader_title">
-          Hi Sample User
+          Welcome John Smith
         </h1>
       </div>
       <div className="row row-pies">
@@ -21,9 +21,9 @@ function Dashboard() {
           type="pie"
           cartTitle="Active Users"
         >
-          <CustomOneLevelPieChart 
+          <CustomOneLevelPieChart
             className="graphCard_chart"
-            customNumber={parseInt(Math.random()*100)}
+            customNumber={parseInt(Math.random() * 100)}
           />
         </GraphCard>
         <GraphCard
@@ -31,9 +31,9 @@ function Dashboard() {
           type="pie"
           cartTitle="Daily Views"
         >
-          <CustomOneLevelPieChart 
+          <CustomOneLevelPieChart
             className="graphCard_chart"
-            customNumber={parseInt(Math.random()*100)}
+            customNumber={parseInt(Math.random() * 100)}
           />
         </GraphCard>
         <GraphCard
@@ -41,31 +41,31 @@ function Dashboard() {
           type="pie"
           cartTitle="Online Sessions"
         >
-          <CustomOneLevelPieChart 
+          <CustomOneLevelPieChart
             className="graphCard_chart"
-            customNumber={parseInt(Math.random()*100)}
+            customNumber={parseInt(Math.random() * 100)}
           />
         </GraphCard>
       </div>
       <div className="row row-content">
-        <Paper 
+        <Paper
           className="col col-md-8-guttered col-form"
-          style={{height: 250}}
+          style={{ height: 250 }}
         >
           <CustomLineChart />
         </Paper>
-        <Paper 
+        <Paper
           className="col col-md-4-guttered col-form"
-          style={{height: 250}}
+          style={{ height: 250 }}
         >
           <CustomBarChart />
         </Paper>
       </div>
 
       <div className="row row-content-2">
-        <Paper 
+        <Paper
           className="col col-md-12-guttered col-form"
-          style={{height: 500}}
+          style={{ height: 500 }}
         >
           <CustomAreaChart />
         </Paper>
@@ -76,11 +76,13 @@ function Dashboard() {
 
 
 function GraphCard(props) {
-  const { className, type, cartTitle, children } = props
-  return(
-    <Paper 
+  const {
+ className, type, cartTitle, children 
+} = props;
+  return (
+    <Paper
       className={cn(`${className} graphCard`, {
-        [`graphCard-${type}`]: type
+        [`graphCard-${type}`]: type,
       })}
     >
       <h1 className="graphCard_title">
@@ -92,7 +94,7 @@ function GraphCard(props) {
         </div>
       </div>
     </Paper>
-  )
+  );
 }
 
 export default Dashboard;

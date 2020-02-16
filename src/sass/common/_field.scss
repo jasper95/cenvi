@@ -1,7 +1,7 @@
 $fieldBorder: 1px solid $gray-200;
 
 %fieldLabelSettings {
-	font-size: .8em;
+	font-size: .8rem;
 	margin-bottom: .5em;
 	font-family: $font-family;
 	color: $gray-300;
@@ -11,11 +11,12 @@ $fieldBorder: 1px solid $gray-200;
 	font-weight: bold;
 	letter-spacing: .15em;
 	text-transform: uppercase;
+	line-height: 1;
 }
 
 .iField {
 	border: $gray-200;
-	padding: .5em;
+	padding: .5rem;
 	font-size: 1rem;
 	font-family: $font-family;
 	width: 100%;
@@ -315,8 +316,6 @@ $fieldBorder: 1px solid $gray-200;
 		}
 	}
 
-
-
 	.md-selection-control-container {
 		height: auto;
 		margin-bottom: .5em;
@@ -372,7 +371,7 @@ $fieldBorder: 1px solid $gray-200;
 	.md-divider {
 		margin-top: -5px;
 	}
-} 
+}
 
 // ====================================
 // multifields
@@ -465,22 +464,15 @@ $fieldBorder: 1px solid $gray-200;
 .selectAutoComplete {
 	font-size: 1rem;
 	width: 100%;
+	padding: 0.5rem;
 
 	// .selectAutoComplete_label
 	&_label {
-		margin-bottom: .5em;
-		font-size: .8em;
-		font-family: $font-family;
-		transform: none !important;
-		color: $gray-300;
-		width: 100%;
-		text-align: left;
-		display: block;
-		font-weight: bold;
-		letter-spacing: .15em;
-		text-transform: uppercase;
-		margin-bottom: 0;
-		padding: 0 .8em;
+		@extend %fieldLabelSettings;
+	}
+
+	.iField-rsContainer {
+		padding: 0;
 	}
 }
 
@@ -537,4 +529,21 @@ $fieldBorder: 1px solid $gray-200;
 		min-height: 30rem;
 		padding: 1rem;
 	}
+}
+
+// ====================================
+// checkbox
+// ====================================
+.iField-cb {
+	[role="checkbox"] + span {
+		font-weight: 600;
+		font-family: $font-family;
+	}
+}
+
+// ====================================
+// checkbox
+// ====================================
+.iField-ci__control {
+	border-radius: 0;
 }
