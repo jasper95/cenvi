@@ -5,32 +5,12 @@ import Button from 'react-md/lib/Buttons/Button';
 
 import SectionHeader from 'shared/components/Section';
 import './style.scss';
-
-const apiURL = process.env.REACT_APP_API_HOST_PORT;
+import useQuery from 'shared/hooks/useQuery';
+import { downloadFile } from 'shared/utils/tools';
 
 function DownloadSectionHome({ BCP = 'section-downloads' }) {
-  const [downloads, handleDownload] = useState(null);
-  const [categories, handleCategories] = useState(null);
-
-  const getDownloads = () => {
-    fetch(`${apiURL}/download`, { credentials: 'include' })
-      .then(response => response.json())
-      .then(response => handleDownload(response.data))
-      .catch(err => console.error(err));
-  };
-
-  const getDownloadCategories = () => {
-    fetch(`${apiURL}/download-category`, { credentials: 'include' })
-      .then(response => response.json())
-      .then(response => handleCategories(response.data))
-      .catch(err => console.error(err));
-  };
-
-  useEffect(() => {
-    // getDownloads()
-    // getDownloadCategories()
-  }, []);
-
+  const [queryState] = useQuery({ url: '/resource' }, { isBase: true });
+  const { data, loading } = queryState;
   return (
     <section id="downloads" className={`${BCP} section`}>
       <div className="container">
@@ -46,11 +26,18 @@ function DownloadSectionHome({ BCP = 'section-downloads' }) {
         />
 
         <div className="row row-downloads">
-          {range(0, 9).map(r => (
-            <div className="col col-md-4 col-sm-6">
-              <DowndloadableItem />
-            </div>
-          ))}
+          {loading ? (
+            <span>Loading...</span>
+          ) : (
+            <>
+              {data.map(item => (
+                <div className="col col-md-4 col-sm-6">
+                  <DowndloadableItem data={item} />
+                </div>
+              ))}
+            </>
+          )}
+
         </div>
 
         {/* <div className="row row-content">
@@ -87,12 +74,15 @@ function getRandom(max) {
 }
 
 function DowndloadableItem(props) {
-  const randomfiletype = ['csv', 'docx', 'jpeg', 'kml', 'shp', 'txt'];
   const {
-    name = 'filename',
-    format = randomfiletype[getRandom(randomfiletype.length)],
-    description = 'Id veniam cillum nisi velit velit officia tempor occaecat esse ea.',
+    data,
   } = props;
+  const {
+    name,
+    format,
+    description,
+    file_path: filePath,
+  } = data;
 
   const assumedFilename = `${name.replace(' ', '-')}.${format}`;
   const assumedImgSrc = `/static/img/file_icons/${format}.png`;
@@ -118,77 +108,12 @@ function DowndloadableItem(props) {
           children="Download"
           iconEl={<i className="wtfr wtf-cloud-download" />}
           className="iBttn iBttn-second-prio"
+          onClick={() => downloadFile(filePath)}
         />
       </div>
     </div>
   );
 }
 
-function Download(props) {
-  return (
-    <div>
-      <Col xs="12" sm="12">
-        <div
-          id="collapse"
-          key={props.id}
-          className={`dowload-file collapse${props.id}`}
-          style={{ display: 'none' }}
-        >
-          <a href={props.hrefVal} className="download-link">
-            {props.titleFile}
-          </a>
-        </div>
-      </Col>
-    </div>
-  );
-}
-
-function CategoryButton(props) {
-  return (
-    <div
-      className="btn btn-info btn-category"
-      data-toggle="collapse"
-      role="button"
-      id={`button${props.id}`}
-      onClick={() => chooseCatDisplay(props.id, props.categoriesSize)}
-    >
-      {props.categoryName}
-      <span className="arrow">❯</span>
-    </div>
-  );
-}
-
-function chooseCatDisplay(id, categoriesSize) {
-  collapseShow(id, categoriesSize);
-  changeBtnBackgrnd(id, categoriesSize);
-}
-
-function changeBtnBackgrnd(id, categoriesSize) {
-  for (let i = 1; i <= categoriesSize; i++) {
-    if (id === i) {
-      document.getElementById(`button${id}`).style.background = '#bdc3c7';
-    } else {
-      document.getElementById(`button${i}`).style.background = '#f5f6fa';
-    }
-  }
-}
-
-function collapseShow(id, categoriesSize) {
-  let i; let j; let
-    elements;
-  for (i = 1; i <= categoriesSize; i++) {
-    if (id === i) {
-      elements = document.getElementsByClassName(`collapse${id}`);
-      for (j = 0; j < elements.length; j++) {
-        elements[j].style.display = 'block';
-      }
-    } else {
-      elements = document.getElementsByClassName(`collapse${i}`);
-      for (j = 0; j < elements.length; j++) {
-        elements[j].style.display = 'none';
-      }
-    }
-  }
-}
 
 export default DownloadSectionHome;

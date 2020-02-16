@@ -200,6 +200,8 @@ export const exportShapefile = data => window.location.assign(`${process.env.GEO
   service: 'wfs', outputFormat: 'shape-zip', typeName: `cenvi:${data.id}`, request: 'GetFeature',
 })}`, '_blank');
 
+export const downloadFile = url => window.location.assign([process.env.STATIC_URL, url].join('/'), '_blank');
+
 export const getPhotoUrl = photo => `${process.env.STATIC_URL}/${photo.image_url || photo.file_path}`;
 
 const singularTypes = ['news'];
