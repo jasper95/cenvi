@@ -1,9 +1,9 @@
 import React from 'react';
 
-const WithAuthSkeleton = props => (
+const SpinnerSkeletonLoader = props => (
   <div className="skeleton skeleton-withauth">
     <div className="spinner" />
   </div>
 );
 
-export default WithAuthSkeleton;
+export default SpinnerSkeletonLoader;

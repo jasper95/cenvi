@@ -7,6 +7,8 @@
         transform: rotate(360deg);
     }
 }
+
+
 .skeleton-withauth {
     width: 100vw;
     height: 100vh;
@@ -49,6 +51,36 @@
             animation-duration: .5s;
             animation-iteration-count: infinite;
             animation-timing-function: linear;
+        }
+    }
+}
+
+.dbContainer {
+    .skeleton-withauth {
+        position: absolute;
+        width: 100%;
+        height: calc(100% - #{$nav-height});
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        .spinner {
+            font-size: 5rem;
+
+            &:before ,
+            &:after {
+                border-width: .07em;
+            }
+
+
+
+            &:before {
+                border-color: darken(#d5dff1, 2%);
+            }
+            &:after {
+                border-color: darken(#dfe8f7, 2%);
+                border-top-color: transparent;
+            }
         }
     }
 }

@@ -16,6 +16,7 @@ import CreatableInput from 'shared/components/CreatableInput';
 import Checkbox from 'react-md/lib/SelectionControls/Checkbox';
 import Map from 'pages/Map/components/Map';
 import 'pages/Map/style.scss';
+import { WithAuthSkeleton } from 'shared/components/Skeletons';
 import { updateShapefileSchema } from '../model/shapefile';
 
 
@@ -36,7 +37,7 @@ function ShapefilesForm(props) {
   const { data: bbox } = bboxQuery;
   if (shapefileResponse.loading || bboxQuery.loading) {
     return (
-      <span>Loading...</span>
+      <WithAuthSkeleton />
     );
   }
 

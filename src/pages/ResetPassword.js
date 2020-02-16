@@ -12,7 +12,7 @@ import useMutation from 'shared/hooks/useMutation';
 import { getValidationResult, fieldIsRequired } from 'shared/utils/tools';
 import 'sass/pages/login.scss';
 import useRouter from 'shared/hooks/useRouter';
-
+import { SpinnerSkeletonLoader } from 'shared/components/Skeletons';
 
 const initialFields = {
   email: '',
@@ -52,6 +52,7 @@ function ResetPassword(props) {
     onElementChange,
   } = formHandlers;
   const { fields, errors } = formState;
+
   return (
     <AuthLayout
       header={(
@@ -61,9 +62,7 @@ function ResetPassword(props) {
       )}
     >
       {(verifyTokenState === 'pending') && (
-        <div>
-          Loading ...
-        </div>
+        <SpinnerSkeletonLoader />
       )}
       {verifyTokenState === 'invalid' && (
         <div>
