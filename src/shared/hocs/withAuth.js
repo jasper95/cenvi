@@ -3,6 +3,8 @@ import { Redirect } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
 import { createSelector } from 'redux-starter-kit';
 import { authRequest } from 'shared/redux/auth/reducer';
+import { WithAuthSkeleton } from 'shared/components/Skeletons';
+
 
 export const authSelector = createSelector(
   state => state.auth.user,
@@ -26,8 +28,9 @@ const withAuth = (WrappedComponent) => {
       }
     }, []);
     if ((!sessionRequested && !auth) || (sessionLoading && requireAuth !== 'optional')) {
-      return (<span>Loading...</span>);
+      return (<WithAuthSkeleton />);
     }
+
     if (!auth && sessionRequested && requireAuth === true) {
       return (<Redirect to="/login" />);
     }
