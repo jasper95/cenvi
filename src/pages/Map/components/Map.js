@@ -4,11 +4,19 @@ import {
   TileLayer,
   WMSTileLayer,
 } from 'react-leaflet';
+import chunk from 'lodash/chunk';
+
 
 export default function Map(props) {
-  const { activeLayers } = props;
+  const { activeLayers, bbox } = props;
   return (
-    <LeafletMap center={[10.9, 123.9]} zoom={10}>
+    <LeafletMap
+      center={[10.9, 123.9]}
+      zoom={10}
+      {...bbox && {
+        bounds: chunk(bbox.slice().reverse(), 2),
+      }}
+    >
       <TileLayer
         attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

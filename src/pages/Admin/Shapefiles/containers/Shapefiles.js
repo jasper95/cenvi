@@ -65,7 +65,7 @@ function Shapefiles() {
           {
             icon: 'edit',
             label: 'Edit',
-            onClick: data => history.push(`/admin/shapefiles/${data.slug}`),
+            onClick: data => history.push(`/admin/shapefiles/${data.id}`),
           },
           {
             icon: 'import_export',
