@@ -3,10 +3,11 @@ import useQuery from 'shared/hooks/useQuery';
 import { getPhotoUrl } from 'shared/utils/tools';
 import 'sass/components/albumDetailsPage/index.scss';
 import ImageLoader from 'react-image';
+import { WithAuthSkeleton } from 'shared/components/Skeletons';
 
 function AlbumDetails(props) {
   const BCP = 'albumDetailPage';
-
+  const { history } = props;
   const { id } = props.match.params;
   const [albumResponse] = useQuery({ url: `/published_album/${id}` }, { initialData: null, initialLoading: true });
 
@@ -14,9 +15,16 @@ function AlbumDetails(props) {
   const { loading, data: album } = albumResponse;
   if (loading) {
     return (
-      <span>Loading...</span>
+      <WithAuthSkeleton />
     );
   }
+
+  // mu null ang albums migo
+  if (album === null) {
+    history.push('/not-found');
+    return false;
+  }
+
   const { photos } = album;
   let hero = photos.find(e => e.is_cover);
   if (!hero) { ([hero] = photos); }
