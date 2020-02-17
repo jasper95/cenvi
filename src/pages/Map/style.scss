@@ -74,3 +74,17 @@ $rootClass: ".cenvi .page-map";
     }
   }
 }
+
+
+@media (max-width: 900px) {
+  #{$rootClass} .section-map {
+    position: relative;
+    .col-sidebar {
+      position: absolute;
+      z-index: 10;
+      bottom: 0;
+      left: 0;
+      height: auto;
+    }
+  }
+}

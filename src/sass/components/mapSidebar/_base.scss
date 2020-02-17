@@ -116,3 +116,68 @@ $base-class: '.page-map .sidebar';
 
 ///////  End of sidebar components  ////////
 
+
+
+///////////////////////////////////////////////
+//           MOBILE                          //
+///////////////////////////////////////////////
+@media (max-width: 900px) {
+    #{$base-class} {
+        z-index: 10;
+        width: 100vw;
+        height: auto;
+        background-color: #fff;
+
+        max-width: 100% !important;
+        transition: none;
+        position: relative;
+
+        justify-content: flex-end;
+        flex-direction: column;
+
+        // .sidebar_toggler
+        &_toggler {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: auto;
+            z-index: 10;
+            width: $header-height;
+            height: $header-height;
+
+            .md-icon {
+                display: block;
+                transform: rotate(-90deg);
+            }
+        }
+
+        // .sidebar_header
+        &_header {
+            padding: 1rem !important;
+            padding-right: 80px !important;
+        }
+
+        // .sidebar_body
+        &_body {
+            padding: 0;
+            max-height: 0;
+            height: calc(100vh - #{$nav-height + 138});
+            transition:
+                padding 300ms ease-out,
+                max-height 300ms ease-out;
+        }
+    }
+
+    #{$base-class}-open {
+        .sidebar_body {
+            padding: 1rem;
+        }
+
+        .sidebar_body {
+            max-height: 100vh;
+        }
+    }
+}
+
+
+
