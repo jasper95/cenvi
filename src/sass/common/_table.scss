@@ -202,6 +202,25 @@ $table-header-text: $primary-color-200;
 	}
  }
 
+ @media (max-width: 737px) {
+
+	.iTable_preLoader_header {
+		display: none;
+	}
+
+	.iTable_preLoader_body {
+		flex-wrap: wrap;
+	}
+
+	.iTable_preLoader_cell {
+		width: 100%;
+		border-right: none !important;
+		&:not(:last-child) {
+			border-bottom: 2px solid darken(#ecf1f9, 2%);
+		}
+	}
+ }
+
 
 
 
