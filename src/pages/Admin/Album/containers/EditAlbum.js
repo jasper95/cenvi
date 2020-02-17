@@ -29,16 +29,15 @@ const customChangeHandler = {
 
 function EditAlbum(props) {
   const { id } = props.match.params;
-  const [queryState] = useQuery({ url: `/album/${id}` }, { isBase: true, onFetchSuccess: onSetFields });
-  const [mutationState, onMutate] = useUpdateNode({ node: 'album' });
   const [formState, formHandlers] = useForm({
     initialFields: {},
     customChangeHandler,
   });
-  const { fields, errors } = formState;
   const { onSetFields, onElementChange } = formHandlers;
+  const [queryState] = useQuery({ url: `/album/${id}` }, { isBase: true, onFetchSuccess: onSetFields });
+  const [mutationState, onMutate] = useUpdateNode({ node: 'album' });
+  const { fields, errors } = formState;
   const { photos = [] } = fields;
-
   const { loading } = queryState;
   if (loading) {
     return (
