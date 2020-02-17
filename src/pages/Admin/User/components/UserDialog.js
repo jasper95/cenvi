@@ -16,6 +16,7 @@ function CreateUser(props) {
       <TextField
         id="first_name"
         label="First Name"
+        className="iField"
         onChange={onElementChange}
         value={fields.first_name}
         error={Boolean(errors.first_name)}
@@ -25,6 +26,7 @@ function CreateUser(props) {
         id="last_name"
         label="Last Name"
         type="last_name"
+        className="iField"
         onChange={onElementChange}
         errorText={errors.last_name}
         error={Boolean(errors.last_name)}
@@ -34,6 +36,7 @@ function CreateUser(props) {
         id="email"
         label="Email"
         type="email"
+        className="iField"
         onChange={onElementChange}
         errorText={errors.email}
         error={Boolean(errors.email)}

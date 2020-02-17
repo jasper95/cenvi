@@ -17,6 +17,7 @@ function Resource(props) {
       <TextField
         id="name"
         label="Name"
+        className="iField"
         onChange={onElementChange}
         value={fields.name}
         error={Boolean(errors.name)}
@@ -25,6 +26,7 @@ function Resource(props) {
       <TextField
         id="description"
         label="Description"
+        className="iField"
         onChange={onElementChange}
         errorText={errors.description}
         error={Boolean(errors.description)}

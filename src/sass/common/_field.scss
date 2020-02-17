@@ -547,3 +547,23 @@ $fieldBorder: 1px solid $gray-200;
 .iField-ci__control {
 	border-radius: 0;
 }
+
+// ====================================
+// Field SubSection
+// ====================================
+.iFieldSubSection {
+	width: 100%;
+	padding-bottom: 2rem;
+
+	&:not(:last-child) {
+		border-bottom: 1px solid $gray-100;
+	}
+
+	// .iFieldSubSection_label
+	&_label {
+		font-size: 1.25rem;
+		font-weight: 600;
+		color: $text-color;
+		margin: 1rem 0;
+	}
+}

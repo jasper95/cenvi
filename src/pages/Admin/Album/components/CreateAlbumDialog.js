@@ -18,6 +18,7 @@ function CreateAlbum(props) {
         label="Title"
         onChange={onElementChange}
         value={fields.name}
+        className="iField"
         error={Boolean(errors.name)}
         errorText={errors.name}
       />
@@ -25,6 +26,7 @@ function CreateAlbum(props) {
         id="excerpt"
         label="Excerpt"
         type="excerpt"
+        className="iField"
         onChange={onElementChange}
         errorText={errors.excerpt}
         error={Boolean(errors.excerpt)}

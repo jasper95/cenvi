@@ -30,7 +30,7 @@ function Resource() {
     dispatch(showDialog({
       component: ResourceDialog,
       props: {
-        title: 'Create',
+        title: 'Add Resource File',
         onValid,
       },
     }));

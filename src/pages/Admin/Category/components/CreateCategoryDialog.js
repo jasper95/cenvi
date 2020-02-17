@@ -16,6 +16,7 @@ function CreateCategory(props) {
       <TextField
         id="name"
         label="Category Name"
+        className="iField"
         onChange={onElementChange}
         value={fields.name}
         error={Boolean(errors.name)}
