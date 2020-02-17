@@ -4,4 +4,4 @@ export { default as NavSkeleton } from './NavSkeleton';
 export { default as RiskItemSkeleton } from './RiskItemSkeleton';
 export { default as ArticleItemSkeleton } from './ArticleItemSkeleton';
 export { default as AlbumItemSkeleton } from './AlbumItemSkeleton';
-export { default as WithAuthSkeleton } from './WithAuthSkeleton';
+export { default as SpinnerSkeletonLoader } from './SpinnerSkeletonLoader';

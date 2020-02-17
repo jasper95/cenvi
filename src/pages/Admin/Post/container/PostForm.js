@@ -26,7 +26,7 @@ import omit from 'lodash/omit';
 import { useSelector, useDispatch } from 'react-redux';
 import { showSuccess } from 'shared/redux/app/reducer';
 import useRouter from 'shared/hooks/useRouter';
-import { WithAuthSkeleton } from 'shared/components/Skeletons';
+import { SpinnerSkeletonLoader } from 'shared/components/Skeletons';
 
 function PostForm() {
   const router = useRouter();
@@ -54,7 +54,7 @@ function PostForm() {
   const [mutationState, onMutate] = useMutation({ url: '/post' });
   if (blogIsLoading) {
     return (
-      <WithAuthSkeleton />
+      <SpinnerSkeletonLoader />
     );
   }
   return (

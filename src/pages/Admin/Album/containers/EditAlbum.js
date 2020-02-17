@@ -16,7 +16,7 @@ import cn from 'classnames';
 import { useUpdateNode } from 'shared/hooks/useMutation';
 
 import 'sass/pages/edit-admin-list-album.scss';
-import { WithAuthSkeleton } from 'shared/components/Skeletons';
+import { SpinnerSkeletonLoader } from 'shared/components/Skeletons';
 
 const customChangeHandler = {
   photos(newPhotos, oldFields) {
@@ -41,7 +41,7 @@ function EditAlbum(props) {
   const { loading } = queryState;
   if (loading) {
     return (
-      <WithAuthSkeleton />
+      <SpinnerSkeletonLoader />
     );
   }
 

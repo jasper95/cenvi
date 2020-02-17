@@ -12,7 +12,7 @@ import uuid from 'uuid/v4';
 import useForm from 'shared/hooks/useForm';
 import { useUpdateNode } from 'shared/hooks/useMutation';
 import { toFormData } from 'shared/utils/tools';
-import { WithAuthSkeleton } from 'shared/components/Skeletons';
+import { SpinnerSkeletonLoader } from 'shared/components/Skeletons';
 import { resourceValidator } from '../model/resource';
 
 
@@ -32,7 +32,7 @@ function ShapefilesForm(props) {
   const [mutationState, onMutate] = useUpdateNode({ node: 'resource' });
   if (queryResponse.loading) {
     return (
-      <WithAuthSkeleton />
+      <SpinnerSkeletonLoader />
     );
   }
 

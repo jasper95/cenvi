@@ -3,7 +3,7 @@ import { Redirect } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
 import { createSelector } from 'redux-starter-kit';
 import { authRequest } from 'shared/redux/auth/reducer';
-import { WithAuthSkeleton } from 'shared/components/Skeletons';
+import { SpinnerSkeletonLoader } from 'shared/components/Skeletons';
 
 
 export const authSelector = createSelector(
@@ -28,7 +28,7 @@ const withAuth = (WrappedComponent) => {
       }
     }, []);
     if ((!sessionRequested && !auth) || (sessionLoading && requireAuth !== 'optional')) {
-      return (<WithAuthSkeleton />);
+      return (<SpinnerSkeletonLoader />);
     }
 
     if (!auth && sessionRequested && requireAuth === true) {

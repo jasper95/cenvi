@@ -3,7 +3,7 @@ import useQuery from 'shared/hooks/useQuery';
 import { getPhotoUrl } from 'shared/utils/tools';
 import 'sass/components/albumDetailsPage/index.scss';
 import ImageLoader from 'react-image';
-import { WithAuthSkeleton } from 'shared/components/Skeletons';
+import { SpinnerSkeletonLoader } from 'shared/components/Skeletons';
 
 function AlbumDetails(props) {
   const BCP = 'albumDetailPage';
@@ -15,7 +15,7 @@ function AlbumDetails(props) {
   const { loading, data: album } = albumResponse;
   if (loading) {
     return (
-      <WithAuthSkeleton />
+      <SpinnerSkeletonLoader />
     );
   }
 
