@@ -17,7 +17,7 @@
 		padding: 0;
 	}
 
-	// .row-ToolbarHeader-floating 
+	// .row-ToolbarHeader-floating
 	&-floating {
 		position: sticky;
 		top: 1rem;
@@ -62,6 +62,11 @@
 					margin-right: .5rem;
 				}
 			}
+		}
+
+		& ~ .row {
+			position: relative;
+			z-index: 10;
 		}
 	}
 }
