@@ -1,21 +1,42 @@
-FROM node:10.15-alpine as builder
-WORKDIR /var/app
-COPY ./package.json  /var/app/package.json
-RUN npm install --silent
-ENV NODE_ENV production
-COPY ./ /var/app/
-RUN npm run build --silent
+  
+# set the base image
+# n/b: for production, node is only used for building 
+# the static Html and javascript files
+# as react creates static html and js files after build
+# these are what will be served by nginx
+# use alias build to be easier to refer this container elsewhere
+# e.g inside nginx container
+FROM node:alpine as build
+# set working directory
+# this is the working folder in the container
+# from which the app will be running from
+WORKDIR /app
+# copy everything to /app directory
+# as opposed to on dev, in prod everything is copied to docker
+COPY . /app
+# add the node_modules folder to $PATH
+ENV PATH /app/node_modules/.bin:$PATH
 
-FROM node:10.15-alpine as runner
-ENV PORT 8080
-ENV NODE_ENV production
-RUN npm install -g --silent pm2
-WORKDIR /var/app
-COPY ./package.json  /var/app/
-RUN npm install --production --silent
-RUN mkdir -p views public
-COPY ./public /var/app/public
-COPY ./server.js /var/app/server.js
-COPY --from=builder /var/app/build /var/app/build
+RUN apk update && apk upgrade && \
+    apk add --no-cache bash git openssh
+# install and cache dependencies
+RUN yarn
+#build the project for production
+RUN yarn build
+# set up production environment
+# the base image for this is an alpine based nginx image
+FROM nginx:alpine
+# copy the build folder from react to the root of nginx (www)
+COPY --from=build /app/build /usr/share/nginx/html
+# --------- only for those using react router ----------
+# if you are using react router 
+# you need to overwrite the default nginx configurations
+# remove default nginx configuration file
+COPY nginx/default.conf.template /etc/nginx/conf.d/default.conf.template
 
-CMD pm2-runtime server.js
+COPY nginx/docker-entrypoint.sh /
+
+RUN chmod +x /docker-entrypoint.sh
+
+ENTRYPOINT ["/docker-entrypoint.sh"]
+CMD ["nginx", "-g", "daemon off;"]

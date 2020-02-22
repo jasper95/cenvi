@@ -4,6 +4,7 @@ import Table from 'react-md/lib/DataTables/DataTable';
 import TableBody from 'react-md/lib/DataTables/TableBody';
 import TableRow from 'react-md/lib/DataTables/TableRow';
 import TableColumn from 'react-md/lib/DataTables/TableColumn';
+import TablePagination from 'react-md/lib/DataTables/TablePagination';
 import TableHead from 'react-md/lib/DataTables/TableHeader';
 import cn from 'classnames';
 import Row from './Row';
@@ -11,8 +12,8 @@ import PreLoader from './PreLoader';
 
 function DataTable(props) {
   const {
-    rows, columns, onRowClick, className, isSelectable, selected, onRowToggle,
-    onSort, sort, isLoading,
+    rows, columns, onRowClick, className, isSelectable, selected,
+    onSort, sort, isLoading, showPagination, tableDispatch, pageSizes, tableState, rowCount,
   } = props;
 
   const BCP = 'iTable';
@@ -74,11 +75,25 @@ function DataTable(props) {
                 </TableRow>
               ))}
             </TableBody>
+            {showPagination && (
+              <TablePagination
+                rows={rowCount}
+                rowsPerPageItems={pageSizes}
+                rowsPerPage={tableState.size}
+                page={tableState.page + 1}
+                onPagination={(a, size, page) => tableDispatch({ type: 'SetPagination', payload: { page: page - 1, size } })}
+              />
+            )}
           </>
         )
       }
     </Table>
   );
+
+
+  function onRowToggle(index, checked) {
+    tableDispatch({ type: 'SetSelected', payload: { index, checked, rows } });
+  }
 }
 
 DataTable.propTypes = {
@@ -88,21 +103,31 @@ DataTable.propTypes = {
   onRowClick: PropTypes.func,
   selected: PropTypes.array,
   isSelectable: PropTypes.bool,
-  onRowToggle: PropTypes.func,
+  // onRowToggle: PropTypes.func,
   onSort: PropTypes.func,
   sort: PropTypes.object,
   isLoading: PropTypes.bool,
+  showPagination: PropTypes.bool.isRequired,
+  rowCount: PropTypes.number.isRequired,
+  tableDispatch: PropTypes.func.isRequired,
+  pageSizes: PropTypes.arrayOf(PropTypes.number),
+  tableState: PropTypes.shape({
+    page: PropTypes.number.isRequired,
+    size: PropTypes.number.isRequired,
+  }).isRequired,
 };
 
 DataTable.defaultProps = {
   className: '',
   onRowClick: () => {},
-  onRowToggle: () => {},
+  // onRowToggle: () => {},
   selected: [],
   isSelectable: false,
   onSort: () => {},
   sort: {},
   isLoading: false,
+  pageSizes: [10, 50, 100, 250],
+  // showPagination: true,
 };
 
 export default DataTable;

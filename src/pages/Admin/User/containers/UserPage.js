@@ -8,7 +8,7 @@ import { showDialog } from 'shared/redux/app/reducer';
 const UserDialog = loadable(() => import('pages/Admin/User/components/UserDialog'));
 
 function User() {
-  const [pageTableState, pageTableHandlers] = usePageTable({ node: 'user', isBaseCreate: false });
+  const [pageTableState, pageTableHandlers] = usePageTable({ node: 'user', isBaseCreate: false, isPaginated: true });
   const dispatch = useDispatch();
   return (
     <PageTable

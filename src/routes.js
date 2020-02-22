@@ -34,7 +34,6 @@ const EditAlbum = loadable(() => import('pages/Admin/Album/containers/EditAlbum'
 
 
 const AdminCategory = loadable(() => import('pages/Admin/Category/containers/Category'));
-const AdminEditCategory = loadable(() => import('pages/Admin/Category/containers/EditCategory'));
 
 const AdminShapefiles = loadable(() => import('pages/Admin/Shapefiles/containers/Shapefiles'));
 const AdminShapefilesForm = loadable(() => import('pages/Admin/Shapefiles/containers/ShapefilesForm'));
@@ -149,18 +148,6 @@ const adminRoutes = [
     key: 'admin-category',
     component: AdminCategory,
     path: '/admin/category',
-    exact: true,
-    pageProps: {
-      isAdmin: true,
-      hasFooter: false,
-      requireAuth: true,
-      hasNavigation: false,
-    },
-  },
-  {
-    key: 'edit-admin-category',
-    component: AdminEditCategory,
-    path: '/admin/category/:id',
     exact: true,
     pageProps: {
       isAdmin: true,

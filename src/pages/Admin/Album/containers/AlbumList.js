@@ -11,7 +11,7 @@ import loadable from '@loadable/component';
 const CreateAlbum = loadable(() => import('pages/Admin/Album/components/CreateAlbumDialog'));
 
 function AlbumList() {
-  const [pageTableState, pageTableHandlers] = usePageTable({ node: 'album', onSuccess });
+  const [pageTableState, pageTableHandlers] = usePageTable({ node: 'album', onSuccess, isPaginated: true });
   const dispatch = useDispatch();
   return (
     <PageTable

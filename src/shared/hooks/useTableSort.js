@@ -1,14 +1,19 @@
 import { useState } from 'react';
 
-export default function useTableSort({ initialSorted, sortable = [] }) {
-  const [sort, setSort] = useState(initialSorted ? { [initialSorted]: true } : {});
+export default function useTableSort(params) {
+  const { initialSort } = params;
+  const [sort, setSort] = useState(initialSort);
 
-  function onSort(sortKey) {
-    const { [sortKey]: sortValue } = sort;
-    if (sortable.includes(sortKey)) {
-      setSort({ [sortKey]: Boolean(!sortValue) });
-    }
+  function onSort(columnName) {
+    setSort(prevSort => prevSort.map((e) => {
+      if (e.column === columnName) {
+        return {
+          ...e,
+          direction: e.direction === 'asc' ? 'desc' : 'asc',
+        };
+      }
+      return e;
+    }));
   }
-
   return [sort, onSort];
 }

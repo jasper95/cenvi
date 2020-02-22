@@ -13,7 +13,7 @@ const ResourceDialog = loadable(() => import('pages/Admin/Resource/components/Re
 
 
 function Resource() {
-  const [pageTableState, pageTableHandlers] = usePageTable({ node: 'resource', isBaseCreate: false });
+  const [pageTableState, pageTableHandlers] = usePageTable({ node: 'resource', isBaseCreate: false, isPaginated: true });
   const dispatch = useDispatch();
   return (
     <PageTable

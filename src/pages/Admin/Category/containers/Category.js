@@ -10,7 +10,7 @@ import loadable from '@loadable/component';
 const CreateCategoryDialog = loadable(() => import('pages/Admin/Category/components/CreateCategoryDialog'));
 
 function Category() {
-  const [pageTableState, pageTableHandlers] = usePageTable({ node: 'category', onSuccess });
+  const [pageTableState, pageTableHandlers] = usePageTable({ node: 'category', onSuccess, isPaginated: true });
   const dispatch = useDispatch();
   return (
     <PageTable
@@ -19,17 +19,7 @@ function Category() {
       pageName="Categories"
       pageTableState={pageTableState}
       pageTableHandlers={pageTableHandlers}
-      onClickNew={() => dispatch(showDialog({
-        component: CreateCategoryDialog,
-        props: {
-          title: 'Create Category',
-          onValid,
-          initialFields: {
-            status: 'Active',
-            published_date: new Date().toISOString(),
-          },
-        },
-      }))}
+      onClickNew={() => handleCategoryDialog('Create')}
     />
   );
 
@@ -51,12 +41,7 @@ function Category() {
           {
             icon: 'edit',
             label: 'Edit',
-            onClick: data => history.push(`/admin/category/${data.slug}`),
-          },
-          {
-            iconClassName: 'wtfr wtf-eye',
-            label: 'View',
-            onClick: data => window.open(`/category/${data.slug}`, '_blank'),
+            onClick: data => handleCategoryDialog('Update', data),
           },
           {
             icon: 'delete',
@@ -66,6 +51,23 @@ function Category() {
         ],
       },
     ];
+  }
+
+  function handleCategoryDialog(type, initialFields = {}) {
+    const { onCreate, onUpdate } = pageTableHandlers;
+    const onSave = type === 'Create' ? onCreate : onUpdate;
+    dispatch(showDialog({
+      component: CreateCategoryDialog,
+      props: {
+        title: `${type} Category`,
+        initialFields,
+        onValid: (data) => {
+          onSave({
+            data,
+          });
+        },
+      },
+    }));
   }
 
   function onValid(data) {

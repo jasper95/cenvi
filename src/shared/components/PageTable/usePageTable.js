@@ -1,81 +1,104 @@
 import {
-  useState, useEffect, useCallback, useMemo,
+  useCallback, useMemo, useReducer,
 } from 'react';
-import useTableSelect from 'shared/hooks/useTableSelect';
-import useTableSort from 'shared/hooks/useTableSort';
 import useQuery from 'shared/hooks/useQuery';
 import debounce from 'lodash/debounce';
 import { useDispatch } from 'react-redux';
-import useMutation, { useCreateNode, useUpdateNode } from 'shared/hooks/useMutation';
+import useMutation from 'shared/hooks/useMutation';
 import loadable from '@loadable/component';
 import { showDialog } from 'shared/redux/app/reducer';
 import qs from 'qs';
+import capitalize from 'lodash/capitalize';
+import tableReducer, { tableInitialState } from './tableReducer';
 
 const Confirm = loadable(() => import('shared/components/Dialogs/Confirm'));
-
-function usePage(props) {
+const defaultSort = [{ column: 'created_date', direction: 'desc' }];
+function usePageTable(props) {
   const {
-    node, queryParams = {},
+    node = '',
+    mutationNode = node,
+    queryParams = {},
+    initialSort = defaultSort,
+    queryUrl,
+    isPaginated,
+    searchableFields = [],
     isBaseQuery = true,
     isBaseCreate = true,
     isBaseUpdate = true,
     isBaseDelete = true,
+    entityName = capitalize(node),
   } = props;
-  const sortProps = { initialSorted: 'email', sortable: ['email', 'full_name'] };
-  const [rowResponse, queryHandlers] = useQuery({ url: `/${node}?${qs.stringify(queryParams)}` }, { initialData: [], initialLoading: true, isBase: isBaseQuery });
-  const [search, setSearch] = useState('');
-  const [sort, onSort] = useTableSort(sortProps);
-  const { data: rows } = rowResponse;
-  const [selected, { onRowToggle, setSelected }] = useTableSelect(rows);
-
-  const [, onCreate] = useCreateNode({
-    node, onSuccess: queryHandlers.refetch, isBase: isBaseCreate,
+  const listInitialData = [];
+  const paginatedListInitialData = { data: [], count: 0 };
+  const initialData = isPaginated ? paginatedListInitialData : listInitialData;
+  const debounceSearch = useCallback(debounce(onSearch, 1000), []);
+  const [tableState, tableDispatch] = useReducer(
+    tableReducer, { ...tableInitialState, sort: initialSort },
+  );
+  const { sort, page, size } = tableState;
+  const queryString = qs.stringify({
+    search: {
+      fields: searchableFields,
+      value: tableState.search,
+    },
+    sort,
+    ...(isPaginated && { page, size }),
+    ...queryParams,
   });
-  const [, onUpdate] = useUpdateNode({
-    node,
+
+  const [rowResponse, queryHandlers] = useQuery(
+    {
+      url: `${queryUrl ? `${queryUrl}?${queryString}` : `/${node}?${queryString}`}`,
+    },
+    { initialData, isBase: isBaseQuery },
+  );
+  const [, onCreate] = useMutation({
+    url: `/${mutationNode}`,
+    method: 'POST',
+    isBase: isBaseCreate,
     onSuccess: queryHandlers.refetch,
+    message: `${entityName} successfully created`,
+  });
+  const [, onUpdate] = useMutation({
+    url: `/${mutationNode}`,
+    method: 'PUT',
     isBase: isBaseUpdate,
+    message: `${entityName} successfully updated`,
+    onSuccess: queryHandlers.refetch,
   });
   const [, onDelete] = useMutation({
-    url: `/${node}/bulk`,
-    isBase: isBaseDelete,
+    url: `/${mutationNode}`,
     method: 'DELETE',
+    isBase: isBaseDelete,
     onSuccess: () => {
-      setSelected([]);
+      tableDispatch({ type: 'ResetSelected' });
       queryHandlers.refetch();
     },
+    message: `${entityName} successfully deleted`,
   });
   const dispatch = useDispatch();
-  const debounceSearch = useCallback(debounce(onSearch, 1000), []);
-  const states = useMemo(() => ({
-    rowResponse,
-    selected,
-    sort,
-    search,
-  }), [
-    rowResponse,
-    selected,
-    sort,
-    search,
-  ]);
-  const handlers = useMemo(() => ({
+  const states = useMemo(
+    () => ({
+      tableState,
+      rowResponse,
+      showPagination: isPaginated,
+    }),
+    [tableState, rowResponse, isPaginated],
+  );
+  const handlers = {
     onCreate,
     onDelete,
     onUpdate,
-    onSort,
     onSearch: debounceSearch,
-    onRowToggle,
+    tableDispatch,
+    queryHandlers,
     onConfirmDelete: confirmDelete,
-  }), [
-    onCreate,
-    onDelete,
-    onUpdate,
-    onSort,
-    debounceSearch,
-    onRowToggle,
-    confirmDelete,
-  ]);
+  };
   return [states, handlers];
+
+  function onSearch(value) {
+    tableDispatch({ type: 'SetSearch', payload: value });
+  }
 
   function confirmDelete(ids) {
     dispatch(showDialog({
@@ -87,9 +110,5 @@ function usePage(props) {
       },
     }));
   }
-
-  function onSearch(value) {
-    setSearch(value);
-  }
 }
-export default usePage;
+export default usePageTable;

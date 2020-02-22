@@ -1,6 +1,7 @@
 import React from 'react';
 import Paper from 'react-md/lib/Papers/Paper';
 import DataTable from 'shared/components/DataTable';
+import pick from 'lodash/pick';
 import SearchRenderer from './SearchRenderer';
 import ToolbarRenderer from './ToolbarRenderer';
 
@@ -9,10 +10,12 @@ function PageTable(props) {
     pageTableState, pageTableHandlers, columns, toolbarRenderer: Toolbar,
     searchRenderer: SearchBar, onClickNew, pageName,
   } = props;
-  const { selected, sort, rowResponse } = pageTableState;
-  const { data: rows, loading: isLoading } = rowResponse;
+  const { tableState, rowResponse, showPagination } = pageTableState;
+  const { selected, sort } = tableState;
+  const { data, loading: isLoading } = rowResponse;
+  const rows = showPagination ? data.data : data;
   const {
-    onRowToggle, onSort, onSearch, onConfirmDelete,
+    onRowToggle, onSort, onSearch, onConfirmDelete, tableDispatch,
   } = pageTableHandlers;
   return (
     <>
@@ -43,6 +46,10 @@ function PageTable(props) {
             sort={sort}
             onSort={onSort}
             isLoading={isLoading}
+            showPagination={showPagination}
+            tableState={tableState}
+            tableDispatch={tableDispatch}
+            rowCount={showPagination ? data.count : undefined}
           />
         </Paper>
       </div>
