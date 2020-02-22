@@ -16,6 +16,7 @@ function DataTable(props) {
     onSort, sort, isLoading, showPagination, tableDispatch, pageSizes, tableState, rowCount,
   } = props;
 
+  const dataEmpty = rows.length === 0;
   const BCP = 'iTable';
 
   return (
@@ -28,64 +29,72 @@ function DataTable(props) {
       onRowToggle={onRowToggle}
     >
       {
-        isLoading ? (
-          <PreLoader columns={columns.length} className={`${BCP}_preLoader`} />
-        ) : (
-          <>
-            <TableHead className={`${BCP}_header`}>
-              <TableRow className={`${BCP}_row`}>
-                {columns.map(({ title, accessor, headProps = {} }, idx) => (
-                  <TableColumn
-                    key={idx}
-                    onClick={() => onSort(accessor)}
-                    sorted={sort[accessor]}
-                    className={`${BCP}_cell`}
-                    {...headProps}
-                  >
-                    {title}
+        <>
+          {
+            isLoading ? (
+              <PreLoader columns={columns.length} className={`${BCP}_preLoader`} />
+            ) : (
+              <>
+                <TableHead className={`${BCP}_header`}>
+                  <TableRow className={`${BCP}_row`}>
+                    {columns.map(({ title, accessor, headProps = {} }, idx) => (
+                      <TableColumn
+                        key={idx}
+                        onClick={() => onSort(accessor)}
+                        sorted={sort[accessor]}
+                        className={`${BCP}_cell`}
+                        {...headProps}
+                      >
+                        {title}
 
-                  </TableColumn>
-                ))}
-              </TableRow>
-            </TableHead>
-            <TableBody className={`${BCP}_body`}>
-              {rows.length === 0 && (
-                <div>No Records Found</div>
-              )}
-              {rows.map((row, rowIndex) => (
-                <TableRow
-                  key={row.id}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onRowClick(row);
-                  }}
-                  selected={selected.includes(row.id)}
-                  className={`${BCP}_row`}
-                >
-                  {columns.map((column, idx) => (
-                    <Row
-                      key={idx}
-                      row={row}
-                      index={rowIndex}
-                      columnClassName={`${BCP}_cell`}
-                      {...column}
-                    />
-                  ))
-                  }
-                </TableRow>
-              ))}
-            </TableBody>
-            {showPagination && (
-              <TablePagination
-                rows={rowCount}
-                rowsPerPageItems={pageSizes}
-                rowsPerPage={tableState.size}
-                page={tableState.page + 1}
-                onPagination={(a, size, page) => tableDispatch({ type: 'SetPagination', payload: { page: page - 1, size } })}
-              />
-            )}
-          </>
-        )
+                      </TableColumn>
+                    ))}
+                  </TableRow>
+                </TableHead>
+                <TableBody className={`${BCP}_body`}>
+                  { dataEmpty && (
+                    <div>No Records Found</div>
+                  )}
+                  {!dataEmpty && rows.map((row, rowIndex) => (
+                    <TableRow
+                      key={row.id}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onRowClick(row);
+                      }}
+                      selected={selected.includes(row.id)}
+                      className={`${BCP}_row`}
+                    >
+                      {columns.map((column, idx) => (
+                        <Row
+                          key={idx}
+                          row={row}
+                          index={rowIndex}
+                          columnClassName={`${BCP}_cell`}
+                          {...column}
+                        />
+                      ))
+                      }
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </>
+            )
+          }
+          {showPagination && !dataEmpty && (
+            <TablePagination
+              id={`${BCP}_pagination`}
+              className={`${BCP}_pagination`}
+              selectFieldClassName={`${BCP}_pagination_select`}
+              selectFieldInputClassName={`${BCP}_pagination_select_input`}
+              rows={rowCount}
+              rowsPerPageItems={pageSizes}
+              rowsPerPage={tableState.size}
+              page={tableState.page + 1}
+              onPagination={(a, size, page) => tableDispatch({ type: 'SetPagination', payload: { page: page - 1, size } })}
+            />
+          )}
+        </>
       }
     </Table>
   );

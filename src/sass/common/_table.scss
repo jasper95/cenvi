@@ -52,6 +52,97 @@ $table-header-text: $primary-color-200;
 		}
 	}
 
+	// iTable_pagination
+	&_pagination {
+
+		.md-table-column {
+			padding-right: 0;
+			padding-top: 2rem;
+		}
+
+		.md-table-pagination {
+			height: auto;
+			position: relative;
+			margin-left: auto !important;
+			display: flex;
+			align-items: center;
+			justify-content: flex-end;
+
+			&:not(:empty) {
+				border-top: 1px solid $table-footer-select-bg;
+				padding-top: 1rem;
+			}
+		}
+
+		.md-table-pagination__label {
+			font-size: 1rem;
+			font-weight: 600;
+			color: $primary-color;
+			margin: 1ch;
+		}
+
+		[id*="-pagination-decrement-btn"],
+		[id*="-pagination-increment-btn"] {
+			&:disabled {
+				opacity: 0.5;
+				background-color: $table-footer-select-bg;
+				border-radius: .25rem;
+				margin: 0 0.15rem;
+				cursor: not-allowed;
+			}
+		}
+
+		.md-menu--select-field {
+			margin: 0 1rem;
+		}
+
+		.md-table-pagination--label {
+			font-size: 1rem;
+			font-weight: 600;
+			color: $text-color;
+			letter-spacing: 0.25em;
+			margin: 0 1rem;
+		}
+
+		.md-list {
+			padding: 0;
+		}
+
+		#iTable_pagination-toggle {
+			padding: 0.25rem 1rem;
+			box-shadow: none;
+			background-color: $table-footer-select-bg;
+
+
+			.md-select-field--btn.md-select-field--btn {
+				height: auto;
+			}
+
+			.md-icon-separator {
+				padding: 0;
+			}
+
+			.md-icon-text {
+				font-weight: 600;
+				color: $text-color;
+				font-size: 1rem;
+				padding: 0.5rem 1rem;
+			}
+		}
+
+		#iTable_pagination-menu-options {
+			.md-list-item .md-fake-btn {
+				height: auto;
+				padding: 1rem;
+				.md-text {
+					font-size: 1rem;
+					color: $text-color;
+				}
+			}
+
+		}
+	}
+
 	// table cell checkboxes
 	.md-table-checkbox {
 		width: 40px;
