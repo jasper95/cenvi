@@ -22,7 +22,7 @@ RUN apk update && apk upgrade && \
 # install and cache dependencies
 RUN yarn
 #build the project for production
-RUN yarn build
+RUN yarn build:client
 # set up production environment
 # the base image for this is an alpine based nginx image
 FROM nginx:alpine
