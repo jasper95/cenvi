@@ -7,6 +7,7 @@ import SectionHeader from 'shared/components/Section';
 import './style.scss';
 import useQuery from 'shared/hooks/useQuery';
 import { downloadFile } from 'shared/utils/tools';
+import { SpinnerSkeletonLoader } from 'shared/components/Skeletons';
 
 function DownloadSectionHome({ BCP = 'section-downloads' }) {
   const [queryState] = useQuery({ url: '/resource' }, { isBase: true });
@@ -27,7 +28,7 @@ function DownloadSectionHome({ BCP = 'section-downloads' }) {
 
         <div className="row row-downloads">
           {loading ? (
-            <span>Loading...</span>
+            <SpinnerSkeletonLoader />
           ) : (
             <>
               {data.map(item => (

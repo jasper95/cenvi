@@ -57,7 +57,7 @@ $menu-sub-bg: $tertiary-color;
 			&:not(:last-child) {
 				margin-right: .5rem;
 			}
-		}	
+		}
 	}
 
 
@@ -87,6 +87,7 @@ $menu-sub-bg: $tertiary-color;
    ========================================================================== */
 .nav_menu {
 	height: 100%;
+	margin: 0 auto;
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
@@ -105,7 +106,7 @@ $menu-sub-bg: $tertiary-color;
 		&_item {
 			position: relative;
 			color: $menu-text-color;
-			padding: 0 1em;
+			padding: 0 .5em;
 			background-color: transparent;
 			display: flex;
 			align-items: center;
@@ -147,8 +148,10 @@ $menu-sub-bg: $tertiary-color;
 			}
 
 			.iBttn-toggleSubmenu {
-				min-width: 40px;
-				height: 40px;
+				width: 20px;
+				height: 20px;
+				min-width: unset;
+				padding: 0;
 				padding-left: 0;
 				padding-right: 0;
 				background-color: transparent !important;
@@ -218,7 +221,7 @@ $menu-sub-bg: $tertiary-color;
 	opacity: 0;
 	visibility: hidden;
 	box-shadow: 0 .25rem 1em 0 rgba(#000,.1);
-	transition: 
+	transition:
 		transform 150ms ease-out 150ms,
 		opacity 150ms ease-out 150ms,
 		visibility 150ms ease-out 150ms;

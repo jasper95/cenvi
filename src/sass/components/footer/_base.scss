@@ -2,7 +2,7 @@
 	padding: 3rem 0 0;
 	background-color: #262228;
 
-	// .footer_header 
+	// .footer_header
 	&_header {
 		color: #FFF;
 		margin-bottom: 2rem;
@@ -35,16 +35,29 @@
 			display: flex;
 			align-items: flex-start;
 			justify-content: flex-start;
+			flex-direction: column;
+
+			.item_info {
+				width: 100%;
+				display: flex;
+				align-items: center;
+				justify-content: flex-start;
+			}
 
 			.icon {
 				margin-right: 1rem;
 				color: $primary-color;
+
+				& + .text  {
+					margin-left: 0;
+				}
 			}
 
 			.text {
 				color: #FFF;
 				font-family: $font-family;
 				font-weight: normal;
+				margin-left: 2.15rem;
 			}
 		}
 	}

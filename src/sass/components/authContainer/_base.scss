@@ -29,7 +29,7 @@
 			&_logo {
 				width: 8rem;
 				height: 8rem;
-				display: block;	
+				display: block;
 				margin-bottom: 5rem;
 				cursor: pointer;
 				img {
@@ -90,6 +90,12 @@
 				display: block;
 				margin-left: auto;
 				font-family: $font-family;
+			}
+
+			.info-action {
+				p a {
+					margin-left: 1ch;
+				}
 			}
 		}
 

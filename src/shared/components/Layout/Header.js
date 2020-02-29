@@ -34,7 +34,7 @@ function Header(props) {
   const [, onUpdateUser] = useUpdateNode({ node: 'user', message: 'Profile successfully updated' });
 
   const handleResize = (width, height) => {
-    setIsMobileNav(width < 1025);
+    setIsMobileNav(width < 1300);
     onShowMobileNav(false);
   };
 

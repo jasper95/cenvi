@@ -15,10 +15,10 @@ function SubProjectsPage() {
         alt: 'mango',
       },
       objectives: [
-        `Develop affordable microcontroller-based sensor systems 
-        (pole/UAV) for high-throughput monitoring and 
-        early warning against infestation and disease 
-        in mango tree plantations in Bohol, 
+        `Develop affordable microcontroller-based sensor systems
+        (pole/UAV) for high-throughput monitoring and
+        early warning against infestation and disease
+        in mango tree plantations in Bohol,
         Bantayan, Siquijor, and Guimaras.`,
         `Develop a spectral signature database of
         mango plant diseases and infestation.`,
@@ -70,7 +70,7 @@ function SubProjectsPage() {
         withContainer
         rowSize={10}
         headerLabel="SUB-PROJECTS"
-        header="Projects that We're Proud"
+        header="Projects Showcase"
         desc={`
           The field of environmental informatics uses analytical
           and ICT-based methods to monitor, assess, and protect

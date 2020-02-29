@@ -108,7 +108,7 @@ function SignupPage() {
             children="Signup"
             flat
           />
-          <div className="row row-center">
+          <div className="row row-right info-action">
             <p>
                 Already have an account?
               <Link to="/login">
