@@ -10,10 +10,11 @@ import ReactResizeDetector from 'react-resize-detector';
 export default function Map(props) {
   const { activeLayers, bbox } = props;
   return (
-    <div className="map-container">
-      <ReactResizeDetector handleWidth handleHeight>
-        {({ width, height }) => (
+    <ReactResizeDetector handleWidth handleHeight onResize={onResize}>
+      {({ width, height }) => (
+        <div className="map-container">
           <LeafletMap
+            key={[width, height].join('')}
             style={{ height, width }}
             center={[10.9, 123.9]}
             zoom={10}
@@ -35,8 +36,12 @@ export default function Map(props) {
               />
             ))}
           </LeafletMap>
-        )}
-      </ReactResizeDetector>
-    </div>
+        </div>
+      )}
+    </ReactResizeDetector>
   );
+
+  function onResize(a, b) {
+    console.log('a, b: ', a, b);
+  }
 }
