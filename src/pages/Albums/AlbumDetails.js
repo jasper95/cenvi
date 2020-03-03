@@ -9,7 +9,7 @@ function AlbumDetails(props) {
   const BCP = 'albumDetailPage';
   const { history } = props;
   const { id } = props.match.params;
-  const [albumResponse] = useQuery({ url: `/published_album/${id}` }, { initialData: null, initialLoading: true });
+  const [albumResponse] = useQuery({ url: `/published_album/${id}` }, { initialData: null, initialLoading: true, isBase: true });
 
 
   const { loading, data: album } = albumResponse;
