@@ -17,8 +17,6 @@ COPY . /app
 # add the node_modules folder to $PATH
 ENV PATH /app/node_modules/.bin:$PATH
 
-RUN apk update && apk upgrade && \
-    apk add --no-cache bash git openssh
 # install and cache dependencies
 RUN yarn
 #build the project for production
@@ -34,9 +32,4 @@ COPY --from=build /app/build /usr/share/nginx/html
 # remove default nginx configuration file
 COPY nginx/default.conf.template /etc/nginx/conf.d/default.conf.template
 
-COPY nginx/docker-entrypoint.sh /
-
-RUN chmod +x /docker-entrypoint.sh
-
-ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["nginx", "-g", "daemon off;"]
