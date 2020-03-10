@@ -33,5 +33,9 @@ COPY --from=build /app/build /usr/share/nginx/html
 # you need to overwrite the default nginx configurations
 # remove default nginx configuration file
 COPY nginx/default.conf.template /etc/nginx/conf.d/default.conf.template
+COPY nginx/docker-entrypoint.sh /
 
+RUN chmod +x /docker-entrypoint.sh
+
+ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["nginx", "-g", "daemon off;"]
