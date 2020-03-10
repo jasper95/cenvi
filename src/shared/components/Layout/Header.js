@@ -119,7 +119,7 @@ function Header(props) {
                 </span>
               )}
               <div className="avatar">
-                <ImageLoader src="/static/img/default-avatar.png" />
+                <ImageLoader src="/img/default-avatar.png" />
               </div>
               {isMobile && (
                 <span className="name">

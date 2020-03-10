@@ -9,7 +9,7 @@ function AuthLayout(props) {
         <div className="authContainer_contentHeader">
           <Link to="/" className="authContainer_contentHeader_logo">
             <img
-              src="/static/img/logo.png"
+              src="/img/logo.png"
               alt=""
             />
           </Link>

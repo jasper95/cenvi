@@ -86,7 +86,7 @@ function DowndloadableItem(props) {
   } = data;
 
   const assumedFilename = `${name.replace(' ', '-')}.${format}`;
-  const assumedImgSrc = `/static/img/file_icons/${format}.png`;
+  const assumedImgSrc = `/img/file_icons/${format}.png`;
 
   return (
     <div className="dlItem">

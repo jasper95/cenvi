@@ -6,17 +6,17 @@ function HeroSectionHome({ BCP = 'section-hero' }) {
   const partnerLogos = [
     {
       id: 'logo',
-      src: 'static/img/logo.png',
+      src: '/img/logo.png',
       alt: 'cenvi logo',
     },
     {
       id: 'logo-upc',
-      src: 'static/img/upc.png',
+      src: '/img/upc.png',
       alt: 'upc logo',
     },
     {
       id: 'logo-up',
-      src: 'static/img/up.png',
+      src: '/img/up.png',
       alt: 'up logo',
     },
   ];
@@ -52,7 +52,7 @@ function HeroSectionHome({ BCP = 'section-hero' }) {
             </Button>
           </div>
           <div className={`${BCP}_graphic`}>
-            <img src="static/img/CENVI2.gif" alt="" />
+            <img src="/img/CENVI2.gif" alt="" />
           </div>
         </div>
       </div>

@@ -69,7 +69,7 @@ function CollaboratorsSectionHome({ BCP = 'section-collaborators' }) {
             <div className="col">
               <div className="col_logo">
                 <img
-                  src={`/static/img/collaborators/${info.logo}`}
+                  src={`/img/collaborators/${info.logo}`}
                   alt={info.logo}
                 />
               </div>

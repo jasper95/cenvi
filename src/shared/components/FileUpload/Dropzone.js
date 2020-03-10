@@ -66,7 +66,7 @@ Dropzone.propTypes = {
 Dropzone.defaultProps = {
   label:
     '(Drag and Drop your files here or click here to open file selection dialog)',
-  imageSource: '/static/img/image-placeholder-gray.png',
+  imageSource: '/img/image-placeholder-gray.png',
 };
 
 export default Dropzone;

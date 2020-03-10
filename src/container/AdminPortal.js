@@ -81,8 +81,8 @@ function Sidebar(props) {
   return (
     <div className={`${className} sidebar`}>
       <div className="sidebar_logo">
-        <img className='logo' src="/static/img/admin-logo.png" />
-        <img className='logoSm' src="/static/img/logo.png" />
+        <img className='logo' src="/img/admin-logo.png" />
+        <img className='logoSm' src="/img/logo.png" />
       </div>
       <List className="sidebar_list">
         {menu.map((item, index) => {

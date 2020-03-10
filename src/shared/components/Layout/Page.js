@@ -67,31 +67,31 @@ function Page(props) {
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
         />
-        <meta property="og:image" content="/static/img/logo.png" />
+        <meta property="og:image" content="/img/logo.png" />
         <meta property="og:site_name" content="CENVI" />
         <meta property="og:locale" content="en_US" />
         <meta name="robots" content="index, follow" />
 
         <meta name="theme-color" content="#000000" />
 
-        <link rel="manifest" href="/static/manifest.json" />
-        <link rel="shortcut icon" href="/static/icons/favicon.ico" />
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="shortcut icon" href="/icons/favicon.ico" />
 
-        <link rel="apple-touch-icon" sizes="180x180" href="/static/favicons/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/static/favicons/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/static/favicons/favicon-16x16.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
         <meta name="msapplication-TileColor" content="#ffc40d" />
-        <meta name="msapplication-TileImage" content="/static/favicons/mstile-144x144.png" />
+        <meta name="msapplication-TileImage" content="/favicons/mstile-144x144.png" />
         <meta name="theme-color" content="#ffffff" />
 
-        <link rel="stylesheet" type="text/css" href="/static/css/react-md.indigo-pink.min.css" />
-        <link rel="stylesheet" type="text/css" href="/static/css/Draft.css" />
-        <link rel="stylesheet" type="text/css" href="/static/css/rafiIcons.css" />
-        <link rel="stylesheet" type="text/css" href="/static/css/wataphak.css" />
-        <link rel="stylesheet" type="text/css" href="/static/css/proxima.min.css" />
-        <link rel="stylesheet" type="text/css" href="/static/css/cenvi-icon.css" />
+        <link rel="stylesheet" type="text/css" href="/css/react-md.indigo-pink.min.css" />
+        <link rel="stylesheet" type="text/css" href="/css/Draft.css" />
+        <link rel="stylesheet" type="text/css" href="/css/rafiIcons.css" />
+        <link rel="stylesheet" type="text/css" href="/css/wataphak.css" />
+        <link rel="stylesheet" type="text/css" href="/css/proxima.min.css" />
+        <link rel="stylesheet" type="text/css" href="/css/cenvi-icon.css" />
       </Head>
       {hasNavigation && (
         <Header auth={auth} onLogout={handleClickLogout} />

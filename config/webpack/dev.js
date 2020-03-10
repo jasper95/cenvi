@@ -24,6 +24,8 @@ const result = baseConfig({
   },
   output: {
     publicPath: '/',
+    filename: 'static/js/[name].js',
+    chunkFilename: 'static/js/[name].js',
   },
   devServer: {
     open: true,
@@ -32,7 +34,7 @@ const result = baseConfig({
     overlay: true,
     historyApiFallback: true,
     before(app) {
-      app.use('/static', express.static(resolvePath('public')));
+      app.use('/', express.static(resolvePath('public')));
     },
     proxy: {
       '/api': {

@@ -5,7 +5,7 @@ function Author(props) {
   const {
     className,
     name,
-    avatar = '/static/img/default-avatar.png',
+    avatar = '/img/default-avatar.png',
     userId = 1,
     position = 'developer',
   } = props;

@@ -11,7 +11,7 @@ function SubProjectsPage() {
     {
       header: 'Mango monitoring using microcontroller-based sensor systems',
       img: {
-        src: 'static/img/sub-projects/mango.png',
+        src: '/img/sub-projects/mango.png',
         alt: 'mango',
       },
       objectives: [
@@ -29,7 +29,7 @@ function SubProjectsPage() {
     {
       header: 'Cebu biodiversity spatial information study',
       img: {
-        src: 'static/img/sub-projects/tree.png',
+        src: '/img/sub-projects/tree.png',
         alt: 'tree',
       },
       objectives: [
@@ -46,7 +46,7 @@ function SubProjectsPage() {
     {
       header: 'Cebu water source mapping and assessment',
       img: {
-        src: 'static/img/sub-projects/droplet.png',
+        src: '/img/sub-projects/droplet.png',
         alt: 'droplet',
       },
       objectives: [

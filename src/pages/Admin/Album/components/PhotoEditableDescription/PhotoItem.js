@@ -15,7 +15,7 @@ function PhotoItem(props) {
   } = photo;
   const imgSrc = url
     ? `${process.env.STATIC_URL}/${url}`
-    : '/static/img/image-placeholder-gray.png';
+    : '/img/image-placeholder-gray.png';
 
   return (
     <div className={`${BCP}GridColumn`}>
