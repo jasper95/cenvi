@@ -1,8 +1,8 @@
 upstream api {
-  server api:8080 fail_timeout=5s max_fails=5;
+  server api:5000 fail_timeout=5s max_fails=5;
 }
 upstream geoserver {
-  server geoserver:8080 fail_timeout=5s max_fails=5;
+  server localhost:8080/geoserver fail_timeout=5s max_fails=5;
 }
 server {
   listen 80;
