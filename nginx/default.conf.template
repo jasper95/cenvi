@@ -1,8 +1,8 @@
 upstream api {
-   server cenvi-api:8080 fail_timeout=5s max_fails=5;
+  server api:8080 fail_timeout=5s max_fails=5;
 }
 upstream geoserver {
-   server geoserver:8080 fail_timeout=5s max_fails=5;
+  server geoserver:8080 fail_timeout=5s max_fails=5;
 }
 server {
   listen 80;
@@ -22,11 +22,6 @@ server {
     proxy_set_header Host $host;
     proxy_set_header X-Forwarded-Proto $scheme;
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-  }
-  location /static/ {
-    root   /usr/share/nginx/html;
-    index  index.html index.htm;
-    try_files $uri $uri/ /index.html;
   }
   location / {
     root   /usr/share/nginx/html;
