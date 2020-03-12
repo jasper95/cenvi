@@ -23,7 +23,6 @@ const result = baseConfig({
     },
   },
   output: {
-    publicPath: '/',
     filename: 'static/js/[name].js',
     chunkFilename: 'static/js/[name].js',
   },

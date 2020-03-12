@@ -65,6 +65,7 @@ function baseConfig(options) {
       ],
     },
     output: {
+      publicPath: '/',
       path: path.join(process.cwd(), 'build'),
     },
     plugins: [
