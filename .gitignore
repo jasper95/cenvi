@@ -11,7 +11,7 @@
 /dist
 
 # config
-/config/.env.development
+/config/.env
 .env
 
 # misc

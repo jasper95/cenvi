@@ -87,7 +87,7 @@ function baseConfig(options) {
         },
       }),
       new DotEnv({
-        path: resolvePath(`config/.env.${mode}`),
+        path: resolvePath('config/.env'),
         safe: true,
         defaults: false,
         systemvars: mode === 'production',
