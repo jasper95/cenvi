@@ -31,12 +31,6 @@ server {
     proxy_cache_bypass $http_upgrade;
   }
 
-  location /uploads {
-    root /usr/share/nginx/uploads
-    index  index.html index.htm;
-    try_files $uri $uri/ /index.html;
-  }
-
   location /.well-known/acme-challenge/ {
     root /var/www/certbot;
   }
@@ -49,5 +43,11 @@ server {
   error_page   500 502 503 504  /50x.html;
   location = /50x.html {
     root   /usr/share/nginx/html;
+  }
+
+  location /uploads {
+    root /usr/share/nginx/uploads
+    index  index.html index.htm;
+    try_files $uri $uri/ /index.html;
   }
 }
