@@ -44,10 +44,4 @@ server {
   location = /50x.html {
     root   /usr/share/nginx/html;
   }
-
-  location /uploads {
-    root /usr/share/nginx/uploads
-    index  index.html index.htm;
-    try_files $uri $uri/ /index.html;
-  }
 }
