@@ -202,7 +202,7 @@ export const exportShapefile = data => window.location.assign(`${process.env.GEO
 
 export const downloadFile = url => window.location.assign([process.env.STATIC_URL, url].join('/'), '_blank');
 
-export const getPhotoUrl = photo => `${process.env.STATIC_URL}/${photo.image_url || photo.file_path}`;
+export const getPhotoUrl = photo => `${[process.env.STATIC_URL, photo.image_url || photo.file_path].join('/')}`;
 
 const singularTypes = ['news'];
 export const getPostType = (type) => {
