@@ -42,6 +42,5 @@ export default function Map(props) {
   );
 
   function onResize(a, b) {
-    console.log('a, b: ', a, b);
   }
 }

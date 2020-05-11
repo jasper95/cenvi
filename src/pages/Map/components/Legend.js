@@ -5,7 +5,6 @@ class Legend extends MapControl {
   createLeafletElement(props) {}
 
   componentDidMount() {
-    console.log('ULOL');
     // get color depending on population density value
     const getColor = d => (d > 1000
       ? '#800026'
@@ -46,7 +45,7 @@ class Legend extends MapControl {
               ${from} ${to ? `&ndash;${to}` : '+'} 
             </span>
           </div>
-        `
+        `;
         labels.push(labelsDom);
       }
 

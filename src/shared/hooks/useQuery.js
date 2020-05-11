@@ -37,6 +37,8 @@ function useQuery(config, options) {
     };
     if (!skip) {
       fetchData();
+    } else {
+      setIsLoading(false);
     }
     return () => {
       source.cancel();

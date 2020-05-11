@@ -27,7 +27,6 @@ function SingleFileUpload(props) {
     multiple: false,
   });
 
-  console.log('file === ', file);
   const hasPreviewImage = (file && file.type.includes('image')) || preview;
 
   return (

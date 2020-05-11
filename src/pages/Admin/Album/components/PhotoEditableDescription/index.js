@@ -64,7 +64,6 @@ function PhotosEditableDescription(props) {
   }
 
   function handleSetFavorite(photoId) {
-    console.log('photoId: ', photoId);
     const newPhotos = photos.map((photo) => {
       if (photo.id === photoId) {
         return {

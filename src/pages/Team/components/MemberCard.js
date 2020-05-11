@@ -4,10 +4,9 @@ import 'sass/components/cards/memberCard/index.scss';
 function MemberCard(props) {
   const {
     id, image,
-    links, name, role
-  } = props
-  console.log('@@MEMCARD', props)
-  const BCP='memberCard'
+    links, name, role,
+  } = props;
+  const BCP = 'memberCard';
 
   return (
     <div className={BCP} key={id}>
@@ -22,7 +21,7 @@ function MemberCard(props) {
             />
           </div>
         )}
-        <img 
+        <img
           className={`${BCP}_media_img`}
           src={image}
           alt={name}

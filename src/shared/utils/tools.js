@@ -26,9 +26,7 @@ export function getValidationResult(data, schema) {
 }
 
 export function validateTextEditor(editorContent, key, label = capitalize(key)) {
-  console.log('editorContent: ', editorContent);
   const isValid = editorContent && editorContent.blocks.some(block => block.text.trim());
-  console.log('isValid: ', isValid);
   return !isValid ? { [key]: `${label} is required` } : {};
 }
 

@@ -9,14 +9,12 @@ import menu from 'shared/constants/adminRoutes';
 
 function AdminPortal(props) {
   const dispatch = useDispatch();
-  const globalIsSidebarCollapsed = useSelector(state => state.app.isSidebarCollapsed)
+  const globalIsSidebarCollapsed = useSelector(state => state.app.isSidebarCollapsed);
   const { history, location, onLogout } = props;
 
   const handleToggleSidebar = () => {
-    // console.log('globalIsSidebarOpen' , globalIsSidebarOpen)
-    console.log('toggleSidebar')
-    dispatch(toggleSidebar(!globalIsSidebarCollapsed))
-  }
+    dispatch(toggleSidebar(!globalIsSidebarCollapsed));
+  };
 
   return (
     <div className={cn('adminPortal', {
@@ -81,8 +79,8 @@ function Sidebar(props) {
   return (
     <div className={`${className} sidebar`}>
       <div className="sidebar_logo">
-        <img className='logo' src="/img/admin-logo.png" />
-        <img className='logoSm' src="/img/logo.png" />
+        <img className="logo" src="/img/admin-logo.png" />
+        <img className="logoSm" src="/img/logo.png" />
       </div>
       <List className="sidebar_list">
         {menu.map((item, index) => {
