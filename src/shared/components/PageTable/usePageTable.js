@@ -67,7 +67,7 @@ function usePageTable(props) {
     onSuccess: queryHandlers.refetch,
   });
   const [, onDelete] = useMutation({
-    url: `/${mutationNode}`,
+    url: `/${mutationNode}/bulk`,
     method: 'DELETE',
     isBase: isBaseDelete,
     onSuccess: () => {
