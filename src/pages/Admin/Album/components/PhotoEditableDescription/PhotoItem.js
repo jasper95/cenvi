@@ -13,9 +13,7 @@ function PhotoItem(props) {
   const {
     description, file_path: url, id, is_cover: isCover,
   } = photo;
-  const imgSrc = url
-    ? `${process.env.STATIC_URL}/${url}`
-    : '/img/image-placeholder-gray.png';
+  const imgSrc = [process.env.STATIC_URL || '', url || '/img/image-placeholder-gray.png'].join('/');
 
   return (
     <div className={`${BCP}GridColumn`}>

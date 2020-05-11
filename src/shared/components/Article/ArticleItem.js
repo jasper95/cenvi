@@ -33,7 +33,7 @@ function ArticleItem(props) {
         </div>
         <ImageLoader
           className={`${BCP}_media_img`}
-          src={`${process.env.STATIC_URL}/${data.image_url}`}
+          src={[process.env.STATIC_URL || '', data.image_url].join('/')}
           alt=""
         />
       </div>

@@ -181,7 +181,7 @@ function PostForm() {
             <p className="iField_label">{`${typeDisplay} Photo`}</p>
             <SingleFileUpload
               id="file"
-              value={fields.image_url ? `${process.env.STATIC_URL}/${fields.image_url}` : fields.file}
+              value={fields.image_url ? [process.env.STATIC_URL || '', fields.image_url].join('/') : fields.file}
               onChange={(file) => {
                 onElementChange(['uploads', 'post', uuid(), file.name].join('/'), 'image_url');
                 onElementChange(file, 'file');
@@ -209,7 +209,7 @@ function PostForm() {
       url: '/file/upload/simple',
       method: 'POST',
     });
-    return { data: { link: `${process.env.STATIC_URL}/${filePath}` } };
+    return { data: { link: [process.env.STATIC_URL || '', filePath].join('/') } };
   }
 
   async function onSave(data) {
