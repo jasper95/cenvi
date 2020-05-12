@@ -8,7 +8,7 @@ const baseSchema = {
 };
 export const createShapefileSchema = yup.object().shape({
   ...baseSchema,
-  shapefile: yup.string().required(fieldIsRequired),
+  file: yup.string().label('Shapefile').required(fieldIsRequired),
 });
 
 export const updateShapefileSchema = yup.object().shape(baseSchema);
