@@ -7,6 +7,7 @@ import { formatDate } from 'shared/components/DataTable/CellFormatter';
 import { exportShapefile, toFormData } from 'shared/utils/tools';
 import { useDispatch } from 'react-redux';
 import { showDialog } from 'shared/redux/app/reducer';
+import uuid from 'uuid/v4';
 
 const ShapefileDialog = loadable(() => import('pages/Admin/Shapefiles/components/ShapefileDialog'));
 
@@ -42,7 +43,9 @@ function Shapefiles() {
     const extension = file && file.name.split('.').pop();
     const sldExtension = sld && sld.name.split('.').pop();
     onCreate({
-      data: toFormData({ ...data, extension, sld_extension: sldExtension }),
+      data: toFormData({
+        ...data, id: uuid(), extension, sld_extension: sldExtension,
+      }),
       onSuccess(response) {
         history.push(`/admin/shapefiles/${response.id}`);
       },
