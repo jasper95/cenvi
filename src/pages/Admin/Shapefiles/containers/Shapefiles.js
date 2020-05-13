@@ -11,7 +11,9 @@ import { showDialog } from 'shared/redux/app/reducer';
 const ShapefileDialog = loadable(() => import('pages/Admin/Shapefiles/components/ShapefileDialog'));
 
 function Shapefiles() {
-  const [pageTableState, pageTableHandlers] = usePageTable({ node: 'shapefile', onSuccess, isPaginated: true });
+  const [pageTableState, pageTableHandlers] = usePageTable({
+    node: 'shapefile', onSuccess, isPaginated: true, isBaseCreate: false,
+  });
   const dispatch = useDispatch();
   return (
     <PageTable
