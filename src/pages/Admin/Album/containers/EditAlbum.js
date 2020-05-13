@@ -22,14 +22,12 @@ function EditAlbum(props) {
   const { id } = props.match.params;
   const [formState, formHandlers] = useForm({
     initialFields: {},
-    // customChangeHandler,
   });
   const { onSetFields, onElementChange } = formHandlers;
   const [queryState] = useQuery({ url: `/album/${id}` }, { isBase: true, onFetchSuccess: onSetFields });
   const [mutationState, onMutate] = useUpdateNode({ node: 'album' });
   const { fields, errors } = formState;
   const { photos = [] } = fields;
-  console.log('photos: ', photos);
   const { loading } = queryState;
   if (loading) {
     return (
