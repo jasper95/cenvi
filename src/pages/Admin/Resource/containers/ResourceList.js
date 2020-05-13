@@ -38,9 +38,12 @@ function Resource() {
 
   async function onValid(data) {
     const { onCreate } = pageTableHandlers;
-    await uploadService(data.file, pick(data, 'file_path'));
+    await uploadService(data.file, { file_path: data.file_path, entity: 'resource' });
     const response = await onCreate({
-      data: omit(data, 'file'),
+      data: {
+        ...omit(data, 'file'),
+        file_path: `resource/${data.file_path}`,
+      },
     });
     history.push(`/admin/resources/${response.id}`);
   }

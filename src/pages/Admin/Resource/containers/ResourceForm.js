@@ -6,13 +6,14 @@ import Button from 'react-md/lib/Buttons/Button';
 import history from 'shared/utils/history';
 import cn from 'classnames';
 import SingleFileUpload from 'shared/components/FileUpload/SingleFileUpload';
-import { isUploadingSelector } from 'shared/utils/uploadService';
+import uploadService, { isUploadingSelector } from 'shared/utils/uploadService';
 import { useSelector } from 'react-redux';
 import uuid from 'uuid/v4';
 import useForm from 'shared/hooks/useForm';
 import { useUpdateNode } from 'shared/hooks/useMutation';
 import { toFormData } from 'shared/utils/tools';
 import { SpinnerSkeletonLoader } from 'shared/components/Skeletons';
+import omit from 'lodash/omit';
 import { resourceValidator } from '../model/resource';
 
 
@@ -113,7 +114,9 @@ function ShapefilesForm(props) {
             <p className="iField_label">File</p>
             <SingleFileUpload
               id="file"
-              onChange={onElementChange}
+              onChange={(file) => {
+                onElementChange([uuid(), file.name].join('/'), 'file_path');
+              }}
               acceptedFileTypes={['doc', 'docx', 'pdf']}
             />
           </div>
@@ -123,12 +126,12 @@ function ShapefilesForm(props) {
   );
 
   async function onSave(data) {
-    const { file, sld } = data;
-    const extension = file && file.name.split('.').pop();
-    const sldExtension = sld && sld.name.split('.').pop();
-    onMutate({
-      data: toFormData({ ...data, extension, sld_extension: sldExtension }),
-    });
+    await Promise.all([
+      onMutate({
+        data: { ...omit(data, 'file'), file_path: `resource/${data.file_path}` },
+      }),
+      data.file && uploadService(data.file, { file_path: data.file_path, entity: 'resource' }),
+    ].filter(Boolean));
   }
 }
 

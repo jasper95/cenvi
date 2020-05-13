@@ -183,7 +183,8 @@ function PostForm() {
               id="file"
               value={fields.image_url ? [process.env.STATIC_URL || '', fields.image_url].join('/') : fields.file}
               onChange={(file) => {
-                onElementChange(['post', uuid(), file.name].join('/'), 'image_url');
+                onElementChange([uuid(), file.name].join('/'), 'image_url');
+
                 onElementChange(file, 'file');
               }}
               error={errors.image_url}
@@ -202,8 +203,8 @@ function PostForm() {
 
   async function uploadFile(file) {
     const fileId = uuid();
-    const filePath = ['post', fileId, file.name].join('/');
-    const formData = toFormData({ file_path: filePath, file });
+    const filePath = [fileId, file.name].join('/');
+    const formData = toFormData({ entity: 'post', file_path: filePath, file });
     await axios({
       data: formData,
       url: '/file/upload/simple',
@@ -215,10 +216,10 @@ function PostForm() {
   async function onSave(data) {
     await Promise.all([
       onMutate({
-        data: omit(data, 'file'),
+        data: { ...omit(data, 'file'), image_url: `post/${data.image_url}` },
         method: isCreate ? 'POST' : 'PUT',
       }),
-      data.file && uploadService(data.file, { file_path: data.image_url }),
+      data.file && uploadService(data.file, { file_path: data.image_url, entity: 'post' }),
     ].filter(Boolean));
     const message = `${typeDisplay} successfuly ${isCreate ? 'created' : 'updated'}`;
     dispatch(showSuccess({ message }));
