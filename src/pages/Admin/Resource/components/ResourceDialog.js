@@ -35,7 +35,7 @@ function Resource(props) {
       <SingleFileUpload
         id="file"
         onChange={(file) => {
-          onElementChange(['uploads', 'post', uuid(), file.name].join('/'), 'file_path');
+          onElementChange(['resource', uuid(), file.name].join('/'), 'file_path');
           onElementChange(file.name.split('.').pop(), 'format');
           onElementChange(file, 'file');
         }}

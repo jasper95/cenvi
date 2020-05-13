@@ -13,7 +13,7 @@ function Gallery(props) {
   });
   const { submittedFiles, uploader } = uploadState;
   return (
-    <div className='galleryUpload'>
+    <div className="galleryUpload">
       <Dropzone
         className="fs_dropzone"
         dropActiveClassName="fs_dropzone--active"

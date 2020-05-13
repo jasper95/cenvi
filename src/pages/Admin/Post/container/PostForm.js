@@ -183,7 +183,7 @@ function PostForm() {
               id="file"
               value={fields.image_url ? [process.env.STATIC_URL || '', fields.image_url].join('/') : fields.file}
               onChange={(file) => {
-                onElementChange(['uploads', uuid(), file.name].join('/'), 'image_url');
+                onElementChange(['post', uuid(), file.name].join('/'), 'image_url');
                 onElementChange(file, 'file');
               }}
               error={errors.image_url}
@@ -202,7 +202,7 @@ function PostForm() {
 
   async function uploadFile(file) {
     const fileId = uuid();
-    const filePath = ['uploads', fileId, file.name].join('/');
+    const filePath = ['post', fileId, file.name].join('/');
     const formData = toFormData({ file_path: filePath, file });
     await axios({
       data: formData,

@@ -32,6 +32,7 @@ server {
   ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
 
   client_max_body_size 100M;
+  client_body_buffer_size 100M;
 
   location /api/ {
     proxy_redirect     off;
