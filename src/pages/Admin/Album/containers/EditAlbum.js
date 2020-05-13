@@ -18,26 +18,18 @@ import { useUpdateNode } from 'shared/hooks/useMutation';
 import 'sass/pages/edit-admin-list-album.scss';
 import { SpinnerSkeletonLoader } from 'shared/components/Skeletons';
 
-const customChangeHandler = {
-  photos(newPhotos, oldFields) {
-    return {
-      ...oldFields,
-      photos: newPhotos.length === 1 ? oldFields.photos.concat(newPhotos) : newPhotos,
-    };
-  },
-};
-
 function EditAlbum(props) {
   const { id } = props.match.params;
   const [formState, formHandlers] = useForm({
     initialFields: {},
-    customChangeHandler,
+    // customChangeHandler,
   });
   const { onSetFields, onElementChange } = formHandlers;
   const [queryState] = useQuery({ url: `/album/${id}` }, { isBase: true, onFetchSuccess: onSetFields });
   const [mutationState, onMutate] = useUpdateNode({ node: 'album' });
   const { fields, errors } = formState;
   const { photos = [] } = fields;
+  console.log('photos: ', photos);
   const { loading } = queryState;
   if (loading) {
     return (

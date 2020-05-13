@@ -29,6 +29,7 @@ export default function useForm(params) {
     onChange(id, value);
   }
   function onChange(key, value) {
+    console.log('key, value: ', key, value);
     const customHandler = customChangeHandler[key];
 
     if (customHandler) {
@@ -40,6 +41,7 @@ export default function useForm(params) {
         return oldFields;
       });
       setErrors(omit(errors, key));
+      console.log('wew');
       return;
     }
     setErrors(omit(errors, key));
