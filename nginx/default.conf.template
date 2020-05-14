@@ -31,9 +31,10 @@ server {
   include /etc/letsencrypt/options-ssl-nginx.conf;
   ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
 
+  client_max_body_size 0;
+  proxy_request_buffering off;
+
   location /api/ {
-    client_max_body_size 0;
-    proxy_request_buffering off;
     proxy_redirect     off;
     rewrite /api/(.*) /$1  break;
     proxy_pass http://backend;
