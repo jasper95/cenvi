@@ -28,7 +28,7 @@ export default function Map(props) {
             />
             {activeLayers.map(e => (
               <WMSTileLayer
-                url={`${process.env.GEOSERVER_URL}/wms`}
+                url={`/geoserver/wms`}
                 layers={`cenvi:${e}`}
                 transparent
                 format="image/png"

@@ -41,6 +41,11 @@ const result = baseConfig({
         pathRewrite: { '^/api': '' },
         changeOrigin: true,
       },
+      '/geoserver': {
+        target: process.env.GEOSERVER_URL,
+        pathRewrite: { '^/geoserver': '' },
+        changeOrigin: true,
+      },
       '/cdn': {
         target: process.env.STATIC_URL,
         pathRewrite: { '^/cdn': '' },

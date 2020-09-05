@@ -155,7 +155,7 @@ function ActiveItemsLayers(props) {
       >
         <img
           alt=""
-          src={`${process.env.GEOSERVER_URL}/wms?${qs.stringify({
+          src={`/geoserver/wms?${qs.stringify({
             service: 'WMS',
             request: 'GetLegendGraphic',
             layer: `cenvi:${layer.id}`,
