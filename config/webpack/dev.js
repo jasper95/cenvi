@@ -34,6 +34,7 @@ const result = baseConfig({
     historyApiFallback: true,
     before(app) {
       app.use('/', express.static(resolvePath('public')));
+      app.use('/cdn', express.static(resolvePath('uploads')));
     },
     proxy: {
       '/api': {
@@ -44,11 +45,6 @@ const result = baseConfig({
       '/geoserver': {
         target: process.env.GEOSERVER_URL,
         pathRewrite: { '^/geoserver': '' },
-        changeOrigin: true,
-      },
-      '/cdn': {
-        target: process.env.STATIC_URL,
-        pathRewrite: { '^/cdn': '' },
         changeOrigin: true,
       },
     },
