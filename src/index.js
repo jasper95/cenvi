@@ -35,3 +35,5 @@ const preLoadFn = isProduction ? loadableReady : cb => cb();
 preLoadFn(() => renderFn(
   <Root />, document.getElementById('root'),
 ));
+
+console.log('est')
