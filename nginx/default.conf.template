@@ -2,10 +2,6 @@ upstream backend {
   server api:$API_PORT fail_timeout=5s max_fails=5;
 }
 
-upstream geoserver-backend {
-  server $GEOSERVER_API fail_timeout=5s max_fails=5;
-}
-
 server {
     listen $PORT;
     listen [::]:$PORT default_server;
@@ -39,16 +35,6 @@ server {
     proxy_redirect     off;
     rewrite /api/(.*) /$1  break;
     proxy_pass http://backend;
-    proxy_http_version 1.1;
-    proxy_set_header Upgrade $http_upgrade;
-    proxy_set_header Connection ‘upgrade’;
-    proxy_set_header Host $host;
-    proxy_cache_bypass $http_upgrade;
-  }
-
-  location /geoserver {
-    proxy_redirect     off;
-    proxy_pass http://geoserver-backend;
     proxy_http_version 1.1;
     proxy_set_header Upgrade $http_upgrade;
     proxy_set_header Connection ‘upgrade’;
