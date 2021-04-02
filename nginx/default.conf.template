@@ -47,6 +47,12 @@ server {
     index  index.html index.htm;
     try_files $uri $uri/ /index.html;
   }
+
+  location /uploads/ {
+    root   /usr/share/nginx/uploads;
+    try_files $uri $uri/;
+  }
+
   error_page   500 502 503 504  /50x.html;
   location = /50x.html {
     root   /usr/share/nginx/html;
