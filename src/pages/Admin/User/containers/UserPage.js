@@ -22,7 +22,7 @@ function User() {
     />
   );
 
-  function handleUserDialog(type, initialFields = {}) {
+  function handleUserDialog(type, initialFields = { role: 'ADMIN' }) {
     const { onCreate, onUpdate } = pageTableHandlers;
     const onSave = type === 'Create' ? onCreate : onUpdate;
     dispatch(showDialog({
