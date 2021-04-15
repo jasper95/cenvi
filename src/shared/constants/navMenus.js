@@ -15,16 +15,6 @@ export default [
         path: '/#downloads',
         label: 'Downloads',
       },
-      {
-        id: 4,
-        path: '/upload/shapefile',
-        label: 'Upload Shapefile',
-      },
-      {
-        id: 5,
-        path: '/upload/file',
-        label: 'Upload File',
-      },
     ],
   },
   {
