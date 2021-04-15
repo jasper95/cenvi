@@ -148,7 +148,7 @@ function EditAlbum(props) {
 
   function onUploadSuccess(data) {
     data = pick(data, 'id', 'file_path');
-    onElementChange([data], 'photos');
+    onElementChange([...photos, data], 'photos');
   }
 }
 
