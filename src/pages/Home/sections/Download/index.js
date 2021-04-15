@@ -20,10 +20,7 @@ function DownloadSectionHome({ BCP = 'section-downloads' }) {
           rowSize={8}
           headerLabel="Downloads"
           header="Files & Resources"
-          desc="Aute esse ea anim ipsum amet id officia. Officia aliquip nisi fugiat
-          magna commodo. Excepteur tempor occaecat ut culpa exercitation consectetur excepteur dolor.
-            Duis et labore dolore duis. Labore voluptate do ipsum et velit.
-          "
+          desc="Presented here are aggregated data and documents compiled by CENVI and our partners. These are freely distributable given appropriate attribution."
         />
 
         <div className="row row-downloads">
