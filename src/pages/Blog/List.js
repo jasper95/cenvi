@@ -22,13 +22,8 @@ function BlogList() {
         rowSize={10}
         position="left"
         headerLabel="BLOGS"
-        header="The Latest Blogs from Cenvi"
-        desc={`
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-          Id culpa, mollitia suscipit nihil animi error. Veritatis
-          aliquid at dolores fugit incidunt nihil quia quaerat!
-          Eveniet dolorum enim corporis provident sit.
-        `}
+        header="Latest events, activities, and outputs"
+        desc={null}
       />
       <div className="row row-content">
         <div className="container">

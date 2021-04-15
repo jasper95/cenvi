@@ -23,12 +23,7 @@ function NewsList() {
         position="left"
         headerLabel="News"
         header="The Latest News from Cenvi"
-        desc={`
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-          Id culpa, mollitia suscipit nihil animi error. Veritatis
-          aliquid at dolores fugit incidunt nihil quia quaerat!
-          Eveniet dolorum enim corporis provident sit.
-        `}
+        desc={`The articles below have been selected from the media coverage of the Center for Environmental Informatics (CENVI) to give a glimpse of our work in research and in the communities.`}
       />
       <div className="row row-content">
         <div className="container">
