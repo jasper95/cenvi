@@ -39,13 +39,12 @@ function ArticleItem(props) {
       </div>
 
       <div className={`${BCP}_content`}>
-        <Link className={`${BCP}_header`} to={`/blogs/${data.slug}`}>
+        <Link className={`${BCP}_header`} to={`/${type}/${data.slug}`}>
           {data.name}
         </Link>
         <div className={`${BCP}_tags tag`}>
           { data.tags.length > 0 && data.tags.map(tag => (
             <Link
-              to="/login"
               className="tag_item"
             >
               {tag}
