@@ -9,6 +9,7 @@ import { facebook } from 'react-icons-kit/fa/facebook';
 
 
 import 'sass/components/footer/index.scss';
+import useAutoScroll from 'shared/hooks/useAutoScroll'
 
 
 export default function Footer() {
@@ -20,9 +21,9 @@ export default function Footer() {
     email: 'upcebunicer@gmail.com',
     fbPage: 'https://www.facebook.com/upcenvi/',
   };
-
+  const ref = useAutoScroll({ elementId: 'contact-us' })
   return (
-    <footer className="footer" id="contact-us">
+    <footer ref={ref} className="footer" id="contact-us">
       <div className="container">
         <div className="row row-main">
           <div className="col col-center">

@@ -39,15 +39,6 @@ function CollaboratorsSectionHome({ BCP = 'section-collaborators' }) {
       email: 'argao@ctu.edu.ph',
     },
     {
-      id: 4,
-      logo: 'upv.png',
-      name: 'University of the Philippines Visayas',
-      address: 'New Administration Building, Miagao, Iloilo',
-      phone: '(033) 315-9494',
-      fax: '(033) 315-9494',
-      email: 'ipo@upv.edu.ph',
-    },
-    {
       id: 5,
       logo: 'nmrdc.png',
       name: 'National Mango Research & Development Center',
