@@ -1,10 +1,12 @@
 import React from 'react';
 import SectionHeader from 'shared/components/Section';
+import useAutoScroll from 'shared/hooks/useAutoScroll'
 import './style.scss';
 
 function AboutSectionHome({ BCP = 'section-about' }) {
+  const ref = useAutoScroll({ elementId: 'about' })
   return (
-    <section id="about" className={`${BCP} section`}>
+    <section ref={ref} id="about" className={`${BCP} section`}>
       <div className="container">
         <SectionHeader
           headerLabel="about us"

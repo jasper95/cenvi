@@ -11,30 +11,6 @@ function Menu(props) {
   const isActive = currentPath === path || submenu && submenu.find(i => currentPath === i.path);
   const [isOpen, setIsOpen] = useState(false);
 
-  const isSmooth = path && path.includes('#')
-  const scrollWithOffset = (el, offset) => {
-    const elementPosition = el.offsetTop - offset;
-    window.scroll({
-      top: elementPosition,
-      left: 0,
-      behavior: 'smooth'
-    });
-  }
-  const linkOptions =  isSmooth ? {
-    scroll :(el) => { scrollWithOffset(el, 78) }
-  } : {}
-
-  useEffect(() => {
-    if (typeof document === 'object') {
-      // add when mounted
-      document.addEventListener('mousedown', handleClick);
-      // return function to be called when unmounted
-      return () => {
-        document.removeEventListener('mousedown', handleClick);
-      };
-    }
-    return () => {};
-  }, []);
   return (
     <li
       ref={node}
@@ -55,7 +31,6 @@ function Menu(props) {
         <Link 
           className="text" 
           to={menu.path}
-          {...linkOptions}
         >
           {menu.label}
         </Link>

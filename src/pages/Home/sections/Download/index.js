@@ -8,12 +8,14 @@ import './style.scss';
 import useQuery from 'shared/hooks/useQuery';
 import { downloadFile } from 'shared/utils/tools';
 import { SpinnerSkeletonLoader } from 'shared/components/Skeletons';
+import useAutoScroll from 'shared/hooks/useAutoScroll'
 
 function DownloadSectionHome({ BCP = 'section-downloads' }) {
   const [queryState] = useQuery({ url: '/resource' }, { isBase: true });
   const { data, loading } = queryState;
+  const ref = useAutoScroll({ elementId: 'downloads' })
   return (
-    <section id="downloads" className={`${BCP} section`}>
+    <section ref={ref} id="downloads" className={`${BCP} section`}>
       <div className="container">
 
         <SectionHeader

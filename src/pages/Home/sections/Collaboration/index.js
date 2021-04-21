@@ -6,6 +6,7 @@ import { phone } from 'react-icons-kit/fa/phone';
 import { file } from 'react-icons-kit/fa/file';
 import { envelope } from 'react-icons-kit/fa/envelope';
 import SectionHeader from 'shared/components/Section';
+import useAutoScroll from 'shared/hooks/useAutoScroll'
 import './style.scss';
 
 function CollaboratorsSectionHome({ BCP = 'section-collaborators' }) {
@@ -56,9 +57,9 @@ function CollaboratorsSectionHome({ BCP = 'section-collaborators' }) {
       email: 'bpi.guimaras@gmail.com',
     },
   ];
-
+  const ref = useAutoScroll({ elementId: 'collaborators' })
   return (
-    <section id="collaborators" className={`${BCP} section`}>
+    <section ref={ref} id="collaborators" className={`${BCP} section`}>
       <div className="container">
         <SectionHeader
           headerLabel="collaborators"
