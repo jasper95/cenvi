@@ -33,6 +33,7 @@ export default function useForm(params) {
     const customHandler = customChangeHandler[key];
 
     if (customHandler) {
+      console.log('customHandler: ', customHandler);
       setFields((oldFields) => {
         const changes = customHandler(value, oldFields);
         if (changes) {

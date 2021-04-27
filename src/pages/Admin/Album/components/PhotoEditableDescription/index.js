@@ -60,7 +60,7 @@ function PhotosEditableDescription(props) {
       }
       return photo;
     });
-    onChange(newPhotos, id);
+    onChange(newPhotos, 'setPhotos');
   }
 
   function handleSetFavorite(photoId) {
@@ -76,11 +76,11 @@ function PhotosEditableDescription(props) {
         is_cover: false,
       };
     });
-    onChange(newPhotos, id);
+    onChange(newPhotos, 'setPhotos');
   }
 
   function handleRemove(photoId) {
-    onChange(photos.filter(photo => photo.id !== photoId), id);
+    onChange({ id: photoId }, 'addRemovePhoto');
   }
 
   function onSortEnd({ oldIndex, newIndex, collection }) {
@@ -90,7 +90,7 @@ function PhotosEditableDescription(props) {
       oldIndex,
       newIndex,
     );
-    onChange(flatten(newCollections), id);
+    onChange(flatten(newCollections), 'setPhotos');
   }
 }
 

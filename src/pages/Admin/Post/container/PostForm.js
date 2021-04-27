@@ -210,7 +210,7 @@ function PostForm() {
       url: '/file/upload/simple',
       method: 'POST',
     });
-    return { data: { link: [process.env.STATIC_URL || '', filePath].join('/') } };
+    return { data: { link: [process.env.STATIC_URL || '', 'post', filePath].join('/') } };
   }
 
   async function onSave(data) {

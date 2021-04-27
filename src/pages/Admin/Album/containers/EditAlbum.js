@@ -18,12 +18,33 @@ import { useUpdateNode } from 'shared/hooks/useMutation';
 import 'sass/pages/edit-admin-list-album.scss';
 import { SpinnerSkeletonLoader } from 'shared/components/Skeletons';
 
+export const albumCustomChangeHandler = {
+  addRemovePhoto(photo, { photos: oldPhotos = []}){
+    const { id } = photo
+    let newPhotos = [...oldPhotos]
+    if(oldPhotos.map(e => e.id).includes(id)) {
+      newPhotos = oldPhotos.filter(e => e.id !== id)
+    } else {
+      newPhotos = newPhotos.concat(photo)
+    }
+    return {
+      photos: newPhotos
+    }
+  },
+  setPhotos(newPhotos) {
+    return {
+      photos: newPhotos
+    }
+  }
+}
 function EditAlbum(props) {
   const { id } = props.match.params;
   const [formState, formHandlers] = useForm({
     initialFields: {},
+    customChangeHandler: albumCustomChangeHandler,
+    onValid
   });
-  const { onSetFields, onElementChange } = formHandlers;
+  const { onSetFields, onElementChange, onValidate } = formHandlers;
   const [queryState] = useQuery({ url: `/album/${id}` }, { isBase: true, onFetchSuccess: onSetFields });
   const [mutationState, onMutate] = useUpdateNode({ node: 'album' });
   const { fields, errors } = formState;
@@ -37,7 +58,6 @@ function EditAlbum(props) {
 
   return (
     <>
-
       <div className="row row-ToolbarHeader row-ToolbarHeader-floating">
         <Paper className="col col-md-12-guttered">
           <div className="ToolbarHeader row">
@@ -52,11 +72,7 @@ function EditAlbum(props) {
             <div className="ToolbarHeader_toolbar">
               <Button
                 className={cn('iBttn iBttn-primary', { processing: mutationState.loading })}
-                onClick={() => {
-                  onMutate({
-                    data: fields,
-                  });
-                }}
+                onClick={onValidate}
                 children="Save"
                 flat
               />
@@ -148,7 +164,13 @@ function EditAlbum(props) {
 
   function onUploadSuccess(data) {
     data = pick(data, 'id', 'file_path');
-    onElementChange([...photos, data], 'photos');
+    onElementChange(data, 'addRemovePhoto');
+  }
+
+  function onValid(data) {
+    onMutate({
+      data,
+    });
   }
 }
 
