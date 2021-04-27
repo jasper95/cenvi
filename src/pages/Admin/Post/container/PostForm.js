@@ -109,6 +109,7 @@ function PostForm() {
               wrapperClassName="iField-wysiwyg"
               toolbarClassName="iField-wysiwyg_toolbar"
               editorClassName="iField-wysiwyg_editor"
+              // editorStyle={{lineHeight: 0}}
               toolbar={{
                 image: {
                   urlEnabled: true,
@@ -121,6 +122,7 @@ function PostForm() {
               editorState={editorState}
               onEditorStateChange={(newState) => {
                 setEditorState(newState);
+                console.log('watt', newState)
                 onChange('content', convertToRaw(newState.getCurrentContent()));
               }}
             />
