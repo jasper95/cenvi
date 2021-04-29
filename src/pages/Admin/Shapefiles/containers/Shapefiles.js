@@ -13,7 +13,7 @@ const ShapefileDialog = loadable(() => import('pages/Admin/Shapefiles/components
 
 function Shapefiles() {
   const [pageTableState, pageTableHandlers] = usePageTable({
-    node: 'shapefile', onSuccess, isPaginated: true, isBaseCreate: false,
+    node: 'shapefile', onSuccess, isPaginated: true, isBaseCreate: false, isBaseDelete: false,
   });
   const dispatch = useDispatch();
   return (
