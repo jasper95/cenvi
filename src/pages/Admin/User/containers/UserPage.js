@@ -4,11 +4,17 @@ import usePageTable from 'shared/components/PageTable/usePageTable';
 import { useDispatch } from 'react-redux';
 import loadable from '@loadable/component';
 import { showDialog } from 'shared/redux/app/reducer';
+import useMutation from 'shared/hooks/useMutation';
 
 const UserDialog = loadable(() => import('pages/Admin/User/components/UserDialog'));
 
 function User() {
   const [pageTableState, pageTableHandlers] = usePageTable({ node: 'user', isBaseCreate: false, isPaginated: true });
+  const [, onCreate] = useMutation({
+    url: '/signup',
+    message: 'User successfully created. Please verify your email to login',
+    onSuccess: pageTableHandlers.queryHandlers.refetch,
+  });
   const dispatch = useDispatch();
   return (
     <PageTable
@@ -23,7 +29,7 @@ function User() {
   );
 
   function handleUserDialog(type, initialFields = { role: 'ADMIN' }) {
-    const { onCreate, onUpdate } = pageTableHandlers;
+    const { onUpdate } = pageTableHandlers;
     const onSave = type === 'Create' ? onCreate : onUpdate;
     dispatch(showDialog({
       component: UserDialog,
