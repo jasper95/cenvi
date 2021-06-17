@@ -15,7 +15,6 @@ import 'sass/components/nav/index.scss';
 import loadable from '@loadable/component';
 import useRouter from 'shared/hooks/useRouter';
 import history from 'shared/utils/history';
-import { useRouteMatch } from 'react-router';
 
 const UserDialog = loadable(() => import('pages/Admin/User/components/UserDialog'));
 
