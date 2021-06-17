@@ -7,23 +7,24 @@ import Button from 'react-md/lib/Buttons/Button';
 import cn from 'classnames';
 import useForm from 'shared/hooks/useForm';
 import * as yup from 'yup';
-import useVerifyToken from 'shared/hooks/useVerifyToken';
 import useMutation from 'shared/hooks/useMutation';
 import { getValidationResult, fieldIsRequired } from 'shared/utils/tools';
 import 'sass/pages/login.scss';
 import useRouter from 'shared/hooks/useRouter';
 import { SpinnerSkeletonLoader } from 'shared/components/Skeletons';
+import useQuery from 'shared/hooks/useQuery';
 
 const initialFields = {
-  email: '',
+  password: '',
+  token: '',
 };
 
-function ResetPassword(props) {
+function ResetPassword() {
   const router = useRouter();
   const type = router.match.path.replace('/', '');
   const [requestSuccess, setRequestSuccess] = useState(false);
   const {
-    linkName, pageTitle, requestUrl, successMessage,
+    pageTitle, requestUrl, successMessage,
   } = {
     'reset-password': {
       linkName: 'Reset password link',
@@ -38,7 +39,8 @@ function ResetPassword(props) {
       successMessage: 'Account successfully verified',
     },
   }[type];
-  const [verifyTokenState] = useVerifyToken({ name: linkName, type, onSuccess: onVerifySuccess });
+  const token = new URLSearchParams(window.location.search).get('token');
+  const [{ data, loading, error }] = useQuery({ url: `/validate-token?token=${token}&type=${type}` }, { initialData: null, onFetchSuccess: onVerifySuccess });
   const [resetState, onReset] = useMutation({
     url: requestUrl,
     method: 'put',
@@ -61,15 +63,15 @@ function ResetPassword(props) {
         </h1>
       )}
     >
-      {(verifyTokenState === 'pending') && (
+      {loading && (
         <SpinnerSkeletonLoader />
       )}
-      {verifyTokenState === 'invalid' && (
+      {error && (
         <div>
           Something went wrong
         </div>
       )}
-      {verifyTokenState === 'valid' && (
+      {data && (
         <>
           {requestSuccess ? (
             <div>
@@ -121,15 +123,15 @@ function ResetPassword(props) {
     </AuthLayout>
   );
 
-  function onValid(data) {
+  function onValid(input) {
     onReset({
-      data,
+      data: input,
     });
   }
   function onResetSuccess() {
     setRequestSuccess(true);
   }
-  function onVerifySuccess(token) {
+  function onVerifySuccess() {
     onChange('token', token);
   }
 }
