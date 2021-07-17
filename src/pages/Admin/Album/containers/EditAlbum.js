@@ -19,30 +19,30 @@ import 'sass/pages/edit-admin-list-album.scss';
 import { SpinnerSkeletonLoader } from 'shared/components/Skeletons';
 
 export const albumCustomChangeHandler = {
-  addRemovePhoto(photo, { photos: oldPhotos = []}){
-    const { id } = photo
-    let newPhotos = [...oldPhotos]
-    if(oldPhotos.map(e => e.id).includes(id)) {
-      newPhotos = oldPhotos.filter(e => e.id !== id)
+  addRemovePhoto(photo, { photos: oldPhotos = [] }) {
+    const { id } = photo;
+    let newPhotos = [...oldPhotos];
+    if (oldPhotos.map(e => e.id).includes(id)) {
+      newPhotos = oldPhotos.filter(e => e.id !== id);
     } else {
-      newPhotos = newPhotos.concat(photo)
+      newPhotos = newPhotos.concat(photo);
     }
     return {
-      photos: newPhotos
-    }
+      photos: newPhotos,
+    };
   },
   setPhotos(newPhotos) {
     return {
-      photos: newPhotos
-    }
-  }
-}
+      photos: newPhotos,
+    };
+  },
+};
 function EditAlbum(props) {
   const { id } = props.match.params;
   const [formState, formHandlers] = useForm({
     initialFields: {},
     customChangeHandler: albumCustomChangeHandler,
-    onValid
+    onValid,
   });
   const { onSetFields, onElementChange, onValidate } = formHandlers;
   const [queryState] = useQuery({ url: `/album/${id}` }, { isBase: true, onFetchSuccess: onSetFields });

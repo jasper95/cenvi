@@ -2,7 +2,7 @@ import React, { useMemo, Fragment } from 'react';
 import chunk from 'lodash/chunk';
 import flatten from 'lodash/flatten';
 import { arrayMove } from 'shared/utils/tools';
-import { sortableContainer, sortableElement } from 'react-sortable-hoc';
+import { SortableContainer as sortableContainer, SortableElement as sortableElement } from 'react-sortable-hoc';
 
 import PhotoItem from './PhotoItem';
 import 'sass/components/cards/albumPhotoCard/index.scss';
@@ -25,6 +25,7 @@ function PhotosEditableDescription(props) {
         axis="xy"
         onSortEnd={onSortEnd}
         helperClass="onTheFly onTheFly-albumCard"
+        pressDelay={200}
       >
         {chunkedPhotos.map((row, i) => (
           <Fragment key={i}>
@@ -64,6 +65,7 @@ function PhotosEditableDescription(props) {
   }
 
   function handleSetFavorite(photoId) {
+    console.log('photoId: ', photoId);
     const newPhotos = photos.map((photo) => {
       if (photo.id === photoId) {
         return {

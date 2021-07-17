@@ -29,11 +29,9 @@ export default function useForm(params) {
     onChange(id, value);
   }
   function onChange(key, value) {
-    console.log('key, value: ', key, value);
     const customHandler = customChangeHandler[key];
 
     if (customHandler) {
-      console.log('customHandler: ', customHandler);
       setFields((oldFields) => {
         const changes = customHandler(value, oldFields);
         if (changes) {
