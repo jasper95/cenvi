@@ -4,7 +4,6 @@ import htmlToReact from 'html-react-parser';
 import { getPhotoUrl } from 'shared/utils/tools';
 import ImageLoader from 'react-image';
 import { Helmet as Head } from 'react-helmet';
-
 import Author from './Author';
 import ArticlePageSkeleton from '../Skeletons/ArticlePageSkeleton';
 
