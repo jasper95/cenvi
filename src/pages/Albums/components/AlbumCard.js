@@ -54,7 +54,7 @@ function AlbumCard(props) {
         <PreviewImages
           className={`${BCP}_images`}
           photos={photos}
-          linkToMore="/albums/test"
+          linkToMore={`/albums/${slug}`}
           history={history}
         />
       </div>
