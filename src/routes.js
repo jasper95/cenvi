@@ -197,6 +197,17 @@ export default [
     },
   },
   {
+    key: 'reset',
+    component: ResetPassword,
+    path: '/reset-password',
+    exact: true,
+    pageProps: {
+      hasFooter: false,
+      hasNavigation: false,
+      requireAuth: 'optional',
+    },
+  },
+  {
     key: 'login',
     component: Login,
     path: '/login',
@@ -220,18 +231,18 @@ export default [
       requireAuth: false,
     },
   },
-  {
-    key: 'signup',
-    component: Signup,
-    path: '/register',
-    exact: true,
-    pageProps: {
-      hasNavigation: false,
-      hasFooter: false,
-      requireAuth: false,
-      pageTitle: 'Signup',
-    },
-  },
+  // {
+  //   key: 'signup',
+  //   component: Signup,
+  //   path: '/register',
+  //   exact: true,
+  //   pageProps: {
+  //     hasNavigation: false,
+  //     hasFooter: false,
+  //     requireAuth: false,
+  //     pageTitle: 'Signup',
+  //   },
+  // },
   {
     key: 'home',
     component: Home,

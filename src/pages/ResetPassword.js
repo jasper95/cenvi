@@ -28,7 +28,7 @@ function ResetPassword() {
   } = {
     'reset-password': {
       linkName: 'Reset password link',
-      pageTitle: 'Activate Account',
+      pageTitle: 'Reset Password',
       requestUrl: '/reset-password',
       successMessage: 'Password successfully updated',
     },

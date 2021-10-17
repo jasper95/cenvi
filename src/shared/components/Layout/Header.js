@@ -139,13 +139,13 @@ function Header(props) {
           iconEl={<i className="wtfr wtf-sign-out" />}
           className="iBttn iBttn-primary"
         />
-        <Button
+        {/* <Button
           flat
           onClick={() => history.push('/register')}
           children="Register"
           iconEl={<i className="wtfr wtf-user-plus" />}
           className="iBttn iBttn-primary"
-        />
+        /> */}
       </>
     );
   }
